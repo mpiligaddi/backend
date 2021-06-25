@@ -11,15 +11,13 @@ module.exports = function (db) {
   router.post("/register", (req, res) => {
     let _defaultParams = ["uuids", "username", "name", "lastname", "email", "role", "password"];
 
-    if (!req.body) res.send({ code: 400, message: "La petición no puede estar vacía" });
     var params = _defaultParams.filter((value) => !Object.keys(req.body).includes(value));
 
     if (params.length != 0) {
-      res.send({ code: 400, message: `Faltan parametros: ${params.join(", ")}` });
-      return;
+      return res.send({ code: 206, message: `Faltan parametros: ${params.join(", ")}` });
     }
 
-    db.registerUser(req.body)
+    db.registerAccount(req.body)
       .then((r) => res.send(r))
       .catch((c) => res.send(c));
   });
@@ -28,11 +26,12 @@ module.exports = function (db) {
     const token = req.headers.authorization?.split(" ")[1];
 
     if (!token) {
-      res.send({ code: 401, message: "Es necesario de una autorización" });
-      return;
+      return res.send({ code: 401, message: "Es necesario de una autorización" });
     }
 
-    db.authenticateToken({ token })
+    const { timestamp } = req.body;
+
+    db.authenticateToken({ token, timestamp })
       .then((r) => res.send(r))
       .catch((c) => res.send(c));
   });
@@ -40,8 +39,7 @@ module.exports = function (db) {
   router.post("/login", (req, res) => {
     const { email, password } = req.body;
     if (!email || !password) {
-      res.send({ code: 400, message: "Es necesario ingresar un correo y una contraseña." });
-      return;
+      return res.send({ code: 204, message: "Es necesario ingresar un correo y una contraseña." });
     }
 
     db.tryLogin({ email, password })
