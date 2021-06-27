@@ -2,6 +2,7 @@ var express = require("express");
 const morgan = require("morgan");
 var bodyParser = require("body-parser");
 const MongoDB = require("./src/db/mongo.driver");
+const DataToDb = require("./data/dataToFirebase")
 
 var app = express();
 
@@ -19,6 +20,10 @@ app.post("*", function (req, res, next) {
 mongo
   .connect()
   .then((db) => {
+
+    const dbt = new DataToDb(db);
+    dbt.uploadData()
+
     app.use("/api", require("./src/auth/auth.router")(db));
     app.use("/assets", require("./src/assets/assets.router")(db));
     app.use("/api", require("./src/reports/reports.router")(db));

@@ -10,6 +10,8 @@ const properties = {
     zones: "zones",
     users: {
       accounts: "accounts",
+      contacts: "contacts",
+      supervisors: "supervisors",
       security: "auth",
     },
     reports: {

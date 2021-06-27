@@ -9,7 +9,7 @@ var router = express.Router();
  */
 module.exports = function (db) {
   router.post("/register", (req, res) => {
-    let _defaultParams = ["uuids", "username", "name", "lastname", "email", "role", "password"];
+    let _defaultParams = ["uuids", "displayName", "email", "role", "password"];
 
     var params = _defaultParams.filter((value) => !Object.keys(req.body).includes(value));
 
