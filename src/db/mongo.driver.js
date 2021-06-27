@@ -171,12 +171,53 @@ class MongoDB {
     });
   }
 
+  async getClients() {
+    return new Promise((resolve, reject) => {
+      this.findClients()
+        .toArray()
+        .then((result) => {
+          if (!result || result.length == 0) return reject({ code: 404, message: "No se encontraron clientes." });
+          return resolve({ code: 200, message: `Se encontraron ${result.length} cliente(s)`, clients: result });
+        })
+        .catch((c) => reject(c));
+    });
+  }
+
+  async getClientById({ id }) {
+    return new Promise((resolve, reject) => {
+      if (!id.isID()) reject({ code: 403, message: "El id ingresado es inválido" });
+
+      this.findClients({
+        $match: {
+          _id: new ObjectId(id),
+        },
+      })
+        .toArray()
+        .then((result) => {
+          if (!result || result.length == 0) return reject({ code: 404, message: "No se pudo encontrar ningún cliente." });
+          return resolve({ code: 200, message: "Cliente encontrado con éxito!", client: result[0] });
+        })
+        .catch((c) => reject({ code: 500, message: "Hubo un error al intentar buscar el cliente." }));
+    });
+  }
+
   async getReports({ start, end, filter, type }) {
     return new Promise((resolve, reject) => {
       const collection = this.getReportColl(type);
       if (!collection) return reject({ code: 404, message: "No se encontró ninguna colección para el reporte" });
 
-      var isPaging = `${start}`.length < 10 || `${end}`.length < 10;
+      collection.aggregate([
+        {
+          $lookup: {
+            from: "accounts",
+            localField: "user",
+            foreignField: "_id",
+            as: "account",
+          },
+        },
+      ]);
+
+      /* var isPaging = `${start}`.length < 10 || `${end}`.length < 10;
 
       if (!isPaging && this.isDate(start ?? Date.now()) && this.isDate(end ?? Date.now())) {
         var sDate = new Date(start ?? Date.now());
@@ -202,7 +243,7 @@ class MongoDB {
         .find(filter, isPaging ? paginationOptions : {})
         .toArray()
         .then((reports) => resolve({ code: 200, message: "Reportes obtenidos con éxito", reports: reports }))
-        .catch((c) => reject({ code: 500, message: "Hubo un error al buscar reportes." }));
+        .catch((c) => reject({ code: 500, message: "Hubo un error al buscar reportes." }));*/
     });
   }
 
@@ -238,8 +279,9 @@ class MongoDB {
   }
 
   async createBranch(branch) {
-    const { chainId, name, address, zoneId, locality, region } = branch;
+    const { chainId, name, address, zoneId, locality } = branch;
     return new Promise((resolve, reject) => {
+      console.log({ zoneId, chainId });
       this.branches.insertOne(
         {
           chainId: new ObjectId(chainId),
@@ -247,7 +289,6 @@ class MongoDB {
           address: address,
           zoneId: new ObjectId(zoneId),
           locality: locality,
-          region: region,
         },
         (error, result) => {
           if (error) return reject(ID.hexEncode());
@@ -391,6 +432,58 @@ class MongoDB {
     });
   }
 
+  async getBranches({ start, end, filter }) {
+    return new Promise((resolve, reject) => {
+      this.branches
+        .aggregate([
+          {
+            $limit: 2
+          },
+          {
+            $lookup: {
+              from: "chains",
+              let: { cid: "$chainId" },
+              pipeline: [
+                {
+                  $match: {
+                    $expr: {
+                      $eq: ["$_id", "$$cid"],
+                    },
+                  },
+                },
+              ],
+              as: "chain"
+            },
+          },
+          {
+            $unwind: "$chain"
+          },
+          {
+            $lookup: {
+              from: "zones",
+              localField: "zoneId",
+              foreignField: "_id",
+              as: "zone",
+            },
+          },
+          {
+            $unwind: "$zone",
+          },
+          {
+            $project: {
+              "chain._id": 0,
+              "zone._id": 0,
+            },
+          },
+        ])
+        .toArray()
+        .then((r) => {
+          return resolve({ r });
+        })
+        .catch((c) => reject(c));
+    });
+  }
+
   isDate(date) {
     return new Date(date) !== "Invalid Date" && !isNaN(new Date(date));
   }
@@ -411,18 +504,51 @@ class MongoDB {
   generateToken() {
     return Math.random().toString(36).substr(2) + Math.random().toString(36).substr(2);
   }
+
+  findClients(match) {
+    return this.clients.aggregate([
+      match ?? {
+        $match: {},
+      },
+      {
+        $lookup: {
+          from: "accounts",
+          localField: "adminId",
+          foreignField: "_id",
+          as: "admin",
+        },
+      },
+      {
+        $unwind: "$admin",
+      },
+      {
+        $lookup: {
+          from: "contacts",
+          localField: "comercialId",
+          foreignField: "_id",
+          as: "comercial",
+        },
+      },
+      {
+        $unwind: "$comercial",
+      },
+      {
+        $project: {
+          "admin.password": 0,
+          "admin._id": 0,
+          "admin.uuids": 0,
+          "comercial._id": 0,
+          "comercial.role": 0,
+        },
+      },
+    ]);
+  }
 }
 
-String.prototype.hexEncode = function () {
-  var hex, i;
+String.prototype.isID = function () {
+  var checkForHexRegExp = new RegExp("^[0-9a-fA-F]{24}$");
 
-  var result = "";
-  for (i = 0; i < this.length; i++) {
-    hex = this.charCodeAt(i).toString(24);
-    result += ("000" + hex).slice(-4);
-  }
-
-  return result;
+  return this.length === 12 || (this.length === 24 && checkForHexRegExp.test(this));
 };
 
 module.exports = MongoDB;

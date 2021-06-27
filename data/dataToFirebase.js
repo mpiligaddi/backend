@@ -27,9 +27,7 @@ class DataToDB {
     this.db = db;
   }
 
-  uploadData() {
-    //zones.forEach(e => this.db.createZone(e))
-    console.log(zones.length);
+  async uploadData() {
   }
 }
 
@@ -38,25 +36,7 @@ module.exports = DataToDB;
 
 /**
 
-  { name: "San Juan", region: "San Juan", supervisorId: "RV" },
-  { name: "San Luis", region: "San Luis", supervisorId: "RV" },
-  { name: "Cordoba", region: "Cordoba", supervisorId: "RV" },
-  { name: "Rio Cuarto", region: "Cordoba", supervisorId: "RV" },
-  { name: "Villa Maria", region: "Cordoba", supervisorId: "RV" },
-  { name: "Mendoza", region: "Mendoza", supervisorId: "RV" },
-  { name: " San Rafael", region: "Mendoza", supervisorId: "RV" },
-  { name: "Tunuyan", region: "Mendoza", supervisorId: "RV" },
-  {
-    name: "Villa Mercedes",
-    region: "San Luis",
-    supervisorId: "RV",
-  },
-  {
-    name: "Santiago Del Estero",
-    region: "Santiago Del Estero",
-    supervisorId: "RV",
-  },
-  { name: "Tucuman", region: "Tucuman", supervisorId: "RV" },
+
 
 
  */

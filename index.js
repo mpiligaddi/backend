@@ -24,9 +24,11 @@ mongo
     const dbt = new DataToDb(db);
     dbt.uploadData()
 
-    app.use("/api", require("./src/auth/auth.router")(db));
+    app.use("/auth", require("./src/auth/auth.router")(db));
     app.use("/assets", require("./src/assets/assets.router")(db));
     app.use("/api", require("./src/reports/reports.router")(db));
+    app.use("/api", require("./src/reports/reports.router")(db));
+    app.use("/api", require("./src/branches/branches.router")(db));
 
     app.listen(process.env.PORT || 3000, () => console.log("Server escuchando UwU"));
   })
