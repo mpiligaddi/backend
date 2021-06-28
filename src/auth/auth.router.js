@@ -1,5 +1,6 @@
 var express = require("express");
 const MongoDB = require("../db/mongo.driver");
+const AuthController = require("./auth.controller");
 var router = express.Router();
 
 /**
@@ -8,6 +9,9 @@ var router = express.Router();
  * @returns
  */
 module.exports = function (db) {
+
+  const controller = new AuthController(db);
+
   router.post("/register", (req, res) => {
     let _defaultParams = ["uuids", "displayName", "email", "role", "password"];
 
@@ -17,7 +21,7 @@ module.exports = function (db) {
       return res.send({ code: 206, message: `Faltan parametros: ${params.join(", ")}` });
     }
 
-    db.registerAccount(req.body)
+    controller.registerAccount(req.body)
       .then((r) => res.send(r))
       .catch((c) => res.send(c));
   });
@@ -31,7 +35,7 @@ module.exports = function (db) {
 
     const { timestamp } = req.body;
 
-    db.authenticateToken({ token, timestamp })
+    controller.authenticateToken({ token, timestamp })
       .then((r) => res.send(r))
       .catch((c) => res.send(c));
   });
@@ -42,7 +46,7 @@ module.exports = function (db) {
       return res.send({ code: 204, message: "Es necesario ingresar un correo y una contraseña." });
     }
 
-    db.tryLogin({ email, password })
+    controller.tryLogin({ email, password })
       .then((r) => res.send(r))
       .catch((c) => res.send(c));
   });

@@ -1,5 +1,6 @@
 var express = require("express");
 const MongoDB = require("../db/mongo.driver");
+const BranchesController = require("./branches.controller");
 var router = express.Router();
 
 /**
@@ -8,8 +9,11 @@ var router = express.Router();
  * @returns
  */
 module.exports = function (db) {
+  const controller = new BranchesController(db);
+
   router.post("/get/branches", (req, res) => {
-    db.getBranches(req.body)
+    controller
+      .getBranches(req.body)
       .then((r) => res.send(r))
       .catch((c) => res.send(c));
   });

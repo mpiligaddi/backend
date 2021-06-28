@@ -1,5 +1,7 @@
 var express = require("express");
 const MongoDB = require("../db/mongo.driver");
+const ReportsController = require("./reports.controller");
+const AuthController = require("../auth/auth.controller");
 var router = express.Router();
 
 /**
@@ -12,6 +14,9 @@ module.exports = function (db) {
     return auth?.split(" ")[1];
   }
 
+  const authController = new AuthController(db);
+  const controller = new ReportsController(db);
+
   router.post("/report/add", (req, res) => {
     const token = hasBearer(req.headers.authorization);
 
@@ -23,12 +28,12 @@ module.exports = function (db) {
 
     if (!type) return res.send({ code: 401, message: "Es necesario definir el tipo de reporte." });
 
-    db.userByToken({ token })
+    authController.userByToken({ token })
       .then((user) => {
         if (!user) return res.send({ code: 404, message: "La sesión no existe o no está disponible" });
         if (createdBy != user.id) return res.send({ code: 403, message: "El identificador no corresponde con el token de validación" });
 
-        db.createReport(req.body)
+        controller.createReport(req.body)
           .then((r) => res.send(r))
           .catch((c) => res.send(c));
       })
@@ -47,10 +52,10 @@ module.exports = function (db) {
     if (!filter) return res.send({ code: 400, message: "Es necesario un filtro" });
     if (!type) return res.send({ code: 401, message: "Es necesario definir el tipo de reporte." });
 
-    db.userByToken({ token })
+    authController.userByToken({ token })
       .then((user) => {
         if (!user) return res.send({ code: 404, message: "La sesión no existe o no está disponible" });
-        db.getReport(req.body)
+        controller.getReport(req.body)
           .then((r) => res.send(r))
           .catch((c) => res.send(c));
       })
@@ -69,7 +74,7 @@ module.exports = function (db) {
 
     if (params.length != 0) return res.send({ code: 206, message: `Faltan parametros: ${params.join(", ")}` });
 
-    db.getReports(req.body)
+    controller.getReports(req.body)
       .then((r) => res.send(r))
       .catch((c) => res.send(c));
   });

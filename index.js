@@ -13,7 +13,7 @@ app.use(bodyParser.json({ limit: "50mb" }));
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 
 app.post("*", function (req, res, next) {
-  if (!req.body || Object.keys(req.body).length === 0 || req.body.constructor != Object) return res.status(400).send({ code: 400, message: "La petición no puede estar vacía" });
+ /* if (!req.body || Object.keys(req.body).length === 0 || req.body.constructor != Object) return res.status(400).send({ code: 400, message: "La petición no puede estar vacía" });*/
   next();
 });
 
@@ -27,7 +27,7 @@ mongo
     app.use("/auth", require("./src/auth/auth.router")(db));
     app.use("/assets", require("./src/assets/assets.router")(db));
     app.use("/api", require("./src/reports/reports.router")(db));
-    app.use("/api", require("./src/reports/reports.router")(db));
+    app.use("/api", require("./src/clients/clients.router")(db));
     app.use("/api", require("./src/branches/branches.router")(db));
 
     app.listen(process.env.PORT || 3000, () => console.log("Server escuchando UwU"));

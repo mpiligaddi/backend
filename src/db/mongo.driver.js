@@ -1,6 +1,5 @@
 const { MongoClient, ObjectId } = require("mongodb");
 const properties = require("./mongo.properties");
-const bcrypt = require("bcrypt-nodejs");
 
 class MongoDB {
   async connect() {
@@ -32,274 +31,7 @@ class MongoDB {
     });
   }
 
-  async tryLogin({ email, password }) {
-    return new Promise((resolve, reject) => {
-      this.accounts.findOne({ email: email }, (error, _account) => {
-        if (error) return reject({ code: 500, message: "Hubo un error al intentar buscar al usuario, volve a intentar" });
-        if (!_account) return reject({ code: 404, message: "No se encontró al usuario" });
-
-        let validPassword = bcrypt.compareSync(password, _account.password);
-
-        if (!validPassword) return reject({ code: 401, message: "La contraseña ingresada es incorrecta, corregila y volve a intentar" });
-
-        let newToken = this.generateToken();
-
-        this.users.findOneAndUpdate({ user: _account._id }, { $set: { token: newToken, timestamp: Date.now() } }, (error, result) => {
-          if (error) return reject({ code: 500, message: "Hubo un error al intentar buscar o crear la sesión, volve a intentar" });
-          if (result.value) return resolve({ code: 200, message: "Sesión recuperada con éxito", user: result.value });
-
-          const userResult = {
-            displayName: _account.displayName,
-            email: email,
-            role: _account.role,
-            id: _account._id,
-            timestamp: Date.now(),
-            token: newToken,
-          };
-
-          this.users.insertOne(
-            {
-              timestamp: Date.now(),
-              user: new ObjectId(_account._id),
-              token: newToken,
-            },
-            (error, _) => {
-              if (error) return reject({ code: 500, message: "Hubo un error al intentar crear la sesión, volve a intentar" });
-              return resolve({ code: 201, message: "Sesión creada con éxito", user: userResult });
-            }
-          );
-        });
-      });
-    });
-  }
-
-  async authenticateToken({ token, timestamp }) {
-    return new Promise((resolve, reject) => {
-      this.users.aggregate(
-        [
-          {
-            $match: {
-              token: token,
-            },
-          },
-          {
-            $lookup: {
-              from: "accounts",
-              localField: "user",
-              foreignField: "_id",
-              as: "account",
-            },
-          },
-          {
-            $unwind: {
-              path: "$account",
-              preserveNullAndEmptyArrays: false,
-            },
-          },
-          {
-            $project: {
-              token: 1,
-              displayName: "$account.displayName",
-              email: "$account.email",
-              role: "$account.role",
-            },
-          },
-        ],
-        async (error, result) => {
-          if (error) return reject({ code: 500, message: "Hubo un error al intentar buscar o crear la sesión, volve a intentar" });
-          const account = (await result.toArray())[0];
-          if (!account) return reject({ code: 500, message: "No se encontró la sesión" });
-
-          this.users.findOneAndUpdate({ token: token }, { $set: { timestamp: timestamp } }, (error, result) => {
-            if (error || !result.value) return reject({ code: 500, message: "Hubo un error al intentar buscar o crear la sesión, volve a intentar" });
-            if (result.value) return resolve({ code: 200, message: "Sesión recuperada con éxito", user: account });
-          });
-        }
-      );
-    });
-  }
-
-  async registerAccount(model) {
-    const { email, password } = model;
-
-    return new Promise((resolve, reject) => {
-      this.accounts.findOne({ email: email }, (error, _account) => {
-        if (error) return reject({ code: 500, message: "Hubo un error al intentar buscar al usuario, volve a intentar" });
-        if (_account) return reject({ code: 404, message: "El correo ya está en uso" });
-
-        const passwordHash = bcrypt.hashSync(password, bcrypt.genSaltSync(8));
-        console.log(passwordHash);
-
-        var account = {
-          ...model,
-          password: passwordHash,
-        };
-
-        this.accounts.insertOne(account, (error, _account) => {
-          if (error) return reject({ code: 500, message: "Hubo un error al intentar crear la cuenta, volve a intentar" });
-          if (!_account) return reject({ code: 404, message: "No se encontró la cuenta" });
-
-          return resolve({ code: 200, message: "Cuenta creada con éxito!" });
-        });
-      });
-    });
-  }
-
-  async userByToken({ token }) {
-    return new Promise((resolve, reject) => {
-      this.users.findOne({ token: token }, (error, result) => {
-        if (error) return reject({ code: 500, message: "Hubo un error al intentar buscar la sesión, volve a intentar" });
-        if (!result) return reject({ code: 403, message: "La sesión no fue encontrada, revisa el token y volve a intentar" });
-        return resolve(result);
-      });
-    });
-  }
-
-  async getReport({ filter, type }) {
-    return new Promise((resolve, reject) => {
-      const collection = this.getReportColl(type);
-      if (!collection) return reject({ code: 404, message: "No se encontró ninguna colección para el reporte" });
-
-      if (filter._id) filter._id = new ObjectId(filter._id);
-
-      collection.aggregate().findOne(filter, (error, _report) => {
-        if (error) return reject({ code: 500, message: "Hubo un error al intentar buscar el reporte, volve a intentar" });
-        if (!_report) return reject({ code: 404, message: "No se pudo encontrar ningún reporte." });
-
-        return resolve({ code: 200, message: "Reporte encontrado con éxito!", report: _report });
-      });
-    });
-  }
-
-  async getClients() {
-    return new Promise((resolve, reject) => {
-      this.findClients()
-        .toArray()
-        .then((result) => {
-          if (!result || result.length == 0) return reject({ code: 404, message: "No se encontraron clientes." });
-          return resolve({ code: 200, message: `Se encontraron ${result.length} cliente(s)`, clients: result });
-        })
-        .catch((c) => reject(c));
-    });
-  }
-
-  async getClientById({ id }) {
-    return new Promise((resolve, reject) => {
-      if (!id.isID()) reject({ code: 403, message: "El id ingresado es inválido" });
-
-      this.findClients({
-        $match: {
-          _id: new ObjectId(id),
-        },
-      })
-        .toArray()
-        .then((result) => {
-          if (!result || result.length == 0) return reject({ code: 404, message: "No se pudo encontrar ningún cliente." });
-          return resolve({ code: 200, message: "Cliente encontrado con éxito!", client: result[0] });
-        })
-        .catch((c) => reject({ code: 500, message: "Hubo un error al intentar buscar el cliente." }));
-    });
-  }
-
-  async getReports({ start, end, filter, type }) {
-    return new Promise((resolve, reject) => {
-      const collection = this.getReportColl(type);
-      if (!collection) return reject({ code: 404, message: "No se encontró ninguna colección para el reporte" });
-
-      collection.aggregate([
-        {
-          $lookup: {
-            from: "accounts",
-            localField: "user",
-            foreignField: "_id",
-            as: "account",
-          },
-        },
-      ]);
-
-      /* var isPaging = `${start}`.length < 10 || `${end}`.length < 10;
-
-      if (!isPaging && this.isDate(start ?? Date.now()) && this.isDate(end ?? Date.now())) {
-        var sDate = new Date(start ?? Date.now());
-        var eDate = new Date(end ?? Date.now());
-
-        if (sDate - eDate >= 0) return reject({ code: 404, message: "Las fechas ingresadas son incorrectas" });
-
-        filter = {
-          ...filter,
-          createdAt: {
-            $gte: sDate.getTime(),
-            $lte: eDate.getTime(),
-          },
-        };
-      }
-
-      let paginationOptions = {
-        limit: end ?? 10,
-        skip: start ?? 0,
-      };
-
-      collection
-        .find(filter, isPaging ? paginationOptions : {})
-        .toArray()
-        .then((reports) => resolve({ code: 200, message: "Reportes obtenidos con éxito", reports: reports }))
-        .catch((c) => reject({ code: 500, message: "Hubo un error al buscar reportes." }));*/
-    });
-  }
-
-  async createReport(report) {
-    const { type, branchId, chainId, clientId, createdAt, createdBy, isComplete, location, categories } = report;
-    return new Promise((resolve, reject) => {
-      const collection = this.getReportColl(type);
-
-      if (!collection) return reject({ code: 404, message: "No se encontró ninguna colección para el reporte" });
-
-      collection.insertOne(
-        {
-          branchId: new ObjectId(branchId),
-          chainId: new ObjectId(chainId),
-          clientId: new ObjectId(clientId),
-          createdAt,
-          createdBy: new ObjectId(createdBy),
-          isComplete,
-          location,
-          categories: categories.map((category) => ({
-            ID: new ObjectId(category.ID),
-            ...category,
-          })),
-        },
-        (error, _report) => {
-          if (error) return reject({ code: 500, message: "Hubo un error al intentar insertar el reporte, volve a intentar" });
-          if (!_report) return reject({ code: 404, message: "No se pudo crear ningún reporte." });
-
-          return resolve({ code: 200, message: "Reporte creado con éxito!", report: _report.insertedId });
-        }
-      );
-    });
-  }
-
-  async createBranch(branch) {
-    const { chainId, name, address, zoneId, locality } = branch;
-    return new Promise((resolve, reject) => {
-      console.log({ zoneId, chainId });
-      this.branches.insertOne(
-        {
-          chainId: new ObjectId(chainId),
-          name: name,
-          address: address,
-          zoneId: new ObjectId(zoneId),
-          locality: locality,
-        },
-        (error, result) => {
-          if (error) return reject(ID.hexEncode());
-          if (error) return reject({ code: 500, message: "Hubo un error al intentar insertar la sucursal, volve a intentar" });
-          if (!result) return reject({ code: 404, message: "No se pudo crear ninguna sucursal." });
-
-          return resolve({ code: 200, message: "Sucursal creada con éxito!", branch: result.insertedId });
-        }
-      );
-    });
-  }
+  /** Chains */
 
   async createChain(chain) {
     const { name, clientId } = chain;
@@ -319,30 +51,7 @@ class MongoDB {
     });
   }
 
-  async createClient(client) {
-    const { companyName, name, adminId, comercialId, address, CUIT, contactName, periodReportId, control } = client;
-    return new Promise((resolve, reject) => {
-      this.branches.insertOne(
-        {
-          adminId: new ObjectId(adminId),
-          comercialId: new ObjectId(comercialId),
-          address,
-          CUIT,
-          contactName,
-          periodReportId,
-          control,
-          companyName,
-          name,
-        },
-        (error, result) => {
-          if (error) return reject({ code: 500, message: "Hubo un error al intentar insertar el cliente, volve a intentar" });
-          if (!result) return reject({ code: 404, message: "No se pudo crear ningún cliente." });
-
-          return resolve({ code: 200, message: "Cliente creado con éxito!", client: result.insertedId });
-        }
-      );
-    });
-  }
+  /** Categories */
 
   async createCategory(category) {
     const { clientId, name } = category;
@@ -361,6 +70,8 @@ class MongoDB {
       );
     });
   }
+
+  /** Products */
 
   async createProduct(product) {
     const { catId, chainId, name, type, skuId, primary } = product;
@@ -384,6 +95,8 @@ class MongoDB {
     });
   }
 
+  /** Contacts */
+
   async createContact(contact) {
     return new Promise((resolve, reject) => {
       this.contacts.insertOne(contact, (error, result) => {
@@ -395,6 +108,7 @@ class MongoDB {
     });
   }
 
+  /** Supervisors */
   async createSupervisor(supervisor) {
     const { coordinatorId } = supervisor;
     return new Promise((resolve, reject) => {
@@ -413,6 +127,7 @@ class MongoDB {
     });
   }
 
+  /** Zone */
   async createZone(zone) {
     const { supervisorId } = zone;
     return new Promise((resolve, reject) => {
@@ -432,84 +147,8 @@ class MongoDB {
     });
   }
 
-  async getBranches({ start, end, filter }) {
-    return new Promise((resolve, reject) => {
-      this.branches
-        .aggregate([
-          {
-            $limit: 2
-          },
-          {
-            $lookup: {
-              from: "chains",
-              let: { cid: "$chainId" },
-              pipeline: [
-                {
-                  $match: {
-                    $expr: {
-                      $eq: ["$_id", "$$cid"],
-                    },
-                  },
-                },
-              ],
-              as: "chain"
-            },
-          },
-          {
-            $unwind: "$chain"
-          },
-          {
-            $lookup: {
-              from: "zones",
-              localField: "zoneId",
-              foreignField: "_id",
-              as: "zone",
-            },
-          },
-          {
-            $unwind: "$zone",
-          },
-          {
-            $project: {
-              "chain._id": 0,
-              "zone._id": 0,
-            },
-          },
-        ])
-        .toArray()
-        .then((r) => {
-          return resolve({ r });
-        })
-        .catch((c) => reject(c));
-    });
-  }
-
-  isDate(date) {
-    return new Date(date) !== "Invalid Date" && !isNaN(new Date(date));
-  }
-
-  getReportColl(type) {
-    switch (type.toLowerCase()) {
-      case "breakeven":
-        return this.breakevensReports;
-      case "pricing":
-        return this.pricingssReports;
-      case "photo":
-        return this.photosReports;
-      default:
-        return undefined;
-    }
-  }
-
-  generateToken() {
-    return Math.random().toString(36).substr(2) + Math.random().toString(36).substr(2);
-  }
-
-  findClients(match) {
+  clientsQuery(query) {
     return this.clients.aggregate([
-      match ?? {
-        $match: {},
-      },
       {
         $lookup: {
           from: "accounts",
@@ -541,8 +180,111 @@ class MongoDB {
           "comercial.role": 0,
         },
       },
+      ...(query ?? []),
     ]);
   }
+
+  branchesQuery(query) {
+    return this.branches.aggregate([
+      {
+        $lookup: {
+          from: "chains",
+          localField: "chainId",
+          foreignField: "_id",
+          as: "chain",
+        },
+      },
+      {
+        $unwind: "$chain",
+      },
+      {
+        $lookup: {
+          from: "zones",
+          localField: "zoneId",
+          foreignField: "_id",
+          as: "zone",
+        },
+      },
+      {
+        $unwind: "$zone",
+      },
+      {
+        $lookup: {
+          from: "supervisors",
+          let: {
+            sid: "$zone.supervisorId",
+          },
+          pipeline: [
+            {
+              $match: {
+                $expr: {
+                  $eq: ["$$sid", "$_id"],
+                },
+              },
+            },
+          ],
+          as: "zone.supervisor",
+        },
+      },
+      {
+        $unwind: "$zone.supervisor",
+      },
+      {
+        $lookup: {
+          from: "contacts",
+          let: {
+            sid: "$zone.supervisor.coordinatorId",
+          },
+          pipeline: [
+            {
+              $match: {
+                $expr: {
+                  $eq: ["$$sid", "$_id"],
+                },
+              },
+            },
+          ],
+          as: "zone.supervisor.coordinator",
+        },
+      },
+      {
+        $unwind: "$zone.supervisor.coordinator",
+      },
+      {
+        $lookup: {
+          from: "clients",
+          let: {
+            sid: "$chain.clientId",
+          },
+          pipeline: [
+            {
+              $match: {
+                $expr: {
+                  $eq: ["$$sid", "$_id"],
+                },
+              },
+            },
+          ],
+          as: "chain.client",
+        },
+      },
+      {
+        $project: {
+          chainId: 0,
+          zoneId: 0,
+          "zone.supervisorId": 0,
+          "zone.supervisor.coordinatorId": 0,
+          "chain.client.adminId": 0,
+          "chain.client.comercialId": 0,
+        },
+      },
+      {
+        $unwind: "$chain.client",
+      },
+      ...(query ?? []),
+    ]);
+  }
+
 }
 
 String.prototype.isID = function () {

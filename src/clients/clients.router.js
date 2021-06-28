@@ -1,5 +1,6 @@
 var express = require("express");
 const MongoDB = require("../db/mongo.driver");
+const ClientsController = require("./clients.controller");
 var router = express.Router();
 
 /**
@@ -8,14 +9,17 @@ var router = express.Router();
  * @returns
  */
 module.exports = function (db) {
+
+  const controller = new ClientsController(db);
+
   router.post("/get/clients", (req, res) => {
-    db.getClients(req.body)
+    controller.getClients(req.body)
       .then((r) => res.send(r))
       .catch((c) => res.send(c));
   });
 
   router.post("/get/client", (req, res) => {
-    db.getClientById(req.body)
+    controller.getClientById(req.body)
       .then((r) => res.send(r))
       .catch((c) => res.send(c));
   });
