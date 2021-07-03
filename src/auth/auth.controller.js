@@ -2,7 +2,6 @@ const MongoDB = require("../db/mongo.driver");
 const bcrypt = require("bcrypt-nodejs");
 const { ObjectId } = require("mongodb");
 
-
 class AuthController {
   /**
    *
@@ -128,11 +127,44 @@ class AuthController {
 
   async userByToken({ token }) {
     return new Promise((resolve, reject) => {
-      this.users.findOne({ token: token }, (error, result) => {
-        if (error) return reject({ code: 500, message: "Hubo un error al intentar buscar la sesión, volve a intentar" });
-        if (!result) return reject({ code: 403, message: "La sesión no fue encontrada, revisa el token y volve a intentar" });
-        return resolve(result);
-      });
+      this.users.aggregate(
+        [
+          {
+            $match: {
+              token: token,
+            },
+          },
+          {
+            $lookup: {
+              from: "accounts",
+              localField: "user",
+              foreignField: "_id",
+              as: "account",
+            },
+          },
+          {
+            $unwind: {
+              path: "$account",
+              preserveNullAndEmptyArrays: false,
+            },
+          },
+          {
+            $project: {
+              token: 1,
+              displayName: "$account.displayName",
+              email: "$account.email",
+              role: "$account.role",
+            },
+          },
+        ],
+        async (error, result) => {
+          if (error) return reject({ code: 500, message: "Hubo un error al intentar buscar o crear la sesión, volve a intentar" });
+          const account = (await result.toArray())[0];
+          if (!account) return reject({ code: 500, message: "No se encontró la sesión" });
+
+          return resolve({ code: 200, message: "Sesión recuperada con éxito", user: account });
+        }
+      );
     });
   }
 

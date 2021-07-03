@@ -9,7 +9,6 @@ var router = express.Router();
  * @returns
  */
 module.exports = function (db) {
-
   const controller = new AuthController(db);
 
   router.post("/register", (req, res) => {
@@ -21,21 +20,21 @@ module.exports = function (db) {
       return res.send({ code: 206, message: `Faltan parametros: ${params.join(", ")}` });
     }
 
-    controller.registerAccount(req.body)
+    controller
+      .registerAccount(req.body)
       .then((r) => res.send(r))
       .catch((c) => res.send(c));
   });
 
   router.post("/authenticate", (req, res) => {
-    const token = req.headers.authorization?.split(" ")[1];
+    const { timestamp, token } = req.body;
 
     if (!token) {
       return res.send({ code: 401, message: "Es necesario de una autorización" });
     }
 
-    const { timestamp } = req.body;
-
-    controller.authenticateToken({ token, timestamp })
+    controller
+      .authenticateToken({ token, timestamp })
       .then((r) => res.send(r))
       .catch((c) => res.send(c));
   });
@@ -46,7 +45,8 @@ module.exports = function (db) {
       return res.send({ code: 204, message: "Es necesario ingresar un correo y una contraseña." });
     }
 
-    controller.tryLogin({ email, password })
+    controller
+      .tryLogin({ email, password })
       .then((r) => res.send(r))
       .catch((c) => res.send(c));
   });

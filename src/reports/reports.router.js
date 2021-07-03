@@ -28,12 +28,16 @@ module.exports = function (db) {
 
     if (!type) return res.send({ code: 401, message: "Es necesario definir el tipo de reporte." });
 
-    authController.userByToken({ token })
+    authController
+      .userByToken({ token })
       .then((user) => {
         if (!user) return res.send({ code: 404, message: "La sesión no existe o no está disponible" });
-        if (createdBy != user.id) return res.send({ code: 403, message: "El identificador no corresponde con el token de validación" });
+        if (createdBy != user.user._id.toString()) return res.send({ code: 403, message: "El identificador no corresponde con el token de validación" });
 
-        controller.createReport(req.body)
+        console.log({ createdBy, user: user.user._id.toString(), value: createdBy === user.user._id.toString() });
+
+        controller
+          .createReport(req.body)
           .then((r) => res.send(r))
           .catch((c) => res.send(c));
       })
@@ -47,15 +51,17 @@ module.exports = function (db) {
       return res.send({ code: 401, message: "Es necesario de una autorización" });
     }
 
-    const { filter, type } = req.body;
+    const { type, id } = req.body;
 
-    if (!filter) return res.send({ code: 400, message: "Es necesario un filtro" });
+    if (!id) return res.send({ code: 401, message: "Es necesario un identificador." });
     if (!type) return res.send({ code: 401, message: "Es necesario definir el tipo de reporte." });
 
-    authController.userByToken({ token })
+    authController
+      .userByToken({ token })
       .then((user) => {
         if (!user) return res.send({ code: 404, message: "La sesión no existe o no está disponible" });
-        controller.getReport(req.body)
+        return controller
+          .getReport(req.body)
           .then((r) => res.send(r))
           .catch((c) => res.send(c));
       })
@@ -68,13 +74,13 @@ module.exports = function (db) {
     if (!token) {
       return res.send({ code: 401, message: "Es necesario de una autorización" });
     }
-    const _defaultParams = ["filter", "type"];
 
-    var params = _defaultParams.filter((value) => !Object.keys(req.body).includes(value));
+    const { type } = req.body;
 
-    if (params.length != 0) return res.send({ code: 206, message: `Faltan parametros: ${params.join(", ")}` });
+    if (!type) return res.send({ code: 401, message: "Es necesario definir el tipo de reporte." });
 
-    controller.getReports(req.body)
+    controller
+      .getReports(req.body)
       .then((r) => res.send(r))
       .catch((c) => res.send(c));
   });

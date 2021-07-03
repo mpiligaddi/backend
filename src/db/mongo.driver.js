@@ -3,31 +3,34 @@ const properties = require("./mongo.properties");
 
 class MongoDB {
   async connect() {
-    return new Promise(async (resolve, reject) => {
+    return new Promise((resolve, reject) => {
       var url = `mongodb://${properties.data.user}:${properties.data.pass}@${properties.data.ip}:27017?authSource=admin&retryWrites=true&w=majority`;
 
       const client = new MongoClient(url, { useUnifiedTopology: true });
+      client
+        .connect()
+        .then((connection) => {
+          const db = connection.db(properties.data.database);
+          let props = properties.collections;
 
-      var connection = await client.connect();
-      const db = connection.db(properties.data.database);
-      let props = properties.collections;
+          this.breakevensReports = db.collection(props.reports.breakevens);
+          this.pricingssReports = db.collection(props.reports.pricing);
+          this.photosReports = db.collection(props.reports.photo);
+          this.accounts = db.collection(props.users.accounts);
+          this.users = db.collection(props.users.security);
+          this.contacts = db.collection(props.users.contacts);
+          this.supervisors = db.collection(props.users.supervisors);
+          this.categories = db.collection(props.categories);
+          this.coverages = db.collection(props.coverages);
+          this.products = db.collection(props.products);
+          this.branches = db.collection(props.branches);
+          this.clients = db.collection(props.clients);
+          this.chains = db.collection(props.chains);
+          this.zones = db.collection(props.zones);
 
-      this.breakevensReports = db.collection(props.reports.breakevens);
-      this.pricingssReports = db.collection(props.reports.pricing);
-      this.photosReports = db.collection(props.reports.photo);
-      this.accounts = db.collection(props.users.accounts);
-      this.users = db.collection(props.users.security);
-      this.contacts = db.collection(props.users.contacts);
-      this.supervisors = db.collection(props.users.supervisors);
-      this.categories = db.collection(props.categories);
-      this.coverages = db.collection(props.coverages);
-      this.products = db.collection(props.products);
-      this.branches = db.collection(props.branches);
-      this.clients = db.collection(props.clients);
-      this.chains = db.collection(props.chains);
-      this.zones = db.collection(props.zones);
-
-      resolve(this);
+          resolve(this);
+        })
+        .catch((error) => reject("Error al conectar a la base de datos."));
     });
   }
 
@@ -149,17 +152,7 @@ class MongoDB {
 
   clientsQuery(query) {
     return this.clients.aggregate([
-      {
-        $lookup: {
-          from: "accounts",
-          localField: "adminId",
-          foreignField: "_id",
-          as: "admin",
-        },
-      },
-      {
-        $unwind: "$admin",
-      },
+      ...this.accountLookup({}),
       {
         $lookup: {
           from: "contacts",
@@ -186,27 +179,81 @@ class MongoDB {
 
   branchesQuery(query) {
     return this.branches.aggregate([
+      ...this.chainLookup(),
+      ...this.zoneLookup(),
+      ...this.clientLookup({ local: "chain.clientId", asField: "chain.client" }),
+      {
+        $project: {
+          chainId: 0,
+          zoneId: 0,
+          "zone.supervisorId": 0,
+          "zone.supervisor.coordinatorId": 0,
+          "chain.client.adminId": 0,
+          "chain.client.comercialId": 0,
+        },
+      },
+      ...(query ?? []),
+    ]);
+  }
+
+  reportsQuery(collection, query) {
+    return collection.aggregate([...this.branchLookup({ addons: [...this.zoneLookup({ local: asField + ".zoneId", asField: asField + ".zone" })] }), ...this.chainLookup(), ...this.clientLookup()]);
+  }
+
+  chainLookup({ local = "chainId", foreign = "_id", asField = "chain" }) {
+    return [
       {
         $lookup: {
           from: "chains",
-          localField: "chainId",
-          foreignField: "_id",
-          as: "chain",
+          localField: local,
+          foreignField: foreign,
+          as: asField,
         },
       },
       {
-        $unwind: "$chain",
+        $unwind: "$" + asField,
       },
+    ];
+  }
+
+  clientLookup({ local = "clientId", foreign = "_id", asField = "client" }) {
+    return [
+      {
+        $lookup: {
+          from: "clients",
+          let: {
+            sid: "$" + local,
+          },
+          pipeline: [
+            {
+              $match: {
+                $expr: {
+                  $eq: ["$$sid", "$" + foreign],
+                },
+              },
+            },
+          ],
+          as: asField,
+        },
+      },
+      {
+        $unwind: "$" + asField,
+      },
+    ];
+  }
+
+  zoneLookup({ local = "zoneId", foreign = "_id", asField = "zone" }) {
+    return [
       {
         $lookup: {
           from: "zones",
-          localField: "zoneId",
-          foreignField: "_id",
-          as: "zone",
+          localField: local,
+          foreignField: foreign,
+          as: asField,
         },
       },
       {
-        $unwind: "$zone",
+        $unwind: "$" + asField,
       },
       {
         $lookup: {
@@ -227,13 +274,13 @@ class MongoDB {
         },
       },
       {
-        $unwind: "$zone.supervisor",
+        $unwind: "$" + asField + ".supervisor",
       },
       {
         $lookup: {
           from: "contacts",
           let: {
-            sid: "$zone.supervisor.coordinatorId",
+            sid: "$" + asField + ".supervisor.coordinatorId",
           },
           pipeline: [
             {
@@ -248,43 +295,48 @@ class MongoDB {
         },
       },
       {
-        $unwind: "$zone.supervisor.coordinator",
+        $unwind: "$" + asField + ".supervisor.coordinator",
       },
+    ];
+  }
+
+  branchLookup({ local = "branchId", foreign = "_id", asField = "branch", addons = [] }) {
+    return [
       {
         $lookup: {
-          from: "clients",
-          let: {
-            sid: "$chain.clientId",
-          },
-          pipeline: [
-            {
-              $match: {
-                $expr: {
-                  $eq: ["$$sid", "$_id"],
-                },
-              },
-            },
-          ],
-          as: "chain.client",
+          from: "branches",
+          localField: local,
+          foreignField: foreign,
+          as: asField,
         },
+      },
+      {
+        $unwind: "$" + asField,
+      },
+      ...addons,
+    ];
+  }
+
+  accountLookup({local = "userId", foreign = "_id", asField = "account"}) {
+    return [
+      {
+        $lookup: {
+          from: "accounts",
+          localField: local,
+          foreignField: foreign,
+          as: asField
+        }
+      },
+      {
+        $unwind: "$"+asField
       },
       {
         $project: {
-          chainId: 0,
-          zoneId: 0,
-          "zone.supervisorId": 0,
-          "zone.supervisor.coordinatorId": 0,
-          "chain.client.adminId": 0,
-          "chain.client.comercialId": 0,
-        },
+          : 0
+        }
       },
-      {
-        $unwind: "$chain.client",
-      },
-      ...(query ?? []),
-    ]);
+    ];
   }
-
 }
 
 String.prototype.isID = function () {

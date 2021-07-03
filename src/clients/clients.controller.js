@@ -38,7 +38,7 @@ class ClientsController {
     return new Promise((resolve, reject) => {
       if (!id.isID()) reject({ code: 403, message: "El id ingresado es inválido" });
 
-      this.clientsQuery({
+      this.db.clientsQuery({
         $match: {
           _id: new ObjectId(id),
         },
