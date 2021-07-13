@@ -106,6 +106,10 @@ class ReportsController {
     });
   }
 
+  async createTest(){
+    this.db.
+  }
+
   getReportColl(type) {
     switch (type.toLowerCase()) {
       case "breakeven":
