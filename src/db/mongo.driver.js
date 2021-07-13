@@ -152,7 +152,7 @@ class MongoDB {
 
   clientsQuery(query) {
     return this.clients.aggregate([
-      ...this.accountLookup({}),
+      ...this.accountLookup({ local: "adminId", asField: "admin" }),
       {
         $lookup: {
           from: "contacts",
@@ -197,7 +197,26 @@ class MongoDB {
   }
 
   reportsQuery(collection, query) {
-    return collection.aggregate([...this.branchLookup({ addons: [...this.zoneLookup({ local: asField + ".zoneId", asField: asField + ".zone" })] }), ...this.chainLookup(), ...this.clientLookup()]);
+    return collection.aggregate([
+      ...this.branchLookup({ addons: [...this.zoneLookup({ local: asField + ".zoneId", asField: asField + ".zone" })] }),
+      ...this.chainLookup(),
+      ...this.clientLookup(),
+      ...this.accountLookup({ local: "createdBy", asField: "creator" }),
+      {
+        $lookup: {
+          
+        }
+      },
+      {
+        $project: {
+          "creator.password": 0,
+          branchId: 0,
+          chainId: 0,
+          clientId: 0,
+          createdBy: 0,
+        },
+      },
+    ]);
   }
 
   chainLookup({ local = "chainId", foreign = "_id", asField = "chain" }) {
@@ -317,23 +336,18 @@ class MongoDB {
     ];
   }
 
-  accountLookup({local = "userId", foreign = "_id", asField = "account"}) {
+  accountLookup({ local = "userId", foreign = "_id", asField = "account" }) {
     return [
       {
         $lookup: {
           from: "accounts",
           localField: local,
           foreignField: foreign,
-          as: asField
-        }
+          as: asField,
+        },
       },
       {
-        $unwind: "$"+asField
-      },
-      {
-        $project: {
-          : 0
-        }
+        $unwind: "$" + asField,
       },
     ];
   }
