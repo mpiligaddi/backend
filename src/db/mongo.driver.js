@@ -35,7 +35,6 @@ class MongoDB {
   }
 
   /** Chains */
-
   async createChain(chain) {
     const { name, clientId } = chain;
     return new Promise((resolve, reject) => {
@@ -150,6 +149,7 @@ class MongoDB {
     });
   }
 
+  /** QUERY */
   clientsQuery(query) {
     return this.clients.aggregate([
       ...this.accountLookup({ local: "adminId", asField: "admin" }),
@@ -198,158 +198,78 @@ class MongoDB {
 
   reportsQuery(collection, query) {
     return collection.aggregate([
-      ...this.branchLookup({ addons: [...this.zoneLookup({ local: asField + ".zoneId", asField: asField + ".zone" })] }),
+      ...(query ?? []),
       ...this.chainLookup(),
       ...this.clientLookup(),
-      ...this.accountLookup({ local: "createdBy", asField: "creator" }),
-      {
-        $lookup: {
-          
-        }
-      },
-      {
-        $project: {
-          "creator.password": 0,
-          branchId: 0,
-          chainId: 0,
-          clientId: 0,
-          createdBy: 0,
-        },
-      },
+      ...this.branchLookup(),
+      ...this.accountLookup({local: "createdBy"})
+
     ]);
   }
 
-  chainLookup({ local = "chainId", foreign = "_id", asField = "chain" }) {
+  chainLookup({ local = "chainId", foreign = "_id", asField = "chain" } = {}) {
+    return this.easyLookup("chains", local, foreign, asField);
+  }
+
+  clientLookup({ local = "clientId", foreign = "_id", asField = "client" } = {}) {
+    return this.easyLookup("clients", local, foreign, asField);
+  }
+
+  easyLookup(from, local, foreign, asField){
     return [
       {
         $lookup: {
-          from: "chains",
-          localField: local,
-          foreignField: foreign,
-          as: asField,
+          from: `${from}`,
+          localField: `${local}`,
+          foreignField: `${foreign}`,
+          as: `${asField}`,
         },
       },
       {
-        $unwind: "$" + asField,
+        $unwind: `$${asField}`,
       },
     ];
   }
 
-  clientLookup({ local = "clientId", foreign = "_id", asField = "client" }) {
+  pipelineLookup(from, local, foreign, asField){
     return [
       {
         $lookup: {
-          from: "clients",
+          from: `${from}`,
           let: {
-            sid: "$" + local,
+            sid: `$${local}`,
           },
           pipeline: [
             {
               $match: {
                 $expr: {
-                  $eq: ["$$sid", "$" + foreign],
+                  $eq: ["$$sid", `$${foreign}`],
                 },
               },
             },
           ],
-          as: asField,
+          as: `${asField}`,
         },
       },
       {
-        $unwind: "$" + asField,
+        $unwind: `$${asField}`,
       },
     ];
   }
 
-  zoneLookup({ local = "zoneId", foreign = "_id", asField = "zone" }) {
+  zoneLookup({ local = "zoneId", foreign = "_id", asField = "zone" } = {}) {
+    return this.easyLookup("zones", local, foreign, asField);
+  }
+
+  branchLookup({ local = "branchId", foreign = "_id", asField = "branch"} = {}) {
     return [
-      {
-        $lookup: {
-          from: "zones",
-          localField: local,
-          foreignField: foreign,
-          as: asField,
-        },
-      },
-      {
-        $unwind: "$" + asField,
-      },
-      {
-        $lookup: {
-          from: "supervisors",
-          let: {
-            sid: "$zone.supervisorId",
-          },
-          pipeline: [
-            {
-              $match: {
-                $expr: {
-                  $eq: ["$$sid", "$_id"],
-                },
-              },
-            },
-          ],
-          as: "zone.supervisor",
-        },
-      },
-      {
-        $unwind: "$" + asField + ".supervisor",
-      },
-      {
-        $lookup: {
-          from: "contacts",
-          let: {
-            sid: "$" + asField + ".supervisor.coordinatorId",
-          },
-          pipeline: [
-            {
-              $match: {
-                $expr: {
-                  $eq: ["$$sid", "$_id"],
-                },
-              },
-            },
-          ],
-          as: "zone.supervisor.coordinator",
-        },
-      },
-      {
-        $unwind: "$" + asField + ".supervisor.coordinator",
-      },
+      ...this.easyLookup("branches", local, foreign, asField),
+      ...this.zoneLookup({local: `${asField}.zoneId`, asField: `${asField}.zone`})
     ];
   }
 
-  branchLookup({ local = "branchId", foreign = "_id", asField = "branch", addons = [] }) {
-    return [
-      {
-        $lookup: {
-          from: "branches",
-          localField: local,
-          foreignField: foreign,
-          as: asField,
-        },
-      },
-      {
-        $unwind: "$" + asField,
-      },
-      ...addons,
-    ];
-  }
-
-  accountLookup({ local = "userId", foreign = "_id", asField = "account" }) {
-    return [
-      {
-        $lookup: {
-          from: "accounts",
-          localField: local,
-          foreignField: foreign,
-          as: asField,
-        },
-      },
-      {
-        $unwind: "$" + asField,
-      },
-    ];
+  accountLookup({ local = "userId", foreign = "_id", asField = "account" } = {}) {
+    return this.easyLookup("accounts", local, foreign, asField)
   }
 }
 

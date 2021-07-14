@@ -12,6 +12,9 @@ module.exports = function (db) {
   const controller = new BranchesController(db);
 
   router.post("/get/branches", (req, res) => {
+
+    const { start, end, filter } = req.body;
+
     controller
       .getBranches(req.body)
       .then((r) => res.send(r))

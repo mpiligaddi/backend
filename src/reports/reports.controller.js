@@ -18,21 +18,31 @@ class ReportsController {
       const collection = this.getReportColl(type);
       if (!collection) return reject({ code: 404, message: "No se encontró ninguna colección para el reporte" });
 
-      if (!id.isID()) reject({ code: 403, message: "El id ingresado es inválido" });
+      if (!id.isID()) return reject({ code: 403, message: "El id ingresado es inválido" });
 
       this.db
-        .reportsQuery({
-          $match: {
-            _id: new ObjectId(id),
+        .reportsQuery(collection, [
+          {
+            $match: {
+              _id: new ObjectId(id),
+            },
           },
-        })
+          {
+            $limit: 1
+          }
+        ])
         .toArray()
         .then((result) => {
+          console.log(result);
           const report = result[0];
           if (!report || !report) return reject({ code: 404, message: "No se pudo encontrar ningún reporte." });
-          return resolve({ code: 200, message: "Cliente encontrado con éxito!", report: report });
+          return resolve({ code: 200, message: "Reporte encontrado con éxito!", report: report });
         })
-        .catch((c) => reject({ code: 500, message: "Hubo un error al intentar buscar el reporte, volve a intentar" }));
+        .catch((c) =>
+        {
+          console.log(c);
+          reject({ code: 500, message: "Hubo un error al intentar buscar el reporte, volve a intentar" })
+        });
     });
   }
 
@@ -104,10 +114,6 @@ class ReportsController {
         }
       );
     });
-  }
-
-  async createTest(){
-    this.db.
   }
 
   getReportColl(type) {

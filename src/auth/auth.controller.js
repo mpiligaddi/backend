@@ -26,7 +26,8 @@ class AuthController {
 
         this.users.findOneAndUpdate({ user: _account._id }, { $set: { token: newToken, timestamp: Date.now() } }, (error, result) => {
           if (error) return reject({ code: 500, message: "Hubo un error al intentar buscar o crear la sesión, volve a intentar" });
-          if (result.value) return resolve({ code: 200, message: "Sesión recuperada con éxito", user: result.value });
+
+          if (result.value) return resolve({ code: 200, message: "Sesión recuperada con éxito", user: { ...result.value, token: newToken, } });
 
           const userResult = {
             displayName: _account.displayName,
@@ -78,7 +79,8 @@ class AuthController {
           },
           {
             $project: {
-              token: 1,
+              _id: 0,
+              id: "$account._id",
               displayName: "$account.displayName",
               email: "$account.email",
               role: "$account.role",
@@ -150,7 +152,7 @@ class AuthController {
           },
           {
             $project: {
-              token: 1,
+              _id: 0,
               displayName: "$account.displayName",
               email: "$account.email",
               role: "$account.role",
