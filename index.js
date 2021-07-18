@@ -20,7 +20,7 @@ mongo
   .then((db) => {
 
     app.use(session({
-      secret: "uwu de awa",
+      secret: "uwu de awa con sabor a iwi",
       cookie: {
         maxAge: 1000 * 60 * 60 * 24 * 7
       },
