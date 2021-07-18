@@ -26,15 +26,10 @@ module.exports = function (db) {
       .catch((c) => res.send(c));
   });
 
-  router.post("/authenticate", (req, res) => {
-    const { timestamp, token } = req.body;
-
-    if (!token) {
-      return res.send({ code: 401, message: "Es necesario de una autorización" });
-    }
+  router.post("/logout", (req, res) => {
 
     controller
-      .authenticateToken({ token, timestamp })
+      .tryLogout()
       .then((r) => res.send(r))
       .catch((c) => res.send(c));
   });
