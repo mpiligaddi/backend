@@ -41,7 +41,7 @@ class BranchesController {
             $match: filter ?? {},
           },
           {
-            $skip: start ?? 1,
+            $skip: start ?? 0,
           },
           {
             $limit: end ?? 10,

@@ -12,7 +12,7 @@ class AuthController {
     this.users = db.users;
   }
 
-  async tryLogin({ email, password }) {
+  async tryLogin({ email, password, id }) {
     return new Promise((resolve, reject) => {
       this.accounts.findOne({ email: email }, (error, _account) => {
         if (error) return reject({ code: 500, message: "Hubo un error al intentar buscar al usuario, volve a intentar" });
@@ -22,82 +22,16 @@ class AuthController {
 
         if (!validPassword) return reject({ code: 401, message: "La contraseña ingresada es incorrecta, corregila y volve a intentar" });
 
-        let newToken = this.generateToken();
 
-        this.users.findOneAndUpdate({ user: _account._id }, { $set: { token: newToken, timestamp: Date.now() } }, (error, result) => {
-          if (error) return reject({ code: 500, message: "Hubo un error al intentar buscar o crear la sesión, volve a intentar" });
+        const userResult = {
+          displayName: _account.displayName,
+          email: email,
+          role: _account.role,
+          id: _account._id,
+        };
 
-          if (result.value) return resolve({ code: 200, message: "Sesión recuperada con éxito", user: { ...result.value, token: newToken, } });
-
-          const userResult = {
-            displayName: _account.displayName,
-            email: email,
-            role: _account.role,
-            id: _account._id,
-            timestamp: Date.now(),
-            token: newToken,
-          };
-
-          this.users.insertOne(
-            {
-              timestamp: Date.now(),
-              user: new ObjectId(_account._id),
-              token: newToken,
-            },
-            (error, _) => {
-              if (error) return reject({ code: 500, message: "Hubo un error al intentar crear la sesión, volve a intentar" });
-              return resolve({ code: 201, message: "Sesión creada con éxito", user: userResult });
-            }
-          );
-        });
+        return resolve({ code: 201, message: "Sesión creada con éxito", user: userResult });
       });
-    });
-  }
-
-  async authenticateToken({ token, timestamp }) {
-    return new Promise((resolve, reject) => {
-      this.users.aggregate(
-        [
-          {
-            $match: {
-              token: token,
-            },
-          },
-          {
-            $lookup: {
-              from: "accounts",
-              localField: "user",
-              foreignField: "_id",
-              as: "account",
-            },
-          },
-          {
-            $unwind: {
-              path: "$account",
-              preserveNullAndEmptyArrays: false,
-            },
-          },
-          {
-            $project: {
-              _id: 0,
-              id: "$account._id",
-              displayName: "$account.displayName",
-              email: "$account.email",
-              role: "$account.role",
-            },
-          },
-        ],
-        async (error, result) => {
-          if (error) return reject({ code: 500, message: "Hubo un error al intentar buscar o crear la sesión, volve a intentar" });
-          const account = (await result.toArray())[0];
-          if (!account) return reject({ code: 500, message: "No se encontró la sesión" });
-
-          this.users.findOneAndUpdate({ token: token }, { $set: { timestamp: timestamp } }, (error, result) => {
-            if (error || !result.value) return reject({ code: 500, message: "Hubo un error al intentar buscar o crear la sesión, volve a intentar" });
-            if (result.value) return resolve({ code: 200, message: "Sesión recuperada con éxito", user: account });
-          });
-        }
-      );
     });
   }
 
@@ -125,6 +59,15 @@ class AuthController {
         });
       });
     });
+  }
+
+  async tryLogout(session) {
+    return new Promise((resolve, reject) => {
+      session.destroy((err) => {
+        if (err) return reject({ code: 500, message: "Hubo un error al desconectarlo de la cuenta" });
+        return resolve({ code: 200, message: "Se elimino la sesión actual." });
+      })
+    })
   }
 
   async userByToken({ token }) {

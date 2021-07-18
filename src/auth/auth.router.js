@@ -46,8 +46,12 @@ module.exports = function (db) {
     }
 
     controller
-      .tryLogin({ email, password })
-      .then((r) => res.send(r))
+      .tryLogin({ email, password, id: req.session.id })
+      .then((r) => {
+        req.session.account = r.user;
+        req.session.isAuth = true;
+        res.send(r);
+      })
       .catch((c) => res.send(c));
   });
 

@@ -38,8 +38,7 @@ class ReportsController {
           if (!report || !report) return reject({ code: 404, message: "No se pudo encontrar ningún reporte." });
           return resolve({ code: 200, message: "Reporte encontrado con éxito!", report: report });
         })
-        .catch((c) =>
-        {
+        .catch((c) => {
           console.log(c);
           reject({ code: 500, message: "Hubo un error al intentar buscar el reporte, volve a intentar" })
         });
@@ -52,33 +51,26 @@ class ReportsController {
 
       if (!collection) return reject({ code: 404, message: "No se encontró ninguna colección para el reporte" });
 
-      /* var isPaging = `${start}`.length < 10 || `${end}`.length < 10;
+      this.db.reportsQuery(collection, [
+        {
+          $match: filter ?? {},
+        },
+        {
+          $skip: start ?? 0,
+        },
+        {
+          $limit: end ?? 10,
+        },
+      ]).toArray().then((reports) => {
+        console.log(reports);
+        if (!reports || !reports.length > 0) return reject({ code: 404, message: "No se pudo encontrar ningún reporte." });
+        return resolve({ code: 200, message: "Reportes obtenidos con éxito!", reports });
+      })
+        .catch((c) => {
+          console.log(c);
+          reject({ code: 500, message: "Hubo un error al intentar buscar reportes, volve a intentar" })
+        });
 
-      if (!isPaging && this.isDate(start ?? Date.now()) && this.isDate(end ?? Date.now())) {
-        var sDate = new Date(start ?? Date.now());
-        var eDate = new Date(end ?? Date.now());
-
-        if (sDate - eDate >= 0) return reject({ code: 404, message: "Las fechas ingresadas son incorrectas" });
-
-        filter = {
-          ...filter,
-          createdAt: {
-            $gte: sDate.getTime(),
-            $lte: eDate.getTime(),
-          },
-        };
-      }
-
-      let paginationOptions = {
-        limit: end ?? 10,
-        skip: start ?? 0,
-      };
-
-      collection
-        .find(filter, isPaging ? paginationOptions : {})
-        .toArray()
-        .then((reports) => resolve({ code: 200, message: "Reportes obtenidos con éxito", reports: reports }))
-        .catch((c) => reject({ code: 500, message: "Hubo un error al buscar reportes." }));*/
     });
   }
 

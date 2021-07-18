@@ -10,28 +10,12 @@ var router = express.Router();
  * @returns
  */
 module.exports = function (db) {
-
-  const authController = new AuthController(db);
   const controller = new ReportsController(db);
-
-  router.use(function (req, res, next) {
-    if (req.headers.authorization.split(" ")[1] == null) {
-      res.send({ "code": 401, message: "No se detectó ningún código de autorización" })
-      return
-    }
-    const token = req.headers.authorization.split(" ")[1];
-
-    authController.authenticateToken({ token, timestamp: Date.now() }).then((user) => {
-      req.user = user.user;
-      next()
-    }).catch((err) => res.send(err))
-
-  })
 
   router.post("/report/create", (req, res) => {
 
     const { createdBy, type } = req.body;
-    const user = req.user;
+    const user = req.session.account;
 
     if (!type) return res.send({ code: 401, message: "Es necesario definir el tipo de reporte." });
 
@@ -47,32 +31,27 @@ module.exports = function (db) {
   });
 
   router.post("/report/get", (req, res) => {
-    const user = req.user;
-
     const { type, id } = req.body;
 
     if (!id) return res.send({ code: 401, message: "Es necesario un identificador." });
     if (!type) return res.send({ code: 401, message: "Es necesario definir el tipo de reporte." });
 
-    if (!user) return res.send({ code: 404, message: "La sesión no existe o no está disponible" });
     return controller
       .getReport(req.body)
       .then((r) => res.send(r))
       .catch((c) => res.send(c));
   });
 
-  router.post("/report/get/all", (req, res) => {
-    const token = req.token
+  router.post("/report/all", (req, res) => {
 
-    if (!token) {
-      return res.send({ code: 401, message: "Es necesario de una autorización" });
-    }
+    const user = req.user;
 
     const { type } = req.body;
 
     if (!type) return res.send({ code: 401, message: "Es necesario definir el tipo de reporte." });
 
-    controller
+    if (!user) return res.send({ code: 404, message: "La sesión no existe o no está disponible" });
+    return controller
       .getReports(req.body)
       .then((r) => res.send(r))
       .catch((c) => res.send(c));

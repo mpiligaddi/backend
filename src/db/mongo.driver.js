@@ -1,8 +1,7 @@
 const { MongoClient, ObjectId } = require("mongodb");
 const properties = require("./mongo.properties");
-
 class MongoDB {
-  async connect() {
+  async connect(session) {
     return new Promise((resolve, reject) => {
       var url = `mongodb://${properties.data.user}:${properties.data.pass}@${properties.data.ip}:27017?authSource=admin&retryWrites=true&w=majority`;
 
@@ -12,6 +11,8 @@ class MongoDB {
         .then((connection) => {
           const db = connection.db(properties.data.database);
           let props = properties.collections;
+
+          this.store = new session({ uri: url, databaseName: properties.data.database, collection: props.users.security })
 
           this.breakevensReports = db.collection(props.reports.breakevens);
           this.pricingssReports = db.collection(props.reports.pricing);
@@ -34,24 +35,6 @@ class MongoDB {
     });
   }
 
-  /** Chains */
-  async createChain(chain) {
-    const { name, clientId } = chain;
-    return new Promise((resolve, reject) => {
-      this.chains.insertOne(
-        {
-          clientId: new ObjectId(clientId),
-          name: name,
-        },
-        (error, result) => {
-          if (error) return reject({ code: 500, message: "Hubo un error al intentar insertar la cadena, volve a intentar" });
-          if (!result) return reject({ code: 404, message: "No se pudo crear ninguna cadena." });
-
-          return resolve({ code: 200, message: "Cadena creada con éxito!", chain: result.insertedId });
-        }
-      );
-    });
-  }
 
   /** Categories */
 
@@ -173,6 +156,7 @@ class MongoDB {
           "comercial.role": 0,
         },
       },
+
       ...(query ?? []),
     ]);
   }
@@ -202,10 +186,49 @@ class MongoDB {
       ...this.chainLookup(),
       ...this.clientLookup(),
       ...this.branchLookup(),
-      ...this.accountLookup({local: "createdBy"})
-
+      ...this.accountLookup({ local: "createdBy", asField: "creator" }),
+      {
+        $project: {
+          "creator.password": 0,
+          "creator.uuids": 0,
+          "branch.chainId": 0,
+          "branch.zoneId": 0,
+          "branch.zone.supervisorId": 0,
+          "chain.clientId": 0,
+          "client.adminId": 0,
+          "client.comercialId": 0,
+          "client.CUIT": 0,
+          "client.periodReportId": 0,
+          "client.control": 0,
+          "client.periodReportId": 0,
+          branchId: 0,
+          chainId: 0,
+          clientId: 0,
+          createdBy: 0,
+        },
+      },
     ]);
   }
+
+  chainsQuery(query) {
+    return this.chains.aggregate([
+      ...(query ?? []),
+      ...this.clientLookup(),
+      {
+        $project: {
+          "client._id": 0,
+          "client.adminId": 0,
+          "client.comercialId": 0,
+          "client.CUIT": 0,
+          "client.periodReportId": 0,
+          "client.control": 0,
+          "client.periodReportId": 0,
+        }
+      }
+    ]);
+  }
+
+  /** LOOKUPS */
 
   chainLookup({ local = "chainId", foreign = "_id", asField = "chain" } = {}) {
     return this.easyLookup("chains", local, foreign, asField);
@@ -215,7 +238,7 @@ class MongoDB {
     return this.easyLookup("clients", local, foreign, asField);
   }
 
-  easyLookup(from, local, foreign, asField){
+  easyLookup(from, local, foreign, asField) {
     return [
       {
         $lookup: {
@@ -231,7 +254,7 @@ class MongoDB {
     ];
   }
 
-  pipelineLookup(from, local, foreign, asField){
+  pipelineLookup(from, local, foreign, asField) {
     return [
       {
         $lookup: {
@@ -261,15 +284,26 @@ class MongoDB {
     return this.easyLookup("zones", local, foreign, asField);
   }
 
-  branchLookup({ local = "branchId", foreign = "_id", asField = "branch"} = {}) {
+  branchLookup({ local = "branchId", foreign = "_id", asField = "branch" } = {}) {
     return [
       ...this.easyLookup("branches", local, foreign, asField),
-      ...this.zoneLookup({local: `${asField}.zoneId`, asField: `${asField}.zone`})
+      ...this.zoneLookup({ local: `${asField}.zoneId`, asField: `${asField}.zone` })
     ];
   }
 
   accountLookup({ local = "userId", foreign = "_id", asField = "account" } = {}) {
     return this.easyLookup("accounts", local, foreign, asField)
+  }
+
+  parseIds(list){
+    for (const key in list) {
+      if (Object.hasOwnProperty.call(list, key)) {
+        const element = list[key];
+        if (element.isID()) list[key] = new ObjectId(element)
+      }
+    }
+
+    return list;
   }
 }
 

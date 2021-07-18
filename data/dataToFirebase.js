@@ -11,13 +11,18 @@
 // //import catxchains from '../data/catxchain'
 
 const MongoDB = require("../src/db/mongo.driver");
-const branches = require("./branches/index");
 const chains = require("./chains");
 const coordinators = require("./coordinators");
 const supervisors = require("./supervisors");
 const users = require("./users/users");
 const zones = require("./zones");
+const con = require("../src/chains/chains.controller");
 
+const dd = require("./branches/dd");
+const branches = require("./branches/index");
+const parsers = require("./branches/parser");
+
+const bcontroller = require("../src/branches/branches.controller")
 class DataToDB {
   /**
    *
@@ -28,6 +33,28 @@ class DataToDB {
   }
 
   async uploadData() {
+    /*for (const iterator of chains) {
+      await new con(this.db).createChain(iterator)
+      console.log(iterator.name);
+    }*/
+    let con = new bcontroller(this.db);
+
+    for (const bgit of dd) {
+
+      const obranch = branches.find(e => e.name == bgit.name);
+
+      let mid = parsers.find(e => e.name == bgit.chainName);
+
+      console.log(bgit.chainName, obranch.name);
+
+      obranch.chainId = mid._id.$oid;
+
+      await con.createBranch(obranch);
+
+
+      console.log(obranch.name);
+    }
+
   }
 }
 
