@@ -51,7 +51,6 @@ class ClientsController {
           $limit: 1
         }
       ]).toArray().then((result) => {
-        console.log(result);
         if (!result || result.length == 0) return reject({ code: 404, message: "No se pudo encontrar ningún cliente." });
         return resolve({ code: 200, message: "Cliente encontrado con éxito!", client: result[0] });
       }).catch((c) => reject({ code: 500, message: "Hubo un error al intentar buscar el cliente." }));
