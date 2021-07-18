@@ -27,9 +27,8 @@ module.exports = function (db) {
   });
 
   router.post("/logout", (req, res) => {
-
     controller
-      .tryLogout()
+      .tryLogout(req.session)
       .then((r) => res.send(r))
       .catch((c) => res.send(c));
   });
