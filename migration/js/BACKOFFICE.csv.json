@@ -1,0 +1,27 @@
+[
+    {
+        "ID": "NT",
+        "NOMBRE": "NAHUEL THOMAS",
+        "DIRECCION DE CORREO": "nthomas@dgroupsa.com.ar"
+    },
+    {
+        "ID": "DT",
+        "NOMBRE": "DANIELA TORREZ",
+        "DIRECCION DE CORREO": "dtorrez@dgroupsa.com.ar"
+    },
+    {
+        "ID": "FV",
+        "NOMBRE": "FRANCO VILA",
+        "DIRECCION DE CORREO": "fvila@dgroupsa.com.ar"
+    },
+    {
+        "ID": "PD",
+        "NOMBRE": "PEDRO DINARDO",
+        "DIRECCION DE CORREO": "pdinardo@dgroupsa.com.ar"
+    },
+    {
+        "ID": "GC",
+        "NOMBRE": "GASTON CICERO",
+        "DIRECCION DE CORREO": "gcicero@dgroupsa.com.ar"
+    }
+]

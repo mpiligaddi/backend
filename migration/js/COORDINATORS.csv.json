@@ -1,0 +1,22 @@
+[
+    {
+        "ID": "DM",
+        "NOMBRE": "DIEGO MIÑO",
+        "DIRECCION DE CORREO": "dmino@dgroupsa.com.ar"
+    },
+    {
+        "ID": "LA",
+        "NOMBRE": "LEO ACOSTA",
+        "DIRECCION DE CORREO": "lacosta@dgroupsa.com.ar"
+    },
+    {
+        "ID": "RV",
+        "NOMBRE": "ROLANDO VACA",
+        "DIRECCION DE CORREO": "rvaca@dgroupsa.com.ar"
+    },
+    {
+        "ID": "MM",
+        "NOMBRE": "MARIANO MARCHANO",
+        "DIRECCION DE CORREO": "mmarchano@dgroupsa.com.ar"
+    }
+]

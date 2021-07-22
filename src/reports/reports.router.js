@@ -1,16 +1,9 @@
 var express = require("express");
-const MongoDB = require("../db/mongo.driver");
 const ReportsController = require("./reports.controller");
-const AuthController = require("../auth/auth.controller");
 var router = express.Router();
 
-/**
- *
- * @param {MongoDB} db
- * @returns
- */
-module.exports = function (db) {
-  const controller = new ReportsController(db);
+module.exports = function () {
+  const controller = new ReportsController();
 
   router.post("/report/create", (req, res) => {
 

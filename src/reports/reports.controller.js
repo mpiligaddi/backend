@@ -1,16 +1,10 @@
-const { ObjectId } = require("mongodb");
-const MongoDB = require("../db/mongo.driver");
-
 class ReportsController {
-  /**
-   *
-   * @param {MongoDB} db
-   */
-  constructor(db) {
-    this.db = db;
+
+  constructor() {
+   /*  this.db = db;
     this.breakevensReports = db.breakevensReports;
     this.pricingssReports = db.pricingssReports;
-    this.photosReports = db.photosReports;
+    this.photosReports = db.photosReports; */
   }
 
   async getReport({ id, type }) {

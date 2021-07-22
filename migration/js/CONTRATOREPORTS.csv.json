@@ -1,0 +1,2246 @@
+[
+    {
+        "CLIENTE": "9",
+        "BOCA": "INC1",
+        "FRECUENCIASEMANAL": "4",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "INC2",
+        "FRECUENCIASEMANAL": "4",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "INC5",
+        "FRECUENCIASEMANAL": "3",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "INC6",
+        "FRECUENCIASEMANAL": "4",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "INC7",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "INC8",
+        "FRECUENCIASEMANAL": "3",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "INC10",
+        "FRECUENCIASEMANAL": "3",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "INC11",
+        "FRECUENCIASEMANAL": "3",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "INC12",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "INC16",
+        "FRECUENCIASEMANAL": "3",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "INC18",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "INC20",
+        "FRECUENCIASEMANAL": "3",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "INC21",
+        "FRECUENCIASEMANAL": "3",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "INC23",
+        "FRECUENCIASEMANAL": "3",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "INC25",
+        "FRECUENCIASEMANAL": "4",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "INC26",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "INC28",
+        "FRECUENCIASEMANAL": "3",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "INC30",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "INC32",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "INC33",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "INC36",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "INC40",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "INC42",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "INC43",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "INC47",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "INC49",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "INC51",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "INC62",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "INC101",
+        "FRECUENCIASEMANAL": "1",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "INC115",
+        "FRECUENCIASEMANAL": "1",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "INC116",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "INC118",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "INC120",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "INC150",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "INC182",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "INC183",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "INC187",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "INC189",
+        "FRECUENCIASEMANAL": "1",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "INC195",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "INC198",
+        "FRECUENCIASEMANAL": "1",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "INC201",
+        "FRECUENCIASEMANAL": "1",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "INC202",
+        "FRECUENCIASEMANAL": "1",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "INC203",
+        "FRECUENCIASEMANAL": "1",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "INC204",
+        "FRECUENCIASEMANAL": "3",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "INC205",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "INC206",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "INC209",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "INC211",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "INC212",
+        "FRECUENCIASEMANAL": "1",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "INC214",
+        "FRECUENCIASEMANAL": "3",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "INC215",
+        "FRECUENCIASEMANAL": "1",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "INC216",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "INC218",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "INC219",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "INC220",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "INC221",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "INC226",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "INC227",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "INC228",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "INC231",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "INC234",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "INC237",
+        "FRECUENCIASEMANAL": "1",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "INC239",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "INC241",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "INC252",
+        "FRECUENCIASEMANAL": "1",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "INC253",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "INC254",
+        "FRECUENCIASEMANAL": "1",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "INC258",
+        "FRECUENCIASEMANAL": "1",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "INC268",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "INC272",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "INC277",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "INC278",
+        "FRECUENCIASEMANAL": "1",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "INC294",
+        "FRECUENCIASEMANAL": "3",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "INC15",
+        "FRECUENCIASEMANAL": "4",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "INC703",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "INC702",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "INC701",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "INC24",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "INC9",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "INC54",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "INC50",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "INC707",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "INC295",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "INC17",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "INC29",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "INC282",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "INC59",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "INC283",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "INC287",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "INC290",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "CHM1039",
+        "FRECUENCIASEMANAL": "1",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "CHM1067",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "COT2",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "COT19",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "COT24",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "COT41",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "COT43",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "COT44",
+        "FRECUENCIASEMANAL": "3",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "COT45",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "COT47",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "COT48",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "COT51",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "COT52",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "COT55",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "COT56",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "COT57",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "COT58",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "COT60",
+        "FRECUENCIASEMANAL": "3",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "COT61",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "COT63",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "COT64",
+        "FRECUENCIASEMANAL": "3",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "COT65",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "COT66",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "COT67",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "COT68",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "COT69",
+        "FRECUENCIASEMANAL": "3",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "COT74",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "COT75",
+        "FRECUENCIASEMANAL": "3",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "COT78",
+        "FRECUENCIASEMANAL": "3",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "COT80",
+        "FRECUENCIASEMANAL": "3",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "COT82",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "COT83",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "COT84",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "COT85",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "COT90",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "COT91",
+        "FRECUENCIASEMANAL": "4",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "COT92",
+        "FRECUENCIASEMANAL": "3",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "COT95",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "COT96",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "COT97",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "COT99",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "COT101",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "COT103",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "COT105",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "COT107",
+        "FRECUENCIASEMANAL": "3",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "COT108",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "COT109",
+        "FRECUENCIASEMANAL": "1",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "COT111",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "COT118",
+        "FRECUENCIASEMANAL": "1",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "COT124",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "COT129",
+        "FRECUENCIASEMANAL": "3",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "COT131",
+        "FRECUENCIASEMANAL": "3",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "COT149",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "COT151",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "COT153",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "COT158",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "COT160",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "COT163",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "COT165",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "COT168",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "COT170",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "COT175",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "COT176",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "COT179",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "COT181",
+        "FRECUENCIASEMANAL": "3",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "COT183",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "COT184",
+        "FRECUENCIASEMANAL": "4",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "COT186",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "COT188",
+        "FRECUENCIASEMANAL": "3",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "COT189",
+        "FRECUENCIASEMANAL": "3",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "COT192",
+        "FRECUENCIASEMANAL": "3",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "COT197",
+        "FRECUENCIASEMANAL": "3",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "COT203",
+        "FRECUENCIASEMANAL": "3",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "COT208",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "COT215",
+        "FRECUENCIASEMANAL": "3",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "COT219",
+        "FRECUENCIASEMANAL": "3",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "COT220",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "COT235",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "COT209",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "DAR1",
+        "FRECUENCIASEMANAL": "1",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "DAR2",
+        "FRECUENCIASEMANAL": "1",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "DAR3",
+        "FRECUENCIASEMANAL": "1",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "DAR4",
+        "FRECUENCIASEMANAL": "1",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "DIS1",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "DIS3",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "DIS4",
+        "FRECUENCIASEMANAL": "3",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "DIS12",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "DIS14",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "DIS15",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "DIS16",
+        "FRECUENCIASEMANAL": "3",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "DIS23",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "DIS25",
+        "FRECUENCIASEMANAL": "3",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "DIS30",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "DIS37",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "DIS38",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "DIS39",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "DIS46",
+        "FRECUENCIASEMANAL": "3",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "DIS48",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "DIS54",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "DIS107",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "DIS111",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "DIS152",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "DIS154",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "DIS235",
+        "FRECUENCIASEMANAL": "3",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "DIS237",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "DIS247",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "DIS630",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "DIS701",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "DIS977",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "DIS441",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "DIS583",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "DIS444",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "DIS29",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "DIS435",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "DIS451",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "DIS28",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "DIS468",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "DIS709",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "DIS436",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "DIS490",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "DIS452",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "DIS450",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "DIS233",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "DIS33",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "VEA32",
+        "FRECUENCIASEMANAL": "1",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "DIS60",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "DIS460",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "TUN2",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "TUN3",
+        "FRECUENCIASEMANAL": "1",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "TUN4",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "TUN5",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "TUN7",
+        "FRECUENCIASEMANAL": "1",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "TUN8",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "TUN9",
+        "FRECUENCIASEMANAL": "1",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "JBO5626",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "JBO662",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "JBO5260",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "JBO5201",
+        "FRECUENCIASEMANAL": "3",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "JBO5202",
+        "FRECUENCIASEMANAL": "5",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "JBO5204",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "JBO5205",
+        "FRECUENCIASEMANAL": "3",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "JBO5206",
+        "FRECUENCIASEMANAL": "3",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "JBO5208",
+        "FRECUENCIASEMANAL": "3",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "JBO5207",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "JBO5211",
+        "FRECUENCIASEMANAL": "3",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "JBO5214",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "JBO5231",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "JBO5218",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "JBO5034",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "JBO5213",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "JBO5259",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "JBO5263",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "JBO628",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "JBO138",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "JBO121",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "JBO182",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "JBO183",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "KIL3",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "KIL4",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "KIL8",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "LIB102",
+        "FRECUENCIASEMANAL": "3",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "LIB901",
+        "FRECUENCIASEMANAL": "3",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "LIB701",
+        "FRECUENCIASEMANAL": "3",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "LIB1001",
+        "FRECUENCIASEMANAL": "3",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "LIB602",
+        "FRECUENCIASEMANAL": "3",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "LIB802",
+        "FRECUENCIASEMANAL": "3",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "LIB1103",
+        "FRECUENCIASEMANAL": "3",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "LIB1202",
+        "FRECUENCIASEMANAL": "3",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "LIB1302",
+        "FRECUENCIASEMANAL": "3",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "LIB1402",
+        "FRECUENCIASEMANAL": "3",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "LIB1502",
+        "FRECUENCIASEMANAL": "3",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "LIB2802",
+        "FRECUENCIASEMANAL": "3",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "LIB2502",
+        "FRECUENCIASEMANAL": "3",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "LIB202",
+        "FRECUENCIASEMANAL": "3",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "LIB1205",
+        "FRECUENCIASEMANAL": "3",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "MKO1",
+        "FRECUENCIASEMANAL": "3",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "MKO2",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "MKO3",
+        "FRECUENCIASEMANAL": "3",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "MKO6",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "MKO8",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "MKO9",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "MKO10",
+        "FRECUENCIASEMANAL": "3",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "MKO15",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "MKO25",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "MKO4",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "MKO21",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "MKO18",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "MKO26",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "MKO5",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "MKO13",
+        "FRECUENCIASEMANAL": "1",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "MBS1",
+        "FRECUENCIASEMANAL": "1",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "NIN1",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "VEA153",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "VEA155",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "VEA158",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "VEA162",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "VEA633",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "VEA692",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "VEA697",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "VEA698",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "VEA636",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "VEA6",
+        "FRECUENCIASEMANAL": "1",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "VEA10",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "VEA240",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "VEA696",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "VEA700",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "VEA741",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "VEA22",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "VEA119",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "VEA437",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "VEA434",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "VEA114",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "VEA475",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "VEA466",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "VEA455",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "VEA479",
+        "FRECUENCIASEMANAL": "1",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "VEA476",
+        "FRECUENCIASEMANAL": "1",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "VEA432",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "VEA472",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "VEA479",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "VEA195",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "VEA113",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "VEA463",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "VEA943",
+        "FRECUENCIASEMANAL": "1",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "VEA187",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "VEA399",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "VEA68",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "VEA1",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "VEA189",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "VEA180",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "VEA398",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "VEA192",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "VEA855",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "VEA190",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "VEA184",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "VEA66",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "VEA183",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "VEA15",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "VEA220",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "VEA5",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "VEA179",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "VEA34",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "VEA63",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "VEA14",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "VEA3",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "VEA21",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "VEA175",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "VEA25",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "VEA53",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "VEA55",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "VEA50",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "VEA5",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "WMT1014",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "WMT1016",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "WMT1017",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "WMT1018",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "WMT1043",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "WMT2997",
+        "FRECUENCIASEMANAL": "4",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "WMT2999",
+        "FRECUENCIASEMANAL": "3",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "WMT3601",
+        "FRECUENCIASEMANAL": "3",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "WMT3603",
+        "FRECUENCIASEMANAL": "3",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "WMT3604",
+        "FRECUENCIASEMANAL": "3",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "WMT1010",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "WMT3605",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "WMT3606",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "WMT3613",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "WMT1005",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "CHM1028",
+        "FRECUENCIASEMANAL": "1",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "CHM1110",
+        "FRECUENCIASEMANAL": "1",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "CHM1059",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "CHM1045",
+        "FRECUENCIASEMANAL": "1",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "CHM1050",
+        "FRECUENCIASEMANAL": "1",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "CHM1076",
+        "FRECUENCIASEMANAL": "1",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "CHM1032",
+        "FRECUENCIASEMANAL": "1",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "CHM1119",
+        "FRECUENCIASEMANAL": "1",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "CHM1029",
+        "FRECUENCIASEMANAL": "1",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "CHM1036",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "CHM1037",
+        "FRECUENCIASEMANAL": "1",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "CHM1013",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "WMT1096",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "WMT1087",
+        "FRECUENCIASEMANAL": "3",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "WMT1004",
+        "FRECUENCIASEMANAL": "4",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "WMT2998",
+        "FRECUENCIASEMANAL": "3",
+        "INTENSIDADXFRECUENCIA": "1"
+    },
+    {
+        "CLIENTE": "9",
+        "BOCA": "MKO23",
+        "FRECUENCIASEMANAL": "2",
+        "INTENSIDADXFRECUENCIA": "1"
+    }
+]

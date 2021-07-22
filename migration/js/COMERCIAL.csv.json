@@ -1,0 +1,37 @@
+[
+  {
+    "ID": "SM",
+    "NOMBRE": "SANDRA MARIÑO",
+    "DIRECCION DE CORREO": "smarino@dgroupsa.com.ar"
+  },
+  {
+    "ID": "MR",
+    "NOMBRE": "MARIANA ROMJEM",
+    "DIRECCION DE CORREO": "mromjem@dgroupsa.com.ar"
+  },
+  {
+    "ID": "CL",
+    "NOMBRE": "CHRISTIAN LOPEZ",
+    "DIRECCION DE CORREO": "clopez@dgroupsa.com.ar"
+  },
+  {
+    "ID": "LS",
+    "NOMBRE": "LORENA SPRETZ",
+    "DIRECCION DE CORREO": "lorena.spretz@dgroupsa.com.ar"
+  },
+  {
+    "ID": "LG",
+    "NOMBRE": "LIONEL GARCIA",
+    "DIRECCION DE CORREO": "lgarcia@dgroupsa.com.ar"
+  },
+  {
+    "ID": "PG",
+    "NOMBRE": "PAOLA GUMMY",
+    "DIRECCION DE CORREO": "pgummy@dgroupsa.com.ar"
+  },
+  {
+    "ID": "CS",
+    "NOMBRE": "CONSTANZA SARAFOGLU",
+    "DIRECCION DE CORREO": "csarafoglu@dgroupsa.com.ar"
+  }
+]

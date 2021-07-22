@@ -1,14 +1,6 @@
-const { ObjectId } = require("mongodb");
-const MongoDB = require("../db/mongo.driver");
-
 class BranchesController {
-  /**
-   *
-   * @param {MongoDB} db
-   */
-  constructor(db) {
-    this.db = db;
-    this.branches = db.branches;
+  constructor() {
+    /* this.branches = db.branches; */
   }
 
   async createBranch(branch) {

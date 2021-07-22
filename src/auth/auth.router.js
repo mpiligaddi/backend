@@ -1,15 +1,17 @@
 var express = require("express");
-const MongoDB = require("../db/mongo.driver");
 const AuthController = require("./auth.controller");
+const { PrismaClient } = require('@prisma/client')
+
 var router = express.Router();
 
 /**
  *
- * @param {MongoDB} db
+ * @param {PrismaClient} prisma
  * @returns
  */
-module.exports = function (db) {
-  const controller = new AuthController(db);
+
+module.exports = function (prisma) {
+  const controller = new AuthController(prisma);
 
   router.post("/register", (req, res) => {
     let _defaultParams = ["uuids", "displayName", "email", "role", "password"];

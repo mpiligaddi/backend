@@ -1,0 +1,315 @@
+[
+    {
+        "ID": "CABA1",
+        "NOMBRE": "CAPITAL FEDERAL 1",
+        "REGION": "CABA",
+        "RESPONSABLE ZONA": "GL"
+    },
+    {
+        "ID": "CABA2",
+        "NOMBRE": "CAPITAL FEDERAL 2",
+        "REGION": "CABA",
+        "RESPONSABLE ZONA": "FN"
+    },
+    {
+        "ID": "INT01",
+        "NOMBRE": "MAR DEL PLATA",
+        "REGION": "BUENOS AIRES",
+        "RESPONSABLE ZONA": "FN"
+    },
+    {
+        "ID": "INT04",
+        "NOMBRE": "BAHIA BLANCA",
+        "REGION": "BUENOS AIRES",
+        "RESPONSABLE ZONA": "FN"
+    },
+    {
+        "ID": "INT05",
+        "NOMBRE": "JUNIN",
+        "REGION": "BUENOS AIRES",
+        "RESPONSABLE ZONA": "CLT"
+    },
+    {
+        "ID": "INT06",
+        "NOMBRE": "SAN NICOLAS",
+        "REGION": "BUENOS AIRES",
+        "RESPONSABLE ZONA": "AR"
+    },
+    {
+        "ID": "INT07",
+        "NOMBRE": "TANDIL",
+        "REGION": "BUENOS AIRES",
+        "RESPONSABLE ZONA": "CLT"
+    },
+    {
+        "ID": "INT08",
+        "NOMBRE": "OLAVARRIA",
+        "REGION": "BUENOS AIRES",
+        "RESPONSABLE ZONA": "CLT"
+    },
+    {
+        "ID": "INT09",
+        "NOMBRE": "PERGAMINO",
+        "REGION": "BUENOS AIRES",
+        "RESPONSABLE ZONA": "CLT"
+    },
+    {
+        "ID": "INT10",
+        "NOMBRE": "CATAMARCA",
+        "REGION": "CATAMARCA",
+        "RESPONSABLE ZONA": "GL"
+    },
+    {
+        "ID": "INT11",
+        "NOMBRE": "RESISTENCIA",
+        "REGION": "CHACO",
+        "RESPONSABLE ZONA": "GL"
+    },
+    {
+        "ID": "INT12",
+        "NOMBRE": "COMODORO RIVADAVIA",
+        "REGION": "CHUBUT",
+        "RESPONSABLE ZONA": "DR"
+    },
+    {
+        "ID": "INT13",
+        "NOMBRE": "ESQUEL",
+        "REGION": "CHUBUT",
+        "RESPONSABLE ZONA": "MM"
+    },
+    {
+        "ID": "INT14",
+        "NOMBRE": "PUERTO MADRYN",
+        "REGION": "CHUBUT",
+        "RESPONSABLE ZONA": "MM"
+    },
+    {
+        "ID": "INT15",
+        "NOMBRE": "TRELEW",
+        "REGION": "CHUBUT",
+        "RESPONSABLE ZONA": "DR"
+    },
+    {
+        "ID": "INT16",
+        "NOMBRE": "CORDOBA",
+        "REGION": "CORDOBA",
+        "RESPONSABLE ZONA": "RV"
+    },
+    {
+        "ID": "INT17",
+        "NOMBRE": "RIO CUARTO",
+        "REGION": "CORDOBA",
+        "RESPONSABLE ZONA": "RV"
+    },
+    {
+        "ID": "INT18",
+        "NOMBRE": "VILLA MARIA",
+        "REGION": "CORDOBA",
+        "RESPONSABLE ZONA": "RV"
+    },
+    {
+        "ID": "INT19",
+        "NOMBRE": "CORRIENTES",
+        "REGION": "CORRIENTES",
+        "RESPONSABLE ZONA": "GL"
+    },
+    {
+        "ID": "INT20",
+        "NOMBRE": "CONCEPCION",
+        "REGION": "ENTRE RIOS",
+        "RESPONSABLE ZONA": "CLT"
+    },
+    {
+        "ID": "INT21",
+        "NOMBRE": "CONCORDIA",
+        "REGION": "ENTRE RIOS",
+        "RESPONSABLE ZONA": "CLT"
+    },
+    {
+        "ID": "INT22",
+        "NOMBRE": "GUALEGUAYCHU",
+        "REGION": "ENTRE RIOS",
+        "RESPONSABLE ZONA": "CLT"
+    },
+    {
+        "ID": "INT23",
+        "NOMBRE": "PARANA",
+        "REGION": "ENTRE RIOS",
+        "RESPONSABLE ZONA": "MMT"
+    },
+    {
+        "ID": "INT24",
+        "NOMBRE": "JUJUY",
+        "REGION": "JUJUY",
+        "RESPONSABLE ZONA": "CLT"
+    },
+    {
+        "ID": "INT25",
+        "NOMBRE": "GENERAL PICO",
+        "REGION": "LA PAMPA",
+        "RESPONSABLE ZONA": "DR"
+    },
+    {
+        "ID": "INT26",
+        "NOMBRE": "SANTA ROSA",
+        "REGION": "LA PAMPA",
+        "RESPONSABLE ZONA": "DR"
+    },
+    {
+        "ID": "INT27",
+        "NOMBRE": "LA RIOJA",
+        "REGION": "LA RIOJA",
+        "RESPONSABLE ZONA": "GL"
+    },
+    {
+        "ID": "INT28",
+        "NOMBRE": "MENDOZA",
+        "REGION": "MENDOZA",
+        "RESPONSABLE ZONA": "RV"
+    },
+    {
+        "ID": "INT29",
+        "NOMBRE": "SAN RAFAEL",
+        "REGION": "MENDOZA",
+        "RESPONSABLE ZONA": "RV"
+    },
+    {
+        "ID": "INT30",
+        "NOMBRE": "TUNUYAN",
+        "REGION": "MENDOZA",
+        "RESPONSABLE ZONA": "RV"
+    },
+    {
+        "ID": "INT31",
+        "NOMBRE": "POSADAS",
+        "REGION": "MISIONES",
+        "RESPONSABLE ZONA": "GL"
+    },
+    {
+        "ID": "INT32",
+        "NOMBRE": "NEUQUEN",
+        "REGION": "NEUQUEN",
+        "RESPONSABLE ZONA": "DR"
+    },
+    {
+        "ID": "INT33",
+        "NOMBRE": "VIEDMA",
+        "REGION": "RIO NEGRO",
+        "RESPONSABLE ZONA": "DR"
+    },
+    {
+        "ID": "INT34",
+        "NOMBRE": "CIPOLETTI",
+        "REGION": "RIO NEGRO",
+        "RESPONSABLE ZONA": "DR"
+    },
+    {
+        "ID": "INT35",
+        "NOMBRE": "BARILOCHE",
+        "REGION": "RIO NEGRO",
+        "RESPONSABLE ZONA": "DR"
+    },
+    {
+        "ID": "INT36",
+        "NOMBRE": "GENERAL ROCA",
+        "REGION": "RIO NEGRO",
+        "RESPONSABLE ZONA": "DR"
+    },
+    {
+        "ID": "INT37",
+        "NOMBRE": "SALTA",
+        "REGION": "SALTA",
+        "RESPONSABLE ZONA": "GL"
+    },
+    {
+        "ID": "INT38",
+        "NOMBRE": "SAN JUAN",
+        "REGION": "SAN JUAN",
+        "RESPONSABLE ZONA": "RV"
+    },
+    {
+        "ID": "INT39",
+        "NOMBRE": "SAN LUIS",
+        "REGION": "SAN LUIS",
+        "RESPONSABLE ZONA": "RV"
+    },
+    {
+        "ID": "INT40",
+        "NOMBRE": "VILLA MERCEDES",
+        "REGION": "SAN LUIS",
+        "RESPONSABLE ZONA": "RV"
+    },
+    {
+        "ID": "INT41",
+        "NOMBRE": "RAFAELA",
+        "REGION": "SANTA FE",
+        "RESPONSABLE ZONA": "MM"
+    },
+    {
+        "ID": "INT42",
+        "NOMBRE": "SANTA FE",
+        "REGION": "SANTA FE",
+        "RESPONSABLE ZONA": "MMT"
+    },
+    {
+        "ID": "INT43",
+        "NOMBRE": "ROSARIO",
+        "REGION": "SANTA FE",
+        "RESPONSABLE ZONA": "AR"
+    },
+    {
+        "ID": "INT44",
+        "NOMBRE": "VENADO TUERTO",
+        "REGION": "SANTA FE",
+        "RESPONSABLE ZONA": "MM"
+    },
+    {
+        "ID": "INT45",
+        "NOMBRE": "SANTIAGO DEL ESTERO",
+        "REGION": "SANTIAGO DEL ESTERO",
+        "RESPONSABLE ZONA": "RV"
+    },
+    {
+        "ID": "INT46",
+        "NOMBRE": "SANTA CRUZ",
+        "REGION": "SANTA CRUZ",
+        "RESPONSABLE ZONA": "DR"
+    },
+    {
+        "ID": "INT47",
+        "NOMBRE": "RIO GRANDE",
+        "REGION": "TIERRA DEL FUEGO",
+        "RESPONSABLE ZONA": "DR"
+    },
+    {
+        "ID": "INT48",
+        "NOMBRE": "TUCUMAN",
+        "REGION": "TUCUMAN",
+        "RESPONSABLE ZONA": "RV"
+    },
+    {
+        "ID": "ZN1",
+        "NOMBRE": "GBA NORTE 1",
+        "REGION": "AMBA",
+        "RESPONSABLE ZONA": "DR"
+    },
+    {
+        "ID": "ZN2",
+        "NOMBRE": "GBA NORTE 2",
+        "REGION": "AMBA",
+        "RESPONSABLE ZONA": "AR"
+    },
+    {
+        "ID": "ZO",
+        "NOMBRE": "GBA OESTE",
+        "REGION": "AMBA",
+        "RESPONSABLE ZONA": "MMT"
+    },
+    {
+        "ID": "ZS",
+        "NOMBRE": "GBA SUR",
+        "REGION": "AMBA",
+        "RESPONSABLE ZONA": "CLT"
+    },
+    {}
+]

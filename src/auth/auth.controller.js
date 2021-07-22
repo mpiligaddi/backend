@@ -1,19 +1,28 @@
-const MongoDB = require("../db/mongo.driver");
+const { PrismaClient } = require("@prisma/client");
 const bcrypt = require("bcrypt-nodejs");
-const { ObjectId } = require("mongodb");
+
 
 class AuthController {
   /**
    *
-   * @param {MongoDB} db
-   */
-  constructor(db) {
-    this.accounts = db.accounts;
-    this.users = db.users;
+   * @param {PrismaClient} prisma
+   * @returns
+  */
+  constructor(prisma) {
+    /* this.accounts = db.accounts;
+    this.users = db.users; */
+    this.prisma = prisma;
+    this.account = prisma.account;
+    this.user = prisma.user;
   }
 
   async tryLogin({ email, password, id }) {
     return new Promise((resolve, reject) => {
+
+
+
+
+      /*
       this.accounts.findOne({ email: email }, (error, _account) => {
         if (error) return reject({ code: 500, message: "Hubo un error al intentar buscar al usuario, volve a intentar" });
         if (!_account) return reject({ code: 404, message: "No se encontró al usuario" });
@@ -31,7 +40,7 @@ class AuthController {
         };
 
         return resolve({ code: 201, message: "Sesión creada con éxito", user: userResult });
-      });
+      }); */
     });
   }
 
@@ -39,7 +48,24 @@ class AuthController {
     const { email, password } = model;
 
     return new Promise((resolve, reject) => {
-      this.accounts.findOne({ email: email }, (error, _account) => {
+      const passwordHash = bcrypt.hashSync(password, bcrypt.genSaltSync(8));
+
+      this.account.create({
+        data: {
+          email: email,
+          password: passwordHash,
+          user: {
+            connectOrCreate: {
+              create: {
+
+              }
+            }
+          }
+        }
+      })
+
+
+      /* this.accounts.findOne({ email: email }, (error, _account) => {
         if (error) return reject({ code: 500, message: "Hubo un error al intentar buscar al usuario, volve a intentar" });
         if (_account) return reject({ code: 404, message: "El correo ya está en uso" });
 
@@ -57,7 +83,7 @@ class AuthController {
 
           return resolve({ code: 200, message: "Cuenta creada con éxito!" });
         });
-      });
+      }); */
     });
   }
 

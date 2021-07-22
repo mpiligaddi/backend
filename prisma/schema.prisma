@@ -1,0 +1,250 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Comercial {
+  id     String   @id @default(uuid())
+  name   String   @unique
+  email  String   @unique
+  client Client[]
+}
+
+model Coordinator {
+  id          String       @id @default(uuid())
+  name        String       @unique
+  email       String       @unique
+  supervisors Supervisor[]
+}
+
+model Supervisor {
+  id            String      @id @default(uuid())
+  name          String      @unique
+  User          User[]
+  email         String      @unique
+  zones         Zone[]
+  coordinator   Coordinator @relation(fields: coordinatorId, references: id)
+  coordinatorId String
+}
+
+model Account {
+  id       String @id @default(uuid())
+  email    String @unique
+  user     User   @relation(fields: [userId], references: [id])
+  userId   String
+  password String
+}
+
+model User {
+  id           String      @id @default(uuid())
+  name         String      @unique
+  email        String      @unique
+  role         user_role
+  account      Account?
+  client       Client[]
+  supervisor   Supervisor? @relation(fields: [supervisorId], references: [id])
+  supervisorId String?
+  reports      Report[]
+}
+
+enum user_role {
+  backoffice
+  merchandiser
+}
+
+model Branch {
+  id             String     @id @default(uuid())
+  name           String     @unique
+  displayName    String
+  locality       String
+  address        String
+  zone           Zone       @relation(fields: [zoneId], references: [id])
+  zoneId         String
+  chain          Chain      @relation(fields: [chainId], references: [id])
+  chainId        String
+  reports        Report[]
+  clientCoverage Coverage[]
+}
+
+model Zone {
+  id           String     @id @default(uuid())
+  name         String     @unique
+  region       String
+  branches     Branch[]
+  supervisor   Supervisor @relation(fields: [supervisorId], references: [id])
+  supervisorId String
+}
+
+model Client {
+  id          String               @id @default(uuid())
+  displayName String               @unique
+  name        String               @unique
+  address     String
+  cuit        String               @unique
+  admin       User                 @relation(fields: [adminId], references: [id])
+  adminId     String
+  comercial   Comercial            @relation(fields: [comercialId], references: [id])
+  comercialId String
+  categories  ClientCategory[]
+  reports     Report[]
+  periods     ClientPeriodReport[]
+  coverages   Coverage[]
+}
+
+model ClientCategory {
+  id         String    @id @default(uuid())
+  client     Client?   @relation(fields: [clientId], references: [id])
+  clientId   String?
+  category   Category? @relation(fields: [categoryId], references: [id])
+  categoryId String?
+
+}
+
+model Chain {
+  id       String    @id @default(uuid())
+  name     String    @unique
+  branch   Branch[]
+  products Product[]
+  reports  Report[]
+}
+
+model Category {
+  id       String           @id @default(uuid())
+  name     String           @unique
+  client   ClientCategory[]
+  report   CategoryReport[]
+  products Product[]
+}
+
+model ClientPeriodReport {
+  id       String        @id @default(uuid())
+  period   PeriodReport? @relation(fields: [periodId], references: [id])
+  periodId String?
+  client   Client?       @relation(fields: [clientId], references: [id])
+  clientId String?
+}
+
+model PeriodReport {
+  id           String               @id @default(uuid())
+  clients      ClientPeriodReport[]
+  reportType   ReportType           @relation(fields: [reportTypeId], references: [id])
+  reportTypeId String
+  name         String               @unique
+  alias        String               @unique
+}
+
+model ReportType {
+  id     String         @id @default(uuid())
+  name   String         @unique
+  alias  String         @unique
+  period PeriodReport[]
+}
+
+model Coverage {
+  id        String  @id @default(uuid())
+  client    Client? @relation(fields: [clientId], references: [id])
+  clientId  String?
+  branch    Branch? @relation(fields: [branchId], references: [id])
+  branchId  String?
+  frecuency Int     @default(1)
+  intensity Int     @default(1)
+}
+
+model Report {
+  id         String   @id @default(uuid())
+  branch     Branch   @relation(fields: [branchId], references: [id])
+  branchId   String
+  chain      Chain    @relation(fields: [chainId], references: [id])
+  chainId    String
+  client     Client   @relation(fields: [clientId], references: [id])
+  clientId   String
+  createAt   DateTime
+  creator    User     @relation(fields: [creatorId], references: [id])
+  creatorId  String
+  isComplete Boolean
+  location   Location @relation(fields: [locationId], references: [id])
+  locationId String
+
+  categories CategoryReport[]
+}
+
+model CategoryReport {
+  id         String          @id @default(uuid())
+  report     Report          @relation(fields: [reportId], references: [id])
+  reportId   String
+  category   Category        @relation(fields: [categoryId], references: [id])
+  categoryId String
+  images     PhotoReport[]
+  pricings   PricingReport[]
+}
+
+model PricingReport {
+  id               String           @id @default(uuid())
+  products         ProductPReport[]
+  report           CategoryReport?  @relation(fields: [categoryReportId], references: [id])
+  categoryReportId String?
+}
+
+model ProductPReport {
+  id              String         @id @default(uuid())
+  product         Product        @relation(fields: [productId], references: [id])
+  productId       String
+  pricing         Decimal
+  pricingReport   PricingReport? @relation(fields: [pricingReportId], references: [id])
+  pricingReportId String?
+}
+
+model PhotoReport {
+  id               String         @id @default(uuid())
+  report           CategoryReport @relation(fields: [categoryReportId], references: [id])
+  categoryReportId String
+  ImageReport      ImageReport[]
+}
+
+model ImageReport {
+  id            String      @id @default(uuid())
+  name          String
+  favorite      Boolean     @default(false)
+  type          stock_type  @default(primary)
+  comment       String      @default("")
+  uri           String
+  photoReport   PhotoReport @relation(fields: [photoReportId], references: [id])
+  photoReportId String
+}
+
+model Location {
+  id        String  @id @default(uuid())
+  latitude  Decimal
+  longitude Decimal
+  report    Report?
+}
+
+model Product {
+  id         String           @id @default(uuid())
+  chain      Chain            @relation(fields: [chainId], references: [id])
+  chainId    String
+  name       String           @unique
+  type       stock_type       @default(secondary)
+  category   Category         @relation(fields: [categoryId], references: [id])
+  categoryId String
+  products   ProductPReport[]
+}
+
+enum stock_type {
+  primary
+  secondary
+}
+
+model Session {
+  id        String   @id
+  sid       String   @unique
+  data      String
+  expiresAt DateTime
+}

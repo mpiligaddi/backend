@@ -1,0 +1,446 @@
+[
+    {
+        "ID CLIENTE": "1",
+        "NOMBRE": "CAT1"
+    },
+    {
+        "ID CLIENTE": "1",
+        "NOMBRE": "CAT2"
+    },
+    {
+        "ID CLIENTE": "1",
+        "NOMBRE": "CAT3"
+    },
+    {
+        "ID CLIENTE": "1",
+        "NOMBRE": "CAT4"
+    },
+    {
+        "ID CLIENTE": "1",
+        "NOMBRE": "CAT5"
+    },
+    {
+        "ID CLIENTE": "1",
+        "NOMBRE": "CAT6"
+    },
+    {
+        "ID CLIENTE": "1",
+        "NOMBRE": "CAT7"
+    },
+    {
+        "ID CLIENTE": "2",
+        "NOMBRE": "CAT8"
+    },
+    {
+        "ID CLIENTE": "2",
+        "NOMBRE": "CAT9"
+    },
+    {
+        "ID CLIENTE": "4",
+        "NOMBRE": "CAT10"
+    },
+    {
+        "ID CLIENTE": "5",
+        "NOMBRE": "CAT11"
+    },
+    {
+        "ID CLIENTE": "6",
+        "NOMBRE": "CAT12"
+    },
+    {
+        "ID CLIENTE": "6",
+        "NOMBRE": "CAT13"
+    },
+    {
+        "ID CLIENTE": "7",
+        "NOMBRE": "CAT14"
+    },
+    {
+        "ID CLIENTE": "8",
+        "NOMBRE": "CAT15"
+    },
+    {
+        "ID CLIENTE": "8",
+        "NOMBRE": "CAT16"
+    },
+    {
+        "ID CLIENTE": "8",
+        "NOMBRE": "CAT17"
+    },
+    {
+        "ID CLIENTE": "8",
+        "NOMBRE": "CAT18"
+    },
+    {
+        "ID CLIENTE": "8",
+        "NOMBRE": "CAT19"
+    },
+    {
+        "ID CLIENTE": "8",
+        "NOMBRE": "CAT20"
+    },
+    {
+        "ID CLIENTE": "8",
+        "NOMBRE": "CAT21"
+    },
+    {
+        "ID CLIENTE": "9",
+        "NOMBRE": "CAT22"
+    },
+    {
+        "ID CLIENTE": "9",
+        "NOMBRE": "CAT23"
+    },
+    {
+        "ID CLIENTE": "9",
+        "NOMBRE": "CAT24"
+    },
+    {
+        "ID CLIENTE": "10",
+        "NOMBRE": "CAT25"
+    },
+    {
+        "ID CLIENTE": "11",
+        "NOMBRE": "CAT26"
+    },
+    {
+        "ID CLIENTE": "11",
+        "NOMBRE": "CAT27"
+    },
+    {
+        "ID CLIENTE": "11",
+        "NOMBRE": "CAT28"
+    },
+    {
+        "ID CLIENTE": "11",
+        "NOMBRE": "CAT29"
+    },
+    {
+        "ID CLIENTE": "12",
+        "NOMBRE": "CAT30"
+    },
+    {
+        "ID CLIENTE": "12",
+        "NOMBRE": "CAT31"
+    },
+    {
+        "ID CLIENTE": "12",
+        "NOMBRE": "CAT32"
+    },
+    {
+        "ID CLIENTE": "13",
+        "NOMBRE": "CAT33"
+    },
+    {
+        "ID CLIENTE": "13",
+        "NOMBRE": "CAT34"
+    },
+    {
+        "ID CLIENTE": "13",
+        "NOMBRE": "CAT35"
+    },
+    {
+        "ID CLIENTE": "14",
+        "NOMBRE": "CAT36"
+    },
+    {
+        "ID CLIENTE": "14",
+        "NOMBRE": "CAT37"
+    },
+    {
+        "ID CLIENTE": "15",
+        "NOMBRE": "CAT38"
+    },
+    {
+        "ID CLIENTE": "15",
+        "NOMBRE": "CAT39"
+    },
+    {
+        "ID CLIENTE": "16",
+        "NOMBRE": "CAT40"
+    },
+    {
+        "ID CLIENTE": "16",
+        "NOMBRE": "CAT41"
+    },
+    {
+        "ID CLIENTE": "17",
+        "NOMBRE": "CAT9"
+    },
+    {
+        "ID CLIENTE": "18",
+        "NOMBRE": "CAT42"
+    },
+    {
+        "ID CLIENTE": "18",
+        "NOMBRE": "CAT9"
+    },
+    {
+        "ID CLIENTE": "19",
+        "NOMBRE": "CAT43"
+    },
+    {
+        "ID CLIENTE": "20",
+        "NOMBRE": "CAT44"
+    },
+    {
+        "ID CLIENTE": "20",
+        "NOMBRE": "CAT45"
+    },
+    {
+        "ID CLIENTE": "21",
+        "NOMBRE": "CAT46"
+    },
+    {
+        "ID CLIENTE": "22",
+        "NOMBRE": "CAT45"
+    },
+    {
+        "ID CLIENTE": "23",
+        "NOMBRE": "CAT47"
+    },
+    {
+        "ID CLIENTE": "23",
+        "NOMBRE": "CAT48"
+    },
+    {
+        "ID CLIENTE": "23",
+        "NOMBRE": "CAT49"
+    },
+    {
+        "ID CLIENTE": "25",
+        "NOMBRE": "CAT50"
+    },
+    {
+        "ID CLIENTE": "25",
+        "NOMBRE": "CAT51"
+    },
+    {
+        "ID CLIENTE": "25",
+        "NOMBRE": "CAT20"
+    },
+    {
+        "ID CLIENTE": "26",
+        "NOMBRE": "CAT52"
+    },
+    {
+        "ID CLIENTE": "26",
+        "NOMBRE": "CAT53"
+    },
+    {
+        "ID CLIENTE": "26",
+        "NOMBRE": "CAT54"
+    },
+    {
+        "ID CLIENTE": "27",
+        "NOMBRE": "CAT2"
+    },
+    {
+        "ID CLIENTE": "27",
+        "NOMBRE": "CAT4"
+    },
+    {
+        "ID CLIENTE": "28",
+        "NOMBRE": "CAT55"
+    },
+    {
+        "ID CLIENTE": "29",
+        "NOMBRE": "CAT56"
+    },
+    {
+        "ID CLIENTE": "29",
+        "NOMBRE": "CAT46"
+    },
+    {
+        "ID CLIENTE": "30",
+        "NOMBRE": "CAT57"
+    },
+    {
+        "ID CLIENTE": "31",
+        "NOMBRE": "CAT58"
+    },
+    {
+        "ID CLIENTE": "31",
+        "NOMBRE": "CAT59"
+    },
+    {
+        "ID CLIENTE": "31",
+        "NOMBRE": "CAT60"
+    },
+    {
+        "ID CLIENTE": "31",
+        "NOMBRE": "CAT61"
+    },
+    {
+        "ID CLIENTE": "32",
+        "NOMBRE": "CAT62"
+    },
+    {
+        "ID CLIENTE": "34",
+        "NOMBRE": "CAT15"
+    },
+    {
+        "ID CLIENTE": "34",
+        "NOMBRE": "CAT21"
+    },
+    {
+        "ID CLIENTE": "35",
+        "NOMBRE": "CAT63"
+    },
+    {
+        "ID CLIENTE": "35",
+        "NOMBRE": "CAT64"
+    },
+    {
+        "ID CLIENTE": "35",
+        "NOMBRE": "CAT65"
+    },
+    {
+        "ID CLIENTE": "36",
+        "NOMBRE": "CAT25"
+    },
+    {
+        "ID CLIENTE": "36",
+        "NOMBRE": "CAT39"
+    },
+    {
+        "ID CLIENTE": "37",
+        "NOMBRE": "CAT67"
+    },
+    {
+        "ID CLIENTE": "38",
+        "NOMBRE": "CAT62"
+    },
+    {
+        "ID CLIENTE": "39",
+        "NOMBRE": "CAT68"
+    },
+    {
+        "ID CLIENTE": "39",
+        "NOMBRE": "CAT69"
+    },
+    {
+        "ID CLIENTE": "40",
+        "NOMBRE": "CAT45"
+    },
+    {
+        "ID CLIENTE": "41",
+        "NOMBRE": "CAT60"
+    },
+    {
+        "ID CLIENTE": "41",
+        "NOMBRE": "CAT61"
+    },
+    {
+        "ID CLIENTE": "42",
+        "NOMBRE": "CAT31"
+    },
+    {
+        "ID CLIENTE": "44",
+        "NOMBRE": "CAT70"
+    },
+    {
+        "ID CLIENTE": "45",
+        "NOMBRE": "CAT71"
+    },
+    {
+        "ID CLIENTE": "46",
+        "NOMBRE": "CAT70"
+    },
+    {
+        "ID CLIENTE": "47",
+        "NOMBRE": "CAT25"
+    },
+    {
+        "ID CLIENTE": "48",
+        "NOMBRE": "CAT52"
+    },
+    {
+        "ID CLIENTE": "48",
+        "NOMBRE": "CAT53"
+    },
+    {
+        "ID CLIENTE": "48",
+        "NOMBRE": "CAT72"
+    },
+    {
+        "ID CLIENTE": "48",
+        "NOMBRE": "CAT60"
+    },
+    {
+        "ID CLIENTE": "50",
+        "NOMBRE": "CAT60"
+    },
+    {
+        "ID CLIENTE": "51",
+        "NOMBRE": "CAT73"
+    },
+    {
+        "ID CLIENTE": "51",
+        "NOMBRE": "CAT74"
+    },
+    {
+        "ID CLIENTE": "52",
+        "NOMBRE": "CAT75"
+    },
+    {
+        "ID CLIENTE": "52",
+        "NOMBRE": "CAT74"
+    },
+    {
+        "ID CLIENTE": "55",
+        "NOMBRE": "CAT76"
+    },
+    {
+        "ID CLIENTE": "56",
+        "NOMBRE": "CAT38"
+    },
+    {
+        "ID CLIENTE": "56",
+        "NOMBRE": "CAT39"
+    },
+    {
+        "ID CLIENTE": "56",
+        "NOMBRE": "CAT6"
+    },
+    {
+        "ID CLIENTE": "56",
+        "NOMBRE": "CAT77"
+    },
+    {
+        "ID CLIENTE": "56",
+        "NOMBRE": "CAT78"
+    },
+    {
+        "ID CLIENTE": "57",
+        "NOMBRE": "CAT79"
+    },
+    {
+        "ID CLIENTE": "58",
+        "NOMBRE": "CAT80"
+    },
+    {
+        "ID CLIENTE": "59",
+        "NOMBRE": "CAT67"
+    },
+    {
+        "ID CLIENTE": "60",
+        "NOMBRE": "CAT76"
+    },
+    {
+        "ID CLIENTE": "60",
+        "NOMBRE": "CAT81"
+    },
+    {
+        "ID CLIENTE": "60",
+        "NOMBRE": "CAT82"
+    },
+    {
+        "ID CLIENTE": "61",
+        "NOMBRE": "CAT10"
+    },
+    {
+        "ID CLIENTE": "62",
+        "NOMBRE": "CAT83"
+    }
+]

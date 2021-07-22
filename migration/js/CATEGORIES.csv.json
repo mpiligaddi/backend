@@ -1,0 +1,330 @@
+[
+    {
+        "ID CAT": "CAT1",
+        "NOMBRE": "CAFÉ"
+    },
+    {
+        "ID CAT": "CAT10",
+        "NOMBRE": "ALFAJORES"
+    },
+    {
+        "ID CAT": "CAT11",
+        "NOMBRE": "OBLEAS"
+    },
+    {
+        "ID CAT": "CAT12",
+        "NOMBRE": "ALIMENTO GATOS"
+    },
+    {
+        "ID CAT": "CAT13",
+        "NOMBRE": "ALIMENTO PERROS"
+    },
+    {
+        "ID CAT": "CAT14",
+        "NOMBRE": "TINTURA MASCULINA"
+    },
+    {
+        "ID CAT": "CAT15",
+        "NOMBRE": "BARRIDOS"
+    },
+    {
+        "ID CAT": "CAT16",
+        "NOMBRE": "ESPONJA METALICA"
+    },
+    {
+        "ID CAT": "CAT17",
+        "NOMBRE": "ESPONJAS"
+    },
+    {
+        "ID CAT": "CAT18",
+        "NOMBRE": "GUANTES"
+    },
+    {
+        "ID CAT": "CAT19",
+        "NOMBRE": "LANA DE ACERO"
+    },
+    {
+        "ID CAT": "CAT2",
+        "NOMBRE": "FIESTAS"
+    },
+    {
+        "ID CAT": "CAT20",
+        "NOMBRE": "PAÑOS"
+    },
+    {
+        "ID CAT": "CAT21",
+        "NOMBRE": "SECADO"
+    },
+    {
+        "ID CAT": "CAT22",
+        "NOMBRE": "DULCE DE LECHE"
+    },
+    {
+        "ID CAT": "CAT23",
+        "NOMBRE": "QUESO AZUL"
+    },
+    {
+        "ID CAT": "CAT24",
+        "NOMBRE": "QUESO CREMA"
+    },
+    {
+        "ID CAT": "CAT25",
+        "NOMBRE": "JUGO DE FRUTA"
+    },
+    {
+        "ID CAT": "CAT26",
+        "NOMBRE": "LECHE"
+    },
+    {
+        "ID CAT": "CAT27",
+        "NOMBRE": "LECHE CONDENSADA"
+    },
+    {
+        "ID CAT": "CAT28",
+        "NOMBRE": "QUESO RALLADO"
+    },
+    {
+        "ID CAT": "CAT29",
+        "NOMBRE": "QUESOS DUROS"
+    },
+    {
+        "ID CAT": "CAT3",
+        "NOMBRE": "GALLETAS AZUCARADAS"
+    },
+    {
+        "ID CAT": "CAT30",
+        "NOMBRE": "BEBIDAS ALCOHOLICAS"
+    },
+    {
+        "ID CAT": "CAT31",
+        "NOMBRE": "CONSERVAS"
+    },
+    {
+        "ID CAT": "CAT32",
+        "NOMBRE": "PULPAS DE FRUTAS"
+    },
+    {
+        "ID CAT": "CAT33",
+        "NOMBRE": "PASTAS FRESCAS"
+    },
+    {
+        "ID CAT": "CAT34",
+        "NOMBRE": "TAPA EMPANADAS"
+    },
+    {
+        "ID CAT": "CAT35",
+        "NOMBRE": "TAPA PASCUALINAS"
+    },
+    {
+        "ID CAT": "CAT36",
+        "NOMBRE": "HARINA DE MAIZ"
+    },
+    {
+        "ID CAT": "CAT37",
+        "NOMBRE": "PASTAS SECAS"
+    },
+    {
+        "ID CAT": "CAT38",
+        "NOMBRE": "DULCES"
+    },
+    {
+        "ID CAT": "CAT39",
+        "NOMBRE": "MERMELADAS"
+    },
+    {
+        "ID CAT": "CAT4",
+        "NOMBRE": "GOLOSINAS"
+    },
+    {
+        "ID CAT": "CAT40",
+        "NOMBRE": "GEL INTIMO"
+    },
+    {
+        "ID CAT": "CAT41",
+        "NOMBRE": "PRESERVATIVOS"
+    },
+    {
+        "ID CAT": "CAT42",
+        "NOMBRE": "FIDEOS SIN GLUTEN"
+    },
+    {
+        "ID CAT": "CAT43",
+        "NOMBRE": "YOGURT"
+    },
+    {
+        "ID CAT": "CAT44",
+        "NOMBRE": "TE"
+    },
+    {
+        "ID CAT": "CAT45",
+        "NOMBRE": "YERBA"
+    },
+    {
+        "ID CAT": "CAT46",
+        "NOMBRE": "EMBUTIDOS"
+    },
+    {
+        "ID CAT": "CAT47",
+        "NOMBRE": "PAÑUELOS"
+    },
+    {
+        "ID CAT": "CAT48",
+        "NOMBRE": "PAPEL HIGIENICO"
+    },
+    {
+        "ID CAT": "CAT49",
+        "NOMBRE": "ROLLO COCINA"
+    },
+    {
+        "ID CAT": "CAT5",
+        "NOMBRE": "PASCUAS"
+    },
+    {
+        "ID CAT": "CAT50",
+        "NOMBRE": "FOSFOROS"
+    },
+    {
+        "ID CAT": "CAT51",
+        "NOMBRE": "VELAS"
+    },
+    {
+        "ID CAT": "CAT52",
+        "NOMBRE": "ALGODÓN"
+    },
+    {
+        "ID CAT": "CAT53",
+        "NOMBRE": "PAÑALES"
+    },
+    {
+        "ID CAT": "CAT54",
+        "NOMBRE": "TOALLITAS/PROTECTORES"
+    },
+    {
+        "ID CAT": "CAT55",
+        "NOMBRE": "SUPLEMENTOS VITAMINICOS"
+    },
+    {
+        "ID CAT": "CAT56",
+        "NOMBRE": "FIAMBRES"
+    },
+    {
+        "ID CAT": "CAT57",
+        "NOMBRE": "BEBDIDAS"
+    },
+    {
+        "ID CAT": "CAT58",
+        "NOMBRE": "BAZAR"
+    },
+    {
+        "ID CAT": "CAT59",
+        "NOMBRE": "ISOPOS"
+    },
+    {
+        "ID CAT": "CAT6",
+        "NOMBRE": "REPOSTERIA"
+    },
+    {
+        "ID CAT": "CAT60",
+        "NOMBRE": "PUERICULTURA"
+    },
+    {
+        "ID CAT": "CAT61",
+        "NOMBRE": "TOALLITAS HUMEDAS"
+    },
+    {
+        "ID CAT": "CAT62",
+        "NOMBRE": "GALLETAS"
+    },
+    {
+        "ID CAT": "CAT63",
+        "NOMBRE": "ADITIVOS COMBUSTIBLE"
+    },
+    {
+        "ID CAT": "CAT64",
+        "NOMBRE": "FRAGANCIA AUTOMOTOR"
+    },
+    {
+        "ID CAT": "CAT65",
+        "NOMBRE": "LIMPIEZA AUTOMOTOR"
+    },
+    {
+        "ID CAT": "CAT67",
+        "NOMBRE": "LEVADURA"
+    },
+    {
+        "ID CAT": "CAT68",
+        "NOMBRE": "LINTERNAS / CARGADORES"
+    },
+    {
+        "ID CAT": "CAT69",
+        "NOMBRE": "PILAS"
+    },
+    {
+        "ID CAT": "CAT7",
+        "NOMBRE": "TOSTADAS"
+    },
+    {
+        "ID CAT": "CAT70",
+        "NOMBRE": "ILUMINACION"
+    },
+    {
+        "ID CAT": "CAT71",
+        "NOMBRE": "COMIDA CONGELADA"
+    },
+    {
+        "ID CAT": "CAT72",
+        "NOMBRE": "PERFUMERIA"
+    },
+    {
+        "ID CAT": "CAT73",
+        "NOMBRE": "SAL"
+    },
+    {
+        "ID CAT": "CAT74",
+        "NOMBRE": "VINAGRE"
+    },
+    {
+        "ID CAT": "CAT75",
+        "NOMBRE": "ADEREZO"
+    },
+    {
+        "ID CAT": "CAT76",
+        "NOMBRE": "ALIMENTOS COGELADOS"
+    },
+    {
+        "ID CAT": "CAT77",
+        "NOMBRE": "ENCURTIDOS"
+    },
+    {
+        "ID CAT": "CAT78",
+        "NOMBRE": "PANIFICADOS"
+    },
+    {
+        "ID CAT": "CAT79",
+        "NOMBRE": "GALLETITAS"
+    },
+    {
+        "ID CAT": "CAT8",
+        "NOMBRE": "GALLETAS ARROZ"
+    },
+    {
+        "ID CAT": "CAT80",
+        "NOMBRE": "LIMPIEZA"
+    },
+    {
+        "ID CAT": "CAT81",
+        "NOMBRE": "ALMACEN"
+    },
+    {
+        "ID CAT": "CAT82",
+        "NOMBRE": "FRESCOS"
+    },
+    {
+        "ID CAT": "CAT83",
+        "NOMBRE": "HELADOS"
+    },
+    {
+        "ID CAT": "CAT9",
+        "NOMBRE": "SNACKS"
+    }
+]

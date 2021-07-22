@@ -1,0 +1,262 @@
+[
+    {
+        "ID": "AIE",
+        "NOMBRE": "AIELLO"
+    },
+    {
+        "ID": "ALV",
+        "NOMBRE": "ALVEAR"
+    },
+    {
+        "ID": "ATO",
+        "NOMBRE": "ATOMO"
+    },
+    {
+        "ID": "BAR",
+        "NOMBRE": "BARALE"
+    },
+    {
+        "ID": "BASU",
+        "NOMBRE": "BASUALDO"
+    },
+    {
+        "ID": "BECE",
+        "NOMBRE": "BECERRA"
+    },
+    {
+        "ID": "CAF",
+        "NOMBRE": "CAFE AMERICA"
+    },
+    {
+        "ID": "CAP",
+        "NOMBRE": "CAPO"
+    },
+    {
+        "ID": "CAR",
+        "NOMBRE": "CAROMAR"
+    },
+    {
+        "ID": "INC",
+        "NOMBRE": "CARREFOUR"
+    },
+    {
+        "ID": "CER",
+        "NOMBRE": "CEREALES"
+    },
+    {
+        "ID": "CHM",
+        "NOMBRE": "CHANGO MAS"
+    },
+    {
+        "ID": "COM",
+        "NOMBRE": "COMODIN"
+    },
+    {
+        "ID": "COO",
+        "NOMBRE": "COOPERATIVA"
+    },
+    {
+        "ID": "COR",
+        "NOMBRE": "CORDIEZ"
+    },
+    {
+        "ID": "COT",
+        "NOMBRE": "COTO"
+    },
+    {
+        "ID": "DAR",
+        "NOMBRE": "DAR"
+    },
+    {
+        "ID": "DDI",
+        "NOMBRE": "DDI"
+    },
+    {
+        "ID": "DEP",
+        "NOMBRE": "DELCA PINTOS"
+    },
+    {
+        "ID": "DIAR",
+        "NOMBRE": "DIARCO"
+    },
+    {
+        "ID": "DIN",
+        "NOMBRE": "DINOSAURIO"
+    },
+    {
+        "ID": "DIS",
+        "NOMBRE": "DISCO"
+    },
+    {
+        "ID": "DON",
+        "NOMBRE": "DON EMILIO"
+    },
+    {
+        "ID": "EAS",
+        "NOMBRE": "EASY"
+    },
+    {
+        "ID": "TNL",
+        "NOMBRE": "EL TUNEL"
+    },
+    {
+        "ID": "FMC",
+        "NOMBRE": "FARMACITY"
+    },
+    {
+        "ID": "FER",
+        "NOMBRE": "FERNIPLAST"
+    },
+    {
+        "ID": "FRI",
+        "NOMBRE": "FRIGORIFICO"
+    },
+    {
+        "ID": "GUI",
+        "NOMBRE": "GUIRAO"
+    },
+    {
+        "ID": "HER",
+        "NOMBRE": "HERGO"
+    },
+    {
+        "ID": "ISI",
+        "NOMBRE": "ISIS"
+    },
+    {
+        "ID": "JOS",
+        "NOMBRE": "JOSIMAR"
+    },
+    {
+        "ID": "JBO",
+        "NOMBRE": "JUMBO"
+    },
+    {
+        "ID": "KBL",
+        "NOMBRE": "KIBEL"
+    },
+    {
+        "ID": "LAG",
+        "NOMBRE": "LA  GALLEGA"
+    },
+    {
+        "ID": "LAE",
+        "NOMBRE": "LA ECONOMIA"
+    },
+    {
+        "ID": "LAR",
+        "NOMBRE": "LA REINA"
+    },
+    {
+        "ID": "LIB",
+        "NOMBRE": "LIBERTAD"
+    },
+    {
+        "ID": "MKO",
+        "NOMBRE": "MAKRO"
+    },
+    {
+        "ID": "MAL",
+        "NOMBRE": "MALAMBO"
+    },
+    {
+        "ID": "MAM",
+        "NOMBRE": "MAMI"
+    },
+    {
+        "ID": "MAX",
+        "NOMBRE": "MARIANO MAX"
+    },
+    {
+        "ID": "MXC",
+        "NOMBRE": "MAXICONSUMO"
+    },
+    {
+        "ID": "MED",
+        "NOMBRE": "MEDAMAX"
+    },
+    {
+        "ID": "MIC",
+        "NOMBRE": "MICROPACK"
+    },
+    {
+        "ID": "MOD",
+        "NOMBRE": "MODELO"
+    },
+    {
+        "ID": "NIN",
+        "NOMBRE": "NINI"
+    },
+    {
+        "ID": "NIP",
+        "NOMBRE": "NIPON"
+    },
+    {
+        "ID": "OSC",
+        "NOMBRE": "OSCAR DAVID"
+    },
+    {
+        "ID": "PET",
+        "NOMBRE": "PETRELLI"
+    },
+    {
+        "ID": "PIA",
+        "NOMBRE": "PIANTONI"
+    },
+    {
+        "ID": "SAN",
+        "NOMBRE": "SAN RAMON"
+    },
+    {
+        "ID": "SOD",
+        "NOMBRE": "SODIMAC"
+    },
+    {
+        "ID": "SUP",
+        "NOMBRE": "SUPER IMPERIO"
+    },
+    {
+        "ID": "SUT",
+        "NOMBRE": "SUPER TOP"
+    },
+    {
+        "ID": "SUM",
+        "NOMBRE": "SUPREMO"
+    },
+    {
+        "ID": "TAD",
+        "NOMBRE": "TADICOR"
+    },
+    {
+        "ID": "TOL",
+        "NOMBRE": "TOLEDO"
+    },
+    {
+        "ID": "TOR",
+        "NOMBRE": "TORNADO"
+    },
+    {
+        "ID": "UPA",
+        "NOMBRE": "UPA"
+    },
+    {
+        "ID": "VEA",
+        "NOMBRE": "VEA"
+    },
+    {
+        "ID": "VIT",
+        "NOMBRE": "VITAL"
+    },
+    {
+        "ID": "WMT",
+        "NOMBRE": "WALMART"
+    },
+    {
+        "ID": "YGR",
+        "NOMBRE": "YAGUAR"
+    },
+    {
+        "ID": "MBS",
+        "NOMBRE": "MAYORISTA BUEN SOL"
+    }
+]

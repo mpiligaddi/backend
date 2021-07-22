@@ -1,0 +1,44 @@
+[
+  {
+    "ID": "DR",
+    "NOMBRE": "DIEGO RUSSO",
+    "DIRECCION CORREO": "drusso@dgroupsa.com.ar",
+    "COORDINADOR A CARGO": "DM"
+  },
+  {
+    "ID": "AR",
+    "NOMBRE": "ADRIAN ROSALES",
+    "DIRECCION CORREO": "arosales@dgroupsa.com.ar",
+    "COORDINADOR A CARGO": "MM"
+  },
+  {
+    "ID": "RV",
+    "NOMBRE": "ROLANDO VACA",
+    "DIRECCION CORREO": "rvaca@dgroupsa.com.ar",
+    "COORDINADOR A CARGO": "RV"
+  },
+  {
+    "ID": "GL",
+    "NOMBRE": "GABRIEL LISCANO",
+    "DIRECCION CORREO": "gliscano@dgroupsa.com.ar",
+    "COORDINADOR A CARGO": "LA"
+  },
+  {
+    "ID": "MMT",
+    "NOMBRE": "MARIO MONTOYA",
+    "DIRECCION CORREO": "mmontoya@dgroupsa.com.ar",
+    "COORDINADOR A CARGO": "DM"
+  },
+  {
+    "ID": "FN",
+    "NOMBRE": "FACUNDO NAVEIRO",
+    "DIRECCION CORREO": "fnaveiro@dgroupsa.com.ar",
+    "COORDINADOR A CARGO": "MM"
+  },
+  {
+    "ID": "CLT",
+    "NOMBRE": "CRISTIAN LORENZATO",
+    "DIRECCION CORREO": "clorenzato@dgroupsa.com.ar",
+    "COORDINADOR A CARGO": "LA"
+  }
+]

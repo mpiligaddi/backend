@@ -1,16 +1,9 @@
-const { ObjectId } = require("mongodb");
-const MongoDB = require("../db/mongo.driver");
-
 class ChainsController {
-  /**
-   *
-   * @param {MongoDB} db
-   */
   constructor(db) {
-    this.db = db;
+    /* this.db = db;
     this.chains = db.chains;
     this.default = ["clientId", "OFC", "OQC", "OPC", "name"];
-    this.PRA = ["V", "S", "Q", "M"];
+    this.PRA = ["V", "S", "Q", "M"]; */
   }
 
   async getChain({ id }) {

@@ -1,16 +1,10 @@
 var express = require("express");
 const fs = require("fs");
 const path = require("path");
-const MongoDB = require("../db/mongo.driver");
 var router = express.Router();
 const sharp = require("sharp");
 
-/**
- *
- * @param {MongoDB} db
- * @returns
- */
-module.exports = function (db) {
+module.exports = function () {
 
   router.get("/:folder/:id/:name", (req, res) => {
     let {folder, id, name } = req.params;

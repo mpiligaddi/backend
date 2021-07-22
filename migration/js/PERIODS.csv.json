@@ -1,0 +1,66 @@
+[
+    {
+        "ID": "FV",
+        "NOMBRE": "FOTO VISITA"
+    },
+    {
+        "ID": "FS",
+        "NOMBRE": "FOTO SEMANA"
+    },
+    {
+        "ID": "FQ",
+        "NOMBRE": "FOTO QUINCENA"
+    },
+    {
+        "ID": "FM",
+        "NOMBRE": "FOTO MENSUAL"
+    },
+    {
+        "ID": "QV",
+        "NOMBRE": "QUIEBRE VISITA"
+    },
+    {
+        "ID": "QS",
+        "NOMBRE": "QUIEBRE SEMANA"
+    },
+    {
+        "ID": "QQ",
+        "NOMBRE": "QUIEBRE QUINCENA"
+    },
+    {
+        "ID": "QM",
+        "NOMBRE": "QUIEBRE MENSUAL"
+    },
+    {
+        "ID": "SV",
+        "NOMBRE": "SOVI VISITA"
+    },
+    {
+        "ID": "SS",
+        "NOMBRE": "SOVI SEMANA"
+    },
+    {
+        "ID": "SQ",
+        "NOMBRE": "SOVI QUINCENA"
+    },
+    {
+        "ID": "SM",
+        "NOMBRE": "SOVI MENSUAL"
+    },
+    {
+        "ID": "PV",
+        "NOMBRE": "PRECIOS VISITA"
+    },
+    {
+        "ID": "PD",
+        "NOMBRE": "PRECIOS SEMANA"
+    },
+    {
+        "ID": "PQ",
+        "NOMBRE": "PRECIOS QUINCENA"
+    },
+    {
+        "ID": "PM",
+        "NOMBRE": "PRECIOS MENSUAL"
+    }
+  ]

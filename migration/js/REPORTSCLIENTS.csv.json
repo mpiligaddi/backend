@@ -1,0 +1,297 @@
+[
+    {
+        "CLIENTE": "1",
+        "REPORTE": "FQ",
+        "NOMBRE COMERCIAL": "BONAFIDE"
+    },
+    {
+        "CLIENTE": "2",
+        "REPORTE": "FQ",
+        "NOMBRE COMERCIAL": "CEREALKO"
+    },
+    {
+        "CLIENTE": "3",
+        "REPORTE": "FQ",
+        "NOMBRE COMERCIAL": "INECTO"
+    },
+    {
+        "CLIENTE": "4",
+        "REPORTE": "FQ",
+        "NOMBRE COMERCIAL": "GUAYMALLEN"
+    },
+    {
+        "CLIENTE": "5",
+        "REPORTE": "FQ",
+        "NOMBRE COMERCIAL": "OBLITA"
+    },
+    {
+        "CLIENTE": "6",
+        "REPORTE": "FQ",
+        "NOMBRE COMERCIAL": "KONGO"
+    },
+    {
+        "CLIENTE": "7",
+        "REPORTE": "FQ",
+        "NOMBRE COMERCIAL": "COMBE"
+    },
+    {
+        "CLIENTE": "8",
+        "REPORTE": "FM",
+        "NOMBRE COMERCIAL": "VIRULANA"
+    },
+    {
+        "CLIENTE": "9",
+        "REPORTE": "FS",
+        "NOMBRE COMERCIAL": "SAN IGNACIO"
+    },
+    {
+        "CLIENTE": "10",
+        "REPORTE": "FQ",
+        "NOMBRE COMERCIAL": "ZUMMY"
+    },
+    {
+        "CLIENTE": "11",
+        "REPORTE": "FQ",
+        "NOMBRE COMERCIAL": "LA BLANQUITA"
+    },
+    {
+        "CLIENTE": "12",
+        "REPORTE": "FQ",
+        "NOMBRE COMERCIAL": "BAHIA"
+    },
+    {
+        "CLIENTE": "13",
+        "REPORTE": "FQ",
+        "NOMBRE COMERCIAL": "LA ITALIANA"
+    },
+    {
+        "CLIENTE": "14",
+        "REPORTE": "FQ",
+        "NOMBRE COMERCIAL": "NUTRISUR"
+    },
+    {
+        "CLIENTE": "15",
+        "REPORTE": "FQ",
+        "NOMBRE COMERCIAL": "EMETH"
+    },
+    {
+        "CLIENTE": "16",
+        "REPORTE": "FQ",
+        "NOMBRE COMERCIAL": "PRIME"
+    },
+    {
+        "CLIENTE": "17",
+        "REPORTE": "FQ",
+        "NOMBRE COMERCIAL": "GOODSHOW"
+    },
+    {
+        "CLIENTE": "18",
+        "REPORTE": "FQ",
+        "NOMBRE COMERCIAL": "MARLOMS"
+    },
+    {
+        "CLIENTE": "18",
+        "REPORTE": "FQ",
+        "NOMBRE COMERCIAL": "WAKAS"
+    },
+    {
+        "CLIENTE": "19",
+        "REPORTE": "FQ",
+        "NOMBRE COMERCIAL": "BEAUDROIT"
+    },
+    {
+        "CLIENTE": "20",
+        "REPORTE": "FM",
+        "NOMBRE COMERCIAL": "PAJARO AZUL"
+    },
+    {
+        "CLIENTE": "21",
+        "REPORTE": "FQ",
+        "NOMBRE COMERCIAL": "LA DIVISA"
+    },
+    {
+        "CLIENTE": "22",
+        "REPORTE": "FM",
+        "NOMBRE COMERCIAL": "AMANDA"
+    },
+    {
+        "CLIENTE": "23",
+        "REPORTE": "FQ",
+        "NOMBRE COMERCIAL": "CELULOSA CAMPANA"
+    },
+    {
+        "CLIENTE": "24",
+        "REPORTE": "FQ",
+        "NOMBRE COMERCIAL": "DULKRE"
+    },
+    {
+        "CLIENTE": "25",
+        "REPORTE": "FQ",
+        "NOMBRE COMERCIAL": "SUDAMERICANA"
+    },
+    {
+        "CLIENTE": "26",
+        "REPORTE": "FQ",
+        "NOMBRE COMERCIAL": "LENTERDIT"
+    },
+    {
+        "CLIENTE": "27",
+        "REPORTE": "FQ",
+        "NOMBRE COMERCIAL": "PLENARIO"
+    },
+    {
+        "CLIENTE": "28",
+        "REPORTE": "FQ",
+        "NOMBRE COMERCIAL": "WEB SUPLEMENT"
+    },
+    {
+        "CLIENTE": "29",
+        "REPORTE": "FQ",
+        "NOMBRE COMERCIAL": "EL BIERZO"
+    },
+    {
+        "CLIENTE": "30",
+        "REPORTE": "FQ",
+        "NOMBRE COMERCIAL": "DELLEPIANE"
+    },
+    {
+        "CLIENTE": "31",
+        "REPORTE": "FQ",
+        "NOMBRE COMERCIAL": "PRIFAMON"
+    },
+    {
+        "CLIENTE": "32",
+        "REPORTE": "FM",
+        "NOMBRE COMERCIAL": "SORIANO"
+    },
+    {
+        "CLIENTE": "34",
+        "REPORTE": "FM",
+        "NOMBRE COMERCIAL": "SALZANO"
+    },
+    {
+        "CLIENTE": "35",
+        "REPORTE": "FQ",
+        "NOMBRE COMERCIAL": "AUTOREFRESH"
+    },
+    {
+        "CLIENTE": "36",
+        "REPORTE": "FS",
+        "NOMBRE COMERCIAL": "LAS BRISAS"
+    },
+    {
+        "CLIENTE": "37",
+        "REPORTE": "FQ",
+        "NOMBRE COMERCIAL": "LEVADURA"
+    },
+    {
+        "CLIENTE": "38",
+        "REPORTE": "FQ",
+        "NOMBRE COMERCIAL": "BREVISS"
+    },
+    {
+        "CLIENTE": "39",
+        "REPORTE": "FQ",
+        "NOMBRE COMERCIAL": "ENERGIZER"
+    },
+    {
+        "CLIENTE": "40",
+        "REPORTE": "FQ",
+        "NOMBRE COMERCIAL": "VERDE FLOR"
+    },
+    {
+        "CLIENTE": "41",
+        "REPORTE": "FQ",
+        "NOMBRE COMERCIAL": "DISPITA"
+    },
+    {
+        "CLIENTE": "42",
+        "REPORTE": "FQ",
+        "NOMBRE COMERCIAL": "GOMES DA COSTA"
+    },
+    {
+        "CLIENTE": "44",
+        "REPORTE": "FQ",
+        "NOMBRE COMERCIAL": "CANDIL"
+    },
+    {
+        "CLIENTE": "45",
+        "REPORTE": "FS",
+        "NOMBRE COMERCIAL": "FUBAO"
+    },
+    {
+        "CLIENTE": "46",
+        "REPORTE": "FQ",
+        "NOMBRE COMERCIAL": "ILUMINARIA SAN JUSTO"
+    },
+    {
+        "CLIENTE": "47",
+        "REPORTE": "FM",
+        "NOMBRE COMERCIAL": "JUGOS TUTTI"
+    },
+    {
+        "CLIENTE": "48",
+        "REPORTE": "FQ",
+        "NOMBRE COMERCIAL": "ESTRELLA"
+    },
+    {
+        "CLIENTE": "50",
+        "REPORTE": "FQ",
+        "NOMBRE COMERCIAL": "BABELITO"
+    },
+    {
+        "CLIENTE": "51",
+        "REPORTE": "FQ",
+        "NOMBRE COMERCIAL": "DOS ANCLAS"
+    },
+    {
+        "CLIENTE": "52",
+        "REPORTE": "FQ",
+        "NOMBRE COMERCIAL": "MENOYO"
+    },
+    {
+        "CLIENTE": "55",
+        "REPORTE": "FQ",
+        "NOMBRE COMERCIAL": "EL NOBLE"
+    },
+    {
+        "CLIENTE": "56",
+        "REPORTE": "FQ",
+        "NOMBRE COMERCIAL": "ESNAOLA- DULCOR"
+    },
+    {
+        "CLIENTE": "57",
+        "REPORTE": "FQ",
+        "NOMBRE COMERCIAL": "GAONA"
+    },
+    {
+        "CLIENTE": "58",
+        "REPORTE": "FQ",
+        "NOMBRE COMERCIAL": "ANCHOPACKAGING"
+    },
+    {
+        "CLIENTE": "59",
+        "REPORTE": "FQ",
+        "NOMBRE COMERCIAL": "CALSA"
+    },
+    {
+        "CLIENTE": "60",
+        "REPORTE": "FQ",
+        "NOMBRE COMERCIAL": "SWIFT"
+    },
+    {
+        "CLIENTE": "61",
+        "REPORTE": "FQ",
+        "NOMBRE COMERCIAL": "FANTOCHE"
+    },
+    {
+        "CLIENTE": "62",
+        "REPORTE": "FQ",
+        "NOMBRE COMERCIAL": "FRIGOR"
+    },
+    {
+        "CLIENTE": "64",
+        "REPORTE": "FQ",
+        "NOMBRE COMERCIAL": "ZAFRAN"
+    }
+]

@@ -1,0 +1,533 @@
+[
+    {
+        "ID": "1",
+        "RAZON SOCIAL": "BONAFIDE S.A.I.C.",
+        "NOMBRE COMERCIAL": "BONAFIDE",
+        "BO": "PD",
+        "COMERCIAL": "MR",
+        "DIRECCION": "CERRITO  1130 6 B - CAPITAL FEDERAL-CP 1010",
+        "CUIIT": "30-50121458-9"
+    },
+    {
+        "ID": "2",
+        "RAZON SOCIAL": "CEREALKO S.A.",
+        "NOMBRE COMERCIAL": "CEREALKO",
+        "BO": "PD",
+        "COMERCIAL": "CL",
+        "DIRECCION": "RUTA 8  5264 - BUENOS AIRES",
+        "CUIIT": "30-69098835-2"
+    },
+    {
+        "ID": "3",
+        "RAZON SOCIAL": "LINDABELL S.A.",
+        "NOMBRE COMERCIAL": "INECTO",
+        "BO": "DT",
+        "COMERCIAL": "LL",
+        "DIRECCION": "ALVAREZ JONTE AV. 1684- CAPITAL FEDERAL -CP 1416",
+        "CUIIT": "30-70742550-0"
+    },
+    {
+        "ID": "4",
+        "RAZON SOCIAL": "ALEXVIAN S.A.C.I.F.I.A",
+        "NOMBRE COMERCIAL": "GUAYMALLEN",
+        "BO": "PD",
+        "COMERCIAL": "MR",
+        "DIRECCION": "MARTINIANO LEGUIZAMON  1287  - CAPITAL FEDERAL- CP 1440",
+        "CUIIT": "33-52190283-9"
+    },
+    {
+        "ID": "5",
+        "RAZON SOCIAL": "ALIMENTARIA MONTECRISTO S.R.L.",
+        "NOMBRE COMERCIAL": "OBLITA",
+        "BO": "PD",
+        "COMERCIAL": "CS",
+        "DIRECCION": "AV. SAN MARTIN  3621 - PATERNAL-CAPITAL FEDERAL- CP 1416",
+        "CUIIT": "30-64476137-8"
+    },
+    {
+        "ID": "6",
+        "RAZON SOCIAL": "AGROINDUSTRIA BAIRES S.A.",
+        "NOMBRE COMERCIAL": "KONGO",
+        "BO": "FV",
+        "COMERCIAL": "MR",
+        "DIRECCION": "RUTA PROV. 30KM 88500 88500  - BUENOS AIRES - CP 1741",
+        "CUIIT": "33-70726132-9"
+    },
+    {
+        "ID": "7",
+        "RAZON SOCIAL": "COMBE ARGENTINA S.R.L.",
+        "NOMBRE COMERCIAL": "COMBE",
+        "BO": "PD",
+        "COMERCIAL": "PG",
+        "DIRECCION": "QUIROS  2615  - CAPITAL FEDERAL- CP 1424",
+        "CUIIT": "30-70097650-1"
+    },
+    {
+        "ID": "8",
+        "RAZON SOCIAL": "MAPA VIRULANA S.A.I.C.",
+        "NOMBRE COMERCIAL": "VIRULANA",
+        "BO": "PD",
+        "COMERCIAL": "CS",
+        "DIRECCION": "\"RUTA PANAMERICANA KM. 37,5 0  -CENTRO INDUSTRIAL GARÍN-BUENOS AIRES-CP 1619\"",
+        "CUIIT": "30-50081143-5"
+    },
+    {
+        "ID": "9",
+        "RAZON SOCIAL": "ESTABLECIEMIENTO SAN IGNACIO S.A.",
+        "NOMBRE COMERCIAL": "SAN IGNACIO",
+        "BO": "FV",
+        "COMERCIAL": "LL",
+        "DIRECCION": "CALLAO 384 5 2- CAPITAL FEDERAL-CP 1022",
+        "CUIIT": "30-55945309-5"
+    },
+    {
+        "ID": "10",
+        "RAZON SOCIAL": "FENIX S.A.",
+        "NOMBRE COMERCIAL": "ZUMMY",
+        "BO": "FV",
+        "COMERCIAL": "LL",
+        "DIRECCION": "RUTA NACIONAL 1800 - KM 8000 0  - MENDOZA",
+        "CUIIT": "30-67224214-9"
+    },
+    {
+        "ID": "11",
+        "RAZON SOCIAL": "LA BLANQUITA SRL",
+        "NOMBRE COMERCIAL": "LA BLANQUITA",
+        "BO": "FV",
+        "COMERCIAL": "LL",
+        "DIRECCION": "\"RUTA  PROVINCIAL Nº 32, km 31 - ENTRE RIOS- CP 3109\"",
+        "CUIIT": "30-71037469-0"
+    },
+    {
+        "ID": "12",
+        "RAZON SOCIAL": "REGIONAL TRADE SA",
+        "NOMBRE COMERCIAL": "BAHIA",
+        "BO": "DT",
+        "COMERCIAL": "CL",
+        "DIRECCION": "PJE ANTONIO FALUCHO 2552  - SANTA FE- CP 3000",
+        "CUIIT": "30-64038209-7"
+    },
+    {
+        "ID": "13",
+        "RAZON SOCIAL": "GUALTIERI HNOS S.A.",
+        "NOMBRE COMERCIAL": "LA ITALIANA",
+        "BO": "FV",
+        "COMERCIAL": "LL",
+        "DIRECCION": "RUTA NACIONAL 158 (KM.0) 158  - CORDOBA-CP 5822",
+        "CUIIT": "30-66911290-0"
+    },
+    {
+        "ID": "14",
+        "RAZON SOCIAL": "INPAL FOODS S.A.",
+        "NOMBRE COMERCIAL": "NUTRISUR",
+        "BO": "PD",
+        "COMERCIAL": "LL",
+        "DIRECCION": "LAVALLE 310 3 - CAPITAL FEDERAL- CP 1047",
+        "CUIIT": "30-70981316-8"
+    },
+    {
+        "ID": "15",
+        "RAZON SOCIAL": "DULFIX S.A.",
+        "NOMBRE COMERCIAL": "EMETH",
+        "BO": "PD",
+        "COMERCIAL": "MR",
+        "DIRECCION": "PASO 962  962  - BUENOS AIRES-CP 1702",
+        "CUIIT": "30-64221935-5"
+    },
+    {
+        "ID": "16",
+        "RAZON SOCIAL": "BUHL SA",
+        "NOMBRE COMERCIAL": "PRIME",
+        "BO": "PD",
+        "COMERCIAL": "PG",
+        "DIRECCION": "URUGUAY 485 10 - CAPITAL FEDERAL-CP 1015",
+        "CUIIT": "30-63780514-9"
+    },
+    {
+        "ID": "17",
+        "RAZON SOCIAL": "REJO SA",
+        "NOMBRE COMERCIAL": "GOODSHOW",
+        "BO": "NT",
+        "COMERCIAL": "LL",
+        "DIRECCION": "LIBERTAD 6120 0  - BUENOS AIRES-CP 1653",
+        "CUIIT": "30-70969845-8"
+    },
+    {
+        "ID": "18",
+        "RAZON SOCIAL": "MARLOMS SRL",
+        "NOMBRE COMERCIAL": "MARLOMS",
+        "BO": "NT",
+        "COMERCIAL": "MR",
+        "DIRECCION": "BEAUCHEFF  4963  - BUENOS AIRES-CP 1615",
+        "CUIIT": "30-70853816-3"
+    },
+    {
+        "ID": "18",
+        "RAZON SOCIAL": "WAKAS S.A.",
+        "NOMBRE COMERCIAL": "WAKAS",
+        "BO": "NT",
+        "COMERCIAL": "MR",
+        "DIRECCION": "BEAUCHEFF  4963  - BUENOS AIRES- CP 1615",
+        "CUIIT": "30-71541533-6"
+    },
+    {
+        "ID": "19",
+        "RAZON SOCIAL": "PROLAIT S.R.L.",
+        "NOMBRE COMERCIAL": "BEAUDROIT",
+        "BO": "DT",
+        "COMERCIAL": "CS",
+        "DIRECCION": "GALICIA  1477  -CAPITAL FEDERAL-CP 1416",
+        "CUIIT": "30-71566489-1"
+    },
+    {
+        "ID": "20",
+        "RAZON SOCIAL": "AMSA S.A.",
+        "NOMBRE COMERCIAL": "PAJARO AZUL",
+        "BO": "DT",
+        "COMERCIAL": "CS",
+        "DIRECCION": "KM 10 LOTE 40 B COLONIA YERBA 0 - MISIONES",
+        "CUIIT": "30-70970641-8"
+    },
+    {
+        "ID": "21",
+        "RAZON SOCIAL": "LA DIVISA S.R.L.",
+        "NOMBRE COMERCIAL": "LA DIVISA",
+        "BO": "DT",
+        "COMERCIAL": "MR",
+        "DIRECCION": "PASAJE ESTONIA  2135  - CAPITAL FEDERAL- CP 1440",
+        "CUIIT": "30-57008057-8"
+    },
+    {
+        "ID": "22",
+        "RAZON SOCIAL": "LA CACHUERA SA",
+        "NOMBRE COMERCIAL": "AMANDA",
+        "BO": "NT",
+        "COMERCIAL": "CL",
+        "DIRECCION": "AV RADEMACHER 2653  - MISIONES- CP 3300",
+        "CUIIT": "30-50883497-3"
+    },
+    {
+        "ID": "23",
+        "RAZON SOCIAL": "Celulosa Campana S.A",
+        "NOMBRE COMERCIAL": "CELULOSA CAMPANA",
+        "BO": "NT",
+        "COMERCIAL": "CS",
+        "DIRECCION": "DARRAGUEIRA  1261  -VALENTIN ALSINA- CP 1822",
+        "CUIIT": "30-59797159-8"
+    },
+    {
+        "ID": "24",
+        "RAZON SOCIAL": "CORPORACION DEL BOSQUE S.A.",
+        "NOMBRE COMERCIAL": "DULKRE",
+        "BO": "DT",
+        "COMERCIAL": "LL",
+        "DIRECCION": "COLECTORA GAONA NORTE 13201  - BUENOS AIRES- CP 1746",
+        "CUIIT": "30-70987183-4"
+    },
+    {
+        "ID": "25",
+        "RAZON SOCIAL": "COMPAÑÍA GRAL DE FOSFOROS SUD AMERICANA SA",
+        "NOMBRE COMERCIAL": "SUDAMERICANA",
+        "BO": "FV",
+        "COMERCIAL": "LL",
+        "DIRECCION": "CALLE 41 EX ITALIA 7620  - BUENOS AIRES- CP 1656",
+        "CUIIT": "30-50076567-0"
+    },
+    {
+        "ID": "26",
+        "RAZON SOCIAL": "LENTERDIT SA",
+        "NOMBRE COMERCIAL": "LENTERDIT",
+        "BO": "DT",
+        "COMERCIAL": "MR",
+        "DIRECCION": "MATHEU 2290 - SAN JUSTO- CP 1754",
+        "CUIIT": "33-57332947-9"
+    },
+    {
+        "ID": "27",
+        "RAZON SOCIAL": "PLENARIO S.A.",
+        "NOMBRE COMERCIAL": "PLENARIO",
+        "BO": "NT",
+        "COMERCIAL": "MR",
+        "DIRECCION": "MORIONDO 3737  - CAPITAL FEDERAL- CP 1676",
+        "CUIIT": "30-51919838-6"
+    },
+    {
+        "ID": "28",
+        "RAZON SOCIAL": "WEB SUPPLEMENTS SRL",
+        "NOMBRE COMERCIAL": "WEB SUPLEMENT",
+        "BO": "DT",
+        "COMERCIAL": "MR",
+        "DIRECCION": "OBISPO SALGUERO 507- CORDOBA- CP 5000",
+        "CUIIT": "30-70953977-5"
+    },
+    {
+        "ID": "29",
+        "RAZON SOCIAL": "FRIGORIFICO EL BIERZO S.A.",
+        "NOMBRE COMERCIAL": "EL BIERZO",
+        "BO": "FV",
+        "COMERCIAL": "CS",
+        "DIRECCION": "BRAGADO 6759  -MATADEROS-CAPITAL FEDERAL",
+        "CUIIT": "30-50515037-2"
+    },
+    {
+        "ID": "30",
+        "RAZON SOCIAL": "DELLEPIANE SAN LUIS S.A.",
+        "NOMBRE COMERCIAL": "DELLEPIANE",
+        "BO": "PD",
+        "COMERCIAL": "LL",
+        "DIRECCION": "KM 755.500 RAUTA NAC. 148 0  - SAN LUIS-CP 5730",
+        "CUIIT": "30-62232429-2"
+    },
+    {
+        "ID": "31",
+        "RAZON SOCIAL": "PRIFAMON SAIC",
+        "NOMBRE COMERCIAL": "PRIFAMON",
+        "BO": "FV",
+        "COMERCIAL": "LL",
+        "DIRECCION": "AV ADER  638  -BOULOGNE- BUENOS AIRES",
+        "CUIIT": "30-50058318-1"
+    },
+    {
+        "ID": "32",
+        "RAZON SOCIAL": "PRODUCTOS SORIANO S.R.L.",
+        "NOMBRE COMERCIAL": "SORIANO",
+        "BO": "NT",
+        "COMERCIAL": "LL",
+        "DIRECCION": "AV. CORRIENTES 880 14 - CAPITAL FEDERAL- CP 1036",
+        "CUIIT": "30-67968103-2"
+    },
+    {
+        "ID": "34",
+        "RAZON SOCIAL": "FRANCISCO SALZANO S.A.",
+        "NOMBRE COMERCIAL": "SALZANO",
+        "BO": "DT",
+        "COMERCIAL": "LL",
+        "DIRECCION": "CALLE 47 AUTO BS AS PLATA KM30 6750  - PLATANOS-BUENOS AIRES- CP 1885",
+        "CUIIT": "30-51561763-5"
+    },
+    {
+        "ID": "35",
+        "RAZON SOCIAL": "ENERGIZER ARGENTINA S.A.",
+        "NOMBRE COMERCIAL": "AUTOREFRESH",
+        "BO": "FV",
+        "COMERCIAL": "LL",
+        "DIRECCION": "EDISON  2659 3 B -BUENOS AIRES- CP 1640",
+        "CUIIT": "30-70733953-1"
+    },
+    {
+        "ID": "36",
+        "RAZON SOCIAL": "V Y V ALIMENTOS S.A.",
+        "NOMBRE COMERCIAL": "LAS BRISAS",
+        "BO": "FV",
+        "COMERCIAL": "LL",
+        "DIRECCION": "TABARES 5751 5751  - SANTA FE",
+        "CUIIT": "33-71141307-9"
+    },
+    {
+        "ID": "37",
+        "RAZON SOCIAL": "SAF ARGENTINA SA",
+        "NOMBRE COMERCIAL": "LEVADURA",
+        "BO": "DT",
+        "COMERCIAL": "LL",
+        "DIRECCION": "JOSE A CABRERA  4338  - CAPITAL FEDERAL",
+        "CUIIT": "30-67988839-7"
+    },
+    {
+        "ID": "38",
+        "RAZON SOCIAL": "MARCELO CUETO S.A.",
+        "NOMBRE COMERCIAL": "BREVISS",
+        "BO": "FV",
+        "COMERCIAL": "LL",
+        "DIRECCION": "VERAZZI  966  - BUENOS AIRES- CP 1650",
+        "CUIIT": "30-67706015-4"
+    },
+    {
+        "ID": "39",
+        "RAZON SOCIAL": "ENERGIZER ARGENTINA S.A.",
+        "NOMBRE COMERCIAL": "ENERGIZER",
+        "BO": "FV",
+        "COMERCIAL": "LL",
+        "DIRECCION": "EDISON  2659 3 B- BUENOS AIRES- CP 1640",
+        "CUIIT": "30-70733953-1"
+    },
+    {
+        "ID": "40",
+        "RAZON SOCIAL": "CORDEIRO Y CIA  S.R.L.",
+        "NOMBRE COMERCIAL": "VERDE FLOR",
+        "BO": "PD",
+        "COMERCIAL": "LL",
+        "DIRECCION": "AV. MANUEL SAVIO 5656 LOTE 3 F 0  - CORDOBA- CP 5123",
+        "CUIIT": "30-61168950-7"
+    },
+    {
+        "ID": "41",
+        "RAZON SOCIAL": "DISPITA S.A",
+        "NOMBRE COMERCIAL": "DISPITA",
+        "BO": "NT",
+        "COMERCIAL": "MR",
+        "DIRECCION": "CATAMARCA 1406 3 - CAPITAL FEDERAL- CP 1246",
+        "CUIIT": "30-71479470-8"
+    },
+    {
+        "ID": "42",
+        "RAZON SOCIAL": "GDC ARGENTINA S.A",
+        "NOMBRE COMERCIAL": "GOMES DA COSTA",
+        "BO": "FV",
+        "COMERCIAL": "LL",
+        "DIRECCION": "CARLOS PELLEGRINI  989 P 6- CAPITAL FEDERAL- CP 1009",
+        "CUIIT": "30-70836960-4"
+    },
+    {
+        "ID": "44",
+        "RAZON SOCIAL": "CANDIL ILUMINACION  SRL",
+        "NOMBRE COMERCIAL": "CANDIL",
+        "BO": "DT",
+        "COMERCIAL": "SM",
+        "DIRECCION": "AV GAONA 2388  - CAPITAL FEDERAL- CP 1416",
+        "CUIIT": "30-70817158-8"
+    },
+    {
+        "ID": "45",
+        "RAZON SOCIAL": "FUBAO FOOD COMPANY ARGENTINA S",
+        "NOMBRE COMERCIAL": "FUBAO",
+        "BO": "FV",
+        "COMERCIAL": "LL",
+        "DIRECCION": "ECHEVERRIA 1515 0  --CAPITAL FEDERAL-CP",
+        "CUIIT": "30-71567033-6"
+    },
+    {
+        "ID": "46",
+        "RAZON SOCIAL": "ROS MATERIALES ELECTRICOS SRL",
+        "NOMBRE COMERCIAL": "ILUMINARIA SAN JUSTO",
+        "BO": "PD",
+        "COMERCIAL": "SM",
+        "DIRECCION": "PARQUE INDUSTRIAL LA MATANZA - 0  - CAPITAL FEDERAL- CP 1764",
+        "CUIIT": "30-63320183-4"
+    },
+    {
+        "ID": "47",
+        "RAZON SOCIAL": "BABASAL SRL",
+        "NOMBRE COMERCIAL": "JUGOS TUTTI",
+        "BO": "DT",
+        "COMERCIAL": "PG",
+        "DIRECCION": "LIBERTAD  1371   -CAPITAL FEDERAL- CP 1016",
+        "CUIIT": "30-71405671-5"
+    },
+    {
+        "ID": "48",
+        "RAZON SOCIAL": "GRUPO ANDINO SA",
+        "NOMBRE COMERCIAL": "ESTRELLA",
+        "BO": "NT",
+        "COMERCIAL": "PG",
+        "DIRECCION": "CALLE 11  758  -(PQUE INDUSTRIAL)-BUENOS AIRES- CP 1633",
+        "CUIIT": "33-69482124-9"
+    },
+    {
+        "ID": "50",
+        "RAZON SOCIAL": "LINEA PARA EL BEBE BABELITO S A",
+        "NOMBRE COMERCIAL": "BABELITO",
+        "BO": "PD",
+        "COMERCIAL": "PG",
+        "DIRECCION": "LOS PATOS  2584  - BUENOS AIRES-CP 1643",
+        "CUIIT": "30-59849898-5"
+    },
+    {
+        "ID": "51",
+        "RAZON SOCIAL": "COMPAÑIA INTRODUCTORA DE BUENOS AIRES SA",
+        "NOMBRE COMERCIAL": "DOS ANCLAS",
+        "BO": "NT",
+        "COMERCIAL": "SM",
+        "DIRECCION": "CHILE 778  - CAPITAL FEDERAL- CP 1098",
+        "CUIIT": "30-50129032-3"
+    },
+    {
+        "ID": "52",
+        "RAZON SOCIAL": "MENOYO SA",
+        "NOMBRE COMERCIAL": "MENOYO",
+        "BO": "FV",
+        "COMERCIAL": "PG",
+        "DIRECCION": "AV MITRE  3116  -MUNRO-BUENOS AIRES",
+        "CUIIT": "30-56973541-2"
+    },
+    {
+        "ID": "55",
+        "RAZON SOCIAL": "EL NOBLE DEL SUR S.A",
+        "NOMBRE COMERCIAL": "EL NOBLE",
+        "BO": "FV",
+        "COMERCIAL": "LL",
+        "DIRECCION": "MANUEL SAVIO 629  - PARQUE IN. OKS- BUENOS AIRES- CP 1619",
+        "CUIIT": "30-71123782-4"
+    },
+    {
+        "ID": "56",
+        "RAZON SOCIAL": "DULCOR SA",
+        "NOMBRE COMERCIAL": "ESNAOLA- DULCOR",
+        "BO": "DT",
+        "COMERCIAL": "LL",
+        "DIRECCION": "AV ELVIO ELADIO RIBA 1615  - ARROYITO-CORDOBA- CP 2434",
+        "CUIIT": "30-54759682-6"
+    },
+    {
+        "ID": "57",
+        "RAZON SOCIAL": "PILARES COMPAÑIA ALIMENTICIA SA",
+        "NOMBRE COMERCIAL": "GAONA",
+        "BO": "PD",
+        "COMERCIAL": "LL",
+        "DIRECCION": "AV PRESIDENTE FRONZIDI 2911  -PARQUE INDUSTRIAL PILAR-BUENOS AIRES-CP 1629",
+        "CUIIT": "30-71137523-2"
+    },
+    {
+        "ID": "58",
+        "RAZON SOCIAL": "PACKALL SRL",
+        "NOMBRE COMERCIAL": "ANCHOPACKAGING",
+        "BO": "NT",
+        "COMERCIAL": "LL",
+        "DIRECCION": "RODO JOSE ENRIQUE 5658 2 - CAPITAL FEDERAL- CP 1440",
+        "CUIIT": "30-66156125-0"
+    },
+    {
+        "ID": "59",
+        "RAZON SOCIAL": "COMPAÑIA ARGENTINA DE LEVADURAS S A I C",
+        "NOMBRE COMERCIAL": "CALSA",
+        "BO": "NT",
+        "COMERCIAL": "SM",
+        "DIRECCION": "AV. PTE. RAÚL ALFONSÍN  3145  - BUENOS AIRES- CP 1825",
+        "CUIIT": "30-53214979-3"
+    },
+    {
+        "ID": "60",
+        "RAZON SOCIAL": "SWIFT ARGENTINA SA",
+        "NOMBRE COMERCIAL": "SWIFT",
+        "BO": "PD",
+        "COMERCIAL": "SM",
+        "DIRECCION": "EDISON  2659 03 - BUENOS AIRES- CP 1640",
+        "CUIIT": "30-56037805-6"
+    },
+    {
+        "ID": "61",
+        "RAZON SOCIAL": "DIELO SA",
+        "NOMBRE COMERCIAL": "FANTOCHE",
+        "BO": "FV",
+        "COMERCIAL": "CL",
+        "DIRECCION": "BALBASTRO  5540  - CAPITAL FEDERAL - CP 1439",
+        "CUIIT": "30-51565826-9"
+    },
+    {
+        "ID": "62",
+        "RAZON SOCIAL": "FRONERI ARGENTINA SA",
+        "NOMBRE COMERCIAL": "FRIGOR",
+        "BO": "NT",
+        "COMERCIAL": "CL",
+        "DIRECCION": "RTA PARAMERICANA KM 29 COL E 0  --BUENOS AIRES- CP 1618",
+        "CUIIT": "30-71528751-6"
+    },
+    {
+        "ID": "64",
+        "RAZON SOCIAL": "PRONIPOTI S.A.",
+        "NOMBRE COMERCIAL": "ZAFRAN",
+        "BO": "DT",
+        "COMERCIAL": "LL",
+        "DIRECCION": "REPUBLICA DE ISRAEL 3430 0  - VILLA LYNCH -CAPITAL FEDERAL- CP",
+        "CUIIT": "30-71396430-8"
+    }
+]

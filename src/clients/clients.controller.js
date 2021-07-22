@@ -1,17 +1,4 @@
-const { ObjectId } = require("mongodb");
-const MongoDB = require("../db/mongo.driver");
-
 class ClientsController {
-  /**
-   *
-   * @param {MongoDB} db
-   */
-  constructor(db) {
-    this.db = db;
-    this.clients = db.clients;
-  }
-
-
   async getClients({ start, end, filter }) {
     return new Promise((resolve, reject) => {
 

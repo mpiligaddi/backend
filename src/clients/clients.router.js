@@ -1,16 +1,10 @@
 var express = require("express");
-const MongoDB = require("../db/mongo.driver");
 const ClientsController = require("./clients.controller");
 var router = express.Router();
 
-/**
- *
- * @param {MongoDB} db
- * @returns
- */
-module.exports = function (db) {
+module.exports = function () {
 
-  const controller = new ClientsController(db);
+  const controller = new ClientsController();
 
   router.post("/clients/statistics", (req, res) => {
     res.send({

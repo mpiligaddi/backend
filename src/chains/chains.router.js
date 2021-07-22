@@ -1,16 +1,10 @@
 var express = require("express");
-const MongoDB = require("../db/mongo.driver");
 const ChainsController = require("./chains.controller");
 var router = express.Router();
 
-/**
- *
- * @param {MongoDB} db
- * @returns
- */
-module.exports = function (db) {
+module.exports = function () {
 
-  const controller = new ChainsController(db);
+  const controller = new ChainsController();
 
   router.post("/chains/get", (req, res) => {
 

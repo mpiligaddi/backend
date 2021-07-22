@@ -1,15 +1,9 @@
 var express = require("express");
-const MongoDB = require("../db/mongo.driver");
 const BranchesController = require("./branches.controller");
 var router = express.Router();
 
-/**
- *
- * @param {MongoDB} db
- * @returns
- */
-module.exports = function (db) {
-  const controller = new BranchesController(db);
+module.exports = function () {
+  const controller = new BranchesController();
 
   router.post("/get/branches", (req, res) => {
 
