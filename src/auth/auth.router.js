@@ -13,7 +13,7 @@ var router = express.Router();
 module.exports = function (prisma) {
   const controller = new AuthController(prisma);
 
-  router.post("/register", (req, res) => {
+  router.put("/register", (req, res) => {
     let _defaultParams = ["uuids", "displayName", "email", "role", "password"];
 
     var params = _defaultParams.filter((value) => !Object.keys(req.body).includes(value));
@@ -24,15 +24,15 @@ module.exports = function (prisma) {
 
     controller
       .registerAccount(req.body)
-      .then((r) => res.send(r))
-      .catch((c) => res.send(c));
+      .then((r) => res.status(200).send(r))
+      .catch((c) => res.status(400).send(c));
   });
 
   router.post("/logout", (req, res) => {
     controller
       .tryLogout(req.session)
-      .then((r) => res.send(r))
-      .catch((c) => res.send(c));
+      .then((r) => res.status(200).send(r))
+      .catch((c) => res.status(400).send(c));
   });
 
   router.post("/login", (req, res) => {

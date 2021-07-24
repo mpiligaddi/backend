@@ -19,8 +19,8 @@ const prisma = new PrismaClient()
 const bcrypt = require('bcrypt-nodejs');
 
 async function main() {
-  await periodReports();
   await client();
+
 }
 
 async function migrate() {
@@ -31,11 +31,61 @@ async function migrate() {
   await merch();
   await zones();
   await reportsTypes();
-  await periodReports();
   await chains();
   await branches();
   await category();
-  await client();
+}
+
+async function coverages() {
+  for (const coverage of CONTRATOREPORTS) {
+
+    const branch = BRANCHES.find((b) => b['ID LOCAL'] == coverage.BOCA);
+
+    const client = CLIENTS.find(c => c.ID == coverage.CLIENTE);
+
+    if (branch == null || client == null) {
+      console.log(branch == null ? "NB" : "noc");
+      continue;
+    };
+
+    const branchDB = await prisma.branch.findFirst({
+      where: {
+        address: {
+          equals: branch.DIRECCION
+        }
+      }
+    })
+
+    const clientDB = await prisma.client.findFirst({
+      where: {
+        cuit: client.CUIIT
+      }
+    })
+
+    if (clientDB == null || branchDB == null) {
+      console.log(branch == null ? "NdB" : "nodc");
+      continue;
+    };
+
+
+    const result = await prisma.coverage.create({
+      data: {
+        branch: {
+          connect: {
+            id: branchDB.id
+          }
+        },
+        client: {
+          connect: {
+            id: clientDB.id
+          }
+        },
+        frecuency: coverage.FRECUENCIASEMANAL,
+        intensity: coverage.INTENSIDADXFRECUENCIA
+      }
+    })
+    console.table(result)
+  }
 }
 
 async function periodReports() {
@@ -104,59 +154,67 @@ async function client() {
       continue;
     }
 
+    if (client['RAZON SOCIAL'] == null) {
+      console.log(client);
+      continue;
+    }
 
-    const result = await prisma.client.create({
-      data: {
-        displayName: client['RAZON SOCIAL'],
-        name: client['NOMBRE COMERCIAL'],
-        address: client.DIRECCION,
-        cuit: client.CUIIT,
-        admin: {
-          connect: {
-            email: backoffice['DIRECCION DE CORREO']
-          }
-        },
-        comercial: {
-          connect: {
-            email: comercial['DIRECCION DE CORREO']
-          }
-        },
-        categories: {
-          create: category.map((cat) => {
-            return {
-              category: {
-                connect: {
-                  name: cat.NOMBRE
+    try {
+
+      const result = await prisma.client.create({
+        data: {
+          displayName: client['RAZON SOCIAL'],
+          name: client['NOMBRE COMERCIAL'],
+          address: client.DIRECCION,
+          cuit: client.CUIIT,
+          admin: {
+            connect: {
+              email: backoffice['DIRECCION DE CORREO']
+            }
+          },
+          comercial: {
+            connect: {
+              email: comercial['DIRECCION DE CORREO']
+            }
+          },
+          categories: {
+            create: category.map((cat) => {
+              return {
+                category: {
+                  connect: {
+                    name: cat.NOMBRE
+                  }
                 }
               }
-            }
-          })
-        },
-        periods: {
-          create: periodOfClient.map((pfc) => {
-            return {
-              period: {
-                connect: {
-                  alias: pfc.REPORTE
+            })
+          },
+          periods: {
+            create: periodOfClient.map((pfc) => {
+              return {
+                period: {
+                  connect: {
+                    alias: pfc.REPORTE
+                  }
                 }
               }
-            }
-          })
-        }
-      },
-      include: {
-        periods: {
-          where: {
-            id: {
-              not: "PEP"
+            })
+          }
+        },
+        include: {
+          periods: {
+            where: {
+              id: {
+                not: "PEP"
+              }
             }
           }
         }
-      }
-    })
+      })
+    } catch (error) {
+      console.log(client);
 
-
-    console.log(JSON.stringify(result));
+      console.log("");
+    }
   }
 
   console.table(errors)

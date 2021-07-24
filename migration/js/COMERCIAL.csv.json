@@ -33,5 +33,10 @@
     "ID": "CS",
     "NOMBRE": "CONSTANZA SARAFOGLU",
     "DIRECCION DE CORREO": "csarafoglu@dgroupsa.com.ar"
+  },
+  {
+    "ID": "LL",
+    "DIRECCION DE CORREO": "lorena.lionel@dgroupsa.com.ar",
+    "NOMBRE": "Lorena Lionel"
   }
 ]
