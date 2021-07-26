@@ -71,7 +71,7 @@ router.route("/:id/:name")
     var files = fs.readdirSync(directory);
     console.log(files);
 
-    return res.status(200).send({ code: 200, message: "Imagenes encontradas con éxito", images: files.map((image) => `${path_url}/assets`) })
+    return res.status(200).send({ code: 200, message: "Imagenes encontradas con éxito", images: files.map((image) => `${path_url}/${id}/${name}/${image}`) })
 
   })
 
