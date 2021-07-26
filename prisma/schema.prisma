@@ -11,15 +11,15 @@ generator client {
 }
 
 model Comercial {
-  id     String   @id @default(uuid())
-  name   String   @unique
-  email  String   @unique
-  client Client[]
+  id      String   @id @default(uuid())
+  name    String   @unique
+  email   String
+  clients Client[]
 }
 
 model Coordinator {
   id          String       @id @default(uuid())
-  name        String       @unique
+  name        String
   email       String       @unique
   supervisors Supervisor[]
 }
@@ -27,7 +27,7 @@ model Coordinator {
 model Supervisor {
   id            String      @id @default(uuid())
   name          String      @unique
-  User          User[]
+  users         User[]
   email         String      @unique
   zones         Zone[]
   coordinator   Coordinator @relation(fields: coordinatorId, references: id)
@@ -44,11 +44,11 @@ model Account {
 
 model User {
   id           String      @id @default(uuid())
-  name         String      @unique
+  name         String
   email        String      @unique
   role         user_role
   account      Account?
-  client       Client[]
+  clients      Client[]
   supervisor   Supervisor? @relation(fields: [supervisorId], references: [id])
   supervisorId String?
   reports      Report[]
@@ -57,20 +57,21 @@ model User {
 enum user_role {
   backoffice
   merchandiser
+  superadmin
 }
 
 model Branch {
-  id             String     @id @default(uuid())
-  name           String     @unique
-  displayName    String
-  locality       String
-  address        String
-  zone           Zone       @relation(fields: [zoneId], references: [id])
-  zoneId         String
-  chain          Chain      @relation(fields: [chainId], references: [id])
-  chainId        String
-  reports        Report[]
-  clientCoverage Coverage[]
+  id          String     @id @default(uuid())
+  name        String     @unique
+  displayName String
+  locality    String
+  address     String
+  zone        Zone       @relation(fields: [zoneId], references: [id])
+  zoneId      String
+  chain       Chain      @relation(fields: [chainId], references: [id])
+  chainId     String
+  reports     Report[]
+  coverages   Coverage[]
 }
 
 model Zone {
@@ -110,7 +111,7 @@ model ClientCategory {
 model Chain {
   id       String    @id @default(uuid())
   name     String    @unique
-  branch   Branch[]
+  branches Branch[]
   products Product[]
   reports  Report[]
 }
@@ -118,33 +119,33 @@ model Chain {
 model Category {
   id       String           @id @default(uuid())
   name     String           @unique
-  client   ClientCategory[]
-  report   CategoryReport[]
+  clients  ClientCategory[]
+  reports  CategoryReport[]
   products Product[]
+}
+
+model ReportType {
+  id      String         @id @default(uuid())
+  name    String         @unique
+  alias   String         @unique
+  periods PeriodReport[]
+}
+
+model PeriodReport {
+  id           String               @id @default(uuid())
+  clients      ClientPeriodReport[]
+  type         ReportType           @relation(fields: [reportTypeId], references: [id])
+  reportTypeId String
+  name         String               @unique
+  alias        String               @unique
 }
 
 model ClientPeriodReport {
   id       String        @id @default(uuid())
   period   PeriodReport? @relation(fields: [periodId], references: [id])
   periodId String?
-  client   Client?       @relation(fields: [clientId], references: [id])
+  client  Client?       @relation(fields: [clientId], references: [id])
   clientId String?
-}
-
-model PeriodReport {
-  id           String               @id @default(uuid())
-  clients      ClientPeriodReport[]
-  reportType   ReportType           @relation(fields: [reportTypeId], references: [id])
-  reportTypeId String
-  name         String               @unique
-  alias        String               @unique
-}
-
-model ReportType {
-  id     String         @id @default(uuid())
-  name   String         @unique
-  alias  String         @unique
-  period PeriodReport[]
 }
 
 model Coverage {
@@ -158,54 +159,71 @@ model Coverage {
 }
 
 model Report {
-  id         String   @id @default(uuid())
-  branch     Branch   @relation(fields: [branchId], references: [id])
+  id         String           @id @default(uuid())
+  branch     Branch           @relation(fields: [branchId], references: [id])
   branchId   String
-  chain      Chain    @relation(fields: [chainId], references: [id])
+  chain      Chain            @relation(fields: [chainId], references: [id])
   chainId    String
-  client     Client   @relation(fields: [clientId], references: [id])
+  client     Client           @relation(fields: [clientId], references: [id])
   clientId   String
   createAt   DateTime
-  creator    User     @relation(fields: [creatorId], references: [id])
+  creator    User             @relation(fields: [creatorId], references: [id])
   creatorId  String
   isComplete Boolean
-  location   Location @relation(fields: [locationId], references: [id])
+  location   Location         @relation(fields: [locationId], references: [id])
   locationId String
-
+  type       report_types     @default(photographic)
   categories CategoryReport[]
 }
 
 model CategoryReport {
-  id         String          @id @default(uuid())
-  report     Report          @relation(fields: [reportId], references: [id])
+  id         String            @id @default(uuid())
+  report     Report            @relation(fields: [reportId], references: [id])
   reportId   String
-  category   Category        @relation(fields: [categoryId], references: [id])
+  category   Category          @relation(fields: [categoryId], references: [id])
   categoryId String
-  images     PhotoReport[]
+  photos     PhotoReport[]
   pricings   PricingReport[]
+  breakevens BreakevenReport[]
+}
+
+model BreakevenReport {
+  id               String                   @id @default(uuid())
+  report           CategoryReport?          @relation(fields: [categoryReportId], references: [id])
+  categoryReportId String?
+  products         ProductBreakevenReport[]
 }
 
 model PricingReport {
-  id               String           @id @default(uuid())
-  products         ProductPReport[]
-  report           CategoryReport?  @relation(fields: [categoryReportId], references: [id])
+  id               String                 @id @default(uuid())
+  products         ProductPricingReport[]
+  report           CategoryReport?        @relation(fields: [categoryReportId], references: [id])
   categoryReportId String?
 }
 
-model ProductPReport {
+model ProductPricingReport {
   id              String         @id @default(uuid())
   product         Product        @relation(fields: [productId], references: [id])
   productId       String
-  pricing         Decimal
+  pricing         Decimal        @default(0)
   pricingReport   PricingReport? @relation(fields: [pricingReportId], references: [id])
   pricingReportId String?
+}
+
+model ProductBreakevenReport {
+  id                String           @id @default(uuid())
+  product           Product          @relation(fields: [productId], references: [id])
+  productId         String
+  status            Boolean          @default(false)
+  report            BreakevenReport? @relation(fields: [breakevenReportId], references: [id])
+  breakevenReportId String?
 }
 
 model PhotoReport {
   id               String         @id @default(uuid())
   report           CategoryReport @relation(fields: [categoryReportId], references: [id])
   categoryReportId String
-  ImageReport      ImageReport[]
+  images           ImageReport[]
 }
 
 model ImageReport {
@@ -227,14 +245,15 @@ model Location {
 }
 
 model Product {
-  id         String           @id @default(uuid())
-  chain      Chain            @relation(fields: [chainId], references: [id])
+  id         String                   @id @default(uuid())
+  chain      Chain                    @relation(fields: [chainId], references: [id])
   chainId    String
-  name       String           @unique
-  type       stock_type       @default(secondary)
-  category   Category         @relation(fields: [categoryId], references: [id])
+  name       String                   @unique
+  type       stock_type               @default(secondary)
+  category   Category                 @relation(fields: [categoryId], references: [id])
   categoryId String
-  products   ProductPReport[]
+  pricings   ProductPricingReport[]
+  breakevens ProductBreakevenReport[]
 }
 
 enum stock_type {
@@ -247,4 +266,10 @@ model Session {
   sid       String   @unique
   data      String
   expiresAt DateTime
+}
+
+enum report_types {
+  pricing
+  breakeven
+  photographic
 }

@@ -19,8 +19,7 @@ const prisma = new PrismaClient()
 const bcrypt = require('bcrypt-nodejs');
 
 async function main() {
-  await client();
-
+  await migrate();
 }
 
 async function migrate() {
@@ -34,6 +33,9 @@ async function migrate() {
   await chains();
   await branches();
   await category();
+  await periodReports();
+  await client();
+  await coverages();
 }
 
 async function coverages() {
@@ -80,8 +82,8 @@ async function coverages() {
             id: clientDB.id
           }
         },
-        frecuency: coverage.FRECUENCIASEMANAL,
-        intensity: coverage.INTENSIDADXFRECUENCIA
+        frecuency: parseInt(coverage.FRECUENCIASEMANAL),
+        intensity: parseInt(coverage.INTENSIDADXFRECUENCIA)
       }
     })
     console.table(result)
@@ -346,7 +348,7 @@ async function merch() {
     }
     const result = await prisma.account.create({
       data: {
-        password: bcrypt.hashSync(`chek-${(Math.random() * Date.now()).toString(36).replace(/[^a-z]+/g, '').substr(0, 2)}`, salt),
+        password: bcrypt.hashSync(`chek-repo`, salt),
         email: bo.EMAIL,
         user: {
           connectOrCreate: {
