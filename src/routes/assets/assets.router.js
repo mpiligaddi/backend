@@ -198,7 +198,7 @@ async function createFile(file, directory, override = false) {
 
 async function encodeImageToBlurhash(directory) {
   return new Promise((resolve, reject) => {
-    resize(directory, 256, 256)
+    resize(directory, 32, 32)
       .raw()
       .ensureAlpha()
       .toBuffer((err, buffer, { width, height }) => {
