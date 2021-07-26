@@ -214,7 +214,7 @@ function resize(directory, width, height) {
   let transform = sharp();
 
   if (width || height) {
-    transform = transform.toFormat("png").resize(width, height, { fit: 'inside' });
+    transform = transform.toFormat("png").resize(width, height, { fit: 'cover' });
   }
 
   return readStream.pipe(transform);
