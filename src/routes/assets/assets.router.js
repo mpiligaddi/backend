@@ -198,13 +198,12 @@ async function createFile(file, directory, override = false) {
 
 async function encodeImageToBlurhash(directory) {
   return new Promise((resolve, reject) => {
-    resize(directory, 32, 32)
+    resize(directory, 256, 256)
       .raw()
       .ensureAlpha()
       .toBuffer((err, buffer, { width, height }) => {
         if (err) return reject(err);
-        console.log(encode(new Uint8ClampedArray(buffer), width, height, 4, 4));
-        return resolve(encode(new Uint8ClampedArray(buffer), width, height, 4, 4));
+        return resolve(encode(new Uint8ClampedArray(buffer), width, height, 4, 3));
       });
   });
 }
