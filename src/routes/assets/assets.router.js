@@ -5,7 +5,7 @@ var router = express.Router();
 const sharp = require("sharp");
 
 const multer = require("multer");
-const { authMiddleware } = require("../../middlewares/auth.utils");
+const { authMiddleware } = require("../../middlewares/auth.middleware");
 const { encode } = require("blurhash");
 
 var upload = multer({ dest: "public/temp", preservePath: false })

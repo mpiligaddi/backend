@@ -1,6 +1,6 @@
 var express = require("express");
 const { check } = require('express-validator');
-const { validateBody } = require("../../middlewares/validators.utils");
+const { validateBody } = require("../../middlewares/validators.middleware");
 const AccountsControllers = require("./accounts.controller");
 
 var router = express.Router();
@@ -16,7 +16,8 @@ router.route("/accounts/:id")
     return controller.getAccount({id: id, query: req.query})
       .then((r) => res.status(r.code).send(r))
       .catch((c) => res.status(c.code).send(c))
-
+  })
+  .post((req, res) => {
 
   })
 

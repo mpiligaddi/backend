@@ -46,6 +46,7 @@ model User {
   id           String      @id @default(uuid())
   name         String
   email        String      @unique
+  picture      String?
   role         user_role
   account      Account?
   clients      Client[]
@@ -57,6 +58,7 @@ model User {
 enum user_role {
   backoffice
   merchandiser
+  client
   superadmin
 }
 

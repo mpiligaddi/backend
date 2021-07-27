@@ -1,6 +1,6 @@
 const { check } = require('express-validator');
 var express = require("express");
-const { validateBody } = require("../../middlewares/validators.utils");
+const { validateBody } = require("../../middlewares/validators.middleware");
 const ChainsController = require("./chains.controller");
 
 

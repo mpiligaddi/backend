@@ -1,7 +1,7 @@
 const ComercialsController = require("./comercials.controller");
 const { check, query } = require('express-validator');
 var express = require("express");
-const { validateBody } = require("../../middlewares/validators.utils");
+const { validateBody } = require("../../middlewares/validators.middleware");
 
 
 const router = express.Router();

@@ -1,6 +1,6 @@
 const { body } = require('express-validator');
 var { Router } = require("express");
-const { validateBody } = require("../../../middlewares/validators.utils");
+const { validateBody } = require("../../../middlewares/validators.middleware");
 const ReportsController = require('../reports.controller');
 
 
