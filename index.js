@@ -40,18 +40,8 @@ prisma.$connect().then(() => {
   })
     .then(rateLimiter => {
 
-      app.use((req, res, next) => {
-        rateLimiter.consume(req.ip)
-          .then(() => {
-            next();
-          })
-          .catch(_ => {
-            res.status(429).send({ message: 'Too Many Requests' });
-          });
-      })
-
       app.use(session({
-        secret: "uwu de awa con sabor a iwi",
+        secret: "papurritesteo",
         cookie: {
           maxAge: 1000 * 60 * 60 * 24 * 4
         },
