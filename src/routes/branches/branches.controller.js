@@ -36,11 +36,11 @@ class BranchesController {
 
   async updateBranch({ search, data, query }) {
     return new Promise((resolve, reject) => {
-      this.branches.update({
+      this.branches.upsert({
         where: {
           id: search
         },
-        data: {
+        update: {
           name: data.name,
           locality: data.locality,
           address: data.address,

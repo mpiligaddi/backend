@@ -50,7 +50,7 @@ router.post("/login", [
     .tryLogin(req.body)
     .then((r) => {
       req.session.isAuth = true;
-      req.session.user = r.user.id;
+      req.session.user = r.user;
       return res.status(r.code).send(r);
     })
     .catch((c) => res.status(c.code).send(c));

@@ -8,14 +8,23 @@ const router = express.Router();
 
 const controller = new CategoriesController();
 
-router.post("/category", [
-  check("name", "Faltó ingresar el nombre").notEmpty(),
-  validateBody
-], (req, res) => {
-  controller.createCategory(req.body)
-    .then((r) => res.status(r.code).send(r))
-    .catch((c) => res.status(c.code).send(c))
-})
+router.route("/categories")
+  .post([
+    check("name", "Faltó ingresar el nombre").notEmpty(),
+    validateBody
+  ], (req, res) => {
+    controller.createCategory(req.body)
+      .then((r) => res.status(r.code).send(r))
+      .catch((c) => res.status(c.code).send(c))
+  })
+  .get((req, res) => {
+    controller.getCategories({ query: req.query })
+      .then((r) => res.status(r.code).send(r))
+      .catch((c) => {
+        console.log(c);
+        return res.status(c.code).send(c);
+      })
+  })
 
 router.route("/categories/:id")
   .get((req, res) => {
@@ -47,15 +56,5 @@ router.route("/categories/:id")
         return res.status(c.code).send(c)
       })
   })
-
-router.get("/categories", (req, res) => {
-  controller.getCategories({ query: req.query })
-    .then((r) => res.status(r.code).send(r))
-    .catch((c) => {
-      console.log(c);
-      return res.status(c.code).send(c);
-    })
-})
-
 
 module.exports = router;

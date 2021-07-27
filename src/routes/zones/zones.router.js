@@ -8,16 +8,22 @@ const router = express.Router();
 
 const controller = new ZonesController();
 
-router.post("/zone", [
-  body("name", "Faltó ingresar el nombre").notEmpty(),
-  body("region", "Faltó ingresar la región").notEmpty(),
-  body("supervisor", "Faltó ingresar al supervisor").notEmpty(),
-  validateBody
-], (req, res) => {
-  controller.createZone(req.body)
-    .then((r) => res.status(r.code).send(r))
-    .catch((c) => res.status(c.code).send(c))
-})
+router.route("/zones")
+  .post([
+    body("name", "Faltó ingresar el nombre").notEmpty(),
+    body("region", "Faltó ingresar la región").notEmpty(),
+    body("supervisor", "Faltó ingresar al supervisor").notEmpty(),
+    validateBody
+  ], (req, res) => {
+    controller.createZone(req.body)
+      .then((r) => res.status(r.code).send(r))
+      .catch((c) => res.status(c.code).send(c))
+  })
+  .get((req, res) => {
+    controller.getZones({ query: req.query })
+      .then((r) => res.status(r.code).send(r))
+      .catch((c) => res.status(c.code).send(c))
+  })
 
 router.route("/zones/:id")
   .get((req, res) => {
@@ -51,12 +57,6 @@ router.route("/zones/:id")
         return res.status(c.code).send(c)
       })
   })
-
-router.get("/zones", (req, res) => {
-  controller.getZones({ query: req.query })
-    .then((r) => res.status(r.code).send(r))
-    .catch((c) => res.status(c.code).send(c))
-})
 
 
 module.exports = router;

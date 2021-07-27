@@ -8,15 +8,22 @@ const router = express.Router();
 
 const controller = new CoordinatorsController();
 
-router.post("/coordinator", [
-  check("name", "Faltó ingresar el nombre").isEmpty(),
-  check("email", "El email es incorrecto").isEmail(),
-  validateBody
-], (req, res) => {
-  controller.createCoordinator(req.body)
-    .then((r) => res.status(r.code).send(r))
-    .catch((c) => res.status(c.code).send(c))
-})
+router.route("/coordinators")
+  .post([
+    check("name", "Faltó ingresar el nombre").isEmpty(),
+    check("email", "El email es incorrecto").isEmail(),
+    validateBody
+  ], (req, res) => {
+    controller.createCoordinator(req.body)
+      .then((r) => res.status(r.code).send(r))
+      .catch((c) => res.status(c.code).send(c))
+  })
+  .get((req, res) => {
+    controller.getCoordinators({ query: req.query })
+      .then((r) => res.status(r.code).send(r))
+      .catch((c) => res.status(c.code).send(c))
+  })
+
 
 router.route("/coordinators/:id")
   .get((req, res) => {
@@ -49,12 +56,6 @@ router.route("/coordinators/:id")
         return res.status(c.code).send(c)
       })
   })
-
-router.get("/coordinators", (req, res) => {
-  controller.getCoordinators({ query: req.query })
-    .then((r) => res.status(r.code).send(r))
-    .catch((c) => res.status(c.code).send(c))
-})
 
 
 module.exports = router;

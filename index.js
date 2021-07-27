@@ -3,8 +3,8 @@ const morgan = require("morgan");
 const session = require("express-session");
 const { PrismaClient } = require('@prisma/client')
 const { PrismaSessionStore } = require('@quixo3/prisma-session-store');
+const crypto = require('crypto');
 
-const bcrypt = require('bcrypt-nodejs');
 const { authMiddleware } = require("./src/middlewares/auth.utils");
 
 const prisma = new PrismaClient();
@@ -35,7 +35,6 @@ prisma.$connect().then(() => {
   app.use("/api", authMiddleware)
 
   app.use("/assets", require("./src/routes/assets/assets.router"))
-  //console.log(bcrypt.hashSync("chek-repo", bcrypt.genSaltSync()));
 
   app.use("/auth", require("./src/routes/auth/auth.router"));
   app.use("/api", require("./src/routes/comercials/comercials.router"))
@@ -47,6 +46,7 @@ prisma.$connect().then(() => {
   app.use("/api", require("./src/routes/chains/chains.router"))
   app.use("/api", require("./src/routes/categories/categories.router"))
   app.use("/api", require("./src/routes/reports/reports.router"))
+  app.use("/api", require("./src/routes/accounts/accounts.router"))
   /*app.use("/assets", require("./src/assets/assets.router")());
   app.use("/api", require("./src/reports/reports.router")());
   app.use("/api", require("./src/clients/clients.router")());

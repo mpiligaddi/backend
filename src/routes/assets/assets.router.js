@@ -16,7 +16,7 @@ router.route("/:id/:name")
   .post([authMiddleware, upload.array("file")], (req, res) => {
     let { id, name } = req.params;
 
-    if (id != req.session.user) {
+    if (id != req.session.user.id) {
       req.files.forEach((file) => fs.unlinkSync(file.path))
       return res.status(401).send({ code: 401, message: "No estas autorizado para subir una imagen en este directorio" })
     }
@@ -69,10 +69,8 @@ router.route("/:id/:name")
     };
 
     var files = fs.readdirSync(directory);
-    console.log(files);
 
     return res.status(200).send({ code: 200, message: "Imagenes encontradas con éxito", images: files.map((image) => `${path_url}/${id}/${name}/${image}`) })
-
   })
 
 

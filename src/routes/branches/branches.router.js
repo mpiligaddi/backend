@@ -7,19 +7,25 @@ const router = express.Router();
 
 const controller = new BranchesController();
 
-router.post("/branch", [
-  check("name", "Faltó ingresar el nombre").notEmpty(),
-  check("displayname", "Faltó ingresar el nombre comercial").notEmpty(),
-  check("locality", "Faltó ingresar la localidad").notEmpty(),
-  check("address", "Faltó ingresar la dirección").notEmpty(),
-  check("zone", "Faltó ingresar la zona").notEmpty(),
-  check("chain", "Faltó ingresar la cadena").notEmpty(),
-  validateBody
-], (req, res) => {
-  controller.createBranch(req.body)
-    .then((r) => res.status(r.code).send(r))
-    .catch((c) => res.status(c.code).send(c))
-})
+router.route("/branchs")
+  .post([
+    check("name", "Faltó ingresar el nombre").notEmpty(),
+    check("displayname", "Faltó ingresar el nombre comercial").notEmpty(),
+    check("locality", "Faltó ingresar la localidad").notEmpty(),
+    check("address", "Faltó ingresar la dirección").notEmpty(),
+    check("zone", "Faltó ingresar la zona").notEmpty(),
+    check("chain", "Faltó ingresar la cadena").notEmpty(),
+    validateBody
+  ], (req, res) => {
+    controller.createBranch(req.body)
+      .then((r) => res.status(r.code).send(r))
+      .catch((c) => res.status(c.code).send(c))
+  })
+  .get((req, res) => {
+    controller.getBranches({ query: req.query })
+      .then((r) => res.status(r.code).send(r))
+      .catch((c) => res.status(c.code).send(c))
+  })
 
 router.route("/branches/:id")
   .get((req, res) => {
@@ -56,12 +62,6 @@ router.route("/branches/:id")
         return res.status(c.code).send(c)
       })
   })
-
-router.get("/branches", (req, res) => {
-  controller.getBranches({ query: req.query })
-    .then((r) => res.status(r.code).send(r))
-    .catch((c) => res.status(c.code).send(c))
-})
 
 
 module.exports = router;

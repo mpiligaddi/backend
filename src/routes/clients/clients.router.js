@@ -10,19 +10,26 @@ const controller = new ClientsController();
 
 //router.use("/clients",  require("../periods/periods.router"))
 
-router.post("/client", [
-  body("name", "Faltó ingresar el nombre").notEmpty(),
-  body("displayname", "Faltó ingresar el nombre comercial").notEmpty(),
-  body("address", "Faltó ingresar la dirección").notEmpty(),
-  body("cuit", "Faltó ingresar el cuit").notEmpty(),
-  body("admin", "Faltó ingresar el backoffice").notEmpty(),
-  body("comercial", "Faltó ingresar el comercial").notEmpty(),
-  validateBody
-], (req, res) => {
-  controller.createClient(req.body)
-    .then((r) => res.status(r.code).send(r))
-    .catch((c) => res.status(c.code).send(c))
-})
+router.route("/clients")
+  .get([
+    body("name", "Faltó ingresar el nombre").notEmpty(),
+    body("displayname", "Faltó ingresar el nombre comercial").notEmpty(),
+    body("address", "Faltó ingresar la dirección").notEmpty(),
+    body("cuit", "Faltó ingresar el cuit").notEmpty(),
+    body("admin", "Faltó ingresar el backoffice").notEmpty(),
+    body("comercial", "Faltó ingresar el comercial").notEmpty(),
+    validateBody
+  ], (req, res) => {
+    controller.createClient(req.body)
+      .then((r) => res.status(r.code).send(r))
+      .catch((c) => res.status(c.code).send(c))
+  })
+  .post((req, res) => {
+    controller.getClients({ query: req.query })
+      .then((r) => res.status(r.code).send(r))
+      .catch((c) => res.status(c.code).send(c))
+  })
+
 
 router.route("/clients/:client/periods")
   .get((req, res) => {
@@ -78,11 +85,6 @@ router.route("/clients/:id")
       })
   })
 
-router.get("/clients", (req, res) => {
-  controller.getClients({ query: req.query })
-    .then((r) => res.status(r.code).send(r))
-    .catch((c) => res.status(c.code).send(c))
-})
 
 
 module.exports = router;

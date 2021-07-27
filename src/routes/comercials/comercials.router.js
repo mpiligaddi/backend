@@ -8,15 +8,24 @@ const router = express.Router();
 
 const controller = new ComercialsController();
 
-router.post("/comercial", [
-  check("name", "Faltó ingresar el nombre").not().isEmpty(),
-  check("email", "El email es incorrecto").isEmail(),
-  validateBody
-], (req, res) => {
-  controller.createComercial(req.body)
-    .then((r) => res.status(r.code).send(r))
-    .catch((c) => res.status(c.code).send(c))
-})
+router.route("/comercials")
+  .post([
+    check("name", "Faltó ingresar el nombre").not().isEmpty(),
+    check("email", "El email es incorrecto").isEmail(),
+    validateBody
+  ], (req, res) => {
+    controller.createComercial(req.body)
+      .then((r) => res.status(r.code).send(r))
+      .catch((c) => res.status(c.code).send(c))
+  })
+  .get((req, res) => {
+    controller.getComercials({ query: req.query })
+      .then((r) => res.status(r.code).send(r))
+      .catch((c) => {
+        console.log(c);
+        return res.status(c.code).send(c);
+      })
+  })
 
 router.route("/comercials/:id")
   .get((req, res) => {
@@ -50,14 +59,6 @@ router.route("/comercials/:id")
       })
   })
 
-router.get("/comercials", (req, res) => {
-  controller.getComercials({ query: req.query })
-    .then((r) => res.status(r.code).send(r))
-    .catch((c) => {
-      console.log(c);
-      return res.status(c.code).send(c);
-    })
-})
 
 
 module.exports = router;

@@ -64,7 +64,7 @@ class CategoriesController {
           id: search
         },
         include: {
-          client: query.clients ? {
+          clients: query.clients ? {
             select: {
               client: {
                 select: {
@@ -75,23 +75,9 @@ class CategoriesController {
                 }
               }
             }
-          } : query.client ? {
-            select: {
-              client: {
-                select: {
-                  displayName: true,
-                  name: true,
-                  id: true,
-                  cuit: true
-                }
-              }
-            },
-            where: {
-              clientId: query.client
-            }
-          } : false,
+          }  : false,
           products: query.products ?? false,
-          report: query.reports ?? false
+          reports: query.reports ?? false
         }
       }).then((result) => {
         if (!result) return reject({ code: 404, message: "No se encontró la categoria" })

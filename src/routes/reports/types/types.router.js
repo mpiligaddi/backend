@@ -13,15 +13,21 @@ const router = Router();
  */
 module.exports = (controller) => {
 
-  router.post("/type", [
-    body("name", "Es necesario un nombre").not().isEmpty(),
-    body("alias", "Es necesario un alias").not().isEmpty(),
-    validateBody
-  ], (req, res) => {
-    controller.createReportType(req.body)
-      .then((r) => res.status(r.code).send(r))
-      .catch((c) => res.status(c.code).send(c))
-  })
+  router.route("/types")
+    .post([
+      body("name", "Es necesario un nombre").not().isEmpty(),
+      body("alias", "Es necesario un alias").not().isEmpty(),
+      validateBody
+    ], (req, res) => {
+      controller.createReportType(req.body)
+        .then((r) => res.status(r.code).send(r))
+        .catch((c) => res.status(c.code).send(c))
+    })
+    .get((req, res) => {
+      controller.getZones({ query: req.query })
+        .then((r) => res.status(r.code).send(r))
+        .catch((c) => res.status(c.code).send(c))
+    })
 
   router.route("/types/:id")
     .get((req, res) => {
@@ -54,12 +60,6 @@ module.exports = (controller) => {
           return res.status(c.code).send(c)
         })
     })
-
-  router.get("/types", (req, res) => {
-    controller.getZones({ query: req.query })
-      .then((r) => res.status(r.code).send(r))
-      .catch((c) => res.status(c.code).send(c))
-  })
 
   return router;
 };
