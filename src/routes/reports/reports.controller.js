@@ -1,4 +1,4 @@
-const { stock_type } = require("@prisma/client");
+const { stock_type, report_types } = require("@prisma/client");
 const { prisma } = require("../../..");
 
 
@@ -109,7 +109,7 @@ class ReportsController {
     })
   }
 
-  async getZones({ query }) {
+  async getReportTypes({ query }) {
     return new Promise((resolve, reject) => {
       this.types.findMany({
         orderBy: {
@@ -133,6 +133,83 @@ class ReportsController {
         console.log(error);
         return reject({ code: 500, message: "Hubo un error al intentar buscar los tipos de reporte" })
       })
+    })
+  }
+
+  async createReport(userId, { branchId, clientId, chainId, categories, createAt, isComplete, location, type }) {
+    return new Promise((resolve, reject) => {
+      this.reports.create({
+        data: {
+          createAt,
+          isComplete,
+          type,
+          creator: {
+            connect: {
+              id: userId,
+            }
+          },
+          branch: {
+            connect: {
+              id: branchId
+            }
+          },
+          client: {
+            connect: {
+              id: clientId
+            }
+          },
+          chain: {
+            connect: {
+              id: chainId
+            }
+          },
+          location: {
+            create: {
+              latitude: location.latitude,
+              longitude: location.longitude
+            }
+          },
+          categories: {
+            create: categories.map((cat) => {
+              let current = {}
+
+              if (type == report_types.photographic) {
+                current = {
+                  photos: {
+                    create: {
+                      images: {
+                        create: [].map((image) => {
+                          return {
+                            name: image.name,
+                            comment: image.name,
+                            type: stock_type[image.type],
+                            uri: image.uri,
+                          }
+                        })
+                      }
+                    }
+                  }
+                }
+              }
+
+              return {
+                category: {
+                  connect: {
+                    id: cat.category,
+                  }
+                },
+                ...current
+              }
+            })
+          }
+        }
+      })
+        .then((result) => {
+          return resolve({ code: 201, message: "Reporte creado con éxito!", report: result })
+        }).catch((error) => {
+          console.log(error);
+          return reject({ code: 500, message: "Hubo un error al crear el reporte" })
+        })
     })
   }
 

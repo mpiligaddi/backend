@@ -33,12 +33,13 @@ prisma.$connect().then(() => {
     dbName: 'chek',
     storeClient: psql,
     points: 5,
-    duration: 60 * 60 * 3,
+    duration: 1,
     blockDuration: 60 * 15,
     tableName: 'limiters',
     keyPrefix: 'rlp'
   })
     .then(rateLimiter => {
+
 
       app.use(session({
         secret: "papurritesteo",
@@ -61,7 +62,7 @@ prisma.$connect().then(() => {
 
       app.use("/assets", require("./src/routes/assets/assets.router"))
 
-      app.use("/auth", require("./src/routes/auth/auth.router"));
+      app.use("/auth", require("./src/routes/auth/auth.router")(rateLimiter));
       app.use("/api", require("./src/routes/comercials/comercials.router"))
       app.use("/api", require("./src/routes/coordinators/coordinators.router"))
       app.use("/api", require("./src/routes/supervisors/supervisors.router"))

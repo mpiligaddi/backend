@@ -146,7 +146,7 @@ model ClientPeriodReport {
   id       String        @id @default(uuid())
   period   PeriodReport? @relation(fields: [periodId], references: [id])
   periodId String?
-  client  Client?       @relation(fields: [clientId], references: [id])
+  client   Client?       @relation(fields: [clientId], references: [id])
   clientId String?
 }
 
@@ -168,22 +168,26 @@ model Report {
   chainId    String
   client     Client           @relation(fields: [clientId], references: [id])
   clientId   String
-  createAt   DateTime
+  createAt   Int
   creator    User             @relation(fields: [creatorId], references: [id])
   creatorId  String
   isComplete Boolean
   location   Location         @relation(fields: [locationId], references: [id])
   locationId String
+  revised    Boolean          @default(false)
   type       report_types     @default(photographic)
   categories CategoryReport[]
 }
 
 model CategoryReport {
-  id         String            @id @default(uuid())
-  report     Report            @relation(fields: [reportId], references: [id])
-  reportId   String
-  category   Category          @relation(fields: [categoryId], references: [id])
-  categoryId String
+  id           String   @id @default(uuid())
+  report       Report   @relation(fields: [reportId], references: [id])
+  reportId     String
+  category     Category @relation(fields: [categoryId], references: [id])
+  categoryId   String
+  badCategory  Boolean  @default(false)
+  withoutStock Boolean  @default(false)
+
   photos     PhotoReport[]
   pricings   PricingReport[]
   breakevens BreakevenReport[]
@@ -223,7 +227,7 @@ model ProductBreakevenReport {
 
 model PhotoReport {
   id               String         @id @default(uuid())
-  report           CategoryReport @relation(fields: [categoryReportId], references: [id])
+  category         CategoryReport @relation(fields: [categoryReportId], references: [id])
   categoryReportId String
   images           ImageReport[]
 }
@@ -234,7 +238,9 @@ model ImageReport {
   favorite      Boolean     @default(false)
   type          stock_type  @default(primary)
   comment       String      @default("")
-  uri           String
+  uri           String?
+  delete        Boolean     @default("false")
+  deleteReason  String      @default("")
   photoReport   PhotoReport @relation(fields: [photoReportId], references: [id])
   photoReportId String
 }

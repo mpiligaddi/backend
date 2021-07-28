@@ -24,7 +24,7 @@ module.exports = (controller) => {
         .catch((c) => res.status(c.code).send(c))
     })
     .get((req, res) => {
-      controller.getZones({ query: req.query })
+      controller.getReportTypes({ query: req.query })
         .then((r) => res.status(r.code).send(r))
         .catch((c) => res.status(c.code).send(c))
     })
