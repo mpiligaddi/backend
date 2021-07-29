@@ -3,6 +3,7 @@ const AuthController = require("./auth.controller");
 const { check } = require('express-validator');
 const { validateBody } = require("../../middlewares/validators.middleware");
 const { RateLimiterPostgres } = require("rate-limiter-flexible");
+const { authMiddleware } = require("../../middlewares/auth.middleware");
 
 /**
  *
@@ -32,17 +33,19 @@ module.exports = (rateLimiter) => {
       });
   });
 
-  router.put("/authenticate", (req, res) => {
+  router.put("/authenticate", authMiddleware, (req, res) => {
     console.log(req.headers.cookie);
-    if (!req.session.isAuth) return res.status(400).send({ code: 400, message: "No se encontro ninguna sesión" })
-    req.session.reload((err) => {
+    const user = req.session.user;
+
+    req.session.regenerate((err) => {
       if (err) return res.status(500).send({ code: 500, message: "Hubo un error al autenticar la sesión" });
+      req.session.isAuth = true;
+      req.session.user = user;
       return res.status(200).send({ code: 200, message: "Se reautenticó la sesión con éxito!", user: req.session.user });
     })
   })
 
-  router.put("/logout", (req, res) => {
-    if (!req.session.isAuth) return res.status(400).send({ code: 400, message: "No se encontro ninguna sesión" })
+  router.put("/logout", authMiddleware, (req, res) => {
     req.session.destroy((err) => {
       if (err) return res.status(500).send({ code: 500, message: "Hubo un error al desconectarlo de la cuenta" });
       return res.status(200).send({ code: 200, message: "Se elimino la sesión actual." });
