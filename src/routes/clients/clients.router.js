@@ -2,6 +2,7 @@ const { body, header } = require('express-validator');
 var express = require("express");
 const { validateBody } = require("../../middlewares/validators.middleware");
 const ClientsController = require("./clients.controller");
+const { route } = require('../assets/assets.router');
 
 
 const router = express.Router();
@@ -30,6 +31,12 @@ router.route("/clients")
         return res.status(c.code).send(c)
       })
   })
+
+router.get("/clients/:client/categories", (req, res) => {
+  controller.getCategories({ client: req.params.client, query: req.query })
+    .then((r) => res.status(r.code).send(r))
+    .catch((c) => res.status(c.code).send(c))
+})
 
 
 router.route("/clients/:client/periods")

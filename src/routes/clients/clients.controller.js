@@ -5,6 +5,7 @@ class ClientsController {
   constructor() {
     this.clients = prisma.client;
     this.periods = prisma.clientPeriodReport;
+    this.categories = prisma.category;
   }
 
   async createClient({ name, displayname, address, cuit, admin, comercial }) {
@@ -358,6 +359,37 @@ class ClientsController {
     })
   }
 
+  async getCategories({ client, query }) {
+    return new Promise((resolve, reject) => {
+      this.categories.findMany({
+        where: {
+          clients: {
+            every: {
+              clientId: client
+            }
+          }
+        },
+        select: {
+          name: true,
+          id: true,
+          products: query.products ? {
+            select: {
+              chainId: true,
+              name: true,
+              type: true,
+              id: true
+            }
+          } : false
+        }
+      }).then((result) => {
+        if (result.length == 0) return reject({ code: 404, message: "No se encontraron categorias para el cliente." });
+        return resolve({ code: 200, categories: result });
+      }).catch((error) => {
+        console.log(error);
+        return reject({ code: 500, message: "Hubo un error al intentar buscar las categorias para el cliente." })
+      })
+    })
+  }
 
 }
 
