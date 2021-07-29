@@ -371,7 +371,6 @@ class ClientsController {
               id: true,
               products: query.products ? {
                 select: {
-                  chainId: true,
                   name: true,
                   type: true,
                   id: true
