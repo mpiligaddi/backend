@@ -43,7 +43,6 @@ prisma.$connect().then(() => {
 
       app.use(session({
         secret: "papurritesteo",
-        name: "p",
         cookie: {
           maxAge: 1000 * 60 * 60 * 24 * 4
         },

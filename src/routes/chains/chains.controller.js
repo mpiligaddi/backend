@@ -182,19 +182,32 @@ class ChainsController {
   }
 
   async getBranches({ chain, query }) {
+    let filter = {}
+
+    if (query.client) {
+      filter.coverages = {
+        every: {
+          clientId: {
+            equals: query.clientId
+          }
+        }
+      }
+    }
+
     return new Promise((resolve, reject) => {
       this.branches.findMany({
         orderBy: {
           name: ['asc', 'desc'].find((order) => order == query.orderby) || 'asc'
         },
-        where:{
+        where: {
+          ...filter,
           chainId: {
             equals: chain
           }
         },
         skip: +query.start || 0,
         take: +query.end || 10,
-        select:{
+        select: {
           name: true,
           locality: true
         }

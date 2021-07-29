@@ -19,7 +19,24 @@ const prisma = new PrismaClient()
 const bcrypt = require('bcrypt-nodejs');
 
 async function main() {
-  await migrate();
+  for (const branch of BRANCHES) {
+    try {
+      const res = await prisma.branch.update({
+        where: {
+          name: `${branch['ID CADENA']}-${branch.DIRECCION}`
+        },
+        data: {
+          name: `${branch.NOMBRE} (${branch['N° SUC']})`
+        }
+      })
+
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+      continue;
+    }
+
+  }
 }
 
 async function migrate() {
@@ -263,6 +280,7 @@ async function branches() {
 
       continue;
     }
+
 
     const result = await prisma.branch.create({
       data: {
