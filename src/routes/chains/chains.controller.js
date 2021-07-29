@@ -135,14 +135,36 @@ class ChainsController {
 
   async getChains({ query }) {
     return new Promise((resolve, reject) => {
+
+      let filter = {};
+
+      if (query.byclient) {
+        filter.branches = {
+          every: {
+            coverages: {
+              every: {
+                clientId: {
+                  equals: query.byclient
+                }
+              }
+            }
+          }
+        }
+      }
+
       this.chains.findMany({
         orderBy: {
           name: ['asc', 'desc'].find((order) => order == query.orderby) || 'asc'
         },
         skip: +query.start || 0,
         take: +query.end || 10,
+        where: {
+          ...filter
+        },
         include: {
           branches: query.branches ? {
+            skip: +query.bstart  || 0,
+            take: +query.bend || 10,
             select: {
               id: true,
               displayName: true,
@@ -200,7 +222,6 @@ class ChainsController {
           name: ['asc', 'desc'].find((order) => order == query.orderby) || 'asc'
         },
         where: {
-          ...filter,
           chainId: {
             equals: chain
           }
@@ -209,6 +230,7 @@ class ChainsController {
         take: +query.end || 10,
         select: {
           name: true,
+          displayName: true,
           locality: true
         }
       }).then((result) => {
