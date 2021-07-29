@@ -8,8 +8,6 @@ const router = express.Router();
 
 const controller = new ClientsController();
 
-//router.use("/clients",  require("../periods/periods.router"))
-
 router.route("/clients")
   .post([
     body("name", "Faltó ingresar el nombre").notEmpty(),
@@ -27,7 +25,10 @@ router.route("/clients")
   .get((req, res) => {
     controller.getClients({ query: req.query })
       .then((r) => res.status(r.code).send(r))
-      .catch((c) => res.status(c.code).send(c))
+      .catch((c) => {
+        console.log(c);
+        return res.status(c.code).send(c)
+      })
   })
 
 

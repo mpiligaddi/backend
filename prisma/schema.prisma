@@ -116,6 +116,14 @@ model Chain {
   branches Branch[]
   products Product[]
   reports  Report[]
+  format   Format?   @relation(fields: formatId, references: id)
+  formatId String?
+}
+
+model Format {
+  id     String  @id @default(uuid())
+  name   String  @unique
+  chains Chain[]
 }
 
 model Category {
