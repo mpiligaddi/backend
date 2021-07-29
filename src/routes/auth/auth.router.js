@@ -34,8 +34,9 @@ module.exports = (rateLimiter) => {
 
   router.put("/authenticate", (req, res) => {
     if (!req.session.isAuth) return res.status(400).send({ code: 400, message: "No se encontro ninguna sesión" })
-    req.session.regenerate((err) => {
+    req.session.reload((err) => {
       if (err) return res.status(500).send({ code: 500, message: "Hubo un error al autenticar la sesión" });
+      console.log(req.session);
       return res.status(200).send({ code: 200, message: "Se reautenticó la sesión con éxito!", user: req.session.user });
     })
   })
