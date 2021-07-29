@@ -8,6 +8,7 @@ const { PrismaSessionStore } = require('@quixo3/prisma-session-store');
 const helmet = require('helmet')
 
 const { authMiddleware } = require("./src/middlewares/auth.middleware");
+const { convertQuerys } = require("./src/middlewares/validators.middleware");
 
 var prisma = new PrismaClient();
 
@@ -58,7 +59,7 @@ prisma.$connect().then(() => {
         saveUninitialized: false
       }))
 
-      app.use("/api", authMiddleware)
+      app.use("/api", [authMiddleware, convertQuerys])
 
       app.use("/assets", require("./src/routes/assets/assets.router"))
 

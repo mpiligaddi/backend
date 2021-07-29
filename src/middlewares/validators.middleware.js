@@ -1,4 +1,5 @@
 const { validationResult } = require("express-validator");
+const queryString = require('query-string');
 
 const validateBody = (req, res, next) => {
   const errores = validationResult(req);
@@ -6,13 +7,26 @@ const validateBody = (req, res, next) => {
   if (!errores.isEmpty()) {
     return res.status(400).send({
       code: 400,
-      message: errores.array({onlyFirstError: true})[0].msg
+      message: errores.array({ onlyFirstError: true })[0].msg
     })
   }
 
   next();
 }
 
+const convertQuerys = (req, res, next) => {
+  var toRaw = "";
+  for (key in req.query) {
+    toRaw += `${key}=${req.query[key]}&`
+  }
+  req.query = queryString.parse(toRaw, {
+    parseBooleans: true,
+    parseNumbers: true
+  })
+  next();
+}
+
 module.exports = {
-  validateBody
+  validateBody,
+  convertQuerys
 }

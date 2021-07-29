@@ -192,7 +192,6 @@ class ClientsController {
 
   async getClients({ query }) {
     return new Promise((resolve, reject) => {
-
       let filters = {
         NOT: {}
       }
@@ -217,7 +216,7 @@ class ClientsController {
         skip: +query.start || 0,
         take: +query.end || 10,
         include: {
-          admin: query.admin ? {
+          admin: query.admin  ? {
             select: {
               id: true,
               name: true,
@@ -241,7 +240,7 @@ class ClientsController {
             }
           } : false,
           comercial: query.comercial ?? false,
-          coverages: query.coverages ? {
+          coverages: query.coverages? {
             select: {
               branch: {
                 select: {
@@ -261,6 +260,7 @@ class ClientsController {
             select: {
               period: {
                 select: {
+                  id: true,
                   name: true,
                   alias: true,
                   type: true
