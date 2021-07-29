@@ -229,7 +229,13 @@ class ClientsController {
               id: true,
               category: {
                 include: {
-                  products: true
+                  products: {
+                    select: {
+                      name: true,
+                      id: true,
+                      type: true
+                    }
+                  }
                 }
               }
             }
