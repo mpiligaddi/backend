@@ -11,7 +11,7 @@ const controller = new ClientsController();
 //router.use("/clients",  require("../periods/periods.router"))
 
 router.route("/clients")
-  .get([
+  .post([
     body("name", "Faltó ingresar el nombre").notEmpty(),
     body("displayname", "Faltó ingresar el nombre comercial").notEmpty(),
     body("address", "Faltó ingresar la dirección").notEmpty(),
@@ -24,7 +24,7 @@ router.route("/clients")
       .then((r) => res.status(r.code).send(r))
       .catch((c) => res.status(c.code).send(c))
   })
-  .post((req, res) => {
+  .get((req, res) => {
     controller.getClients({ query: req.query })
       .then((r) => res.status(r.code).send(r))
       .catch((c) => res.status(c.code).send(c))
