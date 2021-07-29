@@ -4,6 +4,7 @@ const { prisma } = require("../../..");
 class ChainsController {
   constructor() {
     this.chains = prisma.chain;
+    this.branches = prisma.branch;
   }
 
   async createChain({ name }) {
@@ -169,6 +170,33 @@ class ChainsController {
               id: true
             }
           } : false
+        }
+      }).then((result) => {
+        if (result.length == 0) return reject({ code: 404, message: "No se encontraron sucursales." });
+        return resolve({ code: 200, chains: result });
+      }).catch((error) => {
+        console.log(error);
+        return reject({ code: 500, message: "Hubo un error al intentar buscar las sucursales." })
+      })
+    })
+  }
+
+  async getBranches({ chain, query }) {
+    return new Promise((resolve, reject) => {
+      this.branches.findMany({
+        orderBy: {
+          name: ['asc', 'desc'].find((order) => order == query.orderby) || 'asc'
+        },
+        where:{
+          chainId: {
+            equals: chain
+          }
+        },
+        skip: +query.start || 0,
+        take: +query.end || 10,
+        select:{
+          name: true,
+          locality: true
         }
       }).then((result) => {
         if (result.length == 0) return reject({ code: 404, message: "No se encontraron sucursales." });

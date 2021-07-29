@@ -366,7 +366,7 @@ class ClientsController {
         },
         select: {
           category: {
-            select:{
+            select: {
               name: true,
               id: true,
               products: query.products ? {
@@ -376,7 +376,7 @@ class ClientsController {
                   type: true,
                   id: true
                 }
-              } : false              
+              } : false
             }
           }
         }

@@ -26,6 +26,15 @@ router.route("/chains")
       })
   })
 
+router.get("/chains/:chain/branches", (req, res) => {
+  controller.getBranches({ chain: req.params.chain, query: req.query })
+  .then((r) => res.status(r.code).send(r))
+  .catch((c) => {
+    console.log(c);
+    res.status(c.code).send(c)
+  })
+})
+
 router.route("/chains/:id")
   .get((req, res) => {
     controller.getChain({ search: req.params.id, query: req.query })

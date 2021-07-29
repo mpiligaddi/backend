@@ -111,12 +111,12 @@ model ClientCategory {
 }
 
 model Chain {
-  id       String    @id @default(uuid())
-  name     String    @unique
+  id       String         @id @default(uuid())
+  name     String         @unique
   branches Branch[]
-  products Product[]
+  products ProductChain[]
   reports  Report[]
-  format   Format?   @relation(fields: formatId, references: id)
+  format   Format?        @relation(fields: formatId, references: id)
   formatId String?
 }
 
@@ -262,14 +262,21 @@ model Location {
 
 model Product {
   id         String                   @id @default(uuid())
-  chain      Chain                    @relation(fields: [chainId], references: [id])
-  chainId    String
   name       String                   @unique
   type       stock_type               @default(secondary)
   category   Category                 @relation(fields: [categoryId], references: [id])
   categoryId String
+  chains     ProductChain[]
   pricings   ProductPricingReport[]
   breakevens ProductBreakevenReport[]
+}
+
+model ProductChain {
+  id        String  @id @default(uuid())
+  chain     Chain   @relation(fields: chainId, references: id)
+  chainId   String
+  product   Product @relation(fields: productId, references: id)
+  productId String
 }
 
 enum stock_type {
