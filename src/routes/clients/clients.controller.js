@@ -6,6 +6,7 @@ class ClientsController {
     this.clients = prisma.client;
     this.periods = prisma.clientPeriodReport;
     this.categories = prisma.clientCategory;
+    this.reports = prisma.report;
   }
 
   async createClient({ name, displayname, address, cuit, admin, comercial }) {
@@ -130,7 +131,7 @@ class ClientsController {
               category: {
                 include: {
                   products: {
-                    select:{
+                    select: {
                       name: true,
                       type: true,
                       id: true,
@@ -169,7 +170,25 @@ class ClientsController {
               id: true
             }
           } : false,
-          reports: query.reports ?? false
+          reports: query.reports ? {
+            include: {
+              categories: {
+                include: {
+                  category: {
+                    select: {
+                      name: true,
+                      id: true,
+                    }
+                  },
+                  photos: {
+                    include: {
+                      images: true
+                    }
+                  }
+                }
+              }
+            }
+          } : false
         }
       }).then((result) => {
         if (!result) return reject({ code: 404, message: "No se encontró al cliente" })
@@ -222,7 +241,7 @@ class ClientsController {
         skip: +query.start || 0,
         take: +query.end || 10,
         include: {
-          admin: query.admin  ? {
+          admin: query.admin ? {
             select: {
               id: true,
               name: true,
@@ -246,7 +265,7 @@ class ClientsController {
             }
           } : false,
           comercial: query.comercial ?? false,
-          coverages: query.coverages? {
+          coverages: query.coverages ? {
             select: {
               branch: {
                 select: {
@@ -275,7 +294,25 @@ class ClientsController {
               id: true
             }
           } : false,
-          reports: query.reports ?? false
+          reports: query.reports ? {
+            include: {
+              categories: {
+                include: {
+                  category: {
+                    select: {
+                      name: true,
+                      id: true,
+                    }
+                  },
+                  photos: {
+                    include: {
+                      images: true
+                    }
+                  }
+                }
+              }
+            }
+          } : false
         }
       }).then((result) => {
         if (result.length == 0) return reject({ code: 404, message: "No se encontraron clientes." });
@@ -402,6 +439,77 @@ class ClientsController {
     })
   }
 
+
+  async getReports({ client, query }) {
+    return new Promise((resolve, reject) => {
+      this.reports.findMany({
+        where: {
+          clientId: {
+            equals: client
+          }
+        },
+        skip: +query.start || 0,
+        take: +query.end || 10,
+        include: {
+          branch: query.branch ? {
+            select: {
+              address: true,
+              displayName: true,
+              name: true,
+              id: true
+            }
+          } : false,
+          chain: query.chain ? {
+            select: {
+              format: true,
+              id: true,
+              name: true,
+            }
+          } : false,
+          client: query.client ? {
+            select: {
+              displayName: true,
+              name: true,
+              id: true,
+              cuit: true
+            }
+          } : false,
+          categories: query.categories ? {
+            include: {
+              category: {
+                select: {
+                  name: true,
+                  id: true,
+                }
+              },
+              photos: {
+                include: {
+                  images: true
+                }
+              }
+            }
+          } : false,
+          creator: query.creator ? {
+            select: {
+              id: true,
+              email: true,
+              name: true,
+              role: true
+            }
+          } : false,
+          location: query.location
+        }
+      }).then((result) => {
+        console.log(result);
+        if (result.length == 0) return reject({ code: 404, message: "No se encontraron reportes." });
+        return resolve({ code: 200, reports: result });
+      }).catch((error) => {
+        console.log(error);
+        return reject({ code: 500, message: "Hubo un error al intentar buscar los reportes." })
+      })
+    })
+
+  }
 }
 
 module.exports = ClientsController;

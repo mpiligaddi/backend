@@ -38,6 +38,11 @@ router.get("/clients/:client/categories", (req, res) => {
     .catch((c) => res.status(c.code).send(c))
 })
 
+router.get("/clients/:client/reports", (req, res) => {
+  controller.getReports({ client: req.params.client, query: req.query })
+    .then((r) => res.status(r.code).send(r))
+    .catch((c) => res.status(c.code).send(c))
+})
 
 router.route("/clients/:client/periods")
   .get((req, res) => {

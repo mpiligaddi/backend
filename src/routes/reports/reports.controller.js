@@ -178,12 +178,12 @@ class ReportsController {
                   photos: {
                     create: {
                       images: {
-                        create: [].map((image) => {
+                        create: cat.images.map((image) => {
                           return {
                             name: image.name,
-                            comment: image.name,
+                            comment: image.comment,
                             type: stock_type[image.type],
-                            uri: image.uri,
+                            uri: image.name,
                           }
                         })
                       }
@@ -198,7 +198,7 @@ class ReportsController {
                     id: cat.category,
                   }
                 },
-                ...current
+                ...current,
               }
             })
           }
@@ -213,6 +213,211 @@ class ReportsController {
     })
   }
 
+  async getReports({ query }) {
+    return new Promise((resolve, reject) => {
+      this.reports.findMany({
+        where: {
+          type: {
+            equals: query.type
+          }
+        },
+        skip: +query.start || 0,
+        take: +query.end || 10,
+        include: {
+          branch: query.branch ? {
+            select: {
+              address: true,
+              displayName: true,
+              name: true,
+              id: true
+            }
+          } : false,
+          chain: query.chain ? {
+            select: {
+              format: true,
+              id: true,
+              name: true,
+            }
+          } : false,
+          client: query.client ? {
+            select: {
+              displayName: true,
+              name: true,
+              id: true,
+              cuit: true
+            }
+          } : false,
+          categories: query.categories ? {
+            include: {
+              category: {
+                select: {
+                  name: true,
+                  id: true,
+                }
+              },
+              photos: {
+                include: {
+                  images: true
+                }
+              }
+            }
+          } : false,
+          creator: query.creator ? {
+            select: {
+              id: true,
+              email: true,
+              name: true,
+              role: true
+            }
+          } : false,
+          location: query.location
+        }
+      }).then((result) => {
+        if (result.length == 0) return reject({ code: 404, message: "No se encontraron reportes." });
+        return resolve({ code: 200, reports: result });
+      }).catch((error) => {
+        console.log(error);
+        return reject({ code: 500, message: "Hubo un error al intentar buscar los reportes." })
+      })
+    })
+
+  }
+
+  async getReport({ report, query }) {
+    return new Promise((resolve, reject) => {
+      this.reports.findUnique({
+        where: {
+          id: report
+        },
+        include: {
+          branch: query.branch ? {
+            select: {
+              address: true,
+              displayName: true,
+              name: true,
+              id: true
+            }
+          } : false,
+          chain: query.chain ? {
+            select: {
+              format: true,
+              id: true,
+              name: true,
+            }
+          } : false,
+          client: query.client ? {
+            select: {
+              displayName: true,
+              name: true,
+              id: true,
+              cuit: true
+            }
+          } : false,
+          categories: query.categories ? {
+            include: {
+              category: {
+                select: {
+                  name: true,
+                  id: true,
+                }
+              },
+              photos: {
+                include: {
+                  images: true
+                }
+              }
+            }
+          } : false,
+          creator: query.creator ? {
+            select: {
+              id: true,
+              email: true,
+              name: true,
+              role: true
+            }
+          } : false,
+          location: query.location
+        }
+      }).then((result) => {
+        if (result.length == 0) return reject({ code: 404, message: "No se encontraron reportes." });
+        return resolve({ code: 200, reports: result });
+      }).catch((error) => {
+        console.log(error);
+        return reject({ code: 500, message: "Hubo un error al intentar buscar los reportes." })
+      })
+    })
+
+  }
+
+  async updateReport({ report, data, query }) {
+    return new Promise((resolve, reject) => {
+      this.reports.update({
+        where: {
+          id: report
+        },
+        data: {
+
+        },
+        include: {
+          branch: query.branch ? {
+            select: {
+              address: true,
+              displayName: true,
+              name: true,
+              id: true
+            }
+          } : false,
+          chain: query.chain ? {
+            select: {
+              format: true,
+              id: true,
+              name: true,
+            }
+          } : false,
+          client: query.client ? {
+            select: {
+              displayName: true,
+              name: true,
+              id: true,
+              cuit: true
+            }
+          } : false,
+          categories: query.categories ? {
+            include: {
+              category: {
+                select: {
+                  name: true,
+                  id: true,
+                }
+              },
+              photos: {
+                include: {
+                  images: true
+                }
+              }
+            }
+          } : false,
+          creator: query.creator ? {
+            select: {
+              id: true,
+              email: true,
+              name: true,
+              role: true
+            }
+          } : false,
+          location: query.location
+        }
+      }).then((result) => {
+        if (!result) return reject({ code: 404, message: "No se encontró el reporte" })
+        return resolve({ code: 200, message: "Se actualizó el reporte con éxito", report: result });
+      }).catch((error) => {
+        console.log(error);
+        return reject({ code: 500, message: "Hubo un error al intentar buscar el reporte" })
+      })
+    })
+  }
+
+  async favoriteReport({ }) { }
 }
 
 module.exports = ReportsController;
