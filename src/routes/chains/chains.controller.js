@@ -140,9 +140,9 @@ class ChainsController {
 
       if (query.byclient) {
         filter.branches = {
-          every: {
+          some: {
             coverages: {
-              every: {
+              some: {
                 clientId: {
                   equals: query.byclient
                 }
@@ -151,7 +151,6 @@ class ChainsController {
           }
         }
       }
-
       this.chains.findMany({
         orderBy: {
           name: ['asc', 'desc'].find((order) => order == query.orderby) || 'asc'
