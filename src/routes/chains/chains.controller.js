@@ -232,7 +232,7 @@ class ChainsController {
           name: true,
           displayName: true,
           locality: true,
-          id: true          
+          id: true
         }
       }).then((result) => {
         if (result.length == 0) return reject({ code: 404, message: "No se encontraron sucursales." });

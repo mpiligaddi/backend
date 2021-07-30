@@ -363,7 +363,8 @@ class ClientsController {
         return reject({ code: 500, message: "Hubo un error al crear los periodos" })
       })
     })
-  } client
+  }
+
   async getCategories({ client, query }) {
     return new Promise((resolve, reject) => {
       this.categories.findMany({
