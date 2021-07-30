@@ -42,7 +42,7 @@ router.route("/reports")
     if (reportValidator.valid)
       controller.createReport(id, report)
         .then((r) => {
-          if (req.files.image.length > 0) {
+          if (req.files.image != null && req.files.image.length > 0) {
             let directory = path.join(__dirname, "../../../public", id, r.report.id);
 
             if (!fs.existsSync(path.join(__dirname, "../../../public", id)))
@@ -59,10 +59,7 @@ router.route("/reports")
               }).catch((value) => {
                 errors.push(value);
               })
-            })).finally(() => {
-              console.log(errors);
-              console.log(success);
-            })
+            }))
           }
           return res.status(r.code).send(r);
         })
@@ -71,7 +68,7 @@ router.route("/reports")
           return res.status(c.code).send(c);
         })
     else {
-      return res.status(400).send({ code: 400, message: `${reportValidator.errors[0].path[0]} es un valor erroneo, revisalo.` })
+      return res.status(400).send({ code: 400, message: `${reportValidator.errors[0].property} es un valor erroneo, revisalo.` })
     }
   })
   .get((req, res) => {

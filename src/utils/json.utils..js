@@ -64,9 +64,6 @@ const reportSchema = {
                 },
                 comment: {
                   type: "string"
-                },
-                uri: {
-                  type: "string"
                 }
               }
             }
