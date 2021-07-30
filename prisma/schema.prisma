@@ -176,7 +176,7 @@ model Report {
   chainId    String
   client     Client           @relation(fields: [clientId], references: [id])
   clientId   String
-  createAt   Int
+  createdAt  Int
   creator    User             @relation(fields: [creatorId], references: [id])
   creatorId  String
   isComplete Boolean

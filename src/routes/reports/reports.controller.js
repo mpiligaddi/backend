@@ -136,11 +136,11 @@ class ReportsController {
     })
   }
 
-  async createReport(userId, { branchId, clientId, chainId, categories, createAt, isComplete, location, type }) {
+  async createReport(userId, { branchId, clientId, chainId, categories, createdAt, isComplete, location, type }) {
     return new Promise((resolve, reject) => {
       this.reports.create({
         data: {
-          createAt,
+          createdAt,
           isComplete,
           type,
           creator: {

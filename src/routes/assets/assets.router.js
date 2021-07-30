@@ -1,12 +1,11 @@
 var express = require("express");
 const fs = require("fs");
 const path = require("path");
-var router = express.Router();
-const sharp = require("sharp");
 
+var router = express.Router();
 const multer = require("multer");
 const { authMiddleware } = require("../../middlewares/auth.middleware");
-const { encode } = require("blurhash");
+const { createFile, encodeImageToBlurhash, resizeImage } = require("../../utils/images.utils");
 
 var upload = multer({ dest: "public/temp", preservePath: false })
 
@@ -107,7 +106,7 @@ router.route("/:id/:folder/:name")
         if (heightString) {
           height = parseInt(heightString);
         }
-        return resize(directory, width, height).pipe(res);
+        return resizeImage(directory, width, height).pipe(res);
       }
     });
   })
@@ -123,99 +122,45 @@ router.route("/:id/:folder/:name")
     fs.unlinkSync(directory);
     return res.status(200).send({ code: 200, message: "Imagen eliminada con éxito" })
   })
-  .put([
+  .put(
     authMiddleware,
     upload.single("file")
-  ], (req, res) => {
-    let { folder, id, name } = req.params;
+    , (req, res) => {
+      let { folder, id, name } = req.params;
 
-    let directory = path.join(__dirname, "../../../public", id, folder, `${name}`);
+      let directory = path.join(__dirname, "../../../public", id, folder, `${name}`);
 
-    if (!fs.existsSync(directory)) {
-      fs.unlinkSync(req.file.path);
-      return res.status(404).send({ code: 404, message: "No se encontró el archivo" })
-    };
+      if (!fs.existsSync(directory)) {
+        fs.unlinkSync(req.file.path);
+        return res.status(404).send({ code: 404, message: "No se encontró el archivo" })
+      };
 
-    fs.unlinkSync(directory);
+      fs.unlinkSync(directory);
 
-    if (!req.file) return res.status(400).send({ code: 400, message: "Es necesario adjuntar un archivo" })
-    req.file.originalname = name;
+      if (!req.file) return res.status(400).send({ code: 400, message: "Es necesario adjuntar un archivo" })
+      req.file.originalname = name;
 
-    createFile(req.file, directory, true)
-      .then(() => {
-        res.type("image/png");
+      createFile(req.file, directory, true)
+        .then(() => {
+          res.type("image/png");
 
-        const widthString = req.query.w;
-        const heightString = req.query.h;
+          const widthString = req.query.w;
+          const heightString = req.query.h;
 
-        let width, height;
+          let width, height;
 
-        if (widthString) {
-          width = parseInt(widthString);
-        }
-        if (heightString) {
-          height = parseInt(heightString);
-        }
-        return resize(directory, width, height).pipe(res);
-      })
-      .catch((c) => {
-        return res.status(500).send(c.message);
-      })
-  })
-
-async function createFile(file, directory, override = false) {
-  return new Promise((resolve, reject) => {
-    let fileName = file.originalname;
-    let filePathName = `${fileName}`.split(" ").join("").split(".");
-    filePathName.pop();
-    let filePath = path.join(directory, filePathName.join(""));
-
-    var alreadyExist = fs.existsSync(filePath);
-
-    if (alreadyExist && !override) {
-      fs.unlinkSync(file.path);
-      return reject({ message: "Ya existe el archivo", name: fileName })
-    }
-
-    var tempFile = fs.readFileSync(file.path)
-
-    if (!tempFile) return reject({ message: "No se detectó un archivo", name: fileName })
-
-    var encoded = tempFile.toString('base64')
-    var image = Buffer.from(encoded, 'base64')
-
-    fs.writeFile(filePath, image, (err, writeResponse) => {
-      fs.unlinkSync(file.path);
-      if (err) return reject({ message: "No se pudo guardar la imagen", name: fileName })
-      return resolve(filePathName.join(""))
+          if (widthString) {
+            width = parseInt(widthString);
+          }
+          if (heightString) {
+            height = parseInt(heightString);
+          }
+          return resize(directory, width, height).pipe(res);
+        })
+        .catch((c) => {
+          return res.status(500).send(c.message);
+        })
     })
-  })
-}
 
-
-
-async function encodeImageToBlurhash(directory) {
-  return new Promise((resolve, reject) => {
-    resize(directory, 32, 32)
-      .raw()
-      .ensureAlpha()
-      .toBuffer((err, buffer, { width, height }) => {
-        if (err) return reject(err);
-        return resolve(encode(new Uint8ClampedArray(buffer), width, height, 4, 3));
-      });
-  });
-}
-
-
-function resize(directory, width, height) {
-  const readStream = fs.createReadStream(directory);
-  let transform = sharp();
-
-  if (width || height) {
-    transform = transform.toFormat("png").resize(width, height, { fit: 'cover' });
-  }
-
-  return readStream.pipe(transform);
-}
 
 module.exports = router;
