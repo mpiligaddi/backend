@@ -7,7 +7,7 @@ const router = express.Router();
 
 const controller = new BranchesController();
 
-router.route("/branchs")
+router.route("/branches")
   .post([
     check("name", "Faltó ingresar el nombre").notEmpty(),
     check("displayname", "Faltó ingresar el nombre comercial").notEmpty(),

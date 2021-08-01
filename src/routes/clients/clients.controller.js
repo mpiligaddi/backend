@@ -233,6 +233,22 @@ class ClientsController {
         }
       }
 
+      if (query.products) {
+        filters.NOT.categories = {
+          every: {
+            NOT: {
+              category: {
+                NOT: {
+                  products: {
+                    none: {}
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+
       this.clients.findMany({
         orderBy: {
           name: ['asc', 'desc'].find((order) => order == query.orderby) || 'asc'
