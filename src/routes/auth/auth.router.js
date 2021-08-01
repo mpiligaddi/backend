@@ -28,7 +28,7 @@ module.exports = (rateLimiter) => {
       .registerAccount(req.body)
       .then((r) => res.status(r.code).send(r))
       .catch((c) => {
-        console.log(c);
+        ;
         res.status(c.code).send(c)
       });
   });

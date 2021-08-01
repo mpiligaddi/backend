@@ -21,7 +21,7 @@ router.route("/chains")
     controller.getChains({ query: req.query })
       .then((r) => res.status(r.code).send(r))
       .catch((c) => {
-        console.log(c);
+        ;
         res.status(c.code).send(c)
       })
   })
@@ -30,7 +30,7 @@ router.get("/chains/:chain/branches", (req, res) => {
   controller.getBranches({ chain: req.params.chain, query: req.query })
     .then((r) => res.status(r.code).send(r))
     .catch((c) => {
-      console.log(c);
+      ;
       res.status(c.code).send(c)
     })
 })
@@ -53,7 +53,7 @@ router.route("/chains/:id")
     controller.updateChain({ search: req.params.id, data: req.body, query: req.query })
       .then((r) => res.status(r.code).send(r))
       .catch((c) => {
-        console.log(c);
+        ;
         return res.status(c.code).send(c)
       })
   })
@@ -61,7 +61,7 @@ router.route("/chains/:id")
     controller.updateChain({ search: req.params.id, data: req.body, query: req.query })
       .then((r) => res.status(r.code).send(r))
       .catch((c) => {
-        console.log(c);
+        ;
         return res.status(c.code).send(c)
       })
   })

@@ -22,7 +22,7 @@ router.route("/comercials")
     controller.getComercials({ query: req.query })
       .then((r) => res.status(r.code).send(r))
       .catch((c) => {
-        console.log(c);
+        ;
         return res.status(c.code).send(c);
       })
   })
@@ -46,7 +46,7 @@ router.route("/comercials/:id")
     controller.updateComercial({ search: req.params.id, data: req.body, query: req.query })
       .then((r) => res.status(r.code).send(r))
       .catch((c) => {
-        console.log(c);
+        ;
         return res.status(c.code).send(c)
       })
   })
@@ -54,7 +54,7 @@ router.route("/comercials/:id")
     controller.updateComercial({ search: req.params.id, data: req.body, query: req.query })
       .then((r) => res.status(r.code).send(r))
       .catch((c) => {
-        console.log(c);
+        ;
         return res.status(c.code).send(c)
       })
   })

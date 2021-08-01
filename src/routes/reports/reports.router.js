@@ -64,7 +64,7 @@ router.route("/reports")
           return res.status(r.code).send(r);
         })
         .catch((c) => {
-          console.log(c);
+          ;
           return res.status(c.code).send(c);
         })
     else {

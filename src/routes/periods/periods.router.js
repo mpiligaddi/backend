@@ -21,7 +21,7 @@ router.route("/periods")
     controller.getPeriods({ client: req.params.client, query: req.query })
       .then((r) => res.status(r.code).send(r))
       .catch((c) => {
-        console.log(c);
+        ;
         return res.status(c.code).send(c)
       })
   })
@@ -42,7 +42,7 @@ router.route("/periods/:id")
     controller.updateClient({ search: req.params.id, data: req.body, query: req.query })
       .then((r) => res.status(r.code).send(r))
       .catch((c) => {
-        console.log(c);
+        ;
         return res.status(c.code).send(c)
       })
   })
@@ -50,7 +50,7 @@ router.route("/periods/:id")
     controller.updateClient({ search: req.params.id, data: req.body, query: req.query })
       .then((r) => res.status(r.code).send(r))
       .catch((c) => {
-        console.log(c);
+        ;
         return res.status(c.code).send(c)
       })
   })

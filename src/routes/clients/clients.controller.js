@@ -218,29 +218,42 @@ class ClientsController {
   async getClients({ query }) {
     return new Promise((resolve, reject) => {
       let filters = {
-        NOT: {}
-      }
-
+        NOT: {},
+        AND: {
+          NOT: {}
+        }
+      };
       if (query.coverages == "only") {
         filters.NOT.coverages = {
           none: {}
         }
       }
 
-      if (query.periods == "only") {
-        filters.NOT.periods = {
-          none: {}
-        }
-      }
-
       if (query.products) {
-        filters.NOT.categories = {
-          every: {
-            NOT: {
-              category: {
-                NOT: {
-                  products: {
-                    none: {}
+        let value = filters[query.coverages == "only" ? "AND" : "NOT"];
+        if (query.coverages != "only") {
+          value.categories = {
+            every: {
+              NOT: {
+                category: {
+                  NOT: {
+                    products: {
+                      none: {}
+                    }
+                  }
+                }
+              }
+            }
+          }
+        } else {
+          value.NOT.categories = {
+            every: {
+              NOT: {
+                category: {
+                  NOT: {
+                    products: {
+                      none: {}
+                    }
                   }
                 }
               }
@@ -248,10 +261,9 @@ class ClientsController {
           }
         }
       }
-
       this.clients.findMany({
         orderBy: {
-          name: ['asc', 'desc'].find((order) => order == query.orderby) || 'asc'
+          displayName: ['asc', 'desc'].find((order) => order == query.orderby) || 'asc'
         },
         where: filters,
         skip: +query.start || 0,
