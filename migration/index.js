@@ -14,29 +14,44 @@ const REPORTSCLIENTS = require("./js/REPORTSCLIENTS.csv.json")
 const ZONES = require("./js/ZONES.csv.json");
 const categoriesxclient = require("./js/categoriesxclient.csv.json")
 const report_types = require("./js/report_types.json")
+const products = require('./js/productos.json')
 
 const prisma = new PrismaClient()
 const bcrypt = require('bcrypt-nodejs');
 
 async function main() {
-  for (const branch of BRANCHES) {
+
+  for (const product of products) {
+
     try {
-      const res = await prisma.branch.update({
-        where: {
-          name: `${branch['ID CADENA']}-${branch.DIRECCION}`
-        },
+      const result = await prisma.product.create({
         data: {
-          name: `${branch.NOMBRE} (${branch['N° SUC']})`
+          name: product.name.toUpperCase(),
+          category: {
+            connect: {
+              name: CATEGORIES.find((cat) => cat['ID CAT'] == product.catId).NOMBRE,
+            }
+          },
+          chains: {
+            create: {
+              chain: {
+                connect: {
+                  name: CHAINS.find((chain) => chain.ID == product.chainId).NOMBRE
+                }
+              }
+            }
+          },
+          type: product.primary ? stock_type.primary : stock_type.secondary
         }
       })
 
-      console.log(res);
+      console.log(result.id);
+
     } catch (error) {
-      console.log(error);
       continue;
     }
-
   }
+
 }
 
 async function migrate() {
@@ -284,7 +299,7 @@ async function branches() {
 
     const result = await prisma.branch.create({
       data: {
-        name: `${branch['ID CADENA']}-${branch.DIRECCION}`,
+        name: `${branch.NOMBRE} (${branch['N° SUC']})`,
         displayName: branch.NOMBRE,
         address: branch.DIRECCION,
         locality: branch.Localidad,

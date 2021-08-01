@@ -136,7 +136,9 @@ class ChainsController {
   async getChains({ query }) {
     return new Promise((resolve, reject) => {
 
-      let filter = {};
+      let filter = {
+        NOT: {}
+      };
 
       if (query.byclient) {
         filter.branches = {
@@ -151,6 +153,13 @@ class ChainsController {
           }
         }
       }
+
+      if (query.products) {
+        filter.NOT.products = {
+          none: {}
+        }
+      }
+
       this.chains.findMany({
         orderBy: {
           name: ['asc', 'desc'].find((order) => order == query.orderby) || 'asc'
@@ -162,7 +171,7 @@ class ChainsController {
         },
         include: {
           branches: query.branches ? {
-            skip: +query.bstart  || 0,
+            skip: +query.bstart || 0,
             take: +query.bend || 10,
             select: {
               id: true,
@@ -175,17 +184,21 @@ class ChainsController {
               }
             }
           } : false,
-          products: query.products ? {
+          products: {
             select: {
-              category: {
+              product: {
                 select: {
-                  name: true,
-                  id: true
-                },
-              },
-              name: true
-            },
-          } : false,
+                  category: {
+                    select: {
+                      name: true,
+                      id: true
+                    },
+                  },
+                  name: true
+                }
+              }
+            }
+          },
           reports: query.reports ? {
             select: {
               id: true
