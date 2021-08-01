@@ -194,6 +194,8 @@ class ChainsController {
                       id: true
                     },
                   },
+                  id: true,
+                  type: true,
                   name: true
                 }
               }
