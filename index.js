@@ -28,7 +28,7 @@ app.use(morgan("dev"));
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ limit: "50mb", extended: true }));
 app.use(helmet());
-app.use(cors("*"))
+app.use(cors())
 prisma.$connect().then(() => {
 
   createRateLimiter({
