@@ -46,13 +46,19 @@ class ChainsController {
           } : false,
           products: query.products ? {
             select: {
-              category: {
+              product: {
                 select: {
+                  id: true,
+                  category: {
+                    select: {
+                      id: true,
+                      name: true
+                    }
+                  },
                   name: true,
-                  id: true
-                },
-              },
-              name: true
+                  type: true,
+                }
+              }
             },
           } : false,
           reports: query.reports ? {
@@ -93,13 +99,19 @@ class ChainsController {
           } : false,
           products: query.products ? {
             select: {
-              category: {
+              product: {
                 select: {
+                  id: true,
+                  category: {
+                    select: {
+                      id: true,
+                      name: true
+                    }
+                  },
                   name: true,
-                  id: true
-                },
-              },
-              name: true
+                  type: true,
+                }
+              }
             },
           } : false,
           reports: query.reports ? {
@@ -188,15 +200,15 @@ class ChainsController {
             select: {
               product: {
                 select: {
+                  id: true,
                   category: {
                     select: {
-                      name: true,
-                      id: true
-                    },
+                      id: true,
+                      name: true
+                    }
                   },
-                  id: true,
+                  name: true,
                   type: true,
-                  name: true
                 }
               }
             }
@@ -246,7 +258,7 @@ class ChainsController {
           name: true,
           displayName: true,
           locality: true,
-          id: true
+          id: true,
         }
       }).then((result) => {
         if (result.length == 0) return reject({ code: 404, message: "No se encontraron sucursales." });
