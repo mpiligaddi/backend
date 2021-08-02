@@ -34,45 +34,7 @@ class AuthController {
     });
   }
 
-  async registerAccount(model) {
-    return new Promise((resolve, reject) => {
-      const { email, password } = model;
 
-      const passwordHash = bcrypt.hashSync(password, bcrypt.genSaltSync());
-
-      if (model.role == user_role.merchandiser && !model.supervisor) return reject({ code: 400, message: "Falta indicar el supervisor" })
-
-      this.account.create({
-        data: {
-          email: email,
-          password: passwordHash,
-          user: {
-            create: {
-              email: email,
-              name: model.name,
-              role: user_role[model.role],
-              supervisor: model.role == user_role.merchandiser ? {
-                connect: {
-                  id: model.supervisor
-                }
-              } : undefined,
-            }
-          }
-        },
-        include: {
-          user: true
-        }
-      }).then((result) => {
-        if (!result) return reject({ code: 404, message: "No se pudo crear la cuenta." })
-        return resolve({ code: 202, message: "Cuenta creada con éxito!", user: result.user });
-      }).catch((reason) => {
-        if (reason.code && reason.code == 'P2002') {
-          return reject({ code: 400, message: "El correo ya existe" })
-        }
-        return reject({ code: 500, message: "Hubo un error al crear la cuenta." })
-      })
-    });
-  }
 }
 
 module.exports = AuthController;

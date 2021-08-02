@@ -15,24 +15,6 @@ module.exports = (rateLimiter) => {
 
   const controller = new AuthController();
 
-  router.post("/register", [
-    check("role", "Faltó ingresar el rol").notEmpty(),
-    check("name", "Faltó ingresar el nombre").notEmpty(),
-    check("password", "Faltó ingresar la contraseña").notEmpty(),
-    check("email", "El email es incorrecto").isEmail(),
-    check("role", "El rol es incorrecto").isIn('backoffice', 'merchandiser'),
-    validateBody
-  ], (req, res) => {
-
-    controller
-      .registerAccount(req.body)
-      .then((r) => res.status(r.code).send(r))
-      .catch((c) => {
-        ;
-        res.status(c.code).send(c)
-      });
-  });
-
   router.put("/authenticate", authMiddleware, (req, res) => {
     console.log(req.headers.cookie);
     const user = req.session.user;

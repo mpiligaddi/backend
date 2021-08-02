@@ -6,6 +6,7 @@ const { createRateLimiter } = require('./src/middlewares/limiter.middleware')
 const { PrismaClient } = require('@prisma/client')
 const { PrismaSessionStore } = require('@quixo3/prisma-session-store');
 const helmet = require('helmet')
+const cors = require('cors')
 
 const { authMiddleware } = require("./src/middlewares/auth.middleware");
 const { convertQuerys } = require("./src/middlewares/validators.middleware");
@@ -27,7 +28,7 @@ app.use(morgan("dev"));
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ limit: "50mb", extended: true }));
 app.use(helmet());
-
+app.use(cors("*"))
 prisma.$connect().then(() => {
 
   createRateLimiter({
