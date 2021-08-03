@@ -30,6 +30,7 @@
     "bcrypt-nodejs": "0.0.3",
     "helmet": "^4.6.0",
     "morgan": "^1.10.0",
+    "nodemon": "^2.0.12",
     "prisma": "^2.28.0"
   }
 }
