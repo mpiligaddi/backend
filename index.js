@@ -60,6 +60,9 @@ prisma.$connect().then(() => {
             dbRecordIdFunction: undefined,
           }
         ),
+        cookie:{
+          sameSite: 'none',
+        },
         resave: false,
         saveUninitialized: false
       }))
