@@ -10,6 +10,7 @@ const controller = new AccountsControllers();
 router.get("/accounts/profile", (req, res) => {
   return controller.getAccount({ id: req.session.user.id, query: req.query })
     .then((r) => {
+      const { user } = r;
       req.session.user = {
         id: user.id,
         name: user.name,
@@ -21,6 +22,7 @@ router.get("/accounts/profile", (req, res) => {
       return res.status(r.code).send(r);
     })
     .catch((c) => {
+      console.log(c);
       req.session.destroy();
       return res.status(c.code).send(c);
     })

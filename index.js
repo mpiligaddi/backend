@@ -41,13 +41,8 @@ prisma.$connect().then(() => {
     keyPrefix: 'rlp'
   })
     .then(rateLimiter => {
-
-
       app.use(session({
         secret: "papurritesteo",
-        cookie: {
-          maxAge: 1000 * 60 * 60 * 24 * 4
-        },
         store: new PrismaSessionStore(
           prisma,
           {
