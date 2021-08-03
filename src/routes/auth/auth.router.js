@@ -34,10 +34,16 @@ module.exports = (rateLimiter) => {
     })
   });
 
+  router.get('/csfr', (req, res) => {
+    res.send({ token: req.csrfToken() });
+  })
+
+  module.exports = router;
+
   router.post("/login",
     check("password", "Faltó ingresar la contraseña").notEmpty(),
     check("email", "El email es incorrecto").isEmail(),
-    check("remember", "Remember tiene que ser un boolean").isBoolean().optional({nullable: false, checkFalsy: false}),
+    check("remember", "Remember tiene que ser un boolean").isBoolean().optional({ nullable: false, checkFalsy: false }),
     validateBody
     , (req, res) => {
 

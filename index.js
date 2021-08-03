@@ -7,7 +7,8 @@ const { PrismaClient } = require('@prisma/client')
 const { PrismaSessionStore } = require('@quixo3/prisma-session-store');
 const helmet = require('helmet')
 const cors = require('cors')
-
+var cookieParser = require('cookie-parser')
+const csurf = require('csurf');
 const { authMiddleware } = require("./src/middlewares/auth.middleware");
 const { convertQuerys } = require("./src/middlewares/validators.middleware");
 
@@ -47,6 +48,8 @@ prisma.$connect().then(() => {
     keyPrefix: 'rlp'
   })
     .then(rateLimiter => {
+
+
       app.use(session({
         secret: "papurritesteo",
         store: new PrismaSessionStore(
@@ -60,6 +63,8 @@ prisma.$connect().then(() => {
         resave: false,
         saveUninitialized: false
       }))
+      app.use(cookieParser())
+      app.use(csurf({ cookie: true, sessionKey: 'connect.sid' }));
 
       app.use("/api", [authMiddleware, convertQuerys])
 
@@ -85,6 +90,11 @@ prisma.$connect().then(() => {
 }).catch((error) => {
   console.log(error);
 })
+
+process.on('SIGTERM', async () => {
+  await prisma.$disconnect();
+  process.exit(0);
+});
 
 
 module.exports = {
