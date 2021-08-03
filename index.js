@@ -62,6 +62,7 @@ prisma.$connect().then(() => {
         ),
         cookie:{
           sameSite: 'none',
+          secure: false
         },
         resave: false,
         saveUninitialized: false
