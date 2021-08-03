@@ -64,7 +64,7 @@ prisma.$connect().then(() => {
         saveUninitialized: false
       }))
       app.use(cookieParser())
-      app.use(csurf({ cookie: true, sessionKey: 'connect.sid' }));
+      //app.use(csurf({ cookie: true, sessionKey: 'connect.sid' }));
 
       app.use("/api", [authMiddleware, convertQuerys])
 
