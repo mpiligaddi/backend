@@ -61,8 +61,7 @@ prisma.$connect().then(() => {
           }
         ),
         cookie:{
-          sameSite: 'none',
-          secure: false
+          secure: process.env.NODE_ENV === 'production' 
         },
         resave: false,
         saveUninitialized: false
