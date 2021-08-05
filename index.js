@@ -28,7 +28,7 @@ var app = express();
 app.use(morgan("dev"));
 
 app.use(cors({
-  origin: '*',
+  origin: 'http://localhost:4000',
   credentials: true,
 }))
 
@@ -60,9 +60,8 @@ prisma.$connect().then(() => {
             dbRecordIdFunction: undefined,
           }
         ),
-        cookie: {
-          sameSite: 'none',
-          secure: false
+        cookie:{
+          secure: process.env.NODE_ENV === 'production'
         },
         resave: false,
         saveUninitialized: false
