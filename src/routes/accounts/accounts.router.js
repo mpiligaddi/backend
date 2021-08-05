@@ -7,7 +7,7 @@ var router = express.Router();
 
 const controller = new AccountsControllers();
 
-router.get("/accounts/profile", (req, res) => {
+router.get("/profile", (req, res) => {
   return controller.getAccount({ id: req.session.user.id, query: req.query })
     .then((r) => {
       const { user } = r;
@@ -27,6 +27,16 @@ router.get("/accounts/profile", (req, res) => {
       return res.status(c.code).send(c);
     })
 });
+
+router.get("/profile/reports", (req, res) => {
+  return controller.getReportsByUser({ id: req.session.user.id, query: req.query })
+    .then((r) => {
+      return res.status(r.code).send(r);
+    })
+    .catch((c) => {
+      return res.status(c.code).send(c);
+    })
+})
 
 router.route("/accounts")
   .get((req, res) => {

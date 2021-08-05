@@ -3,13 +3,13 @@ const morgan = require("morgan");
 const session = require("express-session");
 const { Pool } = require('pg');
 const { createRateLimiter } = require('./src/middlewares/limiter.middleware')
-const { PrismaClient } = require('@prisma/client')
+const { PrismaClient, user_role } = require('@prisma/client')
 const { PrismaSessionStore } = require('@quixo3/prisma-session-store');
 const helmet = require('helmet')
 const cors = require('cors')
 var cookieParser = require('cookie-parser')
 const csurf = require('csurf');
-const { authMiddleware } = require("./src/middlewares/auth.middleware");
+const { authMiddleware, csrfMiddleware, permissionMiddleware } = require("./src/middlewares/auth.middleware");
 const { convertQuerys } = require("./src/middlewares/validators.middleware");
 
 var prisma = new PrismaClient();
@@ -28,7 +28,7 @@ var app = express();
 app.use(morgan("dev"));
 
 app.use(cors({
-  origin: 'http://localhost:3000',
+  origin: '*',
   credentials: true,
 }))
 
@@ -60,17 +60,18 @@ prisma.$connect().then(() => {
             dbRecordIdFunction: undefined,
           }
         ),
-        cookie:{
+        cookie: {
           sameSite: 'none',
           secure: false
         },
         resave: false,
         saveUninitialized: false
       }))
-      app.use(cookieParser())
-      //app.use(csurf({ cookie: true, sessionKey: 'connect.sid' }));
+      app.use(csurf());
 
-      app.use("/api", [authMiddleware, convertQuerys])
+      app.use(csrfMiddleware)
+
+      app.use("/api", authMiddleware, convertQuerys, permissionMiddleware)
 
       app.use("/assets", require("./src/routes/assets/assets.router"))
 
@@ -87,7 +88,7 @@ prisma.$connect().then(() => {
       app.use("/api", require("./src/routes/accounts/accounts.router"))
 
 
-      app.listen(process.env.PORT || 3000, () => console.log("Server escuchando UWU"));
+      app.listen(process.env.PORT || 3000, () => console.log(`Server escuchando UWU en porteño ${process.env.PORT || 3000}`));
     }).catch(e => {
       console.log(e);
     })

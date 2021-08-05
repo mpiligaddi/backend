@@ -14,10 +14,10 @@ class ChainsController {
           name
         }
       }).then((result) => {
-        return resolve({ code: 201, message: "Sucursal creada con éxito!", chain: result })
+        return resolve({ code: 201, message: "Cadena creada con éxito!", chain: result })
       }).catch((error) => {
         console.log(error);
-        return reject({ code: 500, message: "Hubo un error al crear la sucursal" })
+        return reject({ code: 500, message: "Hubo un error al crear la cadena" })
       })
     })
   }
@@ -68,11 +68,11 @@ class ChainsController {
           } : false
         }
       }).then((result) => {
-        if (!result) return reject({ code: 404, message: "No se encontró la sucursal" })
-        return resolve({ code: 200, message: "Se actualizó la sucursal con éxito", chain: result });
+        if (!result) return reject({ code: 404, message: "No se encontró la cadena" })
+        return resolve({ code: 200, message: "Se actualizó la cadena con éxito", chain: result });
       }).catch((error) => {
         console.log(error);
-        return reject({ code: 500, message: "Hubo un error al intentar buscar la sucursal" })
+        return reject({ code: 500, message: "Hubo un error al intentar buscar la cadena" })
       })
     })
   }
@@ -82,7 +82,7 @@ class ChainsController {
 
       this.chains.findUnique({
         where: {
-          id: search
+          id: search,
         },
         include: {
           branches: query.branches ? {
@@ -121,11 +121,11 @@ class ChainsController {
           } : false
         }
       }).then((result) => {
-        if (!result) return reject({ code: 404, message: "No se encontró la sucursal" })
-        return resolve({ code: 200, message: "Sucursal encontrada con éxito.", chain: result });
+        if (!result) return reject({ code: 404, message: "No se encontró la cadena" })
+        return resolve({ code: 200, message: "Cadena encontrada con éxito.", chain: result });
       }).catch((error) => {
         console.log(error);
-        return reject({ code: 500, message: "Hubo un error al intentar buscar la sucursal" })
+        return reject({ code: 500, message: "Hubo un error al intentar buscar la cadena" })
       })
     })
   }
@@ -137,10 +137,10 @@ class ChainsController {
           id: id
         }
       }).then((result) => {
-        return resolve({ code: 200, message: "Se elimino la sucursal con éxito" });
+        return resolve({ code: 200, message: "Se elimino la cadena con éxito" });
       }).catch((error) => {
         console.log(error);
-        return reject({ code: 500, message: "Hubo un error al intentar borrar la sucursal" })
+        return reject({ code: 500, message: "Hubo un error al intentar borrar la cadena" })
       })
     })
   }
@@ -172,6 +172,14 @@ class ChainsController {
         }
       }
 
+      if (query.reports == "revised") {
+        filter.reports = {
+          every: {
+            revised: true
+          }
+        }
+      }
+
       this.chains.findMany({
         orderBy: {
           name: ['asc', 'desc'].find((order) => order == query.orderby) || 'asc'
@@ -179,7 +187,8 @@ class ChainsController {
         skip: +query.start || 0,
         take: +query.end || 10,
         where: {
-          ...filter
+          ...filter,
+
         },
         include: {
           branches: query.branches ? {
@@ -229,46 +238,6 @@ class ChainsController {
     })
   }
 
-  async getBranches({ chain, query }) {
-    let filter = {}
-
-    if (query.client) {
-      filter.coverages = {
-        every: {
-          clientId: {
-            equals: query.clientId
-          }
-        }
-      }
-    }
-
-    return new Promise((resolve, reject) => {
-      this.branches.findMany({
-        orderBy: {
-          name: ['asc', 'desc'].find((order) => order == query.orderby) || 'asc'
-        },
-        where: {
-          chainId: {
-            equals: chain
-          }
-        },
-        skip: +query.start || 0,
-        take: +query.end || 10,
-        select: {
-          name: true,
-          displayName: true,
-          locality: true,
-          id: true,
-        }
-      }).then((result) => {
-        if (result.length == 0) return reject({ code: 404, message: "No se encontraron sucursales." });
-        return resolve({ code: 200, branches: result });
-      }).catch((error) => {
-        console.log(error);
-        return reject({ code: 500, message: "Hubo un error al intentar buscar las sucursales." })
-      })
-    })
-  }
 
 }
 

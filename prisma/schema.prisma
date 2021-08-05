@@ -99,6 +99,7 @@ model Client {
   reports     Report[]
   periods     ClientPeriodReport[]
   coverages   Coverage[]
+  products    ProductChain[]
 }
 
 model ClientCategory {
@@ -273,6 +274,8 @@ model Product {
 
 model ProductChain {
   id        String  @id @default(uuid())
+  client    Client  @relation(fields: clientId, references: id)
+  clientId  String
   chain     Chain   @relation(fields: chainId, references: id)
   chainId   String
   product   Product @relation(fields: productId, references: id)

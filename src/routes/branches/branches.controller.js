@@ -137,10 +137,52 @@ class BranchesController {
   }
 
   async getBranches({ query }) {
+
+    let filter = {
+      NOT: {}
+    }
+
+    if (query.bychain) {
+      filter.chain = {
+        id: {
+          equals: query.bychain
+        }
+      }
+    }
+
+    if (query.clientId) {
+      filter.coverages = {
+        every: {
+          clientId: {
+            equals: query.clientId
+          }
+        }
+      }
+    }
+
+    if (query.reports == "only") {
+      filter.NOT.reports = {
+        none: {}
+      }
+    }
+    else if (query.reports == "revised") {
+      filter.NOT.reports = {
+          none: {},
+          every: {
+            revised:{
+              not: false
+            }
+        }
+      }
+    }
+
     return new Promise((resolve, reject) => {
       this.branches.findMany({
         orderBy: {
           name: ['asc', 'desc'].find((order) => order == query.orderby) || 'asc'
+        },
+        where: {
+          ...filter
         },
         skip: +query.start || 0,
         take: +query.end || 5,
@@ -168,6 +210,7 @@ class BranchesController {
           zone: query.zone ?? false
         }
       }).then((result) => {
+        if (result.length == 0 && query.start > 0) return resolve({ code: 203, message: "Ya no hay más sucursales" });
         if (result.length == 0) return reject({ code: 404, message: "No se encontraron sucursales." });
         return resolve({ code: 200, branches: result });
       }).catch((error) => {

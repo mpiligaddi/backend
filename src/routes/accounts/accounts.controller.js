@@ -1,13 +1,14 @@
-const { user_role } = require("@prisma/client");
+const { user_role, report_types } = require("@prisma/client");
 const bcrypt = require("bcrypt-nodejs");
 const { prisma } = require("../../..");
 
-class AccountsControllers {
+class AccountsController {
   constructor() {
     /* this.accounts = db.accounts;
     this.users = db.users; */
     this.account = prisma.account;
     this.user = prisma.user;
+    this.reports = prisma.report;
   }
 
   async getAccount({ id, query }) {
@@ -121,6 +122,91 @@ class AccountsControllers {
       })
     });
   }
+
+  async getReportsByUser({ id, query }) {
+    return new Promise((resolve, reject) => {
+
+      let reportFilter = {};
+
+      switch (query.type) {
+        case report_types.photographic:
+          reportFilter.photos = {
+            select: {
+              images: {
+                select: {
+                  name: true,
+                  id: true,
+                  comment: true,
+                  delete: true,
+                  type: true,
+                }
+              }
+            }
+          }
+          break;
+
+        default:
+          break;
+      }
+
+      this.reports.findMany({
+        where: {
+          creatorId: {
+            equals: id
+          },
+          type: {
+            equals: report_types[query.type ?? "photographic"] ?? report_types.photographic
+          }
+        },
+        orderBy: {
+          createdAt: ['asc', 'desc'].find((order) => order == query.orderby) || 'asc'
+        },
+        skip: +query.start || 0,
+        take: +query.end || 5,
+        include: {
+          branch: {
+            select: {
+              id: true,
+              displayName: true,
+              name: true
+            },
+          },
+          categories: {
+            select: {
+              category: {
+                select: {
+                  name: true,
+                  id: true,
+                }
+              },
+              badCategory: true,
+              withoutStock: true,
+              ...reportFilter
+            }
+          },
+          chain: {
+            select: {
+              id: true,
+              name: true,
+            }
+          },
+          client: {
+            select: {
+              displayName: true,
+              id: true,
+              name: true
+            }
+          }
+        }
+      }).then((result) => {
+        if (result.length == 0) return reject({ code: 404, message: "No se encontraron reportes." });
+        return resolve({ code: 200, message: "Reportes encontrados con éxito", reports: result });
+      }).catch((error) => {
+        console.log(error);
+        return reject({ code: 500, message: "Hubo un error al intentar buscar las reportes." })
+      })
+    })
+  }
 }
 
-module.exports = AccountsControllers;
+module.exports = AccountsController;

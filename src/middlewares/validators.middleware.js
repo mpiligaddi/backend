@@ -17,6 +17,8 @@ const validateBody = (req, res, next) => {
 const convertQuerys = (req, res, next) => {
   var toRaw = "";
   for (key in req.query) {
+    if (!req.query[key] || req.query[key] == "") continue;
+
     toRaw += `${key}=${req.query[key]}&`
   }
   req.query = queryString.parse(toRaw, {

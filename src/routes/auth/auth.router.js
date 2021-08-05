@@ -34,18 +34,15 @@ module.exports = (rateLimiter) => {
     })
   });
 
-  router.get('/csfr', (req, res) => {
+  router.get('/csrf', (req, res) => {
     res.send({ token: req.csrfToken() });
   })
-
-  module.exports = router;
 
   router.post("/login",
     check("password", "Faltó ingresar la contraseña").notEmpty(),
     check("email", "El email es incorrecto").isEmail(),
     check("remember", "Remember tiene que ser un boolean").isBoolean().optional({ nullable: false, checkFalsy: false }),
-    validateBody
-    , (req, res) => {
+    validateBody, (req, res) => {
 
       if (req.session.isAuth && req.session.user != null && req.session.user.email == req.body.email)
         return res.status(202).send({ code: 202, message: "Sesión obtenida con éxito", user: req.session.user });

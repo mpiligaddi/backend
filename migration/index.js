@@ -19,40 +19,47 @@ const products = require('./js/productos.json')
 const prisma = new PrismaClient()
 const bcrypt = require('bcrypt-nodejs');
 
+String.prototype.capitalize = function () {
+  return this.split(" ").map((text) => text.charAt(0).toUpperCase() + text.slice(1).toLowerCase()).join(" ");
+};
+
 async function main() {
-
-  for (const product of products) {
-
-    try {
-      const result = await prisma.product.create({
-        data: {
-          name: product.name.toUpperCase(),
-          category: {
-            connect: {
-              name: CATEGORIES.find((cat) => cat['ID CAT'] == product.catId).NOMBRE,
-            }
-          },
-          chains: {
-            create: {
-              chain: {
-                connect: {
-                  name: CHAINS.find((chain) => chain.ID == product.chainId).NOMBRE
-                }
-              }
-            }
-          },
-          type: product.primary ? stock_type.primary : stock_type.secondary
+  /* const result = await prisma.account.create({
+    data:{
+      email: "clopez@dgroupsa.com.ar",
+      password: bcrypt.hashSync("chek-clopez", bcrypt.genSaltSync()),
+      user: {
+        create:{
+          email: "clopez@dgroupsa.com.ar",
+          name: "Christian López",
+          role: user_role.superadmin,
         }
-      })
-
-      console.log(result.id);
-
-    } catch (error) {
-      continue;
+      }
     }
-  }
+  }) */
 
+  const result = await prisma.account.create({
+    data:{
+      email: "sanignacio@gmail.com",
+      password: bcrypt.hashSync("chek-sanignacio", bcrypt.genSaltSync()),
+      user: {
+        create:{
+          email: "sanignacio@gmail.com",
+          name: "San Ignacio",
+          role: user_role.client,
+          clients:{
+            connect:{
+              id: '45d99fcb-4596-410f-a42e-2f8f4f31e8fa'
+            }
+          }
+        }
+      }
+    }
+  })
+
+  console.log(result);
 }
+
 
 async function migrate() {
   await comercials();
@@ -68,6 +75,46 @@ async function migrate() {
   await periodReports();
   await client();
   await coverages();
+  await productsUpload()
+}
+
+async function productsUpload() {
+  for (const product of products) {
+
+    try {
+      const result = await prisma.product.create({
+        data: {
+          name: product.skuId.capitalize(),
+          category: {
+            connect: {
+              name: CATEGORIES.find((cat) => cat['ID CAT'] == product.catId).NOMBRE.capitalize(),
+            }
+          },
+          chains: {
+            create: {
+              client: {
+                connect: {
+                  id: '45d99fcb-4596-410f-a42e-2f8f4f31e8fa'
+                }
+              },
+              chain: {
+                connect: {
+                  name: CHAINS.find((chain) => chain.ID == product.chainId).NOMBRE.capitalize()
+                }
+              }
+            }
+          },
+          type: product.primary ? stock_type.primary : stock_type.secondary,
+        }
+      })
+
+      console.log(result.id);
+
+    } catch (error) {
+      console.log(error);
+      continue;
+    }
+  }
 }
 
 async function coverages() {
@@ -85,18 +132,20 @@ async function coverages() {
     const branchDB = await prisma.branch.findFirst({
       where: {
         address: {
-          equals: branch.DIRECCION
+          equals: branch.DIRECCION.capitalize()
         }
       }
     })
 
+
     const clientDB = await prisma.client.findFirst({
       where: {
-        cuit: client.CUIIT
+        cuit:client.CUIIT
       }
     })
 
     if (clientDB == null || branchDB == null) {
+      console.log(client['NOMBRE COMERCIAL']);
       console.log(branch == null ? "NdB" : "nodc");
       continue;
     };
@@ -127,15 +176,12 @@ async function periodReports() {
     const result = await prisma.periodReport.create({
       data: {
         alias: period.ID,
-        name: period.NOMBRE,
-        reportType: {
+        name: period.NOMBRE.capitalize(),
+        type: {
           connect: {
             alias: period.ID[0]
           }
         }
-      },
-      include: {
-        reportType: true
       }
     })
 
@@ -147,7 +193,7 @@ async function reportsTypes() {
   const result = await prisma.reportType.createMany({
     data: report_types.map((rt) => {
       return {
-        name: rt.nombre,
+        name: rt.nombre.capitalize(),
         alias: rt.id
       }
     })
@@ -160,7 +206,7 @@ async function category() {
   const result = await prisma.category.createMany({
     data: CATEGORIES.map((category) => {
       return {
-        name: category.NOMBRE
+        name: category.NOMBRE.capitalize()
       }
     })
   })
@@ -197,9 +243,9 @@ async function client() {
 
       const result = await prisma.client.create({
         data: {
-          displayName: client['RAZON SOCIAL'],
-          name: client['NOMBRE COMERCIAL'],
-          address: client.DIRECCION,
+          displayName: client['RAZON SOCIAL'].capitalize(),
+          name: client['NOMBRE COMERCIAL'].capitalize(),
+          address: client.DIRECCION.capitalize(),
           cuit: client.CUIIT,
           admin: {
             connect: {
@@ -208,7 +254,7 @@ async function client() {
           },
           comercial: {
             connect: {
-              email: comercial['DIRECCION DE CORREO']
+              name: comercial.NOMBRE.capitalize()
             }
           },
           categories: {
@@ -216,7 +262,7 @@ async function client() {
               return {
                 category: {
                   connect: {
-                    name: cat.NOMBRE
+                    name: cat.NOMBRE.capitalize()
                   }
                 }
               }
@@ -234,20 +280,11 @@ async function client() {
             })
           }
         },
-        include: {
-          periods: {
-            where: {
-              id: {
-                not: "PEP"
-              }
-            }
-          }
-        }
       })
     } catch (error) {
       console.log(client);
 
-      console.log("");
+      console.log(error);
     }
   }
 
@@ -274,7 +311,7 @@ async function branches() {
     const chainDB = await prisma.chain.findFirst({
       where: {
         name: {
-          equals: chain.NOMBRE
+          equals: chain.NOMBRE.capitalize()
         }
       }
     })
@@ -282,7 +319,7 @@ async function branches() {
     const zoneDB = await prisma.zone.findFirst({
       where: {
         name: {
-          equals: zone.NOMBRE
+          equals: zone.NOMBRE.capitalize()
         }
       }
     })
@@ -299,10 +336,10 @@ async function branches() {
 
     const result = await prisma.branch.create({
       data: {
-        name: `${branch.NOMBRE} (${branch['N° SUC']})`,
-        displayName: branch.NOMBRE,
-        address: branch.DIRECCION,
-        locality: branch.Localidad,
+        name: `${branch.NOMBRE} (${branch['N° SUC']})`.capitalize(),
+        displayName: branch.NOMBRE.capitalize(),
+        address: branch.DIRECCION.capitalize(),
+        locality: branch.Localidad.capitalize(),
         zone: {
           connect: {
             id: zoneDB.id
@@ -325,7 +362,7 @@ async function chains() {
   const result = await prisma.chain.createMany({
     data: CHAINS.map((chain) => {
       return {
-        name: chain.NOMBRE
+        name: chain.NOMBRE.capitalize()
       }
     }),
     skipDuplicates: true
@@ -349,7 +386,7 @@ async function zones() {
 
     const result = await prisma.zone.create({
       data: {
-        name: zone.NOMBRE,
+        name: zone.NOMBRE.capitalize(),
         region: zone.REGION,
         supervisor: {
           connect: {
@@ -387,7 +424,7 @@ async function merch() {
           connectOrCreate: {
             create: {
               email: bo.EMAIL,
-              name: bo.NOMBRE,
+              name: bo.NOMBRE.capitalize(),
               role: user_role.merchandiser,
               supervisor: {
                 connect: {
@@ -419,7 +456,7 @@ async function supervisors() {
     const sv = await prisma.supervisor.create({
       data: {
         email: supervisor['DIRECCION CORREO'],
-        name: supervisor.NOMBRE,
+        name: supervisor.NOMBRE.capitalize(),
         coordinator: {
           connect: {
             email: coord['DIRECCION DE CORREO']
@@ -443,7 +480,7 @@ async function backoffice() {
           connectOrCreate: {
             create: {
               email: bo['DIRECCION DE CORREO'],
-              name: bo.NOMBRE,
+              name: bo.NOMBRE.capitalize(),
               role: user_role.backoffice
             },
             where: {
@@ -464,7 +501,7 @@ async function comercials() {
   const result = await prisma.comercial.createMany({
     data: COMERCIAL.map((e) => {
       return {
-        name: e.NOMBRE,
+        name: e.NOMBRE.capitalize(),
         email: e['DIRECCION DE CORREO']
       }
     }),
@@ -477,7 +514,7 @@ async function coordinators() {
   const result = await prisma.coordinator.createMany({
     data: COORDINATORS.map((e) => {
       return {
-        name: e.NOMBRE,
+        name: e.NOMBRE.capitalize(),
         email: e['DIRECCION DE CORREO']
       }
     }),
@@ -493,3 +530,4 @@ main()
   .finally(async () => {
     await prisma.$disconnect()
   })
+
