@@ -1,16 +1,10 @@
 var express = require("express");
 const morgan = require("morgan");
-const session = require("express-session");
 const { Pool } = require('pg');
 const { createRateLimiter } = require('./src/middlewares/limiter.middleware')
 const { PrismaClient, user_role } = require('@prisma/client')
-const { PrismaSessionStore } = require('@quixo3/prisma-session-store');
 const helmet = require('helmet')
 const cors = require('cors')
-var cookieParser = require('cookie-parser')
-const csurf = require('csurf');
-const { authMiddleware, csrfMiddleware, permissionMiddleware } = require("./src/middlewares/auth.middleware");
-const { convertQuerys } = require("./src/middlewares/validators.middleware");
 
 var prisma = new PrismaClient();
 
@@ -37,8 +31,9 @@ app.use(express.urlencoded({ limit: "50mb", extended: true }));
 
 app.use(helmet());
 
-prisma.$connect().then(() => {
-  createRateLimiter({
+async function init() {
+  await prisma.$connect();
+  var rateLimiter = await createRateLimiter({
     dbName: 'chek',
     storeClient: psql,
     points: 5,
@@ -46,60 +41,20 @@ prisma.$connect().then(() => {
     blockDuration: 60 * 15,
     tableName: 'limiters',
     keyPrefix: 'rlp'
+  });
+
+  app.use(require("./src/routes/index")(rateLimiter));
+}
+
+init()
+  .then(() => {
+    app.listen(process.env.PORT || 3000, () => console.log(`Server escuchando UWU en porteño ${process.env.PORT || 3000}`));
   })
-    .then(rateLimiter => {
-
-
-      app.use(session({
-        secret: "papurritesteo",
-        store: new PrismaSessionStore(
-          prisma,
-          {
-            checkPeriod: 2 * 60 * 1000,  //ms
-            dbRecordIdIsSessionId: true,
-            dbRecordIdFunction: undefined,
-          }
-        ),
-        cookie:{
-          secure: process.env.NODE_ENV === 'production'
-        },
-        resave: false,
-        saveUninitialized: false
-      }))
-      app.use(csurf());
-
-      app.use(csrfMiddleware)
-
-      app.use("/api", authMiddleware, convertQuerys, permissionMiddleware)
-
-      app.use("/assets", require("./src/routes/assets/assets.router"))
-
-      app.use("/auth", require("./src/routes/auth/auth.router")(rateLimiter));
-      app.use("/api", require("./src/routes/comercials/comercials.router"))
-      app.use("/api", require("./src/routes/coordinators/coordinators.router"))
-      app.use("/api", require("./src/routes/supervisors/supervisors.router"))
-      app.use("/api", require("./src/routes/branches/branches.router"))
-      app.use("/api", require("./src/routes/zones/zones.router"))
-      app.use("/api", require("./src/routes/clients/clients.router"))
-      app.use("/api", require("./src/routes/chains/chains.router"))
-      app.use("/api", require("./src/routes/categories/categories.router"))
-      app.use("/api", require("./src/routes/reports/reports.router"))
-      app.use("/api", require("./src/routes/accounts/accounts.router"))
-
-
-      app.listen(process.env.PORT || 3000, () => console.log(`Server escuchando UWU en porteño ${process.env.PORT || 3000}`));
-    }).catch(e => {
-      console.log(e);
-    })
-}).catch((error) => {
-  console.log(error);
-})
-
-process.on('SIGTERM', async () => {
-  await prisma.$disconnect();
-  process.exit(0);
-});
-
+  .catch(async (errr) => {
+    console.log(errr);
+    await prisma.$disconnect();
+    process.exit(0);
+  })
 
 module.exports = {
   prisma
