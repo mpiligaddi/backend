@@ -2,7 +2,7 @@ const { body, header } = require('express-validator');
 var express = require("express");
 const { validateBody } = require("../../middlewares/validators.middleware");
 const ClientsController = require("./clients.controller");
-const { route } = require('../assets/assets.router');
+const { cacheRedis } = require('../../db/redis.cache');
 
 
 const router = express.Router();
@@ -23,7 +23,7 @@ router.route("/clients")
       .then((r) => res.status(r.code).send(r))
       .catch((c) => res.status(c.code).send(c))
   })
-  .get((req, res) => {
+  .get(cacheRedis.route(), (req, res) => {
     controller.getClients({ query: req.query })
       .then((r) => res.status(r.code).send(r))
       .catch((c) => {

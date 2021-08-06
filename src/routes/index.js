@@ -33,7 +33,7 @@ const routesMiddlewares = (rateLimiter) => {
 
   router.use(csrfMiddleware);
 
-  router.use("/api", cacheRedis.route(), authMiddleware, convertQuerys, permissionMiddleware);
+  router.use("/api", authMiddleware, convertQuerys, permissionMiddleware);
 
   router.use("/assets", require("./assets/assets.router"));
 
