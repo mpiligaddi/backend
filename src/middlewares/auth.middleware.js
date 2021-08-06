@@ -1,5 +1,5 @@
 const { user_role } = require('@prisma/client')
-const { prisma } = require('../..')
+const { prisma } = require('../db/prisma.client')
 const { endpointsRoles } = require('../utils/endpoints.utils')
 
 const authMiddleware = (req, res, next) => {

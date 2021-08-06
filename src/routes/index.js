@@ -5,11 +5,12 @@ const session = require("express-session");
 const cookieParser = require("cookie-parser");
 const csurf = require("csurf");
 const { sessionStore } = require("../db/prisma.client");
+const { cacheRedis } = require("../db/redis.cache");
 
 const router = Router();
 
-
 const routesMiddlewares = (rateLimiter) => {
+
   router.use(
     session({
       secret: "papurritesteo",
@@ -32,7 +33,7 @@ const routesMiddlewares = (rateLimiter) => {
 
   router.use(csrfMiddleware);
 
-  router.use("/api", authMiddleware, convertQuerys, permissionMiddleware);
+  router.use("/api", cacheRedis.route(), authMiddleware, convertQuerys, permissionMiddleware);
 
   router.use("/assets", require("./assets/assets.router"));
 
