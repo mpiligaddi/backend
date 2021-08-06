@@ -50,7 +50,7 @@ class ZonesController {
           supervisor: query.supervisor ?? false
         }
       }).then((result) => {
-        if (!result) return reject({ code: 404, message: "No se encontró la zona" })
+        if (!result) return reject({ code: 204, message: "No se encontró la zona" })
         return resolve({ code: 200, message: "Se actualizó la zona con éxito", branch: result });
       }).catch((error) => {
         console.log(error);
@@ -78,7 +78,7 @@ class ZonesController {
           supervisor: query.supervisor ?? false
         }
       }).then((result) => {
-        if (!result) return reject({ code: 404, message: "No se encontró la zona" })
+        if (!result) return reject({ code: 204, message: "No se encontró la zona" })
         return resolve({ code: 200, message: "Zona encontrada con éxito.", zone: result });
       }).catch((error) => {
         console.log(error);
@@ -123,7 +123,7 @@ class ZonesController {
         }
       }).then(async (result) => {
         const maxCount = await this.zones.count();
-        if (result.length == 0) return reject({ code: 404, message: "No se encontraron las zonas.", zones: [] });
+        if (result.length == 0) return reject({ code: 204, message: "No se encontraron las zonas.", zones: [] });
         return resolve({ code: 200, message: "Zonas encontradas con éxito", total: maxCount, hasMore: (query.start || 0) + (query.end || maxCount) < maxCount, zones: result });
       }).catch((error) => {
         console.log(error);

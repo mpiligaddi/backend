@@ -72,7 +72,7 @@ class BranchesController {
           zone: query.zone ?? false
         }
       }).then((result) => {
-        if (!result) return reject({ code: 404, message: "No se encontró la sucursal." });
+        if (!result) return reject({ code: 204, message: "No se encontró la sucursal." });
         return resolve({ code: 200, message: "Se actualizó la sucursal con éxito", branch: result });
       }).catch((error) => {
         console.log(error);
@@ -112,7 +112,7 @@ class BranchesController {
           zone: query.zone ?? false
         }
       }).then((result) => {
-        if (!result) return reject({ code: 404, message: "No se encontró la sucursal" })
+        if (!result) return reject({ code: 204, message: "No se encontró la sucursal" })
         return resolve({ code: 200, message: "Sucursal encontrada con éxito.", sucursal: result });
       }).catch((error) => {
         console.log(error);
@@ -211,7 +211,7 @@ class BranchesController {
         const maxCount = await this.branches.count({
           where: filter
         });
-        if (result.length == 0) return reject({ code: 404, message: "No se encontraron sucursales.", branches: [] });
+        if (result.length == 0) return reject({ code: 204, message: "No se encontraron sucursales.", branches: [] });
         return resolve({ code: 200, message: "Sucursales encontradas con éxito", total: maxCount, hasMore: (query.start || 0) + (query.end || maxCount) < maxCount, branches: result });
       }).catch((error) => {
         console.log(error);

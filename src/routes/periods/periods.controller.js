@@ -56,7 +56,7 @@ class PeriodsController {
           } : false
         }
       }).then((result) => {
-        if (!result) return reject({ code: 404, message: "No se encontró al periodo" })
+        if (!result) return reject({ code: 204, message: "No se encontró al periodo" })
         return resolve({ code: 200, message: "Se actualizó al periodo con éxito", period: result });
       }).catch((error) => {
         console.log(error);
@@ -94,7 +94,7 @@ class PeriodsController {
           } : false
         }
       }).then((result) => {
-        if (!result) return reject({ code: 404, message: "No se encontró al periodo" })
+        if (!result) return reject({ code: 204, message: "No se encontró al periodo" })
         return resolve({ code: 200, message: "Periodo encontrado con éxito.", period: result });
       }).catch((error) => {
         console.log(error);
@@ -158,7 +158,7 @@ class PeriodsController {
         const maxCount = await this.periods.count({
           where: filters
         });
-        if (result.length == 0) return reject({ code: 404, message: "No se encontraron periodos.", periods: [] });
+        if (result.length == 0) return reject({ code: 204, message: "No se encontraron periodos.", periods: [] });
         return resolve({ code: 200, message: "Periodos encontrados con éxito", total: maxCount, hasMore: (query.start || 0) + (query.end || maxCount) < maxCount, periods: result });
       }).catch((error) => {
         console.log(error);

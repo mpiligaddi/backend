@@ -20,7 +20,7 @@ class AuthController {
           user: true,
         }
       }).then((result) => {
-        if (!result) return reject({ code: 404, message: "No se encontró la cuenta." })
+        if (!result) return reject({ code: 204, message: "No se encontró la cuenta." })
 
         var hasPassword = bcrypt.compareSync(password, result.password)
 

@@ -59,7 +59,7 @@ class ReportsController {
           } : false
         }
       }).then((result) => {
-        if (!result) return reject({ code: 404, message: "No se encontró el tipo de reporte" })
+        if (!result) return reject({ code: 204, message: "No se encontró el tipo de reporte" })
         return resolve({ code: 200, message: "Se actualizó el tipo de reporte con éxito", type: result });
       }).catch((error) => {
         console.log(error);
@@ -85,7 +85,7 @@ class ReportsController {
           } : false
         }
       }).then((result) => {
-        if (!result) return reject({ code: 404, message: "No se encontró el tipo de reporte" })
+        if (!result) return reject({ code: 204, message: "No se encontró el tipo de reporte" })
         return resolve({ code: 200, message: "Tipo de reporte encontrado con éxito.", type: result });
       }).catch((error) => {
         console.log(error);
@@ -125,7 +125,7 @@ class ReportsController {
           } : false
         }
       }).then((result) => {
-        if (result.length == 0) return reject({ code: 404, message: "No se encontraron los tipos de reporte", types: [] });
+        if (result.length == 0) return reject({ code: 204, message: "No se encontraron los tipos de reporte", types: [] });
         return resolve({ code: 200, message: "Tipos de reportes encontrados", types: result });
       }).catch((error) => {
         console.log(error);
@@ -289,7 +289,7 @@ class ReportsController {
           }
         });
 
-        if (result.length == 0) return reject({ code: 404, message: "No se encontraron reportes.", reports: [] });
+        if (result.length == 0) return reject({ code: 204, message: "No se encontraron reportes.", reports: [] });
         return resolve({ code: 200, message: "Reportes encontradas con éxito", total: maxCount, hasMore: (query.start || 0) + (query.end || maxCount) < maxCount, reports: result });
       }).catch((error) => {
         console.log(error);
@@ -355,7 +355,7 @@ class ReportsController {
           location: query.location
         }
       }).then((result) => {
-        if (result.length == 0) return reject({ code: 404, message: "No se encontraron reportes." });
+        if (result.length == 0) return reject({ code: 204, message: "No se encontraron reportes." });
         return resolve({ code: 200, reports: result });
       }).catch((error) => {
         console.log(error);
@@ -424,7 +424,7 @@ class ReportsController {
           location: query.location
         }
       }).then((result) => {
-        if (!result) return reject({ code: 404, message: "No se encontró el reporte" })
+        if (!result) return reject({ code: 204, message: "No se encontró el reporte" })
         return resolve({ code: 200, message: "Se actualizó el reporte con éxito", report: result });
       }).catch((error) => {
         console.log(error);

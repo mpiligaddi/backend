@@ -68,7 +68,7 @@ class ChainsController {
           } : false
         }
       }).then((result) => {
-        if (!result) return reject({ code: 404, message: "No se encontró la cadena" })
+        if (!result) return reject({ code: 204, message: "No se encontró la cadena" })
         return resolve({ code: 200, message: "Se actualizó la cadena con éxito", chain: result });
       }).catch((error) => {
         console.log(error);
@@ -121,7 +121,7 @@ class ChainsController {
           } : false
         }
       }).then((result) => {
-        if (!result) return reject({ code: 404, message: "No se encontró la cadena" })
+        if (!result) return reject({ code: 204, message: "No se encontró la cadena" })
         return resolve({ code: 200, message: "Cadena encontrada con éxito.", chain: result });
       }).catch((error) => {
         console.log(error);
@@ -230,7 +230,7 @@ class ChainsController {
           where: filter
         });
         console.log((query.start || 0) + (query.end || maxCount));
-        if (result.length == 0) return reject({ code: 404, message: "No se encontraron cadenas.", chains: [] });
+        if (result.length == 0) return reject({ code: 204, message: "No se encontraron cadenas.", chains: [] });
         return resolve({ code: 200, message: "Cadenas encontradas con éxito", total: maxCount, hasMore: (query.start || 0) + (query.end || maxCount) < maxCount, chains: result });
       }).catch((error) => {
         console.log(error);

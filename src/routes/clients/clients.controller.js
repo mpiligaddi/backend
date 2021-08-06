@@ -101,7 +101,7 @@ class ClientsController {
           reports: query.reports ?? false
         }
       }).then((result) => {
-        if (!result) return reject({ code: 404, message: "No se encontró al cliente" })
+        if (!result) return reject({ code: 204, message: "No se encontró al cliente" })
         return resolve({ code: 200, message: "Se actualizó al cliente con éxito", client: result });
       }).catch((error) => {
         console.log(error);
@@ -186,7 +186,7 @@ class ClientsController {
           } : false
         }
       }).then((result) => {
-        if (!result) return reject({ code: 404, message: "No se encontró al cliente" })
+        if (!result) return reject({ code: 204, message: "No se encontró al cliente" })
         return resolve({ code: 200, message: "Cliente encontrado con éxito.", client: result });
       }).catch((error) => {
         console.log(error);
@@ -336,7 +336,7 @@ class ClientsController {
         const maxCount = await this.clients.count({
           where: filters
         });
-        if (result.length == 0) return reject({ code: 404, message: "No se encontraron clientes.", clients: [] });
+        if (result.length == 0) return reject({ code: 204, message: "No se encontraron clientes.", clients: [] });
         return resolve({ code: 200, message: "Clientes encontrados con éxito", total: maxCount, hasMore: (query.start || 0) + (query.end || maxCount) < maxCount, clients: result });
       }).catch((error) => {
         console.log(error);
