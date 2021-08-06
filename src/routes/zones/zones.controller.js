@@ -1,5 +1,4 @@
-const { prisma } = require("../../..");
-
+const { prisma } = require("../../db/prisma.client");
 
 class ZonesController {
   constructor() {

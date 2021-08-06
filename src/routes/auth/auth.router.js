@@ -45,10 +45,6 @@ module.exports = (rateLimiter) => {
     check("email", "El email es incorrecto").isEmail(),
     check("remember", "Remember tiene que ser un boolean").isBoolean().optional({ nullable: false, checkFalsy: false }),
     validateBody, (req, res) => {
-
-      if (req.session.isAuth && req.session.user != null && req.user.email == req.body.email)
-        return res.status(202).send({ code: 202, message: "Sesión obtenida con éxito", user: req.session.user });
-
       rateLimiter.get(req.ip).then((value) => {
         let retrySecs = 0;
 

@@ -1,21 +1,10 @@
 var express = require("express");
 const morgan = require("morgan");
-const { Pool } = require('pg');
 const { createRateLimiter } = require('./src/middlewares/limiter.middleware')
-const { PrismaClient } = require('@prisma/client')
 const helmet = require('helmet')
-const cors = require('cors')
-
-var prisma = new PrismaClient();
-
-const psql = new Pool({
-  host: 'chekdb.cskgaygskqk4.sa-east-1.rds.amazonaws.com',
-  port: 5432,
-  database: 'chek',
-  user: 'emirchus',
-  password: 'emineko1',
-});
-
+const cors = require('cors');
+const psql = require("./src/db/psql.pool");
+const { prisma } = require("./src/db/prisma.client");
 
 var app = express();
 
@@ -56,7 +45,3 @@ init()
     await prisma.$disconnect();
     process.exit(0);
   })
-
-module.exports = {
-  prisma
-}

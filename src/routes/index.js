@@ -1,12 +1,10 @@
 const { Router } = require("express");
-const { prisma } = require("../..");
 const { authMiddleware, permissionMiddleware, csrfMiddleware } = require("../middlewares/auth.middleware");
 const { convertQuerys } = require("../middlewares/validators.middleware");
-
-const { PrismaSessionStore } = require("@quixo3/prisma-session-store");
 const session = require("express-session");
 const cookieParser = require("cookie-parser");
 const csurf = require("csurf");
+const { sessionStore } = require("../db/prisma.client");
 
 const router = Router();
 
@@ -15,12 +13,7 @@ const routesMiddlewares = (rateLimiter) => {
   router.use(
     session({
       secret: "papurritesteo",
-      store: new PrismaSessionStore(
-        prisma, {
-        checkPeriod: 2 * 60 * 1000, //ms
-        dbRecordIdIsSessionId: true,
-        dbRecordIdFunction: undefined,
-      }),
+      store: sessionStore,
       cookie: {
         secure: process.env.NODE_ENV === "production",
       },

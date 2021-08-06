@@ -1,5 +1,5 @@
 const { stock_type, report_types } = require("@prisma/client");
-const { prisma } = require("../../..");
+const { prisma } = require("../../db/prisma.client");
 
 
 class ReportsController {

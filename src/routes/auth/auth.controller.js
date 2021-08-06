@@ -1,6 +1,6 @@
 const { user_role } = require("@prisma/client");
 const bcrypt = require("bcrypt-nodejs");
-const { prisma } = require("../../..");
+const { prisma } = require("../../db/prisma.client");
 
 class AuthController {
   constructor() {
