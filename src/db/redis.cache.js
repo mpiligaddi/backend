@@ -1,4 +1,4 @@
-const cache = require('express-redis-cache');
+/* const cache = require('express-redis-cache');
 
 const cacheRedis = cache({
   client: require('redis').createClient({
@@ -8,4 +8,4 @@ const cacheRedis = cache({
 
 module.exports = {
   cacheRedis
-}
+} */

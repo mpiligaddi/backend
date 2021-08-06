@@ -2,7 +2,6 @@ const { body, header } = require('express-validator');
 var express = require("express");
 const { validateBody } = require("../../middlewares/validators.middleware");
 const ClientsController = require("./clients.controller");
-const { cacheRedis } = require('../../db/redis.cache');
 
 
 const router = express.Router();
