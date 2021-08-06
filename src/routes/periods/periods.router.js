@@ -1,7 +1,8 @@
 const { body } = require('express-validator');
 var express = require("express");
-const { validateBody } = require("../../middlewares/validators.utils");
 const PeriodsController = require('./periods.controller');
+const { validateBody } = require('../../middlewares/validators.middleware');
+const { user_role } = require('@prisma/client');
 
 const router = express.Router();
 
@@ -18,7 +19,10 @@ router.route("/periods")
       .catch((c) => res.status(c.code).send(c))
   })
   .get((req, res) => {
-    controller.getPeriods({ client: req.params.client, query: req.query })
+    if (req.user.role == user_role.client) {
+      req.query.byclient = req.user.client;
+    }
+    controller.getPeriods({ query: req.query })
       .then((r) => res.status(r.code).send(r))
       .catch((c) => {
         ;

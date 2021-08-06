@@ -337,7 +337,7 @@ class ClientsController {
           where: filters
         });
         if (result.length == 0) return reject({ code: 404, message: "No se encontraron clientes.", clients: [] });
-        return resolve({ code: 200, message: "Clientes encontrados con éxito", total: maxCount, hasMore: (query.start || 0) + (query.end || maxCount) >= maxCount, clients: result });
+        return resolve({ code: 200, message: "Clientes encontrados con éxito", total: maxCount, hasMore: (query.start || 0) + (query.end || maxCount) < maxCount, clients: result });
       }).catch((error) => {
         console.log(error);
         return reject({ code: 500, message: "Hubo un error al intentar buscar los clientes." })

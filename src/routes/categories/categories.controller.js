@@ -144,7 +144,7 @@ class CategoriesController {
           where: filters
         });
         if (result.length == 0) return reject({ code: 404, message: "No se encontraron categorias.", categories: [] });
-        return resolve({ code: 200, message: "Categorias encontradas con éxito", total: maxCount, hasMore: (query.start || 0) + (query.end || maxCount) >= maxCount, categories: result });
+        return resolve({ code: 200, message: "Categorias encontradas con éxito", total: maxCount, hasMore: (query.start || 0) + (query.end || maxCount) < maxCount, categories: result });
       }).catch((error) => {
         console.log(error);
         return reject({ code: 500, message: "Hubo un error al intentar buscar las categorias." })

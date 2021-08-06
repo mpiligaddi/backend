@@ -290,7 +290,7 @@ class ReportsController {
         });
 
         if (result.length == 0) return reject({ code: 404, message: "No se encontraron reportes.", reports: [] });
-        return resolve({ code: 200, message: "Reportes encontradas con éxito", total: maxCount, hasMore: (query.start || 0) + (query.end || maxCount) >= maxCount, reports: result });
+        return resolve({ code: 200, message: "Reportes encontradas con éxito", total: maxCount, hasMore: (query.start || 0) + (query.end || maxCount) < maxCount, reports: result });
       }).catch((error) => {
         console.log(error);
         return reject({ code: 500, message: "Hubo un error al intentar buscar los reportes." })

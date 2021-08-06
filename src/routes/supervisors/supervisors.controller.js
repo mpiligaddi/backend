@@ -124,7 +124,7 @@ class SupervisorsController {
       }).then(async (result) => {
         const maxCount = await this.supervisors.count();
         if (result.length == 0) return reject({ code: 404, message: "No se encontraron supervisores.", supervisors: [] });
-        return resolve({ code: 200, message: "Supervisores encontrados con éxito", total: maxCount, hasMore: (query.start || 0) + (query.end || maxCount) >= maxCount, supervisors: result });
+        return resolve({ code: 200, message: "Supervisores encontrados con éxito", total: maxCount, hasMore: (query.start || 0) + (query.end || maxCount) < maxCount, supervisors: result });
       }).catch((error) => {
         console.log(error);
         return reject({ code: 500, message: "Hubo un error al intentar indexar los supervisores." })

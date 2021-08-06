@@ -18,7 +18,9 @@ const endpointsRoles = {
       "profile/reports",
       "branches",
       "chains",
-      "categories"
+      "categories",
+      "periods",
+      "reports"
     ]
   },
   backoffice: {
@@ -31,7 +33,8 @@ const endpointsRoles = {
       "branches/:id",
       "chains",
       "chains/:id",
-      "categories"
+      "categories",
+      "periods"
     ],
     POST: [
       "reports"

@@ -212,7 +212,7 @@ class BranchesController {
           where: filter
         });
         if (result.length == 0) return reject({ code: 404, message: "No se encontraron sucursales.", branches: [] });
-        return resolve({ code: 200, message: "Sucursales encontradas con éxito", total: maxCount, hasMore: (query.start || 0) + (query.end || maxCount) <= maxCount, branches: result });
+        return resolve({ code: 200, message: "Sucursales encontradas con éxito", total: maxCount, hasMore: (query.start || 0) + (query.end || maxCount) < maxCount, branches: result });
       }).catch((error) => {
         console.log(error);
         return reject({ code: 500, message: "Hubo un error al intentar buscar las sucursales." })

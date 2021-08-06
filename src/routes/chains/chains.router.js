@@ -29,7 +29,7 @@ router.route("/chains")
 
 router.route("/chains/:id")
   .get((req, res) => {
-    if(req.session.user.role == user_role.client){
+    if(req.user.role == user_role.client){
       req.query.byclient = req.user.client;
     }
     controller.getChain({ search: req.params.id, query: req.query })

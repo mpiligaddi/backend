@@ -118,14 +118,18 @@ class PeriodsController {
     })
   }
 
-  async getPeriods({ client, query }) {
+  async getPeriods({ query }) {
     return new Promise((resolve, reject) => {
+      let filters = {};
+
+      if (query.byclient) {
+        filters.clientId = {
+          equals: query.byclient
+        }
+      }
+
       this.periods.findMany({
-        where: {
-          clientId: {
-            equals: client
-          }
-        },
+        where: filters,
         skip: query.start,
         take: query.end,
         include: {
@@ -152,14 +156,10 @@ class PeriodsController {
         }
       }).then(async (result) => {
         const maxCount = await this.periods.count({
-          where: {
-            clientId: {
-              equals: client
-            }
-          }
+          where: filters
         });
         if (result.length == 0) return reject({ code: 404, message: "No se encontraron periodos.", periods: [] });
-        return resolve({ code: 200, message: "Periodos encontrados con éxito", total: maxCount, hasMore: (query.start || 0) + (query.end || maxCount) >= maxCount, periods: result });
+        return resolve({ code: 200, message: "Periodos encontrados con éxito", total: maxCount, hasMore: (query.start || 0) + (query.end || maxCount) < maxCount, periods: result });
       }).catch((error) => {
         console.log(error);
         return reject({ code: 500, message: "Hubo un error al intentar buscar los periodos." })

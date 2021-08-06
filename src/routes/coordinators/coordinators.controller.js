@@ -112,7 +112,7 @@ class CoordinatorsController {
           }
         });
         if (result.length == 0) return reject({ code: 404, message: "No se encontraron coordinadores.", coordinators: [] });
-        return resolve({ code: 200, message: "Coordinadores encontrados con éxito", total: maxCount, hasMore: (query.start || 0) + (query.end || maxCount) >= maxCount, coordinators: result });
+        return resolve({ code: 200, message: "Coordinadores encontrados con éxito", total: maxCount, hasMore: (query.start || 0) + (query.end || maxCount) < maxCount, coordinators: result });
       }).catch((error) => {
         console.log(error);
         return reject({ code: 500, message: "Hubo un error al intentar indexar los coordinadores." })

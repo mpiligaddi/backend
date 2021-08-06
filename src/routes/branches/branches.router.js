@@ -23,7 +23,7 @@ router.route("/branches")
       .catch((c) => res.status(c.code).send(c))
   })
   .get((req, res) => {
-    if(req.session.user.role == user_role.client){
+    if(req.user.role == user_role.client){
       req.query.byclient = req.user.client;
     }
     controller.getBranches({ query: req.query })

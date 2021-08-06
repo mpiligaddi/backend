@@ -30,7 +30,7 @@ class AccountsController {
               name: true,
               displayName: true,
               cuit: true,
-              coverages: true
+              coverages: query.coverages ?? false
             }
           } : false,
           reports: query.reports ?? false,
@@ -54,28 +54,32 @@ class AccountsController {
         skip: query.start,
         take: query.end,
         include: {
-          account: {
+          user: query.user ? {
             select: {
-              id: true,
-              email: true
+              account: {
+                select: {
+                  id: true,
+                  email: true
+                }
+              },
+              clients: query.clients ? {
+                select: {
+                  id: true,
+                  name: true,
+                  displayName: true,
+                  cuit: true,
+
+                }
+              } : false,
+              reports: query.reports ?? false,
+              supervisor: query.supervisor ?? false
             }
-          },
-          clients: query.clients ? {
-            select: {
-              id: true,
-              name: true,
-              displayName: true,
-              cuit: true,
-              coverages: true
-            }
-          } : false,
-          reports: query.reports ?? false,
-          supervisor: query.supervisor ?? false
+          } : false
         }
       }).then(async (result) => {
         const maxCount = await this.account.count();
         if (result.length == 0) return reject({ code: 404, message: "No se encontraron cuentas.", accounts: [] });
-        return resolve({ code: 200, message: "Cuentas encontradas con éxito", total: maxCount, hasMore: (query.start || 0) + (query.end || maxCount) >= maxCount, accounts: result });
+        return resolve({ code: 200, message: "Cuentas encontradas con éxito", total: maxCount, hasMore: (query.start || 0) + (query.end || maxCount) < maxCount, accounts: result });
       }).catch((error) => {
         console.log(error);
         return reject({ code: 500, message: "Hubo un error al intentar buscar las cuentas." })
@@ -210,7 +214,7 @@ class AccountsController {
           }
         });
         if (result.length == 0) return reject({ code: 404, message: "No se encontraron las reportes para este usuario.", reports: [] });
-        return resolve({ code: 200, message: "Reportes encontrados con éxito", total: maxCount, hasMore: (query.start || 0) + (query.end || maxCount) >= maxCount, reports: result });
+        return resolve({ code: 200, message: "Reportes encontrados con éxito", total: maxCount, hasMore: (query.start || 0) + (query.end || maxCount) < maxCount, reports: result });
       }).catch((error) => {
         console.log(error);
         return reject({ code: 500, message: "Hubo un error al intentar buscar las reportes." })

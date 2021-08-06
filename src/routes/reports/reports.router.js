@@ -73,7 +73,7 @@ router.route("/reports")
     }
   })
   .get((req, res) => {
-    if (req.session.user.role == user_role.client) {
+    if (req.user.role == user_role.client) {
       req.query.byclient = req.user.client;
     }
     controller.getReports({ query: req.query })

@@ -124,7 +124,7 @@ class ZonesController {
       }).then(async (result) => {
         const maxCount = await this.zones.count();
         if (result.length == 0) return reject({ code: 404, message: "No se encontraron las zonas.", zones: [] });
-        return resolve({ code: 200, message: "Zonas encontradas con éxito", total: maxCount, hasMore: (query.start || 0) + (query.end || maxCount) >= maxCount, zones: result });
+        return resolve({ code: 200, message: "Zonas encontradas con éxito", total: maxCount, hasMore: (query.start || 0) + (query.end || maxCount) < maxCount, zones: result });
       }).catch((error) => {
         console.log(error);
         return reject({ code: 500, message: "Hubo un error al intentar buscar las zonas." })
