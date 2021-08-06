@@ -47,7 +47,7 @@ class CategoriesController {
           reports: query.reports ?? false
         }
       }).then((result) => {
-        if (!result) return reject({ code: 204, message: "No se encontró la categoria" })
+        if (!result) return reject({ code: 200, message: "No se encontró la categoria" })
         return resolve({ code: 200, message: "Se actualizó la categoria con éxito", category: result });
       }).catch((error) => {
         console.log(error);
@@ -80,7 +80,7 @@ class CategoriesController {
           reports: query.reports ?? false
         }
       }).then((result) => {
-        if (!result) return reject({ code: 204, message: "No se encontró la categoria" })
+        if (!result) return reject({ code: 200, message: "No se encontró la categoria" })
         return resolve({ code: 200, message: "Categoria encontrada con éxito.", category: result });
       }).catch((error) => {
         console.log(error);
@@ -143,7 +143,7 @@ class CategoriesController {
         const maxCount = await this.categories.count({
           where: filters
         });
-        if (result.length == 0) return reject({ code: 204, message: "No se encontraron categorias.", categories: [] });
+        if (result.length == 0) return reject({ code: 200, message: "No se encontraron categorias.", categories: [] });
         return resolve({ code: 200, message: "Categorias encontradas con éxito", total: maxCount, hasMore: (query.start || 0) + (query.end || maxCount) < maxCount, categories: result });
       }).catch((error) => {
         console.log(error);

@@ -64,7 +64,7 @@ router.route("/:id/:name")
     let directory = path.join(__dirname, "../../../public", id, name);
 
     if (!fs.existsSync(directory)) {
-      return res.status(204).send({ code: 204, message: "No se encontró el directorio" })
+      return res.status(200).send({ code: 200, message: "No se encontró el directorio" })
     };
 
     var files = fs.readdirSync(directory);
@@ -80,7 +80,7 @@ router.route("/:id/:folder/:name")
     let directory = path.join(__dirname, "../../../public", id, folder, `${name}`);
     fs.stat(directory, (err, exists) => {
       if (!exists || err) {
-        return res.status(204).send({ code: 204, message: "No se encontro el archivo" });
+        return res.status(200).send({ code: 200, message: "No se encontro el archivo" });
       } else {
 
         if (req.query.blur != undefined) {
@@ -116,7 +116,7 @@ router.route("/:id/:folder/:name")
     let directory = path.join(__dirname, "../../../public", id, folder, `${name}`);
 
     if (!fs.existsSync(directory)) {
-      return res.send({ code: 204, message: "No se encontró el archivo" });
+      return res.send({ code: 200, message: "No se encontró el archivo" });
     }
 
     fs.unlinkSync(directory);
@@ -132,7 +132,7 @@ router.route("/:id/:folder/:name")
 
       if (!fs.existsSync(directory)) {
         fs.unlinkSync(req.file.path);
-        return res.status(204).send({ code: 204, message: "No se encontró el archivo" })
+        return res.status(200).send({ code: 200, message: "No se encontró el archivo" })
       };
 
       fs.unlinkSync(directory);

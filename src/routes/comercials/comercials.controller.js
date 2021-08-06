@@ -42,7 +42,7 @@ class ComercialsController {
           } : false,
         }
       }).then((result) => {
-        if (!result) return reject({ code: 204, message: "No se encontró al comercial." });
+        if (!result) return reject({ code: 200, message: "No se encontró al comercial." });
         return resolve({ code: 200, message: "Se actualizó al comercial con éxito", comercial: result });
       }).catch((error) => {
         console.log(error);
@@ -69,7 +69,7 @@ class ComercialsController {
           } : false,
         }
       }).then((result) => {
-        if (!result) return reject({ code: 204, message: "No se encontró al comercial." });
+        if (!result) return reject({ code: 200, message: "No se encontró al comercial." });
         return resolve({ code: 200, message: "Comercial encontrado con éxito.", comercial: result });
       }).catch((error) => {
         console.log(error);
@@ -113,7 +113,7 @@ class ComercialsController {
         }
       }).then(async (result) => {
         const maxCount = await this.comercials.count();
-        if (result.length == 0) return reject({ code: 204, message: "No se encontraron comerciantes.", comercials: [] });
+        if (result.length == 0) return reject({ code: 200, message: "No se encontraron comerciantes.", comercials: [] });
         return resolve({ code: 200, message: "Comerciantes con éxito", total: maxCount, hasMore: (query.start || 0) + (query.end || maxCount) < maxCount, comercials: result });
       }).catch((error) => {
         console.log(error);

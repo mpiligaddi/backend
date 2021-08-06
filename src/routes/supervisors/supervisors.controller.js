@@ -50,7 +50,7 @@ class SupervisorsController {
           zones: query.zones ?? false
         }
       }).then((result) => {
-        if (!result) return reject({ code: 204, message: "No se encontró al supervisor" })
+        if (!result) return reject({ code: 200, message: "No se encontró al supervisor" })
         return resolve({ code: 200, message: "Se actualizó al supervisor con éxito", supervisor: result });
       }).catch((error) => {
         console.log(error);
@@ -78,7 +78,7 @@ class SupervisorsController {
           zones: query.zones ?? false
         }
       }).then((result) => {
-        if (!result) return reject({ code: 204, message: "No se encontró al supervisor" })
+        if (!result) return reject({ code: 200, message: "No se encontró al supervisor" })
         return resolve({ code: 200, message: "Supervisor encontrado con éxito.", supervisor: result });
       }).catch((error) => {
         console.log(error);
@@ -123,7 +123,7 @@ class SupervisorsController {
         }
       }).then(async (result) => {
         const maxCount = await this.supervisors.count();
-        if (result.length == 0) return reject({ code: 204, message: "No se encontraron supervisores.", supervisors: [] });
+        if (result.length == 0) return reject({ code: 200, message: "No se encontraron supervisores.", supervisors: [] });
         return resolve({ code: 200, message: "Supervisores encontrados con éxito", total: maxCount, hasMore: (query.start || 0) + (query.end || maxCount) < maxCount, supervisors: result });
       }).catch((error) => {
         console.log(error);

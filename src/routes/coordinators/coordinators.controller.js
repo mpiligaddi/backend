@@ -35,7 +35,7 @@ class CoordinatorsController {
           supervisors: query.supervisors ?? false
         }
       }).then((result) => {
-        if (!result) return reject({ code: 204, message: "No se encontró al coordinador." });
+        if (!result) return reject({ code: 200, message: "No se encontró al coordinador." });
         return resolve({ code: 200, message: "Se actualizó al coordinador con éxito", coordinator: result });
       }).catch((error) => {
         console.log(error);
@@ -55,7 +55,7 @@ class CoordinatorsController {
           supervisors: query.supervisors ?? false
         }
       }).then((result) => {
-        if (!result) return reject({ code: 204, message: "No se encontró al coordinador." });
+        if (!result) return reject({ code: 200, message: "No se encontró al coordinador." });
         return resolve({ code: 200, message: "Coordinador encontrado con éxito.", coordinador: result });
       }).catch((error) => {
         console.log(error);
@@ -111,7 +111,7 @@ class CoordinatorsController {
             }
           }
         });
-        if (result.length == 0) return reject({ code: 204, message: "No se encontraron coordinadores.", coordinators: [] });
+        if (result.length == 0) return reject({ code: 200, message: "No se encontraron coordinadores.", coordinators: [] });
         return resolve({ code: 200, message: "Coordinadores encontrados con éxito", total: maxCount, hasMore: (query.start || 0) + (query.end || maxCount) < maxCount, coordinators: result });
       }).catch((error) => {
         console.log(error);

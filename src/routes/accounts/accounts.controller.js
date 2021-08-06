@@ -37,7 +37,7 @@ class AccountsController {
           supervisor: query.supervisor ?? false
         }
       }).then((user) => {
-        if (!user) return reject({ code: 204, message: "No se encontró ningún usuario" })
+        if (!user) return reject({ code: 200, message: "No se encontró ningún usuario" })
         return resolve({ code: 200, message: "Usuario encontrado.", user })
       }).catch((error) => {
         return reject({ code: 503, message: "Hubo un error al intentar buscar la cuenta" })
@@ -78,7 +78,7 @@ class AccountsController {
         }
       }).then(async (result) => {
         const maxCount = await this.account.count();
-        if (result.length == 0) return reject({ code: 204, message: "No se encontraron cuentas.", accounts: [] });
+        if (result.length == 0) return reject({ code: 200, message: "No se encontraron cuentas.", accounts: [] });
         return resolve({ code: 200, message: "Cuentas encontradas con éxito", total: maxCount, hasMore: (query.start || 0) + (query.end || maxCount) < maxCount, accounts: result });
       }).catch((error) => {
         console.log(error);
@@ -116,7 +116,7 @@ class AccountsController {
           user: true
         }
       }).then((result) => {
-        if (!result) return reject({ code: 204, message: "No se pudo crear la cuenta." })
+        if (!result) return reject({ code: 200, message: "No se pudo crear la cuenta." })
         return resolve({ code: 202, message: "Cuenta creada con éxito!", user: result.user });
       }).catch((reason) => {
         if (reason.code && reason.code == 'P2002') {
@@ -213,7 +213,7 @@ class AccountsController {
             }
           }
         });
-        if (result.length == 0) return reject({ code: 204, message: "No se encontraron las reportes para este usuario.", reports: [] });
+        if (result.length == 0) return reject({ code: 200, message: "No se encontraron las reportes para este usuario.", reports: [] });
         return resolve({ code: 200, message: "Reportes encontrados con éxito", total: maxCount, hasMore: (query.start || 0) + (query.end || maxCount) < maxCount, reports: result });
       }).catch((error) => {
         console.log(error);
