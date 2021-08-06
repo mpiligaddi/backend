@@ -25,7 +25,7 @@ module.exports = (rateLimiter) => {
       req.session.user = {
         id: user.id
       };
-      return res.status(200).send({ code: 200, message: "Se reautenticó la sesión con éxito!", user: req.session.user });
+      return res.status(200).send({ code: 200, message: "Se reautenticó la sesión con éxito!", user: req.user });
     })
   })
 
