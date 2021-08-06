@@ -5,8 +5,6 @@ const session = require("express-session");
 const cookieParser = require("cookie-parser");
 const csurf = require("csurf");
 const { sessionStore } = require("../db/prisma.client");
-const { cacheRedis } = require("../db/redis.cache");
-
 const router = Router();
 
 const routesMiddlewares = (rateLimiter) => {
@@ -23,6 +21,7 @@ const routesMiddlewares = (rateLimiter) => {
     })
   );
   router.use(cookieParser());
+
   router.use(
     csurf({
       cookie: {

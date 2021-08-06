@@ -23,7 +23,7 @@ router.route("/clients")
       .then((r) => res.status(r.code).send(r))
       .catch((c) => res.status(c.code).send(c))
   })
-  .get(cacheRedis.route(), (req, res) => {
+  .get((req, res) => {
     controller.getClients({ query: req.query })
       .then((r) => res.status(r.code).send(r))
       .catch((c) => {
