@@ -264,6 +264,7 @@ class ClientsController {
         skip: query.start,
         take: query.end,
         include: {
+          products: query.products ?? false,
           admin: query.admin ? {
             select: {
               id: true,
