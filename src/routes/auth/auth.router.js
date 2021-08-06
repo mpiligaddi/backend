@@ -15,8 +15,7 @@ module.exports = (rateLimiter) => {
 
   const controller = new AuthController();
 
-  router.put("/authenticate", authMiddleware, (req, res) => {
-    console.log(req.headers.cookie);
+  router.get("/", authMiddleware, (req, res) => {
     const user = req.session.user;
 
     req.session.regenerate((err) => {
@@ -27,14 +26,13 @@ module.exports = (rateLimiter) => {
       };
       return res.status(200).send({ code: 200, message: "Se reautenticó la sesión con éxito!", user: req.user });
     })
-  })
-
-  router.put("/logout", authMiddleware, (req, res) => {
+  }).delete("/", authMiddleware, (req, res) => {
     req.session.destroy((err) => {
       if (err) return res.status(500).send({ code: 500, message: "Hubo un error al desconectarlo de la cuenta" });
       return res.status(200).send({ code: 200, message: "Se elimino la sesión actual." });
     })
-  });
+  })
+
 
   router.get('/csrf', (req, res) => {
     res.send({ token: req.csrfToken() });

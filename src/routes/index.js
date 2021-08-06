@@ -26,6 +26,8 @@ const routesMiddlewares = (rateLimiter) => {
     csurf({
       cookie: {
         httpOnly: true,
+        maxAge:  1000 * 60 * 60 * 24 * 4,
+        expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 4)
       },
     })
   );
