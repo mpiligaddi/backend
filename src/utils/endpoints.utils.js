@@ -1,57 +1,57 @@
 const endpointsRoles = {
   merchandiser: {
     GET: [
-      "profile",
-      "profile/reports",
-      "clients",
-      "branches",
-      "chains",
-      "categories"
+      /profile/gi,
+      /profile\/reports/gi,
+      /clients/gi,
+      /branches/gi,
+      /chains/gi,
+      /categories/gi
     ],
     POST: [
-      "reports"
+      /reports/gi
     ]
   },
   client: {
     GET: [
-      "profile",
-      "profile/reports",
-      "branches",
-      "chains",
-      "categories",
-      "periods",
-      "reports"
+      /profile/gi,
+      /profile\/reports/gi,
+      /branches/gi,
+      /chains/gi,
+      /categories/gi,
+      /periods/gi,
+      /reports/gi
     ]
   },
   backoffice: {
     GET: [
-      "profile",
-      "profile/reports",
-      "clients",
-      "clients/:id",
-      "branches",
-      "branches/:id",
-      "chains",
-      "chains/:id",
-      "categories",
-      "periods"
+      /profile/gi,
+      /profile\/reports/gi,
+      /clients/gi,
+      /clients\/\b[0-9a-f]{8}\b-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-\b[0-9a-f]{12}\b/gi,
+      /branches/gi,
+      /branches\/\b[0-9a-f]{8}\b-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-\b[0-9a-f]{12}\b/gi,
+      /chains/gi,
+      /chains\/\b[0-9a-f]{8}\b-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-\b[0-9a-f]{12}\b/gi,
+      /categories/gi,
+      /periods/gi
     ],
     POST: [
-      "reports"
+      /reports/gi
     ],
     PUT: [
-      "reports",
-      "profile",
-      "clients",
-      "branches",
-      "chains"
+      /reports/gi,
+      /profile/gi,
+      /clients/gi,
+      /branches/gi,
+      /chains/gi
     ],
     PATCH: [
-      "reports",
-      "profile",
-      "clients",
-      "branches",
-      "chains"
+      /reports/gi,
+      /profile/gi,
+      /clients/gi,
+      /branches/gi,
+      /chains/gi
     ]
   }
 }

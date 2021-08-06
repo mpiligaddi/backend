@@ -49,10 +49,9 @@ const permissionMiddleware = (req, res, next) => {
   if (req.user.role == user_role.superadmin) return next();
 
   endpoint.shift();
-
   const role = endpointsRoles[req.user.role];
   const method = role[req.method];
-  if (method != null && method.includes(endpoint.map((end, index) => index == endpoint.length - 1 && endpoint.length > 1 ? ":id" : end).join("/"))) return next();
+  if (method != null && method.find((request) => request.test(endpoint.join("/")))) return next();
 
   return res.status(401).send({ "code": 401, message: "Permisos insuficientes" })
 }
