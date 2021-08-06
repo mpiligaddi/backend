@@ -15,7 +15,7 @@ class PeriodsController {
         },
         skipDuplicates: true
       }).then((result) => {
-        return resolve({ code: 201, message: "Periodos añadidos con éxito!"})
+        return resolve({ code: 201, message: "Periodos añadidos con éxito!" })
       }).catch((error) => {
         console.log(error);
         return reject({ code: 500, message: "Hubo un error al crear al periodo" })
@@ -126,8 +126,8 @@ class PeriodsController {
             equals: client
           }
         },
-        skip: +query.start || 0,
-        take: +query.end || 10,
+        skip: query.start,
+        take: query.end,
         include: {
           client: query.client ? {
             select: {
@@ -150,10 +150,16 @@ class PeriodsController {
             }
           } : false
         }
-      }).then((result) => {
-        console.log(result);
-        if (result.length == 0) return reject({ code: 404, message: "No se encontraron periodos." });
-        return resolve({ code: 200, periods: result });
+      }).then(async (result) => {
+        const maxCount = await this.periods.count({
+          where: {
+            clientId: {
+              equals: client
+            }
+          }
+        });
+        if (result.length == 0) return reject({ code: 404, message: "No se encontraron periodos.", periods: [] });
+        return resolve({ code: 200, message: "Periodos encontrados con éxito", total: maxCount, hasMore: (query.start || 0) + (query.end || maxCount) >= maxCount, periods: result });
       }).catch((error) => {
         console.log(error);
         return reject({ code: 500, message: "Hubo un error al intentar buscar los periodos." })

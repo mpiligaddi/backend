@@ -75,7 +75,7 @@ class CategoriesController {
                 }
               }
             }
-          }  : false,
+          } : false,
           products: query.products ?? false,
           reports: query.reports ?? false
         }
@@ -106,12 +106,23 @@ class CategoriesController {
 
   async getCategories({ query }) {
     return new Promise((resolve, reject) => {
+      let filters = {};
+
+      if (query.byclient) {
+        filters.clients = {
+          every: {
+            clientId: query.byclient
+          }
+        }
+      }
+
       this.categories.findMany({
         orderBy: {
           name: ['asc', 'desc'].find((order) => order == query.orderby) || 'asc'
         },
-        skip: +query.start || 0,
-        take: +query.end || 10,
+        where: filters,
+        skip: query.start,
+        take: query.end,
         include: {
           clients: query.clients ? {
             select: {
@@ -128,9 +139,12 @@ class CategoriesController {
           products: query.products ?? false,
           reports: query.reports ?? false
         }
-      }).then((result) => {
-        if (result.length == 0) return reject({ code: 404, message: "No se encontraron las categorias." });
-        return resolve({ code: 200, categories: result });
+      }).then(async (result) => {
+        const maxCount = await this.categories.count({
+          where: filters
+        });
+        if (result.length == 0) return reject({ code: 404, message: "No se encontraron categorias.", categories: [] });
+        return resolve({ code: 200, message: "Categorias encontradas con éxito", total: maxCount, hasMore: (query.start || 0) + (query.end || maxCount) >= maxCount, categories: result });
       }).catch((error) => {
         console.log(error);
         return reject({ code: 500, message: "Hubo un error al intentar buscar las categorias." })

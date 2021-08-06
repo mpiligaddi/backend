@@ -51,9 +51,8 @@ class AccountsController {
         orderBy: {
           email: ['asc', 'desc'].find((order) => order == query.orderby) || 'asc'
         },
-        skip: +query.start || 0,
-        take: +query.end || 10,
-
+        skip: query.start,
+        take: query.end,
         include: {
           account: {
             select: {
@@ -73,9 +72,10 @@ class AccountsController {
           reports: query.reports ?? false,
           supervisor: query.supervisor ?? false
         }
-      }).then((result) => {
-        if (result.length == 0) return reject({ code: 404, message: "No se encontraron cuentas." });
-        return resolve({ code: 200, message: "Cuentas encontrados con éxito", accounts: result });
+      }).then(async (result) => {
+        const maxCount = await this.account.count();
+        if (result.length == 0) return reject({ code: 404, message: "No se encontraron cuentas.", accounts: [] });
+        return resolve({ code: 200, message: "Cuentas encontradas con éxito", total: maxCount, hasMore: (query.start || 0) + (query.end || maxCount) >= maxCount, accounts: result });
       }).catch((error) => {
         console.log(error);
         return reject({ code: 500, message: "Hubo un error al intentar buscar las cuentas." })
@@ -161,17 +161,17 @@ class AccountsController {
         orderBy: {
           createdAt: ['asc', 'desc'].find((order) => order == query.orderby) || 'asc'
         },
-        skip: +query.start || 0,
-        take: +query.end || 5,
+        skip: query.start,
+        take: query.end,
         include: {
-          branch: {
+          branch: query.branch ? {
             select: {
               id: true,
               displayName: true,
               name: true
             },
-          },
-          categories: {
+          } : false,
+          categories: query.categories ? {
             select: {
               category: {
                 select: {
@@ -183,24 +183,34 @@ class AccountsController {
               withoutStock: true,
               ...reportFilter
             }
-          },
-          chain: {
+          } : false,
+          chain: query.chain ? {
             select: {
               id: true,
               name: true,
             }
-          },
-          client: {
+          } : false,
+          client: query.client ? {
             select: {
               displayName: true,
               id: true,
               name: true
             }
-          }
+          } : false
         }
-      }).then((result) => {
-        if (result.length == 0) return reject({ code: 404, message: "No se encontraron reportes." });
-        return resolve({ code: 200, message: "Reportes encontrados con éxito", reports: result });
+      }).then(async (result) => {
+        const maxCount = await this.reports.count({
+          where: {
+            creatorId: {
+              equals: id
+            },
+            type: {
+              equals: report_types[query.type ?? "photographic"] ?? report_types.photographic
+            }
+          }
+        });
+        if (result.length == 0) return reject({ code: 404, message: "No se encontraron las reportes para este usuario.", reports: [] });
+        return resolve({ code: 200, message: "Reportes encontrados con éxito", total: maxCount, hasMore: (query.start || 0) + (query.end || maxCount) >= maxCount, reports: result });
       }).catch((error) => {
         console.log(error);
         return reject({ code: 500, message: "Hubo un error al intentar buscar las reportes." })

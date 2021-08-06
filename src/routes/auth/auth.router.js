@@ -22,7 +22,9 @@ module.exports = (rateLimiter) => {
     req.session.regenerate((err) => {
       if (err) return res.status(500).send({ code: 500, message: "Hubo un error al autenticar la sesión" });
       req.session.isAuth = true;
-      req.session.user = user;
+      req.session.user = {
+        id: user.id
+      };
       return res.status(200).send({ code: 200, message: "Se reautenticó la sesión con éxito!", user: req.session.user });
     })
   })
@@ -63,7 +65,9 @@ module.exports = (rateLimiter) => {
           .tryLogin(req.body)
           .then((r) => {
             req.session.isAuth = true;
-            req.session.user = r.user;
+            req.session.user = {
+              id: r.user.id
+            };
             if (req.body.remember) {
               let timeExpire = 1000 * 60 * 60 * 24 * 4;
               req.session.cookie.expires = new Date(Date.now() + timeExpire);

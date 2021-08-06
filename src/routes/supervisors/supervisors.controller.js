@@ -51,7 +51,7 @@ class SupervisorsController {
         }
       }).then((result) => {
         if (!result) return reject({ code: 404, message: "No se encontró al supervisor" })
-        return resolve({ code: 200, message: "Se actualizó al supervisor con éxito", supervisor: result});
+        return resolve({ code: 200, message: "Se actualizó al supervisor con éxito", supervisor: result });
       }).catch((error) => {
         console.log(error);
         return reject({ code: 500, message: "Hubo un error al intentar buscar al supervisor" })
@@ -108,8 +108,8 @@ class SupervisorsController {
         orderBy: {
           name: ['asc', 'desc'].find((order) => order == query.orderby) || 'asc'
         },
-        skip: +query.start || 0,
-        take: +query.end || 10,
+        skip: query.start,
+        take: query.end,
         include: {
           coordinator: query.coordinator ?? false,
           users: query.users ? {
@@ -121,9 +121,10 @@ class SupervisorsController {
           } : false,
           zones: query.zones ?? false
         }
-      }).then((result) => {
-        if (result.length == 0) return reject({ code: 404, message: "No se encontraron supervisores." });
-        return resolve({ code: 200, supervisors: result });
+      }).then(async (result) => {
+        const maxCount = await this.supervisors.count();
+        if (result.length == 0) return reject({ code: 404, message: "No se encontraron supervisores.", supervisors: [] });
+        return resolve({ code: 200, message: "Supervisores encontrados con éxito", total: maxCount, hasMore: (query.start || 0) + (query.end || maxCount) >= maxCount, supervisors: result });
       }).catch((error) => {
         console.log(error);
         return reject({ code: 500, message: "Hubo un error al intentar indexar los supervisores." })

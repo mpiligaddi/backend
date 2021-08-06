@@ -18,6 +18,9 @@ router.route("/categories")
       .catch((c) => res.status(c.code).send(c))
   })
   .get((req, res) => {
+    if (req.session.user.role == user_role.client) {
+      req.query.byclient = req.user.client;
+    }
     controller.getCategories({ query: req.query })
       .then((r) => res.status(r.code).send(r))
       .catch((c) => {

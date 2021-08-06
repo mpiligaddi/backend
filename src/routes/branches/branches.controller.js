@@ -150,11 +150,11 @@ class BranchesController {
       }
     }
 
-    if (query.clientId) {
+    if (query.byclient) {
       filter.coverages = {
         every: {
           clientId: {
-            equals: query.clientId
+            equals: query.byclient
           }
         }
       }
@@ -167,11 +167,11 @@ class BranchesController {
     }
     else if (query.reports == "revised") {
       filter.NOT.reports = {
-          none: {},
-          every: {
-            revised:{
-              not: false
-            }
+        none: {},
+        every: {
+          revised: {
+            not: false
+          }
         }
       }
     }
@@ -181,11 +181,9 @@ class BranchesController {
         orderBy: {
           name: ['asc', 'desc'].find((order) => order == query.orderby) || 'asc'
         },
-        where: {
-          ...filter
-        },
-        skip: +query.start || 0,
-        take: +query.end || 5,
+        where: filter,
+        skip: query.start,
+        take: query.end,
         include: {
           chain: query.chain ?? false,
           coverages: query.coverages ? {
@@ -209,10 +207,12 @@ class BranchesController {
           reports: query.reports ?? false,
           zone: query.zone ?? false
         }
-      }).then((result) => {
-        if (result.length == 0 && query.start > 0) return resolve({ code: 203, message: "Ya no hay más sucursales" });
-        if (result.length == 0) return reject({ code: 404, message: "No se encontraron sucursales." });
-        return resolve({ code: 200, branches: result });
+      }).then(async (result) => {
+        const maxCount = await this.branches.count({
+          where: filter
+        });
+        if (result.length == 0) return reject({ code: 404, message: "No se encontraron sucursales.", branches: [] });
+        return resolve({ code: 200, message: "Sucursales encontradas con éxito", total: maxCount, hasMore: (query.start || 0) + (query.end || maxCount) <= maxCount, branches: result });
       }).catch((error) => {
         console.log(error);
         return reject({ code: 500, message: "Hubo un error al intentar buscar las sucursales." })

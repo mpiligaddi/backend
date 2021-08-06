@@ -108,8 +108,8 @@ class ZonesController {
         orderBy: {
           name: ['asc', 'desc'].find((order) => order == query.orderby) || 'asc'
         },
-        skip: +query.start || 0,
-        take: +query.end || 10,
+        skip: query.start,
+        take: query.end,
         include: {
           branches: query.branches ? {
             select: {
@@ -121,9 +121,10 @@ class ZonesController {
           } : false,
           supervisor: query.supervisor ?? false
         }
-      }).then((result) => {
-        if (result.length == 0) return reject({ code: 404, message: "No se encontraron las zonas." });
-        return resolve({ code: 200, zones: result });
+      }).then(async (result) => {
+        const maxCount = await this.zones.count();
+        if (result.length == 0) return reject({ code: 404, message: "No se encontraron las zonas.", zones: [] });
+        return resolve({ code: 200, message: "Zonas encontradas con éxito", total: maxCount, hasMore: (query.start || 0) + (query.end || maxCount) >= maxCount, zones: result });
       }).catch((error) => {
         console.log(error);
         return reject({ code: 500, message: "Hubo un error al intentar buscar las zonas." })

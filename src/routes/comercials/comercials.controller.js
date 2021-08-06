@@ -99,8 +99,8 @@ class ComercialsController {
         orderBy: {
           name: ['asc', 'desc'].find((order) => order == query.orderby) || 'asc'
         },
-        skip: +query.start || 0,
-        take: +query.end || 10,
+        skip: query.start,
+        take: query.end,
         include: {
           clients: query.clients ? {
             select: {
@@ -111,9 +111,10 @@ class ComercialsController {
             }
           } : false,
         }
-      }).then((result) => {
-        if (!result || result.length == 0) return reject({ code: 404, message: "No se encontraron comerciales." });
-        return resolve({ code: 200, comercials: result });
+      }).then(async (result) => {
+        const maxCount = await this.comercials.count();
+        if (result.length == 0) return reject({ code: 404, message: "No se encontraron comerciantes.", comercials: [] });
+        return resolve({ code: 200, message: "Comerciantes con éxito", total: maxCount, hasMore: (query.start || 0) + (query.end || maxCount) >= maxCount, comercials: result });
       }).catch((error) => {
         console.log(error);
         return reject({ code: 500, message: "Hubo un error al intentar indexar los comerciales." })

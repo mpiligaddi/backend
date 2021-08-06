@@ -2,6 +2,7 @@ const { check } = require('express-validator');
 var express = require("express");
 const { validateBody } = require("../../middlewares/validators.middleware");
 const ChainsController = require("./chains.controller");
+const { user_role } = require('@prisma/client');
 
 
 const router = express.Router();
@@ -28,6 +29,9 @@ router.route("/chains")
 
 router.route("/chains/:id")
   .get((req, res) => {
+    if(req.session.user.role == user_role.client){
+      req.query.byclient = req.user.client;
+    }
     controller.getChain({ search: req.params.id, query: req.query })
       .then((r) => res.status(r.code).send(r))
       .catch((c) => res.status(c.code).send(c))

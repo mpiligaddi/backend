@@ -31,36 +31,6 @@ router.route("/clients")
       })
   })
 
-router.get("/clients/:client/categories", (req, res) => {
-  controller.getCategories({ client: req.params.client, query: req.query })
-    .then((r) => res.status(r.code).send(r))
-    .catch((c) => res.status(c.code).send(c))
-})
-
-router.get("/clients/:client/reports", (req, res) => {
-  controller.getReports({ client: req.params.client, query: req.query })
-    .then((r) => res.status(r.code).send(r))
-    .catch((c) => res.status(c.code).send(c))
-})
-
-router.route("/clients/:client/periods")
-  .get((req, res) => {
-    controller.getPeriods({ client: req.params.client, query: req.query })
-      .then((r) => res.status(r.code).send(r))
-      .catch((c) => {
-        ;
-        return res.status(c.code).send(c)
-      })
-  })
-  .post([
-    body("periods", "Faltó ingresar el periodos").isArray({ min: 1 }),
-    validateBody
-  ], (req, res) => {
-    controller.createPeriod({ client: req.params.client, periods: req.body.periods })
-      .then((r) => res.status(r.code).send(r))
-      .catch((c) => res.status(c.code).send(c))
-  })
-
 router.route("/clients/:id")
   .get((req, res) => {
     controller.getClient({ search: req.params.id, query: req.query })

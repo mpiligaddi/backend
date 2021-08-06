@@ -2,7 +2,7 @@ var express = require("express");
 const morgan = require("morgan");
 const { Pool } = require('pg');
 const { createRateLimiter } = require('./src/middlewares/limiter.middleware')
-const { PrismaClient, user_role } = require('@prisma/client')
+const { PrismaClient } = require('@prisma/client')
 const helmet = require('helmet')
 const cors = require('cors')
 
@@ -33,6 +33,7 @@ app.use(helmet());
 
 async function init() {
   await prisma.$connect();
+
   var rateLimiter = await createRateLimiter({
     dbName: 'chek',
     storeClient: psql,

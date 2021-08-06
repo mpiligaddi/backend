@@ -5,6 +5,7 @@ const { validateReport } = require("../../utils/json.utils.");
 const fs = require('fs');
 const path = require('path');
 const { createFile } = require("../../utils/images.utils");
+const { user_role } = require("@prisma/client");
 
 const router = express.Router();
 const controller = new ReportsController();
@@ -72,6 +73,9 @@ router.route("/reports")
     }
   })
   .get((req, res) => {
+    if (req.session.user.role == user_role.client) {
+      req.query.byclient = req.user.client;
+    }
     controller.getReports({ query: req.query })
       .then((r) => res.status(r.code).send(r))
       .catch((c) => res.status(c.code).send(c))

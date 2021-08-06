@@ -10,11 +10,13 @@ const csurf = require("csurf");
 
 const router = Router();
 
-module.exports = (rateLimiter) => {
+
+const routesMiddlewares = (rateLimiter) => {
   router.use(
     session({
       secret: "papurritesteo",
-      store: new PrismaSessionStore(prisma, {
+      store: new PrismaSessionStore(
+        prisma, {
         checkPeriod: 2 * 60 * 1000, //ms
         dbRecordIdIsSessionId: true,
         dbRecordIdFunction: undefined,
@@ -54,4 +56,6 @@ module.exports = (rateLimiter) => {
   router.use("/api", require("./accounts/accounts.router"));
 
   return router;
-};
+}
+
+module.exports = routesMiddlewares;

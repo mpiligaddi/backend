@@ -28,18 +28,19 @@ router.route("/periods")
 
 router.route("/periods/:id")
   .get((req, res) => {
-    controller.getClient({ search: req.params.id, query: req.query })
+    controller.getPeriod({ search: req.params.id, query: req.query })
       .then((r) => res.status(r.code).send(r))
       .catch((c) => res.status(c.code).send(c))
   })
   .delete((req, res) => {
-    controller.deleteClient(req.params.id)
+    controller.deletePeriod(req.params.id)
       .then((r) => res.status(r.code).send(r))
       .catch((c) => res.status(c.code).send(c))
   })
   .put([
+    body("periods", "Faltó ingresar el periodos").isArray({ min: 1 }),
   ], (req, res) => {
-    controller.updateClient({ search: req.params.id, data: req.body, query: req.query })
+    controller.updatePeriod({ search: req.params.id, data: req.body, query: req.query })
       .then((r) => res.status(r.code).send(r))
       .catch((c) => {
         ;

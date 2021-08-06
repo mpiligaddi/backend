@@ -149,7 +149,8 @@ class ChainsController {
     return new Promise((resolve, reject) => {
 
       let filter = {
-        NOT: {}
+        NOT: {},
+        AND: {}
       };
 
       if (query.byclient) {
@@ -166,12 +167,11 @@ class ChainsController {
         }
       }
 
-      if (query.products) {
-        filter.NOT.products = {
+      if (query.reports == "only") {
+        filter.NOT.reports = {
           none: {}
         }
       }
-
       if (query.reports == "revised") {
         filter.reports = {
           every: {
@@ -184,12 +184,9 @@ class ChainsController {
         orderBy: {
           name: ['asc', 'desc'].find((order) => order == query.orderby) || 'asc'
         },
-        skip: +query.start || 0,
-        take: +query.end || 10,
-        where: {
-          ...filter,
-
-        },
+        skip: query.start,
+        take: query.end,
+        where: filter,
         include: {
           branches: query.branches ? {
             skip: +query.bstart || 0,
@@ -205,7 +202,7 @@ class ChainsController {
               }
             }
           } : false,
-          products: {
+          products: query.products ? {
             select: {
               product: {
                 select: {
@@ -221,16 +218,19 @@ class ChainsController {
                 }
               }
             }
-          },
+          } : false,
           reports: query.reports ? {
             select: {
               id: true
             }
           } : false
         }
-      }).then((result) => {
-        if (result.length == 0) return reject({ code: 404, message: "No se encontraron sucursales." });
-        return resolve({ code: 200, chains: result });
+      }).then(async (result) => {
+        const maxCount = await this.chains.count({
+          where: filter
+        });
+        if (result.length == 0) return reject({ code: 404, message: "No se encontraron cadenas.", chains: [] });
+        return resolve({ code: 200, message: "Cadenas encontradas con éxito", total: maxCount, hasMore: (query.start || 0) + (query.end || maxCount) >= maxCount, chains: result });
       }).catch((error) => {
         console.log(error);
         return reject({ code: 500, message: "Hubo un error al intentar buscar las sucursales." })

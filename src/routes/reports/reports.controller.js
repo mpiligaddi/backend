@@ -115,8 +115,6 @@ class ReportsController {
         orderBy: {
           name: ['asc', 'desc'].find((order) => order == query.orderby) || 'asc'
         },
-        skip: +query.start || 0,
-        take: +query.end || 10,
         include: {
           periods: query.periods ? {
             select: {
@@ -127,8 +125,8 @@ class ReportsController {
           } : false
         }
       }).then((result) => {
-        if (result.length == 0) return reject({ code: 404, message: "No se encontraron los tipos de reporte" });
-        return resolve({ code: 200, types: result });
+        if (result.length == 0) return reject({ code: 404, message: "No se encontraron los tipos de reporte", types: [] });
+        return resolve({ code: 200, message: "Tipos de reportes encontrados", types: result });
       }).catch((error) => {
         console.log(error);
         return reject({ code: 500, message: "Hubo un error al intentar buscar los tipos de reporte" })
@@ -215,14 +213,23 @@ class ReportsController {
 
   async getReports({ query }) {
     return new Promise((resolve, reject) => {
+      let filter = {};
+
+      if (query.byclient) {
+        filter.clientId = {
+          equals: query.byclient
+        }
+      }
+
       this.reports.findMany({
         where: {
           type: {
             equals: query.type
-          }
+          },
+          ...filter
         },
-        skip: +query.start || 0,
-        take: +query.end || 10,
+        skip: query.start,
+        take: query.end,
         include: {
           branch: query.branch ? {
             select: {
@@ -272,9 +279,18 @@ class ReportsController {
           } : false,
           location: query.location
         }
-      }).then((result) => {
-        if (result.length == 0) return reject({ code: 404, message: "No se encontraron reportes." });
-        return resolve({ code: 200, reports: result });
+      }).then(async (result) => {
+        const maxCount = await this.reports.count({
+          where: {
+            type: {
+              equals: query.type
+            },
+            ...filter
+          }
+        });
+
+        if (result.length == 0) return reject({ code: 404, message: "No se encontraron reportes.", reports: [] });
+        return resolve({ code: 200, message: "Reportes encontradas con éxito", total: maxCount, hasMore: (query.start || 0) + (query.end || maxCount) >= maxCount, reports: result });
       }).catch((error) => {
         console.log(error);
         return reject({ code: 500, message: "Hubo un error al intentar buscar los reportes." })

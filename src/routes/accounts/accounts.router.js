@@ -75,9 +75,6 @@ router.route("/accounts/:id")
       .then((r) => res.status(r.code).send(r))
       .catch((c) => res.status(c.code).send(c))
   })
-  .post((req, res) => {
-
-  })
 
 
 module.exports = router;
