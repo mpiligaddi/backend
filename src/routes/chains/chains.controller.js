@@ -150,7 +150,6 @@ class ChainsController {
 
       let filter = {
         NOT: {},
-        AND: {}
       };
 
       if (query.byclient) {
@@ -171,8 +170,7 @@ class ChainsController {
         filter.NOT.reports = {
           none: {}
         }
-      }
-      if (query.reports == "revised") {
+      } else if (query.reports == "revised") {
         filter.reports = {
           every: {
             revised: true

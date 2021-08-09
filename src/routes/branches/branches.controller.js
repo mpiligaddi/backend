@@ -187,7 +187,16 @@ class BranchesController {
         orderBy: {
           name: ['asc', 'desc'].find((order) => order == query.orderby) || 'asc'
         },
-        where: filter,
+        where: {
+          ...filter,
+          AND: {
+            NOT: {
+              coverages: {
+                none: {}
+              }
+            }
+          }
+        },
         skip: query.start,
         take: query.end,
         include: {
@@ -201,13 +210,6 @@ class BranchesController {
                   cuit: true
                 }
               },
-              branch: {
-                select: {
-                  id: true,
-                  displayName: true,
-                  address: true,
-                }
-              }
             }
           } : false,
           reports: query.reports ?? false,
