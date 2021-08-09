@@ -150,6 +150,7 @@ class ChainsController {
 
       let filter = {
         NOT: {},
+        AND: {}
       };
 
       if (query.byclient) {
@@ -185,6 +186,17 @@ class ChainsController {
           }
         }
       }
+
+      if (query.products == "only") {
+        filter.AND = {
+          NOT: {
+            products: {
+              none: {}
+            }
+          }
+        }
+      }
+
 
       this.chains.findMany({
         orderBy: {
