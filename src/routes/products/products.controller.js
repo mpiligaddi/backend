@@ -76,7 +76,7 @@ class ProductsController {
         }
       }
 
-      if(query.bytype){
+      if (query.bytype) {
         filters.type = {
           equals: stock_type[query.bytype] ?? undefined
         }
@@ -123,9 +123,8 @@ class ProductsController {
         const maxCount = await this.products.count({
           where: filters
         });
-        if (result.length == 0) return reject({ code: 200, message: "No se encontraron productos.", products: [] });
 
-        return resolve({ code: 200, message: "Productos encontrados con éxito", total: maxCount, hasMore: (query.start || 0) + (query.end || maxCount) < maxCount, products: result });
+        return resolve({ code: 200, message: result.length == 0 ? "No se encontraron productos." : "Productos encontrados con éxito", total: maxCount, hasMore: (query.start || 0) + (query.end || maxCount) < maxCount, products: result });
       }
       return reject({ code: 500, message: "Hubo un error al intentar buscar los productos." })
     })

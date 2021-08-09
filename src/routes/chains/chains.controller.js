@@ -235,9 +235,8 @@ class ChainsController {
         const maxCount = await this.chains.count({
           where: filter
         });
-        console.log((query.start || 0) + (query.end || maxCount));
-        if (result.length == 0) return reject({ code: 200, message: "No se encontraron cadenas.", chains: [] });
-        return resolve({ code: 200, message: "Cadenas encontradas con éxito", total: maxCount, hasMore: (query.start || 0) + (query.end || maxCount) < maxCount, chains: result });
+
+        return resolve({ code: 200, message: result.length == 0 ? "No se encontraron cadenas." : "Cadenas encontradas con éxito", total: maxCount, hasMore: (query.start || 0) + (query.end || maxCount) < maxCount, chains: result });
       }).catch((error) => {
         console.log(error);
         return reject({ code: 500, message: "Hubo un error al intentar buscar las sucursales." })
