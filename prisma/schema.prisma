@@ -99,7 +99,7 @@ model Client {
   reports     Report[]
   periods     ClientPeriodReport[]
   coverages   Coverage[]
-  products    ProductChain[]
+  products    ProductClient[]
 }
 
 model ClientCategory {
@@ -117,8 +117,8 @@ model Chain {
   branches Branch[]
   products ProductChain[]
   reports  Report[]
-  format   Format?        @relation(fields: formatId, references: id)
-  formatId String?
+  format   Format        @relation(fields: formatId, references: id)
+  formatId String
 }
 
 model Format {
@@ -268,14 +268,21 @@ model Product {
   category   Category                 @relation(fields: [categoryId], references: [id])
   categoryId String
   chains     ProductChain[]
+  clients    ProductClient[]
   pricings   ProductPricingReport[]
   breakevens ProductBreakevenReport[]
 }
 
-model ProductChain {
+model ProductClient {
   id        String  @id @default(uuid())
   client    Client  @relation(fields: clientId, references: id)
   clientId  String
+  product   Product @relation(fields: productId, references: id)
+  productId String
+}
+
+model ProductChain {
+  id        String  @id @default(uuid())
   chain     Chain   @relation(fields: chainId, references: id)
   chainId   String
   product   Product @relation(fields: productId, references: id)

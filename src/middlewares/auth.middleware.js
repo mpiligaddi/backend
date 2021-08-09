@@ -32,7 +32,6 @@ const authMiddleware = async (req, res, next) => {
 
     req.user = finalUser;
   }
-
   next()
 }
 
@@ -40,7 +39,6 @@ const csrfMiddleware = (err, req, res, next) => {
   if (err.code !== 'EBADCSRFTOKEN') return next(err)
 
   return res.status(403).send({ "code": 403, message: "Esta acción no está permitida" })
-
 }
 
 const permissionMiddleware = (req, res, next) => {
@@ -51,8 +49,12 @@ const permissionMiddleware = (req, res, next) => {
   endpoint.shift();
   const role = endpointsRoles[req.user.role];
   const method = role[req.method];
-  console.log(method);
-  if (method != null && method.find((request) => endpoint.join("/").match(request))) return next();
+
+  let uuid = "\\b[0-9a-f]{8}\\b-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-\\b[0-9a-f]{12}\\b";
+
+  if (method != null && method.find((request) => {
+    return endpoint.join("/").match(RegExp(request.replace(":id", uuid), "gi"));
+  })) return next();
 
   return res.status(401).send({ "code": 401, message: "Permisos insuficientes" })
 }

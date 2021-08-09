@@ -15,6 +15,7 @@ const ZONES = require("./js/ZONES.csv.json");
 const categoriesxclient = require("./js/categoriesxclient.csv.json")
 const report_types = require("./js/report_types.json")
 const products = require('./js/productos.json')
+const FORMATOS = require("./js/TABLA FORMATO (1).csv.json")
 
 const prisma = new PrismaClient()
 const bcrypt = require('bcrypt-nodejs');
@@ -36,7 +37,7 @@ async function main() {
         }
       }
     }
-  }) */
+  })
 
   const result = await prisma.account.create({
     data:{
@@ -49,15 +50,15 @@ async function main() {
           role: user_role.client,
           clients:{
             connect:{
-              id: '45d99fcb-4596-410f-a42e-2f8f4f31e8fa'
+              id: 'ab97a3d6-680a-4680-ac56-a99ceb8647a9'
             }
           }
         }
       }
     }
-  })
+  })*/
 
-  console.log(result);
+  await productsUpload();
 }
 
 
@@ -75,7 +76,7 @@ async function migrate() {
   await periodReports();
   await client();
   await coverages();
-  await productsUpload()
+  //await productsUpload()
 }
 
 async function productsUpload() {
@@ -92,14 +93,18 @@ async function productsUpload() {
           },
           chains: {
             create: {
-              client: {
-                connect: {
-                  id: '45d99fcb-4596-410f-a42e-2f8f4f31e8fa'
-                }
-              },
               chain: {
                 connect: {
                   name: CHAINS.find((chain) => chain.ID == product.chainId).NOMBRE.capitalize()
+                }
+              }
+            }
+          },
+          clients: {
+            create: {
+              client: {
+                connect: {
+                  id: "ab97a3d6-680a-4680-ac56-a99ceb8647a9"
                 }
               }
             }
@@ -359,16 +364,27 @@ async function branches() {
 }
 
 async function chains() {
-  const result = await prisma.chain.createMany({
-    data: CHAINS.map((chain) => {
-      return {
-        name: chain.NOMBRE.capitalize()
-      }
-    }),
-    skipDuplicates: true
-  })
+  for (const chain of CHAINS) {
+    const format = FORMATOS.find((f) => f['CADENA ASOCIADA'] == chain.NOMBRE);
 
-  console.log(result.count);
+    const result = await prisma.chain.create({
+      data: {
+        name: chain.NOMBRE.capitalize(),
+        format: {
+          connectOrCreate: {
+            create: {
+              name: format.NOMBRE.capitalize()
+            },
+            where: {
+              name: format.NOMBRE.capitalize()
+            }
+          }
+        }
+      }
+    })
+    console.log(result);
+  }
+
 }
 
 async function zones() {

@@ -176,6 +176,12 @@ class BranchesController {
       }
     }
 
+    if (query.byzone) {
+      filter.zone = {
+        name: query.byzone
+      }
+    }
+
     return new Promise((resolve, reject) => {
       this.branches.findMany({
         orderBy: {

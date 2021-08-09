@@ -40,6 +40,7 @@ const routesMiddlewares = (rateLimiter) => {
 
   router.use("/auth", require("./auth/auth.router")(rateLimiter));
   router.use("/api", require("./comercials/comercials.router"));
+  router.use("/api", require("./products/products.router"));
   router.use("/api", require("./periods/periods.router"));
   router.use("/api", require("./coordinators/coordinators.router"));
   router.use("/api", require("./supervisors/supervisors.router"));

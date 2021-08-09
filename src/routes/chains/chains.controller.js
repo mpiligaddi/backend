@@ -180,6 +180,14 @@ class ChainsController {
         }
       }
 
+      if (query.format) {
+        filter.format = {
+          name: {
+            equals: query.format
+          }
+        }
+      }
+
       this.chains.findMany({
         orderBy: {
           name: ['asc', 'desc'].find((order) => order == query.orderby) || 'asc'
