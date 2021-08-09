@@ -76,6 +76,12 @@ class ProductsController {
         }
       }
 
+      if(query.bytype){
+        filters.type = {
+          equals: stock_type[query.bytype] ?? undefined
+        }
+      }
+
       const result = await this.products.findMany({
         where: filters,
         skip: query.start,
