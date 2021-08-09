@@ -189,13 +189,13 @@ class BranchesController {
         },
         where: {
           ...filter,
-          AND: {
-            NOT: {
-              coverages: {
-                none: {}
-              }
+
+          NOT: {
+            coverages: {
+              none: {}
             }
           }
+
         },
         skip: query.start,
         take: query.end,
@@ -217,7 +217,14 @@ class BranchesController {
         }
       }).then(async (result) => {
         const maxCount = await this.branches.count({
-          where: filter
+          where: {
+            ...filter,
+            NOT: {
+              coverages: {
+                none: {}
+              }
+            }
+          }
         });
         if (result.length == 0) return reject({ code: 200, message: "No se encontraron sucursales.", branches: [] });
         return resolve({ code: 200, message: "Sucursales encontradas con éxito", total: maxCount, hasMore: (query.start || 0) + (query.end || maxCount) < maxCount, branches: result });
