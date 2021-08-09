@@ -1,59 +1,68 @@
 const endpointsRoles = {
   merchandiser: {
     GET: [
-     "^profile$",
-     "^profile/reports$",
-     "^clients$",
-     "^branches$",
-     "^chains$",
-     "^categories$",
-     "^products$",
-     "^products/:id$"
+      "^profile$",
+      "^profile/reports$",
+      "^clients$",
+      "^branches$",
+      "^chains$",
+      "^categories$",
+      "^products$",
+      "^products/:id$"
     ],
     POST: [
-     "^reports$"
+      "^reports$"
     ]
   },
   client: {
     GET: [
-     "^profile$",
-     "^profile/reports$",
-     "^branches$",
-     "^chains$",
-     "^categories$",
-     "^periods$",
-     "^reports$"
+      "^profile$",
+      "^profile/reports$",
+      "^branches$",
+      "^chains$",
+      "^categories$",
+      "^periods$",
+      "^reports$"
     ]
   },
   backoffice: {
     GET: [
-     "^profile$",
-     "^profile/reports$",
-     "^clients$",
-     "^clients/:id$",
-     "^branches$",
-     "^branches/:id$",
-     "^chains$",
-     "^chains/:id$",
-     "^categories$",
-     "^periods$"
+      "^profile$",
+      "^profile/reports$",
+      "^clients$",
+      "^clients/:id$",
+      "^branches$",
+      "^branches/:id$",
+      "^chains$",
+      "^chains/:id$",
+      "^categories$",
+      "^periods$",
+      "^products$",
+      "^products/:id$"
     ],
     POST: [
-     "^reports$"
+      "^reports$",
+      "^clients$",
+      "^branches$",
+      "^chains$",
+      "^periods$",
+      "^products$",
     ],
     PUT: [
-     "^reports$",
-     "^profile$",
-     "^clients$",
-     "^branches$",
-     "^chains$"
+      "^profile$",
+      "^reports/:id$",
+      "^clients$/:id",
+      "^branches/:id$",
+      "^chains/:id$",
+      "^products/:id$"
     ],
     PATCH: [
-     "^reports$",
-     "^profile$",
-     "^clients$",
-     "^branches$",
-     "^chains$"
+      "^profile$",
+      "^reports/:id$",
+      "^clients$/:id",
+      "^branches/:id$",
+      "^chains/:id$",
+      "^products/:id$"
     ]
   }
 }
