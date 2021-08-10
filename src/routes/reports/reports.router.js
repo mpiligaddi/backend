@@ -6,6 +6,8 @@ const fs = require('fs');
 const path = require('path');
 const { createFile } = require("../../utils/images.utils");
 const { user_role } = require("@prisma/client");
+const { header, query, body } = require("express-validator");
+const { validateBody } = require("../../middlewares/validators.middleware");
 
 const router = express.Router();
 const controller = new ReportsController();
@@ -15,7 +17,36 @@ var upload = multer({ dest: "public/temp", preservePath: false })
 
 const path_url = "http://e.undervolt.io:3000/assets";
 
-router.use("/reports", require("./types/types.router")(controller));
+
+router.patch("/images/:id/favorite", [
+  query("favorite", "Falta marcar si es favorito o no").isBoolean(),
+  validateBody
+],
+  (req, res) => {
+    controller.favoriteReport({ id: req.params.id, favorite: req.query.favorite })
+      .then((r) => res.status(r.code).send(r))
+      .catch((c) => res.status(c.code).send(c))
+  });
+router.patch("/images/:id/delete", [
+  query("soft", "Es necesario marcar el tipo de borrado").isBoolean(),
+  body("delete", "Es necesario marcar si se quiere borrar").isBoolean(),
+  body("reason", "Es necesario marcar la razón de borrado").isIn(["Error de ejecución", "Mala calidad de fotografia", "No corresponde al cliente/cadena"]),
+  validateBody
+],
+  (req, res) => {
+    controller.deleteImage({ id: req.params.id, reason: req.body, soft: req.query.soft ?? false})
+      .then((r) => res.status(r.code).send(r))
+      .catch((c) => res.status(c.code).send(c))
+  });
+router.patch("/reports/:report/revised", [
+  query("revised", "Falta marcar si está revisado o no").isBoolean(),
+  validateBody
+],
+  (req, res) => {
+    controller.revisedReport({ id: req.params.report, revised: req.query.revised })
+      .then((r) => res.status(r.code).send(r))
+      .catch((c) => res.status(c.code).send(c))
+  });
 
 router.route("/reports/:report")
   .get((req, res) => {
@@ -29,10 +60,6 @@ router.route("/reports/:report")
       .catch((c) => res.status(c.code).send(c))
   })
 
-router.patch("/reports/:report/favorite", (req, res) => {
-
-})
-
 router.route("/reports")
   .post(upload.fields([{ name: "image", maxCount: 15 }, { name: "report", maxCount: 1 }]), (req, res) => {
     const report = JSON.parse(req.body.report);
@@ -41,7 +68,7 @@ router.route("/reports")
     const id = req.session.user.id;
 
     if (reportValidator.valid)
-       controller.createReport(id, report)
+      controller.createReport(id, report)
         .then((r) => {
           if (report.type == "photographic" && req.files.image != null && req.files.image.length > 0) {
             let directory = path.join(__dirname, "../../../public", id, r.report.id);
@@ -80,5 +107,7 @@ router.route("/reports")
       .then((r) => res.status(r.code).send(r))
       .catch((c) => res.status(c.code).send(c))
   })
+
+
 
 module.exports = router;

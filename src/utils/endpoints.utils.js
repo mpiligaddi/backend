@@ -38,7 +38,10 @@ const endpointsRoles = {
       "^categories$",
       "^periods$",
       "^products$",
-      "^products/:id$"
+      "^products/:id$",
+      "^zones/:id$",
+      "^zones$",
+      "^reports/:id$"
     ],
     POST: [
       "^reports$",
@@ -62,7 +65,10 @@ const endpointsRoles = {
       "^clients$/:id",
       "^branches/:id$",
       "^chains/:id$",
-      "^products/:id$"
+      "^products/:id$",
+      "^images/:id/favorite$",
+      "^reports/:id/revised$",
+      "^images/:id/delete$"
     ]
   }
 }

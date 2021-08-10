@@ -6,7 +6,7 @@ const authMiddleware = async (req, res, next) => {
   if (!req.session.isAuth) {
     return res.status(401).send({ "code": 401, message: "No se detectó ninguna sesión" })
   }
-  if (["POST", "GET", "UPDATE", "PATCH"].includes(req.method)) {
+  if (["POST", "GET", "UPDATE", "PATCH", "PUT"].includes(req.method)) {
     const userFetch = await prisma.user.findFirst({
       where: {
         id: req.session.user.id
@@ -43,6 +43,7 @@ const csrfMiddleware = (err, req, res, next) => {
 
 const permissionMiddleware = (req, res, next) => {
   var endpoint = req.url.split("?")[0].split("/");
+  if(!req.user) return res.status(500).send({code: 500, message: "Hubo un error al buscar la sesión"});
 
   if (req.user.role == user_role.superadmin) return next();
 

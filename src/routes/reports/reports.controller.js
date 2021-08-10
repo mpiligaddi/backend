@@ -388,7 +388,80 @@ class ReportsController {
     })
   }
 
-  async favoriteReport({ }) { }
+  async favoriteReport({ id, favorite }) {
+    return new Promise(async (resolve, reject) => {
+      const result = await this.imageReport.update({
+        where: {
+          id: id
+        },
+        data: {
+          favorite: favorite
+        },
+        select: {
+          id: true,
+          favorite: true,
+          name: true
+        }
+      });
+
+      if (result) {
+        return resolve({ code: 200, message: "Imagen actualizado con éxito", image: result })
+      } else {
+        return reject({ code: 500, message: "No se encontro la imagen" });
+      }
+
+    })
+  }
+
+  async revisedReport({ id, revised }) {
+    return new Promise(async (resolve, reject) => {
+      const result = await this.reports.update({
+        where: {
+          id: id
+        },
+        data: {
+          revised: revised
+        },
+        select: {
+          id: true,
+          revised: true
+        }
+      });
+
+      if (result) {
+        return resolve({ code: 200, message: "Reporte actualizado con éxito", report: result })
+      } else {
+        return reject({ code: 500, message: "No se encontro el reporte" });
+      }
+
+    })
+  }
+
+  async deleteImage({ id, reason, soft }) {
+    return new Promise(async (resolve, reject) => {
+      const result = await this.imageReport.update({
+        where: {
+          id: id
+        },
+        data: {
+          delete: reason.delete,
+          deleteReason: reason.reason
+        },
+        select: {
+          id: true,
+          delete: true,
+          deleteReason: true
+        }
+      });
+
+      if (result) {
+        return resolve({ code: 200, message: "Imagen actualizado con éxito", image: result })
+      } else {
+        return reject({ code: 500, message: "No se encontro la imagen" });
+      }
+
+    })
+  }
 }
 
 module.exports = ReportsController;
