@@ -41,6 +41,7 @@ const endpointsRoles = {
       "^products/:id$",
       "^zones/:id$",
       "^zones$",
+      "^reports$"
       "^reports/:id$"
     ],
     POST: [
