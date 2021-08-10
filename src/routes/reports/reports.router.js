@@ -41,9 +41,9 @@ router.route("/reports")
     const id = req.session.user.id;
 
     if (reportValidator.valid)
-      controller.createReport(id, report)
+       controller.createReport(id, report)
         .then((r) => {
-          if (req.files.image != null && req.files.image.length > 0) {
+          if (report.type == "photographic" && req.files.image != null && req.files.image.length > 0) {
             let directory = path.join(__dirname, "../../../public", id, r.report.id);
 
             if (!fs.existsSync(path.join(__dirname, "../../../public", id)))
@@ -65,7 +65,7 @@ router.route("/reports")
           return res.status(r.code).send(r);
         })
         .catch((c) => {
-          ;
+          console.log(c);
           return res.status(c.code).send(c);
         })
     else {

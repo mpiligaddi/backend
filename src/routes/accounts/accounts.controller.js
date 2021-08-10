@@ -163,29 +163,27 @@ class AccountsController {
         },
         skip: query.start,
         take: query.end,
-        include: {
+        select: {
+          id: true,
+          type: true,
+          revised: true,
+          isComplete: true,
+          createdAt: true,
+          branchId: !query.branch,
+          chainId: !query.chain,
+          clientId: !query.client,
+          creatorId: !query.creator,
           branch: query.branch ? {
             select: {
-              id: true,
+              address: true,
               displayName: true,
-              name: true
-            },
-          } : false,
-          categories: query.categories ? {
-            select: {
-              category: {
-                select: {
-                  name: true,
-                  id: true,
-                }
-              },
-              badCategory: true,
-              withoutStock: true,
-              ...reportFilter
+              name: true,
+              id: true
             }
           } : false,
           chain: query.chain ? {
             select: {
+              format: true,
               id: true,
               name: true,
             }
@@ -193,10 +191,44 @@ class AccountsController {
           client: query.client ? {
             select: {
               displayName: true,
+              name: true,
               id: true,
-              name: true
+              cuit: true
             }
-          } : false
+          } : false,
+          categories: query.categories ? {
+            select: {
+              badCategory: query.type == "photographic",
+              withoutStock: query.type == "photographic",
+              category: {
+                select: {
+                  name: true,
+                  id: true,
+                }
+              },
+              photos: query.type == "photographic",
+              breakevens: query.type == "breakeven" ? {
+                select: {
+                  product: true,
+                  status: true
+                }
+              } : false,
+            }
+          } : false,
+          creator: query.creator ? {
+            select: {
+              id: true,
+              email: true,
+              name: true,
+              role: true
+            }
+          } : false,
+          location: {
+            select: {
+              latitude: true,
+              longitude: true
+            }
+          }
         }
       }).then(async (result) => {
         const maxCount = await this.reports.count({
