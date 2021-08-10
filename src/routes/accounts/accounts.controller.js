@@ -136,15 +136,11 @@ class AccountsController {
         case report_types.photographic:
           reportFilter.photos = {
             select: {
-              images: {
-                select: {
-                  name: true,
-                  id: true,
-                  comment: true,
-                  delete: true,
-                  type: true,
-                }
-              }
+              name: true,
+              id: true,
+              comment: true,
+              delete: true,
+              type: true,
             }
           }
           break;
