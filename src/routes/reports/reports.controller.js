@@ -174,18 +174,14 @@ class ReportsController {
               if (type == report_types.photographic) {
                 current = {
                   photos: {
-                    create: {
-                      images: {
-                        create: cat.images.map((image) => {
-                          return {
-                            name: image.name,
-                            comment: image.comment,
-                            type: stock_type[image.type],
-                            uri: image.name,
-                          }
-                        })
+                    create: cat.images.map((image) => {
+                      return {
+                        name: image.name,
+                        comment: image.comment,
+                        type: stock_type[image.type],
+                        uri: image.name,
                       }
-                    }
+                    })
                   }
                 }
               }
@@ -262,11 +258,7 @@ class ReportsController {
                   id: true,
                 }
               },
-              photos: {
-                include: {
-                  images: true
-                }
-              }
+              photos: true
             }
           } : false,
           creator: query.creator ? {
@@ -336,11 +328,7 @@ class ReportsController {
                   id: true,
                 }
               },
-              photos: {
-                include: {
-                  images: true
-                }
-              }
+              photos: true
             }
           } : false,
           creator: query.creator ? {
@@ -405,11 +393,7 @@ class ReportsController {
                   id: true,
                 }
               },
-              photos: {
-                include: {
-                  images: true
-                }
-              }
+              photos: true
             }
           } : false,
           creator: query.creator ? {
