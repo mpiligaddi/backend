@@ -63,7 +63,7 @@ async function main() {
 
 
 async function migrate() {
- /*  await comercials();
+  await comercials();
   await backoffice();
   await coordinators();
   await supervisors();
@@ -75,7 +75,7 @@ async function migrate() {
   await category();
   await periodReports();
   await client();
-  await coverages(); */
+  await coverages();
   await productsUpload()
 }
 

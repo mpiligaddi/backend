@@ -42,7 +42,9 @@ const endpointsRoles = {
       "^zones/:id$",
       "^zones$",
       "^reports$",
-      "^reports/:id$"
+      "^reports/:id$",
+      "^comercials$",
+      "^comercials/:id$",
     ],
     POST: [
       "^reports$",
@@ -51,6 +53,7 @@ const endpointsRoles = {
       "^chains$",
       "^periods$",
       "^products$",
+      "^comercials$",
     ],
     PUT: [
       "^profile$",
@@ -58,7 +61,8 @@ const endpointsRoles = {
       "^clients$/:id",
       "^branches/:id$",
       "^chains/:id$",
-      "^products/:id$"
+      "^products/:id$",
+      "^comercials/:id$",
     ],
     PATCH: [
       "^profile$",
@@ -69,7 +73,8 @@ const endpointsRoles = {
       "^products/:id$",
       "^images/:id/favorite$",
       "^reports/:id/revised$",
-      "^images/:id/delete$"
+      "^images/:id/delete$",
+      "^comercials/:id$",
     ]
   }
 }
