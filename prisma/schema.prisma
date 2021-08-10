@@ -64,7 +64,7 @@ enum user_role {
 
 model Branch {
   id          String     @id @default(uuid())
-  name        String     @unique
+  name        String
   displayName String
   locality    String
   address     String
@@ -117,7 +117,7 @@ model Chain {
   branches Branch[]
   products ProductChain[]
   reports  Report[]
-  format   Format        @relation(fields: formatId, references: id)
+  format   Format         @relation(fields: formatId, references: id)
   formatId String
 }
 
@@ -177,7 +177,7 @@ model Report {
   chainId    String
   client     Client           @relation(fields: [clientId], references: [id])
   clientId   String
-  createdAt  Int
+  createdAt  DateTime         @default(now())
   creator    User             @relation(fields: [creatorId], references: [id])
   creatorId  String
   isComplete Boolean
@@ -197,61 +197,40 @@ model CategoryReport {
   badCategory  Boolean  @default(false)
   withoutStock Boolean  @default(false)
 
-  photos     PhotoReport[]
-  pricings   PricingReport[]
-  breakevens BreakevenReport[]
-}
-
-model BreakevenReport {
-  id               String                   @id @default(uuid())
-  report           CategoryReport?          @relation(fields: [categoryReportId], references: [id])
-  categoryReportId String?
-  products         ProductBreakevenReport[]
-}
-
-model PricingReport {
-  id               String                 @id @default(uuid())
-  products         ProductPricingReport[]
-  report           CategoryReport?        @relation(fields: [categoryReportId], references: [id])
-  categoryReportId String?
+  photos     ImageReport[]
+  pricings   ProductPricingReport[]
+  breakevens ProductBreakevenReport[]
 }
 
 model ProductPricingReport {
-  id              String         @id @default(uuid())
-  product         Product        @relation(fields: [productId], references: [id])
-  productId       String
-  pricing         Decimal        @default(0)
-  pricingReport   PricingReport? @relation(fields: [pricingReportId], references: [id])
-  pricingReportId String?
+  id         String          @id @default(uuid())
+  product    Product         @relation(fields: [productId], references: [id])
+  productId  String
+  pricing    Decimal         @default(0)
+  category   CategoryReport? @relation(fields: [categoryId], references: [id])
+  categoryId String?
 }
 
 model ProductBreakevenReport {
-  id                String           @id @default(uuid())
-  product           Product          @relation(fields: [productId], references: [id])
-  productId         String
-  status            Boolean          @default(false)
-  report            BreakevenReport? @relation(fields: [breakevenReportId], references: [id])
-  breakevenReportId String?
-}
-
-model PhotoReport {
-  id               String         @id @default(uuid())
-  category         CategoryReport @relation(fields: [categoryReportId], references: [id])
-  categoryReportId String
-  images           ImageReport[]
+  id         String          @id @default(uuid())
+  product    Product         @relation(fields: [productId], references: [id])
+  productId  String
+  status     Boolean         @default(false)
+  category   CategoryReport? @relation(fields: [categoryId], references: [id])
+  categoryId String?
 }
 
 model ImageReport {
-  id            String      @id @default(uuid())
-  name          String
-  favorite      Boolean     @default(false)
-  type          stock_type  @default(primary)
-  comment       String      @default("")
-  uri           String?
-  delete        Boolean     @default("false")
-  deleteReason  String      @default("")
-  photoReport   PhotoReport @relation(fields: [photoReportId], references: [id])
-  photoReportId String
+  category     CategoryReport? @relation(fields: [categoryId], references: [id])
+  categoryId   String?
+  id           String          @id @default(uuid())
+  name         String
+  favorite     Boolean         @default(false)
+  type         stock_type      @default(primary)
+  comment      String          @default("")
+  uri          String?
+  delete       Boolean         @default("false")
+  deleteReason String          @default("")
 }
 
 model Location {

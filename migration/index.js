@@ -14,7 +14,7 @@ const REPORTSCLIENTS = require("./js/REPORTSCLIENTS.csv.json")
 const ZONES = require("./js/ZONES.csv.json");
 const categoriesxclient = require("./js/categoriesxclient.csv.json")
 const report_types = require("./js/report_types.json")
-const products = require('./js/productos.json')
+const products = require('./js/SURTIDO PARA PRUEBA SAN IGNACIO NORMALIZADO.csv.json')
 const FORMATOS = require("./js/TABLA FORMATO (1).csv.json")
 
 const prisma = new PrismaClient()
@@ -25,12 +25,14 @@ String.prototype.capitalize = function () {
 };
 
 async function main() {
-  /* const result = await prisma.account.create({
-    data:{
+  await migrate();
+
+  await prisma.account.create({
+    data: {
       email: "clopez@dgroupsa.com.ar",
       password: bcrypt.hashSync("chek-clopez", bcrypt.genSaltSync()),
       user: {
-        create:{
+        create: {
           email: "clopez@dgroupsa.com.ar",
           name: "Christian López",
           role: user_role.superadmin,
@@ -39,31 +41,29 @@ async function main() {
     }
   })
 
-  const result = await prisma.account.create({
-    data:{
+  await prisma.account.create({
+    data: {
       email: "sanignacio@gmail.com",
       password: bcrypt.hashSync("chek-sanignacio", bcrypt.genSaltSync()),
       user: {
-        create:{
+        create: {
           email: "sanignacio@gmail.com",
           name: "San Ignacio",
           role: user_role.client,
-          clients:{
-            connect:{
-              id: 'ab97a3d6-680a-4680-ac56-a99ceb8647a9'
+          clients: {
+            connect: {
+              cuit: "30-55945309-5"
             }
           }
         }
       }
     }
-  })*/
-
-  await productsUpload();
+  })
 }
 
 
 async function migrate() {
-  await comercials();
+ /*  await comercials();
   await backoffice();
   await coordinators();
   await supervisors();
@@ -75,8 +75,8 @@ async function migrate() {
   await category();
   await periodReports();
   await client();
-  await coverages();
-  //await productsUpload()
+  await coverages(); */
+  await productsUpload()
 }
 
 async function productsUpload() {
@@ -85,17 +85,17 @@ async function productsUpload() {
     try {
       const result = await prisma.product.create({
         data: {
-          name: product.skuId.capitalize(),
+          name: product.NOMBRE.capitalize(),
           category: {
             connect: {
-              name: CATEGORIES.find((cat) => cat['ID CAT'] == product.catId).NOMBRE.capitalize(),
+              name: CATEGORIES.find((cat) => cat['ID CAT'] == product.CATEGORIA).NOMBRE.capitalize(),
             }
           },
           chains: {
             create: {
               chain: {
                 connect: {
-                  name: CHAINS.find((chain) => chain.ID == product.chainId).NOMBRE.capitalize()
+                  name: CHAINS.find((chain) => chain.ID == product.CADENA).NOMBRE.capitalize()
                 }
               }
             }
@@ -104,12 +104,12 @@ async function productsUpload() {
             create: {
               client: {
                 connect: {
-                  id: "ab97a3d6-680a-4680-ac56-a99ceb8647a9"
+                  cuit: "30-55945309-5"
                 }
               }
             }
           },
-          type: product.primary ? stock_type.primary : stock_type.secondary,
+          type: product.CONDICION == 1 ? stock_type.primary : stock_type.secondary,
         }
       })
 
@@ -145,7 +145,7 @@ async function coverages() {
 
     const clientDB = await prisma.client.findFirst({
       where: {
-        cuit:client.CUIIT
+        cuit: client.CUIIT
       }
     })
 
@@ -341,7 +341,7 @@ async function branches() {
 
     const result = await prisma.branch.create({
       data: {
-        name: `${branch.NOMBRE} (${branch['N° SUC']})`.capitalize(),
+        name: `${branch.BOCA}`.capitalize(),
         displayName: branch.NOMBRE.capitalize(),
         address: branch.DIRECCION.capitalize(),
         locality: branch.Localidad.capitalize(),
