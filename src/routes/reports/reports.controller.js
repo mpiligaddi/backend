@@ -138,7 +138,7 @@ class ReportsController {
     return new Promise((resolve, reject) => {
       this.reports.create({
         data: {
-          createdAt,
+          createdAt: new Date(createdAt),
           isComplete,
           type,
           creator: {
