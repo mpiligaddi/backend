@@ -57,7 +57,7 @@ const reportSchema = (report) => {
               type: "string",
             },
             price: {
-              type: "boolean"
+              type: "number"
             }
           }
         }
