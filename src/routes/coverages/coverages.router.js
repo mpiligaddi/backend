@@ -42,6 +42,8 @@ router.route("/coverages/:id")
   .put([
     body("intensity", "Faltó ingresar la intensidad").isNumeric(),
     body("frecuency", "Faltó ingresar la frecuencia").isNumeric(),
+    body("client", "Faltó ingresar el cliente").isUUID(),
+    body("branch", "Faltó ingresar la sucursal").isUUID(),
     validateBody
   ], (req, res) => {
     controller.updateCoverage({ search: req.params.id, data: req.body, query: req.query })

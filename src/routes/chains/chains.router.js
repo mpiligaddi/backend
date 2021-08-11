@@ -23,8 +23,8 @@ router.route("/chains")
     controller.getChains({ query: req.query })
       .then((r) => res.status(r.code).send(r))
       .catch((c) => {
-        ;
-        res.status(c.code).send(c)
+        console.log(c);
+        return res.status(c.code).send(c)
       })
   })
 

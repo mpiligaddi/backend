@@ -11,11 +11,12 @@ const authMiddleware = async (req, res, next) => {
       where: {
         id: req.session.user.id
       },
-      include: {
-        clients: {
-          take: 2,
+      select: {
+        client:{
           select: {
-            id: true
+            name: true,
+            displayName: true,
+            cuit: true
           }
         }
       }
@@ -24,13 +25,7 @@ const authMiddleware = async (req, res, next) => {
     if (!userFetch)
       return res.status(500).send({ "code": 500, message: "Hubo un error al buscar la sesión" })
 
-    let { clients, ...user } = userFetch;
-
-    let finalUser = user
-
-    if (user.role == user_role.client) finalUser.client = clients[0].id;
-
-    req.user = finalUser;
+    req.user = userFetch;
   }
   next()
 }

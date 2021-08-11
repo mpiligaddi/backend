@@ -40,6 +40,16 @@ class CoveragesController {
         data: {
           frecuency: frecuency,
           intensity: intensity,
+          branch: data.branch ? {
+            connect: {
+              id: data.branch
+            }
+          } : {},
+          client: data.client ? {
+            connect: {
+              id: data.client
+            }
+          } : {}
         },
         include: {
           client: query.client ? {
@@ -86,7 +96,14 @@ class CoveragesController {
             select: {
               id: true,
               displayName: true,
-              name: true
+              name: true,
+              chain: {
+                select: {
+                  id: true,
+                  name: true,
+                  format: true
+                }
+              }
             }
           } : false,
         }
@@ -150,7 +167,14 @@ class CoveragesController {
             select: {
               id: true,
               displayName: true,
-              name: true
+              name: true,
+              chain: {
+                select: {
+                  id: true,
+                  name: true,
+                  format: true
+                }
+              }
             }
           } : false,
         }

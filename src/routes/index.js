@@ -20,13 +20,14 @@ const routesMiddlewares = (rateLimiter) => {
       saveUninitialized: false,
     })
   );
+
   router.use(cookieParser());
 
   router.use(
     csurf({
       cookie: {
         httpOnly: true,
-        maxAge:  1000 * 60 * 60 * 24 * 4,
+        maxAge: 1000 * 60 * 60 * 24 * 4,
         expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 4)
       },
     })

@@ -25,7 +25,7 @@ String.prototype.capitalize = function () {
 };
 
 async function main() {
-  await migrate();
+ /*  await migrate();
 
   await prisma.account.create({
     data: {
@@ -58,18 +58,20 @@ async function main() {
         }
       }
     }
-  })
+  }) */
+
+  await productsUpload();
 }
 
 
 async function migrate() {
- /*  await comercials();
+  await comercials();
   await backoffice();
   await coordinators();
   await supervisors();
   await merch();
   await zones();
-  await reportsTypes(); */
+  await reportsTypes();
   await chains();
   await branches();
   await category();
@@ -110,7 +112,7 @@ async function productsUpload() {
               }
             }
           },
-          type: product.CONDICION == 1 ? stock_type.primary : stock_type.secondary,
+          type: product.CONDICION == 0 ? stock_type.primary : stock_type.secondary,
         }
       })
 

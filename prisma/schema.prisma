@@ -53,6 +53,7 @@ model User {
   supervisor   Supervisor? @relation(fields: [supervisorId], references: [id])
   supervisorId String?
   reports      Report[]
+  client       Client?     @relation("client_account")
 }
 
 enum user_role {
@@ -100,6 +101,8 @@ model Client {
   periods     ClientPeriodReport[]
   coverages   Coverage[]
   products    ProductClient[]
+  user        User?                @relation("client_account", fields: userId, references: id)
+  userId      String?
 }
 
 model ClientCategory {
