@@ -88,6 +88,21 @@ class ReportsController {
                     })
                   }
                 }
+              } else {
+                current = {
+                  pricings: {
+                    create: cat.pricings.map((pricing) => {
+                      return {
+                        product: {
+                          connect: {
+                            id: pricing.product
+                          }
+                        },
+                        pricing: pricing.price
+                      }
+                    })
+                  }
+                }
               }
 
               return {

@@ -46,6 +46,23 @@ const reportSchema = (report) => {
         }
       }
     }
+  } else {
+    categories = {
+      pricings: {
+        type: "array",
+        items: {
+          type: "object",
+          properties: {
+            product: {
+              type: "string",
+            },
+            price: {
+              type: "boolean"
+            }
+          }
+        }
+      }
+    }
   }
 
   return {
