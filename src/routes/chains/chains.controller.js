@@ -7,11 +7,16 @@ class ChainsController {
     this.branches = prisma.branch;
   }
 
-  async createChain({ name }) {
+  async createChain({ name, format }) {
     return new Promise(async (resolve, reject) => {
       this.chains.create({
         data: {
-          name
+          name,
+          format: {
+            connect: {
+              id: format
+            }
+          }
         }
       }).then((result) => {
         return resolve({ code: 201, message: "Cadena creada con éxito!", chain: result })
@@ -30,6 +35,11 @@ class ChainsController {
         },
         data: {
           name: data.name,
+          format: {
+            connect: {
+              id: data.id
+            }
+          }
         },
         include: {
           branches: query.branches ? {
@@ -179,10 +189,10 @@ class ChainsController {
         }
       }
 
-      if (query.format) {
+      if (query.byformat) {
         filter.format = {
           name: {
-            equals: query.format
+            equals: query.byformat
           }
         }
       }
@@ -206,6 +216,7 @@ class ChainsController {
         take: query.end,
         where: filter,
         include: {
+          format: query.format,
           branches: query.branches ? {
             skip: +query.bstart || 0,
             take: +query.bend || 10,
