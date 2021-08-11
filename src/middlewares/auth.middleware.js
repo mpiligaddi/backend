@@ -11,8 +11,8 @@ const authMiddleware = async (req, res, next) => {
       where: {
         id: req.session.user.id
       },
-      select: {
-        client:{
+      include: {
+        client: {
           select: {
             name: true,
             displayName: true,
@@ -38,7 +38,7 @@ const csrfMiddleware = (err, req, res, next) => {
 
 const permissionMiddleware = (req, res, next) => {
   var endpoint = req.url.split("?")[0].split("/");
-  if(!req.user) return res.status(500).send({code: 500, message: "Hubo un error al buscar la sesión"});
+  if (!req.user) return res.status(500).send({ code: 500, message: "Hubo un error al buscar la sesión" });
 
   if (req.user.role == user_role.superadmin) return next();
 
