@@ -63,13 +63,13 @@ async function main() {
 
 
 async function migrate() {
-  await comercials();
+ /*  await comercials();
   await backoffice();
   await coordinators();
   await supervisors();
   await merch();
   await zones();
-  await reportsTypes();
+  await reportsTypes(); */
   await chains();
   await branches();
   await category();
@@ -86,6 +86,7 @@ async function productsUpload() {
       const result = await prisma.product.create({
         data: {
           name: product.NOMBRE.capitalize(),
+          sku: product.BASE,
           category: {
             connect: {
               name: CATEGORIES.find((cat) => cat['ID CAT'] == product.CATEGORIA).NOMBRE.capitalize(),

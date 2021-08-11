@@ -58,6 +58,7 @@ class ChainsController {
             select: {
               product: {
                 select: {
+                  sku: true,
                   id: true,
                   category: {
                     select: {
@@ -111,6 +112,7 @@ class ChainsController {
             select: {
               product: {
                 select: {
+                  sku: true,
                   id: true,
                   category: {
                     select: {
@@ -235,6 +237,7 @@ class ChainsController {
             select: {
               product: {
                 select: {
+                  sku: true,
                   id: true,
                   category: {
                     select: {

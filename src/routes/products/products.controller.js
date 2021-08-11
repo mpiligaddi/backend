@@ -36,6 +36,7 @@ class ProductsController {
               id: true
             }
           },
+          sku: true,
           id: true,
           name: true,
           type: true
@@ -90,6 +91,7 @@ class ProductsController {
           id: true,
           name: true,
           type: true,
+          sku: true,
           clients: query.clients ? {
             select: {
               client: {
@@ -146,6 +148,7 @@ class ProductsController {
           id: true,
           name: true,
           type: true,
+          sku: true,
           chains: query.chains ? {
             select: {
               chain: {
@@ -207,6 +210,7 @@ class ProductsController {
       data: {
         name: data.name,
         type: data.type,
+        sku: data.sku,
       }
     })
 

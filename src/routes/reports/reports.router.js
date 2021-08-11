@@ -96,6 +96,7 @@ router.route("/reports")
           return res.status(c.code).send(c);
         })
     else {
+      console.log(reportValidator.errors);
       return res.status(400).send({ code: 400, message: `${reportValidator.errors[0].property} es un valor erroneo, revisalo.` })
     }
   })

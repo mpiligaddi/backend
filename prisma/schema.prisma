@@ -243,6 +243,7 @@ model Location {
 model Product {
   id         String                   @id @default(uuid())
   name       String                   @unique
+  sku        String
   type       stock_type               @default(secondary)
   category   Category                 @relation(fields: [categoryId], references: [id])
   categoryId String
