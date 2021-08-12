@@ -247,7 +247,7 @@ model Location {
 model Product {
   id         String                   @id @default(uuid())
   name       String                   @unique
-  type       stock_type               @default(secondary)
+  type       stock_type               @default(primary)
   category   Category                 @relation(fields: [categoryId], references: [id])
   categoryId String
   chains     ProductChain[]
