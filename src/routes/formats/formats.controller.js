@@ -61,40 +61,6 @@ class FormatsController {
     });
   }
 
-  async editChainOfFormat(req, res) {
-    try {
-      await this.formats.update({
-        where: {
-          id: req.params.id,
-        },
-        data: {
-          chains: {
-            disconnect: {
-              id: req.params.oldChain,
-            },
-          },
-        },
-      });
-
-      const format = await this.formats.update({
-        where: {
-          id: req.params.id,
-        },
-        data: {
-          chains: {
-            connect: {
-              id: req.body.chainId,
-            },
-          },
-        },
-      });
-
-      res.status(200).json({ code: 200, format });
-    } catch (err) {
-      res.status(500).json({ code: 500, message: "Hubo un error al editar la cadena del formato" });
-    }
-  }
-
   async getFormat({ search, query }) {
     return new Promise((resolve, reject) => {
       this.formats
@@ -125,25 +91,28 @@ class FormatsController {
   }
 
   async deleteFormat(id, chainId) {
-    return new Promise((resolve, reject) => {
-      this.formats
-        .update({
-          where: {
-            id: id,
-          },
-          data: {
-            chains: {
-              disconnect: chainId,
+    try {
+      const format = await this.formats.update({
+        where: {
+          id: id,
+        },
+        data: {
+          chains: {
+            disconnect: {
+              id: chainId,
             },
           },
-        })
-        .then((result) => {
-          return resolve({ code: 200, message: "Se elimino el formato con éxito" });
-        })
-        .catch((error) => {
-          return reject({ code: 500, message: "Hubo un error al intentar borrar el formato" });
-        });
-    });
+        },
+      });
+
+      console.log(format);
+
+      return Promise.resolve({ code: 200, message: "Se elimino el formato con éxito" });
+    } catch (err) {
+      console.log(err);
+
+      return Promise.reject({ code: 500, message: "Hubo un error al intentar borrar el formato" });
+    }
   }
 
   async getFormats({ query }) {

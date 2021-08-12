@@ -235,6 +235,112 @@ class ProductsController {
     if (result) return resolve({ code: 200, message: "Producto actualizado con éxito", product: result });
     else return reject({ code: 500, message: "No se encontro ningún producto" });
   }
+
+  async getProductsChains(req, res) {
+    try {
+      const products = await prisma.productChain.findMany({
+        include: {
+          product: {
+            select: {
+              name: true,
+              category: {
+                select: {
+                  id: true,
+                },
+              },
+            },
+          },
+        },
+      });
+
+      const total = await prisma.productChain.count();
+
+      res.status(200).json({ code: 200, total, products });
+    } catch (err) {
+      console.log(err);
+      res.status(500).json({ code: 500, message: "Error al obtener los productos" });
+    }
+  }
+
+  async updateProductChain(req, res) {
+    const { chainId, name, categoryId } = req.body;
+
+    try {
+      const product = await prisma.productChain.update({
+        where: {
+          id: req.params.id,
+        },
+        data: {
+          chain: {
+            connect: {
+              id: chainId,
+            },
+          },
+          product: {
+            update: {
+              name,
+              category: {
+                connect: {
+                  id: categoryId,
+                },
+              },
+            },
+          },
+        },
+      });
+
+      console.log(product);
+
+      res.status(200).json({ code: 200, product });
+    } catch (err) {
+      console.log(err);
+      res.status(500).json({ code: 500, message: "Error al actualizar el producto" });
+    }
+  }
+
+  async deleteProductChain(req, res) {
+    try {
+      const product = await prisma.productChain.delete({
+        where: {
+          id: req.params.id,
+        },
+      });
+
+      res.status(200).json({ code: 200, product });
+    } catch (err) {
+      res.status(500).json({ code: 500, message: "Error al borrar el producto" });
+    }
+  }
+
+  async createProductChain(req, res) {
+    const { name, chainId, categoryId } = req.body;
+
+    try {
+      const product = await prisma.productChain.create({
+        data: {
+          chain: {
+            connect: {
+              id: chainId,
+            },
+          },
+          product: {
+            create: {
+              name,
+              category: {
+                connect: {
+                  id: categoryId,
+                },
+              },
+            },
+          },
+        },
+      });
+
+      res.status(200).json({ code: 200, product });
+    } catch (err) {
+      res.status(500).json({ code: 500, message: "Error al borrar el producto" });
+    }
+  }
 }
 
 module.exports = ProductsController;
