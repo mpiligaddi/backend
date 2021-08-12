@@ -62,6 +62,8 @@ class ReportsController {
 
               if (type == report_types.photographic) {
                 current = {
+                  badCategory: cat.badCategory,
+                  withoutStock: cat.withoutStock,
                   photos: {
                     create: cat.images.map((image) => {
                       return {
