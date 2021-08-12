@@ -1,6 +1,6 @@
 var express = require("express");
 const AuthController = require("./auth.controller");
-const { check } = require('express-validator');
+const { check } = require("express-validator");
 const { validateBody } = require("../../middlewares/validators.middleware");
 const { RateLimiterPostgres } = require("rate-limiter-flexible");
 const { authMiddleware } = require("../../middlewares/auth.middleware");
@@ -10,39 +10,41 @@ const { authMiddleware } = require("../../middlewares/auth.middleware");
  * @param {RateLimiterPostgres} rateLimiter
  */
 module.exports = (rateLimiter) => {
-
   var router = express.Router();
 
   const controller = new AuthController();
 
-  router.get("/", authMiddleware, (req, res) => {
-    const user = req.session.user;
+  router
+    .get("/", authMiddleware, (req, res) => {
+      const user = req.session.user;
 
-    req.session.regenerate((err) => {
-      if (err) return res.status(500).send({ code: 500, message: "Hubo un error al autenticar la sesión" });
-      req.session.isAuth = true;
-      req.session.user = {
-        id: user.id
-      };
-      return res.status(200).send({ code: 200, message: "Se reautenticó la sesión con éxito!", user: req.user });
+      req.session.regenerate((err) => {
+        if (err) return res.status(500).send({ code: 500, message: "Hubo un error al autenticar la sesión" });
+        req.session.isAuth = true;
+        req.session.user = {
+          id: user.id,
+        };
+        return res.status(200).send({ code: 200, message: "Se reautenticó la sesión con éxito!", user: req.user });
+      });
     })
-  }).delete("/", authMiddleware, (req, res) => {
-    req.session.destroy((err) => {
-      if (err) return res.status(500).send({ code: 500, message: "Hubo un error al desconectarlo de la cuenta" });
-      return res.status(200).send({ code: 200, message: "Se elimino la sesión actual." });
-    })
-  })
+    .delete("/", authMiddleware, (req, res) => {
+      req.session.destroy((err) => {
+        if (err) return res.status(500).send({ code: 500, message: "Hubo un error al desconectarlo de la cuenta" });
+        return res.status(200).send({ code: 200, message: "Se elimino la sesión actual." });
+      });
+    });
 
-
-  router.get('/csrf', (req, res) => {
+  router.get("/csrf", (req, res) => {
     res.send({ token: req.csrfToken() });
-  })
+  });
 
-  router.post("/login",
+  router.post(
+    "/login",
     check("password", "Faltó ingresar la contraseña").notEmpty(),
     check("email", "El email es incorrecto").isEmail(),
     check("remember", "Remember tiene que ser un boolean").isBoolean().optional({ nullable: false, checkFalsy: false }),
-    validateBody, (req, res) => {
+    validateBody,
+    (req, res) => {
       rateLimiter.get(req.ip).then((value) => {
         let retrySecs = 0;
 
@@ -51,7 +53,7 @@ module.exports = (rateLimiter) => {
         }
 
         if (retrySecs > 0) {
-          res.set('Retry-After', String(retrySecs));
+          res.set("Retry-After", String(retrySecs));
           return res.status(429).send({ code: 429, message: "Demasiadas peticiones." });
         }
 
@@ -60,7 +62,7 @@ module.exports = (rateLimiter) => {
           .then((r) => {
             req.session.isAuth = true;
             req.session.user = {
-              id: r.user.id
+              id: r.user.id,
             };
             if (req.body.remember) {
               let timeExpire = 1000 * 60 * 60 * 24 * 4;
@@ -70,23 +72,23 @@ module.exports = (rateLimiter) => {
             return res.status(r.code).send(r);
           })
           .catch((c) => {
-            rateLimiter.consume(req.ip)
-              .then(value => {
-                res.status(c.code).send(c)
+            rateLimiter
+              .consume(req.ip)
+              .then((value) => {
+                res.status(c.code).send(c);
               })
-              .catch(value => {
+              .catch((value) => {
                 if (value instanceof Error) {
-                  return res.status(503).send({ code: 503, message: "Hubo un error en el servidor" })
+                  return res.status(503).send({ code: 503, message: "Hubo un error en el servidor" });
                 } else {
-                  res.set('Retry-After', String(retrySecs));
+                  res.set("Retry-After", String(retrySecs));
                   return res.status(429).send({ code: 429, message: "Demasiadas peticiones." });
                 }
-              })
+              });
           });
       });
-
-
-    });
+    }
+  );
 
   return router;
 };

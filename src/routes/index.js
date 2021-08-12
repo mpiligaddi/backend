@@ -5,10 +5,10 @@ const session = require("express-session");
 const cookieParser = require("cookie-parser");
 const csurf = require("csurf");
 const { sessionStore } = require("../db/prisma.client");
+
 const router = Router();
 
 const routesMiddlewares = (rateLimiter) => {
-
   router.use(
     session({
       secret: "papurritesteo",
@@ -28,7 +28,7 @@ const routesMiddlewares = (rateLimiter) => {
       cookie: {
         httpOnly: true,
         maxAge: 1000 * 60 * 60 * 24 * 4,
-        expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 4)
+        expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 4),
       },
     })
   );
@@ -57,6 +57,6 @@ const routesMiddlewares = (rateLimiter) => {
   router.use("/api", require("./formats/formats.router"));
 
   return router;
-}
+};
 
 module.exports = routesMiddlewares;

@@ -103,6 +103,7 @@ model Client {
   products    ProductClient[]
   user        User?                @relation("client_account", fields: userId, references: id)
   userId      String?
+  control     Boolean?
 }
 
 model ClientCategory {
