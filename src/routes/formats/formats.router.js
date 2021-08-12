@@ -49,8 +49,6 @@ router
       });
   });
 
-router.route("/formats/:id/:oldChain").put([body("chainId", "el chainId es requerido").notEmpty(), validateBody], controller.editChainOfFormat);
-
 router
   .route("/formats/:id/:chainId")
   .post(controller.addChainToFormat)

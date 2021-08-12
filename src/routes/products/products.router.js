@@ -31,6 +31,10 @@ router
       });
   });
 
+router.route("/products/chains").get(controller.getProductsChains).post(controller.createProductChain);
+
+router.route("/products/chains/:id").put(controller.updateProductChain).delete(controller.deleteProductChain);
+
 router
   .route("/products/:id")
   .get((req, res) => {

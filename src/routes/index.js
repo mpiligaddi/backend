@@ -35,7 +35,7 @@ const routesMiddlewares = (rateLimiter) => {
 
   router.use(csrfMiddleware);
 
-  router.use("/api", authMiddleware, convertQuerys, permissionMiddleware);
+  router.use("/api", authMiddleware, convertQuerys);
 
   router.use("/assets", require("./assets/assets.router"));
 

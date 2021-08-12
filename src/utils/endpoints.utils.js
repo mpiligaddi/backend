@@ -1,29 +1,10 @@
 const endpointsRoles = {
   merchandiser: {
-    GET: [
-      "^profile$",
-      "^profile/reports$",
-      "^clients$",
-      "^branches$",
-      "^chains$",
-      "^categories$",
-      "^products$",
-      "^products/:id$"
-    ],
-    POST: [
-      "^reports$"
-    ]
+    GET: ["^profile$", "^profile/reports$", "^clients$", "^branches$", "^chains$", "^categories$", "^products$", "^products/:id$"],
+    POST: ["^reports$"],
   },
   client: {
-    GET: [
-      "^profile$",
-      "^profile/reports$",
-      "^branches$",
-      "^chains$",
-      "^categories$",
-      "^periods$",
-      "^reports$"
-    ]
+    GET: ["^profile$", "^profile/reports$", "^branches$", "^chains$", "^categories$", "^periods$", "^reports$"],
   },
   backoffice: {
     GET: [
@@ -52,29 +33,8 @@ const endpointsRoles = {
       "^formats$",
       "^formats/:id$",
     ],
-    POST: [
-      "^reports$",
-      "^clients$",
-      "^branches$",
-      "^chains$",
-      "^periods$",
-      "^products$",
-      "^comercials$",
-      "^coverages$",
-      "^formats$"
-    ],
-    PUT: [
-      "^profile$",
-      "^reports/:id$",
-      "^clients$/:id",
-      "^branches/:id$",
-      "^chains/:id$",
-      "^products/:id$",
-      "^comercials/:id$",
-      "^users/:id$",
-      "^coverages/:id$",
-      "^formats/:id$",
-    ],
+    POST: ["^reports$", "^clients$", "^branches$", "^chains$", "^periods$", "^products$", "^comercials$", "^coverages$", "^formats$"],
+    PUT: ["^profile$", "^reports/:id$", "^clients$/:id", "^branches/:id$", "^chains/:id$", "^products/:id$", "^comercials/:id$", "^users/:id$", "^coverages/:id$", "^formats/:id$"],
     PATCH: [
       "^profile$",
       "^reports/:id$",
@@ -90,19 +50,10 @@ const endpointsRoles = {
       "^coverages/:id$",
       "^formats/:id$",
     ],
-    DELETE: [
-      "^reports/:id$",
-      "^clients$/:id",
-      "^branches/:id$",
-      "^chains/:id$",
-      "^products/:id$",
-      "^comercials/:id$",
-      "^coverages/:id$",
-      "^formats/:id$",
-    ]
-  }
-}
+    DELETE: ["^reports/:id$", "^clients$/:id", "^branches/:id$", "^chains/:id$", "^products/:id$", "^comercials/:id$", "^coverages/:id$", "^formats/:id$", "^formats/:id/:chainId$"],
+  },
+};
 
 module.exports = {
-  endpointsRoles
-}
+  endpointsRoles,
+};

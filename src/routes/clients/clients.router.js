@@ -1,9 +1,10 @@
 const { body, header } = require("express-validator");
-var express = require("express");
+const { Router } = require("express");
 const { validateBody } = require("../../middlewares/validators.middleware");
+
 const ClientsController = require("./clients.controller");
 
-const router = express.Router();
+const router = Router();
 
 const controller = new ClientsController();
 
