@@ -47,44 +47,48 @@ class ChainsController {
           include: {
             branches: query.branches
               ? {
-                  select: {
-                    id: true,
-                    displayName: true,
-                    address: true,
-                    coverages: {
-                      select: {
-                        clientId: true,
-                      },
+                select: {
+                  id: true,
+                  displayName: true,
+                  address: true,
+                  coverages: {
+                    select: {
+                      clientId: true,
                     },
                   },
-                }
+                },
+              }
               : false,
             products: query.products
               ? {
-                  select: {
-                    product: {
-                      select: {
-                        sku: true,
-                        id: true,
-                        category: {
-                          select: {
-                            id: true,
-                            name: true,
-                          },
+                select: {
+                  product: {
+                    select: {
+                      id: true,
+                      category: {
+                        select: {
+                          id: true,
+                          name: true,
                         },
-                        name: true,
-                        type: true,
                       },
+                      name: true,
+                      secondarys: query.secondarys ? {
+                        select: {
+                          id: true,
+                          name: true,
+                        }
+                      } : false,
                     },
                   },
-                }
+                },
+              }
               : false,
             reports: query.reports
               ? {
-                  select: {
-                    id: true,
-                  },
-                }
+                select: {
+                  id: true,
+                },
+              }
               : false,
           },
         })
@@ -109,44 +113,48 @@ class ChainsController {
           include: {
             branches: query.branches
               ? {
-                  select: {
-                    id: true,
-                    displayName: true,
-                    address: true,
-                    coverages: {
-                      select: {
-                        clientId: true,
-                      },
+                select: {
+                  id: true,
+                  displayName: true,
+                  address: true,
+                  coverages: {
+                    select: {
+                      clientId: true,
                     },
                   },
-                }
+                },
+              }
               : false,
             products: query.products
               ? {
-                  select: {
-                    product: {
-                      select: {
-                        sku: true,
-                        id: true,
-                        category: {
-                          select: {
-                            id: true,
-                            name: true,
-                          },
+                select: {
+                  product: {
+                    select: {
+                      id: true,
+                      category: {
+                        select: {
+                          id: true,
+                          name: true,
                         },
-                        name: true,
-                        type: true,
                       },
+                      name: true,
+                      secondarys: query.secondarys ? {
+                        select: {
+                          id: true,
+                          name: true,
+                        }
+                      } : false,
                     },
                   },
-                }
+                },
+              }
               : false,
             reports: query.reports
               ? {
-                  select: {
-                    id: true,
-                  },
-                }
+                select: {
+                  id: true,
+                },
+              }
               : false,
           },
         })
@@ -265,46 +273,50 @@ class ChainsController {
             format: query.format,
             branches: query.branches
               ? {
-                  skip: +query.bstart || 0,
-                  take: +query.bend || 10,
-                  select: {
-                    id: true,
-                    displayName: true,
-                    address: true,
-                    coverages: {
-                      select: {
-                        clientId: true,
-                      },
+                skip: +query.bstart || 0,
+                take: +query.bend || 10,
+                select: {
+                  id: true,
+                  displayName: true,
+                  address: true,
+                  coverages: {
+                    select: {
+                      clientId: true,
                     },
                   },
-                }
+                },
+              }
               : false,
             products: query.products
               ? {
-                  select: {
-                    product: {
-                      select: {
-                        sku: true,
-                        id: true,
-                        category: {
-                          select: {
-                            id: true,
-                            name: true,
-                          },
+                select: {
+                  product: {
+                    select: {
+                      id: true,
+                      category: {
+                        select: {
+                          id: true,
+                          name: true,
                         },
-                        name: true,
-                        type: true,
                       },
+                      name: true,
+                      secondarys: query.secondarys ? {
+                        select: {
+                          id: true,
+                          name: true,
+                        }
+                      } : false,
                     },
                   },
-                }
+                },
+              }
               : false,
             reports: query.reports
               ? {
-                  select: {
-                    id: true,
-                  },
-                }
+                select: {
+                  id: true,
+                },
+              }
               : false,
           },
         })
