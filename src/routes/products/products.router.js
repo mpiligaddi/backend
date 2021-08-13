@@ -31,6 +31,10 @@ router
       });
   });
 
+router.route("/products/secondarys").get(controller.getSecondarysProducts).post(controller.createSecondaryProduct);
+
+router.route("/products/secondarys/:id").get(controller.getSecondaryProduct).put(controller.updateSecondaryProduct).delete(controller.deleteSecondaryProduct);
+
 router.route("/products/chains").get(controller.getProductsChains).post(controller.createProductChain);
 
 router.route("/products/chains/:id").put(controller.updateProductChain).delete(controller.deleteProductChain);

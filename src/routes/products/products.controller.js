@@ -1,4 +1,4 @@
-const { stock_type } = require("@prisma/client");
+
 const { prisma } = require("../../db/prisma.client");
 
 class ProductsController {
@@ -6,7 +6,7 @@ class ProductsController {
     this.products = prisma.product;
   }
 
-  async createProduct({ chain, client, category, name, type }) {
+  async createProduct({ chain, client, category, name }) {
     return new Promise(async (resolve, reject) => {
       const result = await this.products.create({
         data: {
@@ -25,8 +25,7 @@ class ProductsController {
             connect: {
               id: category,
             },
-          },
-          type: stock_type[type] ?? stock_type.primary,
+          }
         },
         select: {
           category: {
@@ -35,10 +34,8 @@ class ProductsController {
               id: true,
             },
           },
-          sku: true,
           id: true,
-          name: true,
-          type: true,
+          name: true
         },
       });
       if (result) return resolve({ code: 201, message: "Producto creado con éxito!", product: result.product });
@@ -72,12 +69,6 @@ class ProductsController {
         };
       }
 
-      if (query.bytype) {
-        filters.type = {
-          equals: stock_type[query.bytype] ?? undefined,
-        };
-      }
-
       const result = await this.products.findMany({
         where: filters,
         skip: query.start,
@@ -85,8 +76,6 @@ class ProductsController {
         select: {
           id: true,
           name: true,
-          type: true,
-          sku: true,
           secondarys: query.secondarys ? {
             select: {
               id: true,
@@ -168,8 +157,6 @@ class ProductsController {
             : false,
           id: true,
           name: true,
-          type: true,
-          sku: true,
           secondarys: query.secondarys ? {
             select: {
               id: true,
@@ -251,8 +238,6 @@ class ProductsController {
       },
       data: {
         name: data.name,
-        type: data.type,
-        sku: data.sku,
       },
     });
 
@@ -366,6 +351,132 @@ class ProductsController {
       res.status(500).json({ code: 500, message: "Error al borrar el producto" });
     }
   }
+
+  async createSecondaryProduct(req, res) {
+    let { category, name, primary } = req.body;
+    try {
+      const result = await prisma.productSecondary.create({
+        data: {
+          name: name,
+          Product: {
+            connect: {
+              id: primary
+            }
+          },
+          category: {
+            connect: {
+              id: category
+            }
+          }
+        }
+      });
+      return res.status(201).send({ code: 201, product: result });
+    } catch (error) {
+      res.status(500).send({ code: 500, message: "Error al crear el producto secundario" });
+    }
+  }
+
+  async getSecondarysProducts(req, res) {
+    try {
+      const products = await prisma.productSecondary.findMany({
+        include: {
+          Product: req.query.product ? {
+            select: {
+              id: true,
+              name: true,
+            }
+          } : false,
+          category: req.query.category ? {
+            select: {
+              id: true,
+              name: true
+            }
+          } : false
+        },
+      });
+
+      const total = await prisma.productSecondary.count();
+
+      res.status(200).json({ code: 200, total, products });
+    } catch (err) {
+      console.log(err);
+      res.status(500).json({ code: 500, message: "Error al obtener los productos" });
+    }
+  }
+
+  async getSecondaryProduct(req, res) {
+    try {
+      const product = await prisma.productSecondary.findUnique({
+        where: {
+          id: req.params.id
+        },
+        include: {
+          Product: req.query.product ? {
+            select: {
+              id: true,
+              name: true,
+            }
+          } : false,
+          category: req.query.category ? {
+            select: {
+              id: true,
+              name: true
+            }
+          } : false
+        },
+      });
+
+      res.status(200).json({ code: 200, product });
+    } catch (err) {
+      console.log(err);
+      res.status(500).json({ code: 500, message: "Error al obtener el producto" });
+    }
+  }
+
+  async updateSecondaryProduct(req, res) {
+    let { id, name, category, product } = req.body;
+
+    try {
+      const result = await prisma.productSecondary.update({
+        where: {
+          id: id,
+        },
+        data: {
+          name: name,
+          category: category ? {
+            connect: {
+              id: category
+            }
+          } : null,
+          Product: product ? {
+            connect: {
+              id: product
+            }
+          } : false
+        },
+      });
+
+      res.status(200).json({ code: 200, result });
+    } catch (err) {
+      console.log(err);
+      res.status(500).json({ code: 500, message: "Error al crear producto" });
+    }
+  }
+
+  async deleteSecondaryProduct(req, res) {
+    try {
+      const product = await prisma.productSecondary.delete({
+        where: {
+          id: req.params.id,
+        },
+      });
+
+      res.status(200).json({ code: 200, product });
+    } catch (err) {
+      res.status(500).json({ code: 500, message: "Error al borrar el producto" });
+    }
+  }
+
 }
 
 module.exports = ProductsController;
