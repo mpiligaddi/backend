@@ -30,7 +30,11 @@ module.exports = (rateLimiter) => {
             return req.cookies.token;
           }
 
-          return req.headers.authorization.split(" ")[1];
+          if (req.headers.authorization) {
+            return req.headers.authorization.split(" ")[1];
+          }
+
+          return null;
         },
       }),
       async (req, res) => {
