@@ -64,7 +64,6 @@ class ChainsController {
                   select: {
                     product: {
                       select: {
-                        sku: true,
                         id: true,
                         category: {
                           select: {
@@ -73,7 +72,14 @@ class ChainsController {
                           },
                         },
                         name: true,
-                        type: true,
+                        secondarys: query.secondarys
+                          ? {
+                              select: {
+                                id: true,
+                                name: true,
+                              },
+                            }
+                          : false,
                       },
                     },
                   },
@@ -126,7 +132,6 @@ class ChainsController {
                   select: {
                     product: {
                       select: {
-                        sku: true,
                         id: true,
                         category: {
                           select: {
@@ -135,7 +140,14 @@ class ChainsController {
                           },
                         },
                         name: true,
-                        type: true,
+                        secondarys: query.secondarys
+                          ? {
+                              select: {
+                                id: true,
+                                name: true,
+                              },
+                            }
+                          : false,
                       },
                     },
                   },
@@ -284,7 +296,6 @@ class ChainsController {
                   select: {
                     product: {
                       select: {
-                        sku: true,
                         id: true,
                         category: {
                           select: {
@@ -293,7 +304,14 @@ class ChainsController {
                           },
                         },
                         name: true,
-                        type: true,
+                        secondarys: query.secondarys
+                          ? {
+                              select: {
+                                id: true,
+                                name: true,
+                              },
+                            }
+                          : false,
                       },
                     },
                   },
