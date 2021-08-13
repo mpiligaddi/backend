@@ -87,38 +87,50 @@ class ProductsController {
           name: true,
           type: true,
           sku: true,
+          secondarys: query.secondarys ? {
+            select: {
+              id: true,
+              name: true,
+              category: {
+                select: {
+                  id: true,
+                  name: true
+                }
+              }
+            }
+          } : false,
           clients: query.clients
             ? {
-                select: {
-                  client: {
-                    select: {
-                      id: true,
-                      name: true,
-                      displayName: true,
-                    },
+              select: {
+                client: {
+                  select: {
+                    id: true,
+                    name: true,
+                    displayName: true,
                   },
                 },
-              }
+              },
+            }
             : false,
           chains: query.chains
             ? {
-                select: {
-                  chain: {
-                    select: {
-                      id: true,
-                      name: true,
-                    },
+              select: {
+                chain: {
+                  select: {
+                    id: true,
+                    name: true,
                   },
                 },
-              }
+              },
+            }
             : false,
           category: query.category
             ? {
-                select: {
-                  id: true,
-                  name: true,
-                },
-              }
+              select: {
+                id: true,
+                name: true,
+              },
+            }
             : false,
         },
       });
@@ -148,47 +160,59 @@ class ProductsController {
         select: {
           category: query.category
             ? {
-                select: {
-                  name: true,
-                  id: true,
-                },
-              }
+              select: {
+                name: true,
+                id: true,
+              },
+            }
             : false,
           id: true,
           name: true,
           type: true,
           sku: true,
+          secondarys: query.secondarys ? {
+            select: {
+              id: true,
+              name: true,
+              category: {
+                select: {
+                  id: true,
+                  name: true
+                }
+              }
+            }
+          } : false,
           chains: query.chains
             ? {
-                select: {
-                  chain: {
-                    select: {
-                      id: true,
-                      name: true,
-                      format: {
-                        select: {
-                          id: true,
-                          name: true,
-                        },
+              select: {
+                chain: {
+                  select: {
+                    id: true,
+                    name: true,
+                    format: {
+                      select: {
+                        id: true,
+                        name: true,
                       },
                     },
                   },
                 },
-              }
+              },
+            }
             : false,
           clients: query.clients
             ? {
-                select: {
-                  client: {
-                    select: {
-                      id: true,
-                      displayName: true,
-                      name: true,
-                      cuit: true,
-                    },
+              select: {
+                client: {
+                  select: {
+                    id: true,
+                    displayName: true,
+                    name: true,
+                    cuit: true,
                   },
                 },
-              }
+              },
+            }
             : false,
         },
       });
@@ -248,6 +272,7 @@ class ProductsController {
                   id: true,
                 },
               },
+              secondarys: req.query.secondarys
             },
           },
         },
