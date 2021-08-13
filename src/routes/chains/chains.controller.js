@@ -303,6 +303,7 @@ class ChainsController {
               ? {
                   select: {
                     id: true,
+                    revised: true,
                   },
                 }
               : false,

@@ -1,9 +1,13 @@
 var express = require("express");
 const AuthController = require("./auth.controller");
 const { check } = require("express-validator");
+const { prisma } = require("../../db/prisma.client");
 const { validateBody } = require("../../middlewares/validators.middleware");
 const { RateLimiterPostgres } = require("rate-limiter-flexible");
+const jwt = require("jsonwebtoken");
+const expressJwt = require("express-jwt");
 const { authMiddleware } = require("../../middlewares/auth.middleware");
+const { user_role } = require("@prisma/client");
 
 /**
  *
@@ -15,23 +19,41 @@ module.exports = (rateLimiter) => {
   const controller = new AuthController();
 
   router
-    .get("/", authMiddleware, (req, res) => {
-      const user = req.session.user;
+    .get(
+      "/",
+      expressJwt({
+        credentialsRequired: true,
+        secret: "secretword",
+        algorithms: ["HS256"],
+        getToken(req) {
+          if (req.cookies && req.cookies.token) {
+            return req.cookies.token;
+          }
 
-      req.session.regenerate((err) => {
-        if (err) return res.status(500).send({ code: 500, message: "Hubo un error al autenticar la sesión" });
-        req.session.isAuth = true;
-        req.session.user = {
-          id: user.id,
-        };
-        return res.status(200).send({ code: 200, message: "Se reautenticó la sesión con éxito!", user: req.user });
-      });
-    })
-    .delete("/", authMiddleware, (req, res) => {
-      req.session.destroy((err) => {
-        if (err) return res.status(500).send({ code: 500, message: "Hubo un error al desconectarlo de la cuenta" });
-        return res.status(200).send({ code: 200, message: "Se elimino la sesión actual." });
-      });
+          return req.headers.authorization.split(" ")[1];
+        },
+      }),
+      async (req, res) => {
+        const user = await prisma.user.findUnique({
+          where: {
+            id: req.user.user.id,
+          },
+          include: {
+            client: {
+              select: {
+                id: true,
+              },
+            },
+          },
+        });
+
+        res.json({ user });
+      }
+    )
+    .delete("/", (req, res) => {
+      res.clearCookie("token");
+
+      res.json({ message: "Logout con Exito" });
     });
 
   router.get("/csrf", (req, res) => {
@@ -60,15 +82,24 @@ module.exports = (rateLimiter) => {
         controller
           .tryLogin(req.body)
           .then((r) => {
-            req.session.isAuth = true;
-            req.session.user = {
-              id: r.user.id,
-            };
-            if (req.body.remember) {
-              let timeExpire = 1000 * 60 * 60 * 24 * 4;
-              req.session.cookie.expires = new Date(Date.now() + timeExpire);
-              req.session.cookie.maxAge = timeExpire;
-            }
+            const token = jwt.sign(
+              {
+                user: {
+                  id: r.user.id,
+                  role: r.user.role,
+                  clientId: r.user.role === user_role.client ? r.user?.client?.id : undefined,
+                },
+              },
+              "secretword",
+              {
+                expiresIn: "3d",
+              }
+            );
+
+            res.cookie("token", token, {
+              httpOnly: true,
+            });
+
             return res.status(r.code).send(r);
           })
           .catch((c) => {

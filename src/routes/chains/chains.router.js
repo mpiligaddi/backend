@@ -17,6 +17,10 @@ router
       .catch((c) => res.status(c.code).send(c));
   })
   .get((req, res) => {
+    if (req.user.user.role === user_role.client) {
+      req.query.byclient = req.user.user.clientId;
+    }
+
     controller
       .getChains({ query: req.query })
       .then((r) => res.status(r.code).send(r))

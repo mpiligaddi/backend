@@ -5,22 +5,11 @@ const session = require("express-session");
 const cookieParser = require("cookie-parser");
 const csurf = require("csurf");
 const { sessionStore } = require("../db/prisma.client");
+const jwt = require("express-jwt");
 
 const router = Router();
 
 const routesMiddlewares = (rateLimiter) => {
-  router.use(
-    session({
-      secret: "papurritesteo",
-      store: sessionStore,
-      cookie: {
-        secure: process.env.NODE_ENV === "production",
-      },
-      resave: false,
-      saveUninitialized: false,
-    })
-  );
-
   router.use(cookieParser());
 
   router.use(
@@ -35,7 +24,22 @@ const routesMiddlewares = (rateLimiter) => {
 
   router.use(csrfMiddleware);
 
-  router.use("/api", authMiddleware, convertQuerys);
+  router.use(
+    "/api",
+    jwt({
+      credentialsRequired: true,
+      secret: "secretword",
+      algorithms: ["HS256"],
+      getToken(req) {
+        if (req.cookies && req.cookies.token) {
+          return req.cookies.token;
+        }
+
+        return req.headers.authorization.split(" ")[1];
+      },
+    }),
+    convertQuerys
+  );
 
   router.use("/assets", require("./assets/assets.router"));
 
