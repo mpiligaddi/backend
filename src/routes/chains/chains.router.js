@@ -35,8 +35,8 @@ router.patch("/chains/:id/format", controller.changeFormat);
 router
   .route("/chains/:id")
   .get((req, res) => {
-    if (req.user.role == user_role.client) {
-      req.query.byclient = req.user.client;
+    if (req.user.user.role == user_role.client) {
+      req.query.byclient = req.user.user.clientId;
     }
     controller
       .getChain({ search: req.params.id, query: req.query })

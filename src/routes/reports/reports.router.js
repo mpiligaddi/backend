@@ -65,7 +65,7 @@ router.route("/reports")
     const report = JSON.parse(req.body.report);
     const reportValidator = validateReport(report);
 
-    const id = req.session.user.id;
+    const id = req.user.user.id;
 
     if (reportValidator.valid)
       controller.createReport(id, report)
@@ -101,8 +101,8 @@ router.route("/reports")
     }
   })
   .get((req, res) => {
-    if (req.user.role == user_role.client) {
-      req.query.byclient = req.user.client;
+    if (req.user.user.role == user_role.client) {
+      req.query.byclient = req.user.user.clientId;
     }
     controller.getReports({ query: req.query })
       .then((r) => res.status(r.code).send(r))

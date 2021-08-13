@@ -29,7 +29,7 @@ router.get("/profile", (req, res) => {
 });
 
 router.get("/profile/reports", (req, res) => {
-  return controller.getReportsByUser({ id: req.user.id, query: req.query })
+  return controller.getReportsByUser({ id: req.user.user.id, query: req.query })
     .then((r) => {
       return res.status(r.code).send(r);
     })
@@ -40,7 +40,7 @@ router.get("/profile/reports", (req, res) => {
 
 router.route("/accounts")
   .get((req, res) => {
-    if (req.user.role != 'superadmin') return res.status(403).send({ code: 403, message: "No tenes permisos para esta opción" })
+    if (req.user.user.role != 'superadmin') return res.status(403).send({ code: 403, message: "No tenes permisos para esta opción" })
 
     return controller.getAccounts({ query: req.query })
       .then((r) => res.status(r.code).send(r))
@@ -69,7 +69,7 @@ router.route("/accounts/:id")
   .get((req, res) => {
     const { id } = req.params;
 
-    if (id != req.session.user.id && req.user.role != 'superadmin') return res.status(403).send({ code: 403, message: "No tenes permisos para esta opción" })
+    if (id != req.session.user.id && req.user.user.role != 'superadmin') return res.status(403).send({ code: 403, message: "No tenes permisos para esta opción" })
 
     return controller.getAccount({ id: id, query: req.query })
       .then((r) => res.status(r.code).send(r))

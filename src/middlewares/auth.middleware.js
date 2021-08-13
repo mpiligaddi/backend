@@ -37,10 +37,10 @@ const permissionMiddleware = (req, res, next) => {
   var endpoint = req.url.split("?")[0].split("/");
   if (!req.user) return res.status(500).send({ code: 500, message: "Hubo un error al buscar la sesión" });
 
-  if (req.user.role == user_role.superadmin) return next();
+  if (req.user.user.role == user_role.superadmin) return next();
 
   endpoint.shift();
-  const role = endpointsRoles[req.user.role];
+  const role = endpointsRoles[req.user.user.role];
   const method = role[req.method];
 
   let uuid = "\\b[0-9a-f]{8}\\b-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-\\b[0-9a-f]{12}\\b";
