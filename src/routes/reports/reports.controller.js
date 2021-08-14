@@ -146,6 +146,9 @@ class ReportsController {
             },
             ...filter,
           },
+          orderBy: {
+            createdAt: "desc",
+          },
           skip: query.start,
           take: query.end,
           select: {
@@ -199,7 +202,14 @@ class ReportsController {
                         id: true,
                       },
                     },
-                    photos: query.type == "photographic",
+                    photos:
+                      query.type == "photographic"
+                        ? {
+                            where: {
+                              delete: false,
+                            },
+                          }
+                        : false,
                     breakevens:
                       query.type == "breakeven"
                         ? {
