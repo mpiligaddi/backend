@@ -110,8 +110,10 @@ class CategoriesController {
 
       if (query.byclient) {
         filters.clients = {
-          every: {
-            clientId: query.byclient
+          some:{
+            clientId:{
+              equals: query.byclient
+            }
           }
         }
       }
