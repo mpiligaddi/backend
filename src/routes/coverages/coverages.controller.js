@@ -12,124 +12,144 @@ class CoveragesController {
           data: {
             branch: {
               connect: {
-                id: branch
-              }
+                id: branch,
+              },
             },
             client: {
               connect: {
-                id: client
-              }
+                id: client,
+              },
             },
             frecuency: frecuency,
             intensity: intensity,
-          }
-        })
-        return resolve({ code: 201, message: "Anexo creado con éxito!", coverage: result })
+          },
+        });
+        return resolve({ code: 201, message: "Anexo creado con éxito!", coverage: result });
       } catch (error) {
-        return reject({ code: 500, message: "Hubo un error al crear el anexo" })
+        return reject({ code: 500, message: "Hubo un error al crear el anexo" });
       }
-    })
+    });
   }
 
   async updateCoverage({ search, data, query }) {
     return new Promise((resolve, reject) => {
-      this.coverages.update({
-        where: {
-          id: search
-        },
-        data: {
-          frecuency: frecuency,
-          intensity: intensity,
-          branch: data.branch ? {
-            connect: {
-              id: data.branch
-            }
-          } : {},
-          client: data.client ? {
-            connect: {
-              id: data.client
-            }
-          } : {}
-        },
-        include: {
-          client: query.client ? {
-            select: {
-              id: true,
-              displayName: true,
-              name: true
-            }
-          } : false,
-          branch: query.branch ? {
-            select: {
-              id: true,
-              displayName: true,
-              name: true
-            }
-          } : false,
-        }
-      }).then((result) => {
-        if (!result) return reject({ code: 200, message: "No se encontró el anexo" })
-        return resolve({ code: 200, message: "Se actualizó al anexo con éxito", coverage: result });
-      }).catch((error) => {
-        console.log(error);
-        return reject({ code: 500, message: "Hubo un error al intentar buscar el anexo" })
-      })
-    })
+      this.coverages
+        .update({
+          where: {
+            id: search,
+          },
+          data: {
+            frecuency: frecuency,
+            intensity: intensity,
+            branch: data.branch
+              ? {
+                  connect: {
+                    id: data.branch,
+                  },
+                }
+              : {},
+            client: data.client
+              ? {
+                  connect: {
+                    id: data.client,
+                  },
+                }
+              : {},
+          },
+          include: {
+            client: query.client
+              ? {
+                  select: {
+                    id: true,
+                    displayName: true,
+                    name: true,
+                  },
+                }
+              : false,
+            branch: query.branch
+              ? {
+                  select: {
+                    id: true,
+                    displayName: true,
+                    name: true,
+                  },
+                }
+              : false,
+          },
+        })
+        .then((result) => {
+          if (!result) return reject({ code: 200, message: "No se encontró el anexo" });
+          return resolve({ code: 200, message: "Se actualizó al anexo con éxito", coverage: result });
+        })
+        .catch((error) => {
+          console.log(error);
+          return reject({ code: 500, message: "Hubo un error al intentar buscar el anexo" });
+        });
+    });
   }
 
   async getCoverage({ search, query }) {
     return new Promise((resolve, reject) => {
-
-      this.coverages.findUnique({
-        where: {
-          id: search
-        },
-        include: {
-          client: query.client ? {
-            select: {
-              id: true,
-              displayName: true,
-              name: true
-            }
-          } : false,
-          branch: query.branch ? {
-            select: {
-              id: true,
-              displayName: true,
-              name: true,
-              chain: {
-                select: {
-                  id: true,
-                  name: true,
-                  format: true
+      this.coverages
+        .findUnique({
+          where: {
+            id: search,
+          },
+          include: {
+            client: query.client
+              ? {
+                  select: {
+                    id: true,
+                    displayName: true,
+                    name: true,
+                  },
                 }
-              }
-            }
-          } : false,
-        }
-      }).then((result) => {
-        if (!result) return reject({ code: 200, message: "No se encontró el anexo" })
-        return resolve({ code: 200, message: "Anexo encontrado con éxito.", coverage: result });
-      }).catch((error) => {
-        console.log(error);
-        return reject({ code: 500, message: "Hubo un error al intentar buscar el anexo" })
-      })
-    })
+              : false,
+            branch: query.branch
+              ? {
+                  select: {
+                    id: true,
+                    displayName: true,
+                    name: true,
+                    chain: {
+                      select: {
+                        id: true,
+                        name: true,
+                        format: true,
+                      },
+                    },
+                  },
+                }
+              : false,
+          },
+        })
+        .then((result) => {
+          if (!result) return reject({ code: 200, message: "No se encontró el anexo" });
+          return resolve({ code: 200, message: "Anexo encontrado con éxito.", coverage: result });
+        })
+        .catch((error) => {
+          console.log(error);
+          return reject({ code: 500, message: "Hubo un error al intentar buscar el anexo" });
+        });
+    });
   }
 
   async deleteCoverage(id) {
     return new Promise((resolve, reject) => {
-      this.coverages.delete({
-        where: {
-          id: id
-        }
-      }).then((result) => {
-        return resolve({ code: 200, message: "Se elimino el anexo con éxito" });
-      }).catch((error) => {
-        console.log(error);
-        return reject({ code: 500, message: "Hubo un error al intentar borrar el anexo" })
-      })
-    })
+      this.coverages
+        .delete({
+          where: {
+            id: id,
+          },
+        })
+        .then((result) => {
+          return resolve({ code: 200, message: "Se elimino el anexo con éxito" });
+        })
+        .catch((error) => {
+          console.log(error);
+          return reject({ code: 500, message: "Hubo un error al intentar borrar el anexo" });
+        });
+    });
   }
 
   async getCoverages({ query }) {
@@ -138,58 +158,66 @@ class CoveragesController {
 
       if (query.byclient) {
         filter.clientId = {
-          equals: query.byclient
-        }
+          equals: query.byclient,
+        };
       }
 
       if (query.bybranch) {
         filter.branchId = {
-          equals: query.bybranch
-        }
+          equals: query.bybranch,
+        };
       }
 
-      this.coverages.findMany({
-        orderBy: {
-          frecuency: ['asc', 'desc'].find((order) => order == query.orderby) || 'asc'
-        },
-        where: filters,
-        skip: query.start,
-        take: query.end,
-        include: {
-          client: query.client ? {
-            select: {
-              id: true,
-              displayName: true,
-              name: true
-            }
-          } : false,
-          branch: query.branch ? {
-            select: {
-              id: true,
-              displayName: true,
-              name: true,
-              chain: {
-                select: {
-                  id: true,
-                  name: true,
-                  format: true
+      this.coverages
+        .findMany({
+          orderBy: {
+            frecuency: ["asc", "desc"].find((order) => order == query.orderby) || "asc",
+          },
+          where: filters,
+          skip: query.start,
+          take: query.end,
+          include: {
+            client: query.client
+              ? {
+                  select: {
+                    id: true,
+                    displayName: true,
+                    name: true,
+                  },
                 }
-              }
-            }
-          } : false,
-        }
-      }).then(async (result) => {
-        const maxCount = await this.coverages.count({
-          where: filters
+              : false,
+            branch: query.branch
+              ? {
+                  select: {
+                    chain: {
+                      select: {
+                        name: true,
+                        id: true,
+                      },
+                    },
+                  },
+                }
+              : false,
+          },
+        })
+        .then(async (result) => {
+          const maxCount = await this.coverages.count({
+            where: filters,
+          });
+          return resolve({
+            code: 200,
+            message: result.length == 0 ? "No se encontraron anexos." : "Anexos encontrados con éxito",
+            total: maxCount,
+            hasMore: (query.start || 0) + (query.end || maxCount) < maxCount,
+            coverages: result,
+          });
+        })
+        .catch((error) => {
+          console.log(error);
+          return reject({ code: 500, message: "Hubo un error al intentar buscar los anexos." });
         });
-        return resolve({ code: 200, message: result.length == 0 ? "No se encontraron anexos." : "Anexos encontrados con éxito", total: maxCount, hasMore: (query.start || 0) + (query.end || maxCount) < maxCount, coverages: result });
-      }).catch((error) => {
-        console.log(error);
-        return reject({ code: 500, message: "Hubo un error al intentar buscar los anexos." })
-      })
-    })
+    });
   }
-
 }
 
 module.exports = CoveragesController;

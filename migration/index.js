@@ -25,47 +25,45 @@ String.prototype.capitalize = function () {
 };
 
 async function main() {
- /*  await migrate();
+    await migrate();
 
-  await prisma.account.create({
-    data: {
-      email: "clopez@dgroupsa.com.ar",
-      password: bcrypt.hashSync("chek-clopez", bcrypt.genSaltSync()),
-      user: {
-        create: {
-          email: "clopez@dgroupsa.com.ar",
-          name: "Christian López",
-          role: user_role.superadmin,
-        }
-      }
-    }
-  })
+   await prisma.account.create({
+     data: {
+       email: "clopez@dgroupsa.com.ar",
+       password: bcrypt.hashSync("chek-clopez", bcrypt.genSaltSync()),
+       user: {
+         create: {
+           email: "clopez@dgroupsa.com.ar",
+           name: "Christian López",
+           role: user_role.superadmin,
+         }
+       }
+     }
+   })
 
-  await prisma.account.create({
-    data: {
-      email: "sanignacio@gmail.com",
-      password: bcrypt.hashSync("chek-sanignacio", bcrypt.genSaltSync()),
-      user: {
-        create: {
-          email: "sanignacio@gmail.com",
-          name: "San Ignacio",
-          role: user_role.client,
-          clients: {
-            connect: {
-              cuit: "30-55945309-5"
-            }
-          }
-        }
-      }
-    }
-  }) */
-
-  await productsUpload();
+   await prisma.account.create({
+     data: {
+       email: "sanignacio@gmail.com",
+       password: bcrypt.hashSync("chek-sanignacio", bcrypt.genSaltSync()),
+       user: {
+         create: {
+           email: "sanignacio@gmail.com",
+           name: "San Ignacio",
+           role: user_role.client,
+           client: {
+             connect: {
+               cuit: "30-55945309-5"
+             }
+           }
+         }
+       }
+     }
+   })
 }
 
 
 async function migrate() {
-  await comercials();
+ /*  await comercials();
   await backoffice();
   await coordinators();
   await supervisors();
@@ -77,18 +75,35 @@ async function migrate() {
   await category();
   await periodReports();
   await client();
-  await coverages();
+  await coverages(); */
   await productsUpload()
 }
 
 async function productsUpload() {
-  for (const product of products) {
+  for (const product of products.filter((r) => {
+    return r.CONDICION == 0
+  })) {
 
     try {
+
+
       const result = await prisma.product.create({
         data: {
           name: product.NOMBRE.capitalize(),
-          sku: product.BASE,
+          secondarys: {
+            create: products.filter((r) => {
+              return r.CONDICION == 1 & r.BASE == product.BASE;
+            }).map((e) => {
+              return {
+                category: {
+                  connect: {
+                    name: CATEGORIES.find((cat) => cat['ID CAT'] == product.CATEGORIA).NOMBRE.capitalize(),
+                  },
+                },
+                name: e.NOMBRE,
+              }
+            })
+          },
           category: {
             connect: {
               name: CATEGORIES.find((cat) => cat['ID CAT'] == product.CATEGORIA).NOMBRE.capitalize(),
@@ -112,7 +127,6 @@ async function productsUpload() {
               }
             }
           },
-          type: product.CONDICION == 0 ? stock_type.primary : stock_type.secondary,
         }
       })
 
