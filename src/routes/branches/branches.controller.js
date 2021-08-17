@@ -142,6 +142,13 @@ class BranchesController {
       NOT: {}
     }
 
+    if (query.search) {
+      filter.name = {
+        contains: query.search,
+        mode: 'insensitive'
+      };
+    }
+
     if (query.bychain) {
       filter.chain = {
         id: {

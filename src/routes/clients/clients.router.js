@@ -19,6 +19,7 @@ router
       body("control").isBoolean().default(false),
       body("admin", "Faltó ingresar el backoffice").notEmpty(),
       body("comercial", "Faltó ingresar el comercial").notEmpty(),
+      body("email", "Faltó ingresar el correo").isEmail(),
       validateBody,
     ],
     (req, res) => {
@@ -59,6 +60,7 @@ router
       body("cuit", "Faltó ingresar el cuit").notEmpty(),
       body("admin", "Faltó ingresar el backoffice").notEmpty(),
       body("comercial", "Faltó ingresar el comercial").notEmpty(),
+      body("control").isBoolean().default(false),
       validateBody,
     ],
     (req, res) => {

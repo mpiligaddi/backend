@@ -1,4 +1,6 @@
+const { user_role } = require(".prisma/client");
 const { prisma } = require("../../db/prisma.client");
+const bcrypt = require('bcrypt-nodejs');
 
 class ClientsController {
   constructor() {
@@ -8,7 +10,7 @@ class ClientsController {
     this.reports = prisma.report;
   }
 
-  async createClient({ name, displayname, address, cuit, admin, comercial, control }) {
+  async createClient({ name, displayname, address, cuit, admin, comercial, control, email }) {
     return new Promise(async (resolve, reject) => {
       this.clients
         .create({
@@ -23,6 +25,24 @@ class ClientsController {
                 id: admin,
               },
             },
+            user:{
+              connectOrCreate:{
+                where:{
+                  email: email,
+                },
+                create:{
+                  email: email,
+                  name: name,
+                  role: user_role.client,
+                  account:{
+                    create: {
+                      email: email,
+                      password: bcrypt.hashSync(`chek-${name}`, bcrypt.genSaltSync()),
+                    }
+                  },
+                }
+              }
+            },
             comercial: {
               connect: {
                 id: comercial,
@@ -31,7 +51,7 @@ class ClientsController {
           },
         })
         .then((result) => {
-          return resolve({ code: 201, message: "Cliente creado con éxito!", client: result });
+          return resolve({ code: 201, message: "Cliente creado con éxito!", client: result, password: `chek-${name}` });
         })
         .catch((error) => {
           console.log(error);
@@ -247,6 +267,14 @@ class ClientsController {
           NOT: {},
         },
       };
+
+      if (query.search) {
+        filters.name = {
+          contains: query.search,
+          mode: 'insensitive'
+        };
+      }
+
       if (query.coverages == "only") {
         filters.NOT.coverages = {
           none: {},
