@@ -68,7 +68,7 @@ const reportSchema = (report) => {
   return {
     id: "/report",
     type: "object",
-    required: ["chainId", "clientId", "branchId", "createdAt", "isComplete", "type", "location", "categories",],
+    required: ["chainId", "clientId", "branchId", "isComplete", "type", "location", "categories",],
     properties: {
       chainId: {
         type: "string"
