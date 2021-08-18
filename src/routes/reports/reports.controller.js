@@ -535,6 +535,19 @@ class ReportsController {
       }
     });
   }
+
+  async deleteReport({id}){
+    try {
+      let result = await this.reports.delete({
+        where: {
+          id: id
+        },
+      })
+      return {code: 200, message: "Reporte eliminado correctamente"};
+    } catch (error) {
+      return {code: 400, message: "No se pudo eliminar el reporte"};
+    }
+  }
 }
 
 module.exports = ReportsController;
