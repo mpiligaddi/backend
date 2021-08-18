@@ -52,7 +52,7 @@ class ProductsController {
       };
 
       if (query.byclient) {
-        filters.chains.some.clientId = {
+        filters.clients.some.clientId = {
           equals: query.byclient,
         };
       }

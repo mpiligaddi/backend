@@ -80,17 +80,17 @@ router
               const success = [];
               const errors = [];
 
-              Promise.all(
-                req.files.image.map((file) => {
-                  return createFile(file, directory)
-                    .then((value) => {
-                      success.push(`${path_url}/${id}/${r.report.id}/${value}`);
-                    })
-                    .catch((value) => {
-                      errors.push(value);
-                    });
-                })
-              );
+              Promise.all(req.files.image.filter((file) => file.mimetype.startsWith("image")).map((file) => {
+                console.log(file);
+                return createFile(file, directory)
+                  .then((value) => {
+                    success.push(`${path_url}/${id}/${r.report.id}/${value}`);
+                  })
+                  .catch((value) => {
+                    console.log(value);
+                    return res.status(400).send({code: 400, message: "Error al crear una imagen"})
+                  });
+              }));
             }
             return res.status(r.code).send(r);
           })
