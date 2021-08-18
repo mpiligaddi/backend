@@ -1,3 +1,4 @@
+const { report_types } = require(".prisma/client");
 const { prisma } = require("../../db/prisma.client");
 
 class ChainsController {
@@ -246,12 +247,12 @@ class ChainsController {
         filter.NOT.reports = {
           none: {},
         };
-      } else if (query.reports == "revised") {
         filter.reports = {
           every: {
-            revised: true,
+            revised: query.reports == "revised",
+            type: report_types[query.reportType] ?? report_types.photographic
           },
-        };
+        }
       }
 
       if (query.byformat) {
@@ -272,8 +273,7 @@ class ChainsController {
         };
       }
 
-      this.chains
-        .findMany({
+      this.chains.findMany({
           orderBy: {
             name: ["asc", "desc"].find((order) => order == query.orderby) || "asc",
           },
@@ -329,6 +329,7 @@ class ChainsController {
                 select: {
                   id: true,
                   revised: true,
+                  type: true
                 },
               }
               : false,
