@@ -249,9 +249,8 @@ class ChainsController {
         }
         filter.reports = {
           every: {
-            revised: query.reportsrevised ?? false,
-            type: report_types[query.reporttype] ?? report_types.photographic
-          },
+            type: report_types[query.reporttype] ?? report_types.photographic,            
+          }
         }
       }
 
