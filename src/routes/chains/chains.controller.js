@@ -249,7 +249,7 @@ class ChainsController {
         }
         filter.reports = {
           every: {
-            type: report_types[query.reporttype] ?? report_types.photographic,            
+            type: report_types[query.reporttype] ?? report_types.photographic,
           }
         }
       }
@@ -313,6 +313,7 @@ class ChainsController {
                     secondarys: query.secondarys
                       ? {
                         select: {
+                          categoryId: true,
                           id: true,
                           name: true,
                         },

@@ -46,7 +46,7 @@ const reportSchema = (report) => {
         }
       }
     }
-  } else {
+  } else if(report.type == "pricing") {
     categories = {
       pricings: {
         type: "array",
@@ -88,7 +88,7 @@ const reportSchema = (report) => {
       },
       type: {
         type: "string",
-        pattern: /\b(photographic|breakeven|pricing)\b/gi
+        pattern: /\b(photographic|breakeven|pricing|sovi)\b/gi
       },
       location: {
         type: "object",
