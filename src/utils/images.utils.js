@@ -8,6 +8,7 @@ const { encode } = require("blurhash");
 async function createFile(file, directory, override = false) {
   return new Promise((resolve, reject) => {
     let fileName = file.originalname;
+    console.log(file.mimetype);
     if(!file.mimetype.startsWith("image"))  return reject({ message: "Archivo incorrecto", name: fileName })
     let filePathName = `${fileName}`.split(" ").join("").split(".");
     filePathName.pop();

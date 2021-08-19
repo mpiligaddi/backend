@@ -87,13 +87,18 @@ router
                     success.push(`${path_url}/${id}/${r.report.id}/${value}`);
                   })
                   .catch((value) => {
-                    controller.deleteReport({id: r.report.id}).then(() => {
-                      return res.status(400).send(value)
-                    })
+                    throw new Error(JSON.stringify(value));
                   });
-              }));
+              }))
+              .then(() => {
+                return res.status(r.code).send(r);
+              })
+              .catch((value) => {
+                controller.deleteReport({id: r.report.id}).then(() => {
+                  return res.status(400).json(JSON.parse(value.message))
+                })
+              });
             }
-            return res.status(r.code).send(r);
           })
           .catch((c) => {
             console.log(c);
