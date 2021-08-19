@@ -101,7 +101,7 @@ router
           });
       else {
         console.log(reportValidator.errors);
-        return res.status(400).send({ code: 400, message: `${reportValidator.errors.map((errors) => errors.argument).join(', ')} son incorrectos` });
+        return res.status(400).send({ code: 400, message: `${reportValidator.errors.map((errors) => errors.message).join(', ')}` });
       }
     }
   )

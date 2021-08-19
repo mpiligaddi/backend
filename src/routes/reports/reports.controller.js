@@ -97,7 +97,7 @@ class ReportsController {
                               id: pricing.product,
                             },
                           },
-                          pricing: pricing.price,
+                          pricing: pricing.price > 0 ? pricing.price : undefined,
                         };
                       }),
                     },
