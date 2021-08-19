@@ -80,10 +80,7 @@ router
               const success = [];
               const errors = [];
 
-              Promise.all(req.files.image.filter((file) => {
-                console.log(file)
-                return file.mimetype.startsWith("image")
-              }).map((file) => {
+              Promise.all(req.files.image.map((file) => {
                 console.log(file);
                 return createFile(file, directory)
                   .then((value) => {
