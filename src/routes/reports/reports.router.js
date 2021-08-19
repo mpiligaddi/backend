@@ -80,7 +80,10 @@ router
               const success = [];
               const errors = [];
 
-              Promise.all(req.files.image.filter((file) => file.mimetype.startsWith("image")).map((file) => {
+              Promise.all(req.files.image.filter((file) => {
+                print(file)
+                return file.mimetype.startsWith("image")
+              }).map((file) => {
                 console.log(file);
                 return createFile(file, directory)
                   .then((value) => {
@@ -100,7 +103,6 @@ router
             return res.status(c.code).send(c);
           });
       else {
-        console.log(reportValidator.errors);
         return res.status(400).send({ code: 400, message: `${reportValidator.errors.map((errors) => errors.message).join(', ')}` });
       }
     }
