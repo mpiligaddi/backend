@@ -81,7 +81,7 @@ router
               const errors = [];
 
               Promise.all(req.files.image.filter((file) => {
-                print(file)
+                console.log(file)
                 return file.mimetype.startsWith("image")
               }).map((file) => {
                 console.log(file);
