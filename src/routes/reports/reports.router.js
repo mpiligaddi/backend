@@ -16,6 +16,14 @@ var upload = multer({ dest: "public/temp", preservePath: false });
 
 const path_url = "http://e.undervolt.io:3000/assets";
 
+router.patch("/images", (req, res) => {
+  let reports = req.body;
+  let errors = [];
+
+  await Promise.all(reports.map((report) => controller.deleteImage({ id: report[0], reason: report[1] }).catch((e) => errors.push(report[0]))))
+  res.send({ message: errors.length == reports.length ? "No se eliminó ninguna imagen" : "Imagenes eliminadas con éxito", errors: errors })
+})
+
 router.patch("/images/:id/favorite", [query("favorite", "Falta marcar si es favorito o no").isBoolean(), validateBody], (req, res) => {
   controller
     .favoriteReport({ id: req.params.id, favorite: req.query.favorite })
@@ -119,13 +127,6 @@ router
       .getReports({ query: req.query })
       .then((r) => res.status(r.code).send(r))
       .catch((c) => res.status(c.code).send(c));
-  })
-  .delete(async (req, res) => {
-    let reports = req.body;
-    let errors = [];
-
-    await Promise.all(reports.map((report) => controller.deleteImage({ id: report[0], reason: report[1] }).catch((e) => errors.push(report[0]))))
-    res.send({message: errors.length == reports.length ? "No se eliminó ninguna imagen" : "Imagenes eliminadas con éxito", errors: errors})
   })
 
 module.exports = router;

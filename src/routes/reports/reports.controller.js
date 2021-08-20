@@ -202,14 +202,13 @@ class ReportsController {
                       id: true,
                     },
                   },
-                  photos:
-                    query.type == "photographic"
-                      ? {
-                        where: {
-                          delete: false,
-                        },
-                      }
-                      : false,
+                  photos: query.type == "photographic"
+                    ? {
+                      where: {
+                        delete: false,
+                      },
+                    }
+                    : false,
                   breakevens:
                     query.type == "breakeven"
                       ? {
