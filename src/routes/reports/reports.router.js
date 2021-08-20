@@ -16,7 +16,7 @@ var upload = multer({ dest: "public/temp", preservePath: false });
 
 const path_url = "http://e.undervolt.io:3000/assets";
 
-router.patch("/images", (req, res) => {
+router.patch("/images", async (req, res) => {
   let reports = req.body;
   let errors = [];
 
