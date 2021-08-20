@@ -163,74 +163,74 @@ class ReportsController {
             creatorId: !query.creator,
             branch: query.branch
               ? {
-                  select: {
-                    address: true,
-                    displayName: true,
-                    name: true,
-                    id: true,
-                  },
-                }
+                select: {
+                  address: true,
+                  displayName: true,
+                  name: true,
+                  id: true,
+                },
+              }
               : false,
             chain: query.chain
               ? {
-                  select: {
-                    format: true,
-                    id: true,
-                    name: true,
-                  },
-                }
+                select: {
+                  format: true,
+                  id: true,
+                  name: true,
+                },
+              }
               : false,
             client: query.client
               ? {
-                  select: {
-                    displayName: true,
-                    name: true,
-                    id: true,
-                    cuit: true,
-                  },
-                }
+                select: {
+                  displayName: true,
+                  name: true,
+                  id: true,
+                  cuit: true,
+                },
+              }
               : false,
             categories: query.categories
               ? {
-                  select: {
-                    id: true,
-                    badCategory: query.type == "photographic",
-                    withoutStock: query.type == "photographic",
-                    category: {
-                      select: {
-                        name: true,
-                        id: true,
-                      },
+                select: {
+                  id: true,
+                  badCategory: query.type == "photographic",
+                  withoutStock: query.type == "photographic",
+                  category: {
+                    select: {
+                      name: true,
+                      id: true,
                     },
-                    photos:
-                      query.type == "photographic"
-                        ? {
-                            where: {
-                              delete: false,
-                            },
-                          }
-                        : false,
-                    breakevens:
-                      query.type == "breakeven"
-                        ? {
-                            select: {
-                              product: true,
-                              status: true,
-                            },
-                          }
-                        : false,
                   },
-                }
+                  photos:
+                    query.type == "photographic"
+                      ? {
+                        where: {
+                          delete: false,
+                        },
+                      }
+                      : false,
+                  breakevens:
+                    query.type == "breakeven"
+                      ? {
+                        select: {
+                          product: true,
+                          status: true,
+                        },
+                      }
+                      : false,
+                },
+              }
               : false,
             creator: query.creator
               ? {
-                  select: {
-                    id: true,
-                    email: true,
-                    name: true,
-                    role: true,
-                  },
-                }
+                select: {
+                  id: true,
+                  email: true,
+                  name: true,
+                  role: true,
+                },
+              }
               : false,
             location: {
               select: {
@@ -284,66 +284,66 @@ class ReportsController {
             creatorId: !query.creator,
             branch: query.branch
               ? {
-                  select: {
-                    address: true,
-                    displayName: true,
-                    name: true,
-                    id: true,
-                  },
-                }
+                select: {
+                  address: true,
+                  displayName: true,
+                  name: true,
+                  id: true,
+                },
+              }
               : false,
             chain: query.chain
               ? {
-                  select: {
-                    format: true,
-                    id: true,
-                    name: true,
-                  },
-                }
+                select: {
+                  format: true,
+                  id: true,
+                  name: true,
+                },
+              }
               : false,
             client: query.client
               ? {
-                  select: {
-                    displayName: true,
-                    name: true,
-                    id: true,
-                    cuit: true,
-                  },
-                }
+                select: {
+                  displayName: true,
+                  name: true,
+                  id: true,
+                  cuit: true,
+                },
+              }
               : false,
             categories: query.categories
               ? {
-                  select: {
-                    badCategory: query.type == "photographic",
-                    withoutStock: query.type == "photographic",
-                    category: {
-                      select: {
-                        name: true,
-                        id: true,
-                      },
+                select: {
+                  badCategory: query.type == "photographic",
+                  withoutStock: query.type == "photographic",
+                  category: {
+                    select: {
+                      name: true,
+                      id: true,
                     },
-                    photos: query.type == "photographic",
-                    breakevens:
-                      query.type == "breakeven"
-                        ? {
-                            select: {
-                              product: true,
-                              status: true,
-                            },
-                          }
-                        : false,
                   },
-                }
+                  photos: query.type == "photographic",
+                  breakevens:
+                    query.type == "breakeven"
+                      ? {
+                        select: {
+                          product: true,
+                          status: true,
+                        },
+                      }
+                      : false,
+                },
+              }
               : false,
             creator: query.creator
               ? {
-                  select: {
-                    id: true,
-                    email: true,
-                    name: true,
-                    role: true,
-                  },
-                }
+                select: {
+                  id: true,
+                  email: true,
+                  name: true,
+                  role: true,
+                },
+              }
               : false,
             location: {
               select: {
@@ -384,66 +384,66 @@ class ReportsController {
             creatorId: !query.creator,
             branch: query.branch
               ? {
-                  select: {
-                    address: true,
-                    displayName: true,
-                    name: true,
-                    id: true,
-                  },
-                }
+                select: {
+                  address: true,
+                  displayName: true,
+                  name: true,
+                  id: true,
+                },
+              }
               : false,
             chain: query.chain
               ? {
-                  select: {
-                    format: true,
-                    id: true,
-                    name: true,
-                  },
-                }
+                select: {
+                  format: true,
+                  id: true,
+                  name: true,
+                },
+              }
               : false,
             client: query.client
               ? {
-                  select: {
-                    displayName: true,
-                    name: true,
-                    id: true,
-                    cuit: true,
-                  },
-                }
+                select: {
+                  displayName: true,
+                  name: true,
+                  id: true,
+                  cuit: true,
+                },
+              }
               : false,
             categories: query.categories
               ? {
-                  select: {
-                    badCategory: query.type == "photographic",
-                    withoutStock: query.type == "photographic",
-                    category: {
-                      select: {
-                        name: true,
-                        id: true,
-                      },
+                select: {
+                  badCategory: query.type == "photographic",
+                  withoutStock: query.type == "photographic",
+                  category: {
+                    select: {
+                      name: true,
+                      id: true,
                     },
-                    photos: query.type == "photographic",
-                    breakevens:
-                      query.type == "breakeven"
-                        ? {
-                            select: {
-                              product: true,
-                              status: true,
-                            },
-                          }
-                        : false,
                   },
-                }
+                  photos: query.type == "photographic",
+                  breakevens:
+                    query.type == "breakeven"
+                      ? {
+                        select: {
+                          product: true,
+                          status: true,
+                        },
+                      }
+                      : false,
+                },
+              }
               : false,
             creator: query.creator
               ? {
-                  select: {
-                    id: true,
-                    email: true,
-                    name: true,
-                    role: true,
-                  },
-                }
+                select: {
+                  id: true,
+                  email: true,
+                  name: true,
+                  role: true,
+                },
+              }
               : false,
             location: {
               select: {
@@ -512,7 +512,7 @@ class ReportsController {
   }
 
   async deleteImage({ id, reason, soft }) {
-    return new Promise(async (resolve, reject) => {
+    try {
       const result = await this.imageReport.update({
         where: {
           id: id,
@@ -528,24 +528,23 @@ class ReportsController {
         },
       });
 
-      if (result) {
-        return resolve({ code: 200, message: "Imagen actualizado con éxito", image: result });
-      } else {
-        return reject({ code: 500, message: "No se encontro la imagen" });
-      }
-    });
+      if (result)
+        return { code: 200, message: "Imagen actualizado con éxito", image: result };
+    } catch (error) {
+      throw new Error("No se encontro la imagen")
+    }
   }
 
-  async deleteReport({id}){
+  async deleteReport({ id }) {
     try {
       let result = await this.reports.delete({
         where: {
           id: id
         },
       })
-      return {code: 200, message: "Reporte eliminado correctamente"};
+      return { code: 200, message: "Reporte eliminado correctamente" };
     } catch (error) {
-      return {code: 400, message: "No se pudo eliminar el reporte"};
+      return { code: 400, message: "No se pudo eliminar el reporte" };
     }
   }
 }

@@ -36,7 +36,7 @@ router.patch("/reports/:report/revised", [query("revised", "Falta marcar si est�
   controller
     .revisedReport({ id: req.params.report, revised: req.query.revised })
     .then((r) => res.status(r.code).send(r))
-    .catch((c) => res.status(c.code).send(c));
+    .catch((c) => res.status(500).send({ message: c }));
 });
 
 router
@@ -53,6 +53,8 @@ router
       .then((r) => res.status(r.code).send(r))
       .catch((c) => res.status(c.code).send(c));
   });
+
+
 
 router
   .route("/reports")
@@ -90,14 +92,14 @@ router
                     throw new Error(JSON.stringify(value));
                   });
               }))
-              .then(() => {
-                return res.status(r.code).send(r);
-              })
-              .catch((value) => {
-                controller.deleteReport({id: r.report.id}).then(() => {
-                  return res.status(400).json(JSON.parse(value.message))
+                .then(() => {
+                  return res.status(r.code).send(r);
                 })
-              });
+                .catch((value) => {
+                  controller.deleteReport({ id: r.report.id }).then(() => {
+                    return res.status(400).json(JSON.parse(value.message))
+                  })
+                });
             }
           })
           .catch((c) => {
@@ -117,6 +119,13 @@ router
       .getReports({ query: req.query })
       .then((r) => res.status(r.code).send(r))
       .catch((c) => res.status(c.code).send(c));
-  });
+  })
+  .delete(async (req, res) => {
+    let reports = req.body;
+    let errors = [];
+
+    await Promise.all(reports.map((report) => controller.deleteImage({ id: report[0], reason: report[1] }).catch((e) => errors.push(report[0]))))
+    res.send({message: errors.length == reports.length ? "No se eliminó ninguna imagen" : "Imagenes eliminadas con éxito", errors: errors})
+  })
 
 module.exports = router;
