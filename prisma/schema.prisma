@@ -104,6 +104,7 @@ model Client {
   user        User?                @relation("client_account", fields: userId, references: id)
   userId      String?
   control     Boolean?
+  competences ClientCompetence[]
 }
 
 model ClientCategory {
@@ -282,6 +283,21 @@ model ProductChain {
   chainId   String
   product   Product @relation(fields: productId, references: id)
   productId String
+}
+
+model Competence {
+  id      String             @id @default(uuid())
+  name    String             @unique
+  clients ClientCompetence[]
+}
+
+model ClientCompetence {
+  client       Client     @relation(fields: [clientId], references: [id])
+  clientId     String
+  competence   Competence @relation(fields: [competenceId], references: [id])
+  competenceId String
+
+  @@id([clientId, competenceId])
 }
 
 enum stock_type {
