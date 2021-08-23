@@ -313,24 +313,22 @@ class ReportsController {
             categories: query.categories
               ? {
                 select: {
-                  badCategory: query.type == "photographic",
-                  withoutStock: query.type == "photographic",
+                  badCategory: true,
+                  withoutStock: true,
                   category: {
                     select: {
                       name: true,
                       id: true,
+
                     },
                   },
-                  photos: query.type == "photographic",
-                  breakevens:
-                    query.type == "breakeven"
-                      ? {
-                        select: {
-                          product: true,
-                          status: true,
-                        },
-                      }
-                      : false,
+                  photos: true,
+                  breakevens: {
+                    select: {
+                      product: true,
+                      status: true,
+                    },
+                  },
                 },
               }
               : false,
