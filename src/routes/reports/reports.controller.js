@@ -128,24 +128,25 @@ class ReportsController {
 
   async getReports({ query }) {
     return new Promise((resolve, reject) => {
-      let filter = {};
 
       query.type = report_types[query.type] ?? "photographic";
 
-      if (query.byclient) {
-        filter.clientId = {
-          equals: query.byclient,
-        };
-      }
+      let filter = {
+        type: {
+          equals: query.type,
+        },
+        revised: {
+          equals: query.revised
+        },
+        clientId: {
+          equals: query.byclient
+        }
+      };
+
 
       this.reports
         .findMany({
-          where: {
-            type: {
-              equals: query.type,
-            },
-            ...filter,
-          },
+          where: filter,
           orderBy: {
             createdAt: "desc",
           },
@@ -241,12 +242,7 @@ class ReportsController {
         })
         .then(async (result) => {
           const maxCount = await this.reports.count({
-            where: {
-              type: {
-                equals: query.type,
-              },
-              ...filter,
-            },
+            where: filter,
           });
 
           return resolve({
