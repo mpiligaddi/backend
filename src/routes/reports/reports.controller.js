@@ -140,13 +140,7 @@ class ReportsController {
         },
         clientId: {
           equals: query.byclient
-        },
-        chainId: {
-          equals: query.bychain
-        },
-        bybranch: {
-          equals: query.bybranch
-        },
+        }
       };
 
 
