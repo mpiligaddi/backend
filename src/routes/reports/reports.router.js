@@ -92,7 +92,6 @@ router
               const errors = [];
 
               Promise.all(req.files.image.map((file) => {
-                console.log(file);
                 return createFile(file, directory)
                   .then((value) => {
                     success.push(`${path_url}/${id}/${r.report.id}/${value}`);
@@ -110,6 +109,7 @@ router
                   })
                 });
             }
+            return res.status(r.code).send(r);
           })
           .catch((c) => {
             console.log(c);
