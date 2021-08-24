@@ -206,6 +206,34 @@ model CategoryReport {
   photos     ImageReport[]
   pricings   ProductPricingReport[]
   breakevens ProductBreakevenReport[]
+  sovis      SoviReport[]
+}
+
+model SoviReport {
+  id          String                 @id @default(uuid())
+  products    ProductSoviReport[]
+  competences CompetenceSoviReport[]
+  additionals SoviAdditional[]
+  category    CategoryReport?        @relation(fields: [categoryId], references: [id])
+  categoryId  String?
+}
+
+model ProductSoviReport {
+  id        String      @id @default(uuid())
+  product   Product     @relation(fields: [productId], references: [id])
+  productId String
+  faces     Int
+  sovi      SoviReport? @relation(fields: [soviId], references: [id])
+  soviId    String?
+}
+
+model CompetenceSoviReport {
+  id           String      @id @default(uuid())
+  competence   Competence  @relation(fields: [competenceId], references: [id])
+  competenceId String
+  faces        Int
+  sovi         SoviReport? @relation(fields: [soviId], references: [id])
+  soviId       String?
 }
 
 model ProductPricingReport {
@@ -257,6 +285,7 @@ model Product {
 
   pricings   ProductPricingReport[]
   breakevens ProductBreakevenReport[]
+  sovis      ProductSoviReport[]
 }
 
 model ProductSecondary {
@@ -286,9 +315,10 @@ model ProductChain {
 }
 
 model Competence {
-  id      String             @id @default(uuid())
-  name    String             @unique
+  id      String                 @id @default(uuid())
+  name    String                 @unique
   clients ClientCompetence[]
+  sovis   CompetenceSoviReport[]
 }
 
 model ClientCompetence {
@@ -298,6 +328,14 @@ model ClientCompetence {
   competenceId String
 
   @@id([clientId, competenceId])
+}
+
+model SoviAdditional {
+  id     String      @id @default(uuid())
+  name   String      @unique
+  faces  Int
+  sovi   SoviReport? @relation(fields: [soviId], references: [id])
+  soviId String?
 }
 
 enum stock_type {

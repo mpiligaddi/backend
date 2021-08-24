@@ -138,107 +138,106 @@ class ReportsController {
         };
       }
 
-      this.reports
-        .findMany({
-          where: {
-            type: {
-              equals: query.type,
-            },
-            ...filter,
+      this.reports.findMany({
+        where: {
+          type: {
+            equals: query.type,
           },
-          orderBy: {
-            createdAt: "desc",
-          },
-          skip: query.start,
-          take: query.end,
-          select: {
-            id: true,
-            type: true,
-            revised: true,
-            isComplete: true,
-            createdAt: true,
-            branchId: !query.branch,
-            chainId: !query.chain,
-            clientId: !query.client,
-            creatorId: !query.creator,
-            branch: query.branch
-              ? {
-                select: {
-                  address: true,
-                  displayName: true,
-                  name: true,
-                  id: true,
-                },
-              }
-              : false,
-            chain: query.chain
-              ? {
-                select: {
-                  format: true,
-                  id: true,
-                  name: true,
-                },
-              }
-              : false,
-            client: query.client
-              ? {
-                select: {
-                  displayName: true,
-                  name: true,
-                  id: true,
-                  cuit: true,
-                },
-              }
-              : false,
-            categories: query.categories
-              ? {
-                select: {
-                  id: true,
-                  badCategory: query.type == "photographic",
-                  withoutStock: query.type == "photographic",
-                  category: {
-                    select: {
-                      name: true,
-                      id: true,
-                    },
+          ...filter,
+        },
+        orderBy: {
+          createdAt: "desc",
+        },
+        skip: query.start,
+        take: query.end,
+        select: {
+          id: true,
+          type: true,
+          revised: true,
+          isComplete: true,
+          createdAt: true,
+          branchId: !query.branch,
+          chainId: !query.chain,
+          clientId: !query.client,
+          creatorId: !query.creator,
+          branch: query.branch
+            ? {
+              select: {
+                address: true,
+                displayName: true,
+                name: true,
+                id: true,
+              },
+            }
+            : false,
+          chain: query.chain
+            ? {
+              select: {
+                format: true,
+                id: true,
+                name: true,
+              },
+            }
+            : false,
+          client: query.client
+            ? {
+              select: {
+                displayName: true,
+                name: true,
+                id: true,
+                cuit: true,
+              },
+            }
+            : false,
+          categories: query.categories
+            ? {
+              select: {
+                id: true,
+                badCategory: query.type == "photographic",
+                withoutStock: query.type == "photographic",
+                category: {
+                  select: {
+                    name: true,
+                    id: true,
                   },
-                  photos: query.type == "photographic"
+                },
+                photos: query.type == "photographic"
+                  ? {
+                    where: {
+                      delete: false,
+                    },
+                  }
+                  : false,
+                breakevens:
+                  query.type == "breakeven"
                     ? {
-                      where: {
-                        delete: false,
+                      select: {
+                        product: true,
+                        status: true,
                       },
                     }
                     : false,
-                  breakevens:
-                    query.type == "breakeven"
-                      ? {
-                        select: {
-                          product: true,
-                          status: true,
-                        },
-                      }
-                      : false,
-                },
-              }
-              : false,
-            creator: query.creator
-              ? {
-                select: {
-                  id: true,
-                  email: true,
-                  name: true,
-                  role: true,
-                },
-              }
-              : false,
-            location: {
-              select: {
-                latitude: true,
-                longitude: true,
               },
+            }
+            : false,
+          creator: query.creator
+            ? {
+              select: {
+                id: true,
+                email: true,
+                name: true,
+                role: true,
+              },
+            }
+            : false,
+          location: {
+            select: {
+              latitude: true,
+              longitude: true,
             },
           },
-        })
+        },
+      })
         .then(async (result) => {
           const maxCount = await this.reports.count({
             where: {
