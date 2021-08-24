@@ -248,7 +248,7 @@ class ChainsController {
           none: {}
         }
         filter.reports = {
-          every: {
+          some: {
             type: report_types[query.reporttype] ?? report_types.photographic,
           }
         }
