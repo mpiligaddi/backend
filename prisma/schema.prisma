@@ -104,7 +104,7 @@ model Client {
   user        User?                @relation("client_account", fields: userId, references: id)
   userId      String?
   control     Boolean?
-  competences ClientCompetence[]
+  rivals      ClientRivals[]
 }
 
 model ClientCategory {
@@ -133,12 +133,13 @@ model Format {
 }
 
 model Category {
-  id               String             @id @default(uuid())
-  name             String             @unique
-  clients          ClientCategory[]
-  reports          CategoryReport[]
-  products         Product[]
-  ProductSecondary ProductSecondary[]
+  id                String             @id @default(uuid())
+  name              String             @unique
+  clients           ClientCategory[]
+  reports           CategoryReport[]
+  products          Product[]
+  productsSecondary ProductSecondary[]
+  rivals            RivalCategories[]
 }
 
 model ReportType {
@@ -210,11 +211,11 @@ model CategoryReport {
 }
 
 model SoviReport {
-  id          String                 @id @default(uuid())
+  id          String              @id @default(uuid())
   products    ProductSoviReport[]
-  competences CompetenceSoviReport[]
+  rivals      RivalsSoviReport[]
   additionals SoviAdditional[]
-  category    CategoryReport?        @relation(fields: [categoryId], references: [id])
+  category    CategoryReport?     @relation(fields: [categoryId], references: [id])
   categoryId  String?
 }
 
@@ -227,9 +228,9 @@ model ProductSoviReport {
   soviId    String?
 }
 
-model CompetenceSoviReport {
+model RivalsSoviReport {
   id           String      @id @default(uuid())
-  competence   Competence  @relation(fields: [competenceId], references: [id])
+  competence   Rival       @relation(fields: [competenceId], references: [id])
   competenceId String
   faces        Int
   sovi         SoviReport? @relation(fields: [soviId], references: [id])
@@ -275,14 +276,13 @@ model Location {
 }
 
 model Product {
-  id         String             @id @default(uuid())
-  name       String             @unique
-  category   Category           @relation(fields: [categoryId], references: [id])
+  id         String                   @id @default(uuid())
+  name       String                   @unique
+  category   Category                 @relation(fields: [categoryId], references: [id])
   categoryId String
   chains     ProductChain[]
   clients    ProductClient[]
   secondarys ProductSecondary[]
-
   pricings   ProductPricingReport[]
   breakevens ProductBreakevenReport[]
   sovis      ProductSoviReport[]
@@ -314,28 +314,43 @@ model ProductChain {
   productId String
 }
 
-model Competence {
-  id      String                 @id @default(uuid())
-  name    String                 @unique
-  clients ClientCompetence[]
-  sovis   CompetenceSoviReport[]
+model Rival {
+  id         String             @id @default(uuid())
+  name       String             @unique
+  clients    ClientRivals[]
+  sovis      RivalsSoviReport[]
+  categories RivalCategories[]
 }
 
-model ClientCompetence {
-  client       Client     @relation(fields: [clientId], references: [id])
-  clientId     String
-  competence   Competence @relation(fields: [competenceId], references: [id])
-  competenceId String
+model RivalCategories {
+  id         String    @id @default(uuid())
+  rival      Rival?    @relation(fields: rivalId, references: [id])
+  rivalId    String?
+  category   Category? @relation(fields: [categoryId], references: [id])
+  categoryId String?
+}
 
-  @@id([clientId, competenceId])
+model ClientRivals {
+  id           String  @id @default(uuid())
+  client       Client? @relation(fields: [clientId], references: [id])
+  clientId     String?
+  competence   Rival?  @relation(fields: [competenceId], references: [id])
+  competenceId String?
+}
+
+model Additional {
+  id   String           @id @default(uuid())
+  name String           @unique
+  sovi SoviAdditional[]
 }
 
 model SoviAdditional {
-  id     String      @id @default(uuid())
-  name   String      @unique
-  faces  Int
-  sovi   SoviReport? @relation(fields: [soviId], references: [id])
-  soviId String?
+  id           String      @id @default(uuid())
+  additional   Additional  @relation(fields: [additionalId], references: [id])
+  additionalId String
+  faces        Int
+  sovi         SoviReport? @relation(fields: [soviId], references: [id])
+  soviId       String?
 }
 
 enum stock_type {

@@ -1,0 +1,43 @@
+CADENA;CATEGORIA;NOMBRE;CONDICION;BASE
+COT;CAT22;Tradicional x 400gr;0;DDLT400
+COT;CAT22;Serenisima tradic x 400gr;1;DDLT400
+COT;CAT22;Sancor tradic x 400gr;1;DDLT400
+COT;CAT22;Milkaut tradic x 400gr;1;DDLT400
+COT;CAT22;Ligth x 400gr;0;DDLL400
+COT;CAT22;Serenisima light x 400gr;1;DDLL400
+COT;CAT22;Sancor light x 400gr;1;DDLL400
+COT;CAT22;Milkaut light x 400gr;1;DDLL400
+COT;CAT22;Repostero x 400gr;0;DDLR400
+COT;CAT22;Serenisima repostero x 400gr;1;DDLR400
+COT;CAT22;Sancor repostero x 400gr;1;DDLR400
+COT;CAT22;Milkaut repostero x 400gr;1;DDLR400
+COT;CAT22;Vidrio x 480gr;0;DDLR480
+COT;CAT22;Poncho negro vidrio 480gr;1;DDLR480
+COT;CAT22; Cachafaz vidrio 480gr;1;DDLR480
+COT;CAT22;Vidrio x 890gr;0;DDLV890
+COT;CAT22;Cachafaz vidrio x 890gr;1;DDLV890
+COT;CAT22;Lata x 1000gr;0;DDLL1000
+COT;CAT22;Serenisima lata 1000gr;1;DDLL1000
+COT;CAT22;Tradicional x 290gr;0;DDLT290
+COT;CAT24;Casancrem trad x 290gr;1;QCT290
+COT;CAT24;Mendicrim trad x 290gr;1;QCT290
+COT;CAT24;Milkaut trad x 290gr;1;QCT290
+COT;CAT24;La paulina trad x 290gr;1;QCT290
+COT;CAT24;Tradicional x 480gr;0;QCT480
+COT;CAT24;Casancrem trad x 480gr;1;QCT480
+COT;CAT24;Mendicrimtrad x 480gr;1;QCT480
+COT;CAT24;Milkaut trad x 480gr;1;QCT480
+COT;CAT24;La paulina trad x 480gr;1;QCT480
+COT;CAT24;Ligth x 290gr;0;QCL290
+COT;CAT24;Casancrem light x 290gr;1;QCL290
+COT;CAT24;Mendicrim licht x 290gr;1;QCL290
+COT;CAT24;Milkaut licht x 290gr;1;QCL290
+COT;CAT24;La paulina light x 290gr;1;QCL290
+COT;CAT24;Ligth x 480gr;0;QCL480
+COT;CAT24;Casancrem light x 480gr;1;QCL480
+COT;CAT24;Mendicrim licht x 480gr;1;QCL480
+COT;CAT24;Milkaut licht x 480gr;1;QCL480
+COT;CAT24;La paulina light x 480gr;1;QCL480
+COT;CAT23;Cuña x 140gr;0;QA140
+COT;CAT23;Sancor cuña x 140gr;1;QA140
+COT;CAT23;Serenisima cuña x 140gr;1;QA140

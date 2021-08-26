@@ -63,6 +63,8 @@ const routesMiddlewares = (rateLimiter) => {
   router.use("/api", require("./users/users.router"));
   router.use("/api", require("./coverages/coverages.router"));
   router.use("/api", require("./formats/formats.router"));
+  router.use("/api", require("./rivals/rivals.router"));
+  router.use("/api", require("./additionals/additionals.router"));
 
   return router;
 };

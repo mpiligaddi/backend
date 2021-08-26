@@ -1,3 +1,4 @@
+const { report_types } = require(".prisma/client");
 const { prisma } = require("../../db/prisma.client");
 
 
@@ -139,7 +140,17 @@ class BranchesController {
   async getBranches({ query }) {
 
     let filter = {
-      NOT: {}
+      NOT: { },
+      AND: {
+        coverages: query.coverages ? {
+          none: { }
+        } : { }
+      },
+      reports: {
+        some: {
+          type: report_types[query.reportstype] ?? report_types.photographic
+        }
+      }
     }
 
     if (query.search) {
@@ -169,13 +180,12 @@ class BranchesController {
 
     if (query.reports == "only") {
       filter.NOT.reports = {
-        none: {}
+        none: { },
       }
-    }
-    else if (query.reports == "revised") {
+    } else if (query.reports == "revised") {
       filter.NOT.reports = {
-        none: {},
-        every: {
+        none: { },
+        some: {
           revised: {
             not: false
           }
@@ -189,21 +199,13 @@ class BranchesController {
       }
     }
 
+
     return new Promise((resolve, reject) => {
       this.branches.findMany({
         orderBy: {
           name: ['asc', 'desc'].find((order) => order == query.orderby) || 'asc'
         },
-        where: {
-          ...filter,
-
-          NOT: {
-            coverages: {
-              none: {}
-            }
-          }
-
-        },
+        where: filter,
         skip: query.start,
         take: query.end,
         include: {
@@ -219,20 +221,16 @@ class BranchesController {
               },
             }
           } : false,
-          reports: query.reports ?? false,
+          reports: query.reports ? {
+            where: {
+              revised: query.reports == "revised",
+              type: report_types[query.reportstype] ?? report_types.photographic
+            }
+          } : false,
           zone: query.zone ?? false
         }
       }).then(async (result) => {
-        const maxCount = await this.branches.count({
-          where: {
-            ...filter,
-            NOT: {
-              coverages: {
-                none: {}
-              }
-            }
-          }
-        });
+        const maxCount = await this.branches.count({ where: filter });
         return resolve({ code: 200, message: result.length == 0 ? "No se encontraron sucursales." : "Sucursales encontradas con éxito", total: maxCount, hasMore: (query.start || 0) + (query.end || maxCount) < maxCount, branches: result });
       }).catch((error) => {
         console.log(error);
