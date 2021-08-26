@@ -102,6 +102,28 @@ class RivalsController {
 
   async getRivals({ query }) {
 
+    const filter = { };
+
+    if (query.byclient) {
+      filter.clients = {
+        some: {
+          clientId: {
+            equals: query.byclient
+          }
+        }
+      };
+    }
+
+    if (query.bycategory) {
+      filter.categories = {
+        some: {
+          categoryId: {
+            equals: query.bycategory
+          }
+        }
+      }
+    }
+
     try {
       const result = await this.rivals.findMany({
         orderBy: {
@@ -111,6 +133,11 @@ class RivalsController {
         take: query.end,
         include: {
           categories: query.categories ? {
+            where: query.bycategory ? {
+              categoryId: {
+                equals: query.bycategory
+              }
+            } : { },
             select: {
               category: {
                 select: {
@@ -121,6 +148,11 @@ class RivalsController {
             }
           } : false,
           clients: query.clients ? {
+            where: query.byclient ? {
+              clientId: {
+                equals: query.byclient
+              }
+            } : { },
             select: {
               client: {
                 select: {
