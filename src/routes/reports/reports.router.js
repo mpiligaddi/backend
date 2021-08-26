@@ -16,6 +16,15 @@ var upload = multer({ dest: "public/temp", preservePath: false });
 
 const path_url = "http://e.undervolt.io:3000/assets";
 
+router.patch("/images", async (req, res) => {
+  let reports = req.body;
+  let errors = [];
+
+  await Promise.all(reports.images.map((report) => controller.deleteImage({ id: report, reason: { delete: true, reason: reports.reason } }).catch((e) => errors.push(report))))
+
+  res.send({ message: errors.length == reports.images.length ? "No se eliminó ninguna imagen" : "Imagenes eliminadas con éxito", errors: errors })
+})
+
 router.patch("/images/:id/favorite", [query("favorite", "Falta marcar si es favorito o no").isBoolean(), validateBody], (req, res) => {
   controller
     .favoriteReport({ id: req.params.id, favorite: req.query.favorite })
@@ -36,7 +45,7 @@ router.patch("/reports/:report/revised", [query("revised", "Falta marcar si est�
   controller
     .revisedReport({ id: req.params.report, revised: req.query.revised })
     .then((r) => res.status(r.code).send(r))
-    .catch((c) => res.status(c.code).send(c));
+    .catch((c) => res.status(500).send({ message: c }));
 });
 
 router
@@ -53,6 +62,8 @@ router
       .then((r) => res.status(r.code).send(r))
       .catch((c) => res.status(c.code).send(c));
   });
+
+
 
 router
   .route("/reports")
@@ -80,17 +91,23 @@ router
               const success = [];
               const errors = [];
 
-              Promise.all(
-                req.files.image.map((file) => {
-                  return createFile(file, directory)
-                    .then((value) => {
-                      success.push(`${path_url}/${id}/${r.report.id}/${value}`);
-                    })
-                    .catch((value) => {
-                      errors.push(value);
-                    });
+              Promise.all(req.files.image.map((file) => {
+                return createFile(file, directory)
+                  .then((value) => {
+                    success.push(`${path_url}/${id}/${r.report.id}/${value}`);
+                  })
+                  .catch((value) => {
+                    throw new Error(JSON.stringify(value));
+                  });
+              }))
+                .then(() => {
+                  return res.status(r.code).send(r);
                 })
-              );
+                .catch((value) => {
+                  controller.deleteReport({ id: r.report.id }).then(() => {
+                    return res.status(400).json(JSON.parse(value.message))
+                  })
+                });
             }
             return res.status(r.code).send(r);
           })
@@ -99,8 +116,7 @@ router
             return res.status(c.code).send(c);
           });
       else {
-        console.log(reportValidator.errors);
-        return res.status(400).send({ code: 400, message: `${reportValidator.errors[0].property} es un valor erroneo, revisalo.` });
+        return res.status(400).send({ code: 400, message: `${reportValidator.errors.map((errors) => errors.message).join(', ')}` });
       }
     }
   )
@@ -112,6 +128,6 @@ router
       .getReports({ query: req.query })
       .then((r) => res.status(r.code).send(r))
       .catch((c) => res.status(c.code).send(c));
-  });
+  })
 
 module.exports = router;

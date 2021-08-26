@@ -46,7 +46,7 @@ const reportSchema = (report) => {
         }
       }
     }
-  } else {
+  } else if(report.type == "pricing") {
     categories = {
       pricings: {
         type: "array",
@@ -68,7 +68,7 @@ const reportSchema = (report) => {
   return {
     id: "/report",
     type: "object",
-    required: ["chainId", "clientId", "branchId", "createdAt", "isComplete", "type", "location", "categories",],
+    required: ["chainId", "clientId", "branchId", "isComplete", "type", "location", "categories",],
     properties: {
       chainId: {
         type: "string"
@@ -88,7 +88,7 @@ const reportSchema = (report) => {
       },
       type: {
         type: "string",
-        pattern: /\b(photographic|breakeven|pricing)\b/gi
+        pattern: /\b(photographic|breakeven|pricing|sovi)\b/gi
       },
       location: {
         type: "object",

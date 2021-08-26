@@ -1,0 +1,328 @@
+[
+    {
+        "ID": "REG",
+        "NOMBRE": "REGIONAL",
+        "CADENA ASOCIADA": "AIELLO"
+    },
+    {
+        "ID": "REG",
+        "NOMBRE": "REGIONAL",
+        "CADENA ASOCIADA": "ALVEAR"
+    },
+    {
+        "ID": "REG",
+        "NOMBRE": "REGIONAL",
+        "CADENA ASOCIADA": "ATOMO"
+    },
+    {
+        "ID": "REG",
+        "NOMBRE": "REGIONAL",
+        "CADENA ASOCIADA": "BARALE"
+    },
+    {
+        "ID": "REG",
+        "NOMBRE": "REGIONAL",
+        "CADENA ASOCIADA": "BASUALDO"
+    },
+    {
+        "ID": "REG",
+        "NOMBRE": "REGIONAL",
+        "CADENA ASOCIADA": "BECERRA"
+    },
+    {
+        "ID": "REG",
+        "NOMBRE": "REGIONAL",
+        "CADENA ASOCIADA": "CAFE AMERICA"
+    },
+    {
+        "ID": "REG",
+        "NOMBRE": "REGIONAL",
+        "CADENA ASOCIADA": "CAPO"
+    },
+    {
+        "ID": "MOD",
+        "NOMBRE": "MODERNO",
+        "CADENA ASOCIADA": "CAROMAR"
+    },
+    {
+        "ID": "MOD",
+        "NOMBRE": "MODERNO",
+        "CADENA ASOCIADA": "CARREFOUR"
+    },
+    {
+        "ID": "REG",
+        "NOMBRE": "REGIONAL",
+        "CADENA ASOCIADA": "CEREALES"
+    },
+    {
+        "ID": "MOD",
+        "NOMBRE": "MODERNO",
+        "CADENA ASOCIADA": "CHANGO MAS"
+    },
+    {
+        "ID": "REG",
+        "NOMBRE": "REGIONAL",
+        "CADENA ASOCIADA": "COMODIN"
+    },
+    {
+        "ID": "MOD",
+        "NOMBRE": "MODERNO",
+        "CADENA ASOCIADA": "COOPERATIVA"
+    },
+    {
+        "ID": "REG",
+        "NOMBRE": "REGIONAL",
+        "CADENA ASOCIADA": "CORDIEZ"
+    },
+    {
+        "ID": "MOD",
+        "NOMBRE": "MODERNO",
+        "CADENA ASOCIADA": "COTO"
+    },
+    {
+        "ID": "REG",
+        "NOMBRE": "REGIONAL",
+        "CADENA ASOCIADA": "DAR"
+    },
+    {
+        "ID": "REG",
+        "NOMBRE": "REGIONAL",
+        "CADENA ASOCIADA": "DDI"
+    },
+    {
+        "ID": "REG",
+        "NOMBRE": "REGIONAL",
+        "CADENA ASOCIADA": "DELCA PINTOS"
+    },
+    {
+        "ID": "MAY",
+        "NOMBRE": "MAYORISTA",
+        "CADENA ASOCIADA": "DIARCO"
+    },
+    {
+        "ID": "REG",
+        "NOMBRE": "REGIONAL",
+        "CADENA ASOCIADA": "DINOSAURIO"
+    },
+    {
+        "ID": "MOD",
+        "NOMBRE": "MODERNO",
+        "CADENA ASOCIADA": "DISCO"
+    },
+    {
+        "ID": "REG",
+        "NOMBRE": "REGIONAL",
+        "CADENA ASOCIADA": "DON EMILIO"
+    },
+    {
+        "ID": "HOMC",
+        "NOMBRE": "HOMECENTER",
+        "CADENA ASOCIADA": "EASY"
+    },
+    {
+        "ID": "REG",
+        "NOMBRE": "REGIONAL",
+        "CADENA ASOCIADA": "EL TUNEL"
+    },
+    {
+        "ID": "MOD",
+        "NOMBRE": "MODERNO",
+        "CADENA ASOCIADA": "FARMACITY"
+    },
+    {
+        "ID": "REG",
+        "NOMBRE": "REGIONAL",
+        "CADENA ASOCIADA": "FERNIPLAST"
+    },
+    {
+        "ID": "REG",
+        "NOMBRE": "REGIONAL",
+        "CADENA ASOCIADA": "FRIGORIFICO"
+    },
+    {
+        "ID": "REG",
+        "NOMBRE": "REGIONAL",
+        "CADENA ASOCIADA": "GUIRAO"
+    },
+    {
+        "ID": "REG",
+        "NOMBRE": "REGIONAL",
+        "CADENA ASOCIADA": "HERGO"
+    },
+    {
+        "ID": "REG",
+        "NOMBRE": "REGIONAL",
+        "CADENA ASOCIADA": "ISIS"
+    },
+    {
+        "ID": "MOD",
+        "NOMBRE": "MODERNO",
+        "CADENA ASOCIADA": "JOSIMAR"
+    },
+    {
+        "ID": "MOD",
+        "NOMBRE": "MODERNO",
+        "CADENA ASOCIADA": "JUMBO"
+    },
+    {
+        "ID": "REG",
+        "NOMBRE": "REGIONAL",
+        "CADENA ASOCIADA": "KIBEL"
+    },
+    {
+        "ID": "REG",
+        "NOMBRE": "REGIONAL",
+        "CADENA ASOCIADA": "LA  GALLEGA"
+    },
+    {
+        "ID": "MOD",
+        "NOMBRE": "MODERNO",
+        "CADENA ASOCIADA": "LA ECONOMIA"
+    },
+    {
+        "ID": "REG",
+        "NOMBRE": "REGIONAL",
+        "CADENA ASOCIADA": "LA REINA"
+    },
+    {
+        "ID": "REG",
+        "NOMBRE": "REGIONAL",
+        "CADENA ASOCIADA": "LIBERTAD"
+    },
+    {
+        "ID": "MAY",
+        "NOMBRE": "MAYORISTA",
+        "CADENA ASOCIADA": "MAKRO"
+    },
+    {
+        "ID": "REG",
+        "NOMBRE": "REGIONAL",
+        "CADENA ASOCIADA": "MALAMBO"
+    },
+    {
+        "ID": "REG",
+        "NOMBRE": "REGIONAL",
+        "CADENA ASOCIADA": "MAMI"
+    },
+    {
+        "ID": "REG",
+        "NOMBRE": "REGIONAL",
+        "CADENA ASOCIADA": "MARIANO MAX"
+    },
+    {
+        "ID": "MAY",
+        "NOMBRE": "MAYORISTA",
+        "CADENA ASOCIADA": "MAXICONSUMO"
+    },
+    {
+        "ID": "REG",
+        "NOMBRE": "REGIONAL",
+        "CADENA ASOCIADA": "MEDAMAX"
+    },
+    {
+        "ID": "REG",
+        "NOMBRE": "REGIONAL",
+        "CADENA ASOCIADA": "MICROPACK"
+    },
+    {
+        "ID": "REG",
+        "NOMBRE": "REGIONAL",
+        "CADENA ASOCIADA": "MODELO"
+    },
+    {
+        "ID": "MAY",
+        "NOMBRE": "MAYORISTA",
+        "CADENA ASOCIADA": "NINI"
+    },
+    {
+        "ID": "REG",
+        "NOMBRE": "REGIONAL",
+        "CADENA ASOCIADA": "NIPON"
+    },
+    {
+        "ID": "REG",
+        "NOMBRE": "REGIONAL",
+        "CADENA ASOCIADA": "OSCAR DAVID"
+    },
+    {
+        "ID": "REG",
+        "NOMBRE": "REGIONAL",
+        "CADENA ASOCIADA": "PETRELLI"
+    },
+    {
+        "ID": "REG",
+        "NOMBRE": "REGIONAL",
+        "CADENA ASOCIADA": "PIANTONI"
+    },
+    {
+        "ID": "REG",
+        "NOMBRE": "REGIONAL",
+        "CADENA ASOCIADA": "SAN RAMON"
+    },
+    {
+        "ID": "HOMC",
+        "NOMBRE": "HOMECENTER",
+        "CADENA ASOCIADA": "SODIMAC"
+    },
+    {
+        "ID": "REG",
+        "NOMBRE": "REGIONAL",
+        "CADENA ASOCIADA": "SUPER IMPERIO"
+    },
+    {
+        "ID": "REG",
+        "NOMBRE": "REGIONAL",
+        "CADENA ASOCIADA": "SUPER TOP"
+    },
+    {
+        "ID": "REG",
+        "NOMBRE": "REGIONAL",
+        "CADENA ASOCIADA": "SUPREMO"
+    },
+    {
+        "ID": "REG",
+        "NOMBRE": "REGIONAL",
+        "CADENA ASOCIADA": "TADICOR"
+    },
+    {
+        "ID": "REG",
+        "NOMBRE": "REGIONAL",
+        "CADENA ASOCIADA": "TOLEDO"
+    },
+    {
+        "ID": "MAY",
+        "NOMBRE": "MAYORISTA",
+        "CADENA ASOCIADA": "TORNADO"
+    },
+    {
+        "ID": "UPA",
+        "NOMBRE": "PAÑALERA",
+        "CADENA ASOCIADA": "UPA"
+    },
+    {
+        "ID": "MOD",
+        "NOMBRE": "MODERNO",
+        "CADENA ASOCIADA": "VEA"
+    },
+    {
+        "ID": "MAY",
+        "NOMBRE": "MAYORISTA",
+        "CADENA ASOCIADA": "VITAL"
+    },
+    {
+        "ID": "MOD",
+        "NOMBRE": "MODERNO",
+        "CADENA ASOCIADA": "WALMART"
+    },
+    {
+        "ID": "MAY",
+        "NOMBRE": "MAYORISTA",
+        "CADENA ASOCIADA": "YAGUAR"
+    },
+    {
+        "ID": "MAY",
+        "NOMBRE": "MAYORISTA",
+        "CADENA ASOCIADA": "MAYORISTA BUEN SOL"
+    },
+    {}
+]

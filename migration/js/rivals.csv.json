@@ -1,0 +1,56 @@
+[
+  {
+    "CADENA": "COT",
+    "NOMBRE": "Serenisima",
+    "CATEGORIAS": [
+      "CAT22",
+      "CAT23"
+    ]
+  },
+  {
+    "CADENA": "COT",
+    "NOMBRE": "Sancor",
+    "CATEGORIAS": [
+      "CAT22",
+      "CAT23"
+    ]
+  },
+  {
+    "CADENA": "COT",
+    "NOMBRE": "Milkaut",
+    "CATEGORIAS": [
+      "CAT22",
+      "CAT24"
+    ]
+  },
+  {
+    "CADENA": "COT",
+    "NOMBRE": "Otros",
+    "CATEGORIAS": [
+      "CAT22",
+      "CAT23",
+      "CAT24"
+    ]
+  },
+  {
+    "CADENA": "COT",
+    "NOMBRE": "Casancrem",
+    "CATEGORIAS": [
+      "CAT23"
+    ]
+  },
+  {
+    "CADENA": "COT",
+    "NOMBRE": "Mendicrim",
+    "CATEGORIAS": [
+      "CAT23"
+    ]
+  },
+  {
+    "CADENA": "COT",
+    "NOMBRE": "La paulina",
+    "CATEGORIAS": [
+      "CAT23"
+    ]
+  }
+]

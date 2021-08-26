@@ -1,3 +1,4 @@
+const { report_types } = require(".prisma/client");
 const { prisma } = require("../../db/prisma.client");
 
 class ChainsController {
@@ -242,16 +243,15 @@ class ChainsController {
         };
       }
 
-      if (query.reports == "only") {
+      if (query.reports) {
         filter.NOT.reports = {
-          none: {},
-        };
-      } else if (query.reports == "revised") {
+          none: {}
+        }
         filter.reports = {
-          every: {
-            revised: true,
-          },
-        };
+          some: {
+            type: report_types[query.reporttype] ?? report_types.photographic,
+          }
+        }
       }
 
       if (query.byformat) {
@@ -272,68 +272,69 @@ class ChainsController {
         };
       }
 
-      this.chains
-        .findMany({
-          orderBy: {
-            name: ["asc", "desc"].find((order) => order == query.orderby) || "asc",
-          },
-          skip: query.start,
-          take: query.end,
-          where: filter,
-          include: {
-            format: query.format,
-            branches: query.branches
-              ? {
-                skip: +query.bstart || 0,
-                take: +query.bend || 10,
-                select: {
-                  id: true,
-                  displayName: true,
-                  address: true,
-                  coverages: {
-                    select: {
-                      clientId: true,
-                    },
+      this.chains.findMany({
+        orderBy: {
+          name: ["asc", "desc"].find((order) => order == query.orderby) || "asc",
+        },
+        skip: query.start,
+        take: query.end,
+        where: filter,
+        include: {
+          format: query.format,
+          branches: query.branches
+            ? {
+              skip: +query.bstart || 0,
+              take: +query.bend || 10,
+              select: {
+                id: true,
+                displayName: true,
+                address: true,
+                coverages: {
+                  select: {
+                    clientId: true,
                   },
                 },
-              }
-              : false,
-            products: query.products
-              ? {
-                select: {
-                  product: {
-                    select: {
-                      id: true,
-                      category: {
+              },
+            }
+            : false,
+          products: query.products
+            ? {
+              select: {
+                product: {
+                  select: {
+                    id: true,
+                    category: {
+                      select: {
+                        id: true,
+                        name: true,
+                      },
+                    },
+                    name: true,
+                    secondarys: query.secondarys
+                      ? {
                         select: {
+                          categoryId: true,
                           id: true,
                           name: true,
                         },
-                      },
-                      name: true,
-                      secondarys: query.secondarys
-                        ? {
-                          select: {
-                            id: true,
-                            name: true,
-                          },
-                        }
-                        : false,
-                    },
+                      }
+                      : false,
                   },
                 },
-              }
-              : false,
-            reports: query.reports
-              ? {
-                select: {
-                  id: true,
-                  revised: true,
-                },
-              }
-              : false,
-          },
-        })
+              },
+            }
+            : false,
+          reports: query.reports
+            ? {
+              select: {
+                id: true,
+                revised: true,
+                type: true
+              },
+            }
+            : false,
+        },
+      })
         .then(async (result) => {
           const maxCount = await this.chains.count({
             where: filter,

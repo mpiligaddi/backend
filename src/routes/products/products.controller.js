@@ -46,21 +46,28 @@ class ProductsController {
   async getProducts({ query }) {
     return new Promise(async (resolve, reject) => {
       const filters = {
-        chains: {
-          some: {},
-        },
+        chains: {},
+        clients: {},
       };
 
       if (query.byclient) {
-        filters.chains.some.clientId = {
-          equals: query.byclient,
-        };
+        filters.clients = {
+          some: {
+            clientId: {
+              equals: query.byclient,
+            }
+          }
+        }
       }
 
       if (query.bychain) {
-        filters.chains.some.chainId = {
-          equals: query.bychain,
-        };
+        filters.chains = {
+          some: {
+            chainId: {
+              equals: query.bychain,
+            }
+          }
+        }
       }
 
       if (query.bycategory) {

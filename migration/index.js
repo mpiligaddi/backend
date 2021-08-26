@@ -16,6 +16,8 @@ const categoriesxclient = require("./js/categoriesxclient.csv.json")
 const report_types = require("./js/report_types.json")
 const products = require('./js/SURTIDO PARA PRUEBA SAN IGNACIO NORMALIZADO.csv.json')
 const FORMATOS = require("./js/TABLA FORMATO (1).csv.json")
+const additionals = require("./js/additionals.csv.json")
+const rivals = require("./js/rivals.csv.json")
 
 const prisma = new PrismaClient()
 const bcrypt = require('bcrypt-nodejs');
@@ -25,7 +27,7 @@ String.prototype.capitalize = function () {
 };
 
 async function main() {
-    await migrate();
+  /*  await migrate();
 
    await prisma.account.create({
      data: {
@@ -58,12 +60,50 @@ async function main() {
          }
        }
      }
-   })
+   }) */
+
+  let productsdb = await prisma.product.findMany({});
+
+  for (const productdb of productsdb) {
+    await prisma.product.update({
+      where: {
+        id: productdb.id
+      },
+      data: {
+        chains: {
+          create: [
+            {
+              chain: {
+                connect: {
+                  id: '6f7c31cd-34b9-4a33-a495-fa0c7b095255'
+                }
+              }
+            },
+            {
+              chain: {
+                connect: {
+                  id: '7c73469b-f046-4c4a-8f14-169427abf11e'
+                }
+              }
+            },
+            {
+              chain: {
+                connect: {
+                  id: 'd69a7eaa-9f3b-482b-b58c-d4b2b7e881c5'
+                }
+              }
+            }
+          ]
+        }
+      }
+    })
+  }
+
 }
 
 
 async function migrate() {
- /*  await comercials();
+  await comercials();
   await backoffice();
   await coordinators();
   await supervisors();
@@ -75,8 +115,78 @@ async function migrate() {
   await category();
   await periodReports();
   await client();
-  await coverages(); */
+  await coverages();
   await productsUpload()
+  await createRivals()
+  await createAdditionals();
+}
+
+async function createAdditionals() {
+  await prisma.additional.createMany({
+    data: additionals.map((e) => {
+      return {
+        name: e.NOMBRE
+      }
+    })
+  })
+}
+
+async function createRivals() {
+  for (const rivalCSV of rivals) {
+    console.log(rivalCSV);
+
+    let categoryM = await prisma.rivalCategories.findMany({
+      where: {
+        category: {
+          name: {
+            in: CATEGORIES.filter((cat2) => rivalCSV.CATEGORIAS.includes(cat2['ID CAT'])).map((e) => e.NOMBRE.capitalize()),
+          }
+        }
+      },
+      include: {
+        category: true,
+        rival: true
+      }
+    });
+
+    console.log(categoryM);
+
+    let rivalModel = await prisma.rival.create({
+      data: {
+        name: rivalCSV.NOMBRE,
+        categories: {
+          connectOrCreate: rivalCSV.CATEGORIAS.map((cat) => {
+            return {
+              create: {
+                category: {
+                  connect: {
+                    name: CATEGORIES.find((cat2) => cat2['ID CAT'] == cat).NOMBRE.capitalize(),
+                  }
+                }
+              },
+              where: {
+                id: (categoryM.find((e) => {
+                  return e.category.name == CATEGORIES.find((cat2) => cat2['ID CAT'] == cat).NOMBRE.capitalize()
+                }) ?? { id: '' }).id
+              }
+            }
+          })
+        },
+        clients: {
+          create: {
+            client: {
+              connect: {
+                id: '88aa7359-69a6-4bef-8916-cbf9736bc612'
+              }
+            }
+          },
+
+        }
+      }
+    })
+
+    console.log(rivalModel);
+  }
 }
 
 async function productsUpload() {

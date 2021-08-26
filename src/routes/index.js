@@ -42,6 +42,12 @@ const routesMiddlewares = (rateLimiter) => {
         return null;
       },
     }),
+    (err, req, res, next) => {
+      if(err){
+        return res.status(401).send({code: 401, message: err.message})
+      }
+      return next();
+    },
     convertQuerys
   );
 
@@ -63,6 +69,8 @@ const routesMiddlewares = (rateLimiter) => {
   router.use("/api", require("./users/users.router"));
   router.use("/api", require("./coverages/coverages.router"));
   router.use("/api", require("./formats/formats.router"));
+  router.use("/api", require("./rivals/rivals.router"));
+  router.use("/api", require("./additionals/additionals.router"));
 
   return router;
 };
