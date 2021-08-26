@@ -146,11 +146,6 @@ class BranchesController {
           none: { }
         } : { }
       },
-      reports: {
-        some: {
-          type: report_types[query.reportstype] ?? report_types.photographic
-        }
-      }
     }
 
     if (query.search) {
@@ -199,6 +194,17 @@ class BranchesController {
       }
     }
 
+    if (query.reportstype) {
+      filter.reportTypes = {
+        has: report_types[query.reportstype]
+      }
+      if (query.reports)
+        filter.reports = {
+          some: {
+            type: report_types[query.reportstype] ?? report_types.photographic
+          }
+        }
+    }
 
     return new Promise((resolve, reject) => {
       this.branches.findMany({
@@ -224,7 +230,7 @@ class BranchesController {
           reports: query.reports ? {
             where: {
               revised: query.reports == "revised",
-              type: report_types[query.reportstype] ?? report_types.photographic
+              type: report_types[query.reportstype]
             }
           } : false,
           zone: query.zone ?? false

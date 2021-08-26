@@ -75,6 +75,7 @@ model Branch {
   chainId     String
   reports     Report[]
   coverages   Coverage[]
+  reportTypes report_types[]
 }
 
 model Zone {
@@ -369,4 +370,5 @@ enum report_types {
   pricing
   breakeven
   photographic
+  sovi
 }
