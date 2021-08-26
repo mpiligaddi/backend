@@ -142,9 +142,11 @@ class BranchesController {
     let filter = {
       NOT: { },
       AND: {
-        coverages: query.coverages ? {
-          none: { }
-        } : { }
+        NOT: {
+          coverages: query.coverages ? {
+            none: { }
+          } : { }
+        }
       },
     }
 
@@ -165,7 +167,7 @@ class BranchesController {
 
     if (query.byclient) {
       filter.coverages = {
-        every: {
+        some: {
           clientId: {
             equals: query.byclient
           }
@@ -217,6 +219,11 @@ class BranchesController {
         include: {
           chain: query.chain ?? false,
           coverages: query.coverages ? {
+            where: {
+              clientId: {
+                equals: query.byclient
+              }
+            },
             include: {
               client: {
                 select: {
