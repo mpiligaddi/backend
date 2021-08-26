@@ -37,6 +37,12 @@ module.exports = (rateLimiter) => {
           return null;
         },
       }),
+      (err, req, res, next) => {
+        if(err){
+          return res.status(401).send({code: 401, message: err.message})
+        }
+        return next();
+      },
       async (req, res) => {
         const user = await prisma.user.findUnique({
           where: {

@@ -55,7 +55,7 @@ class ReportsController {
             },
             categories: {
               create: categories.map((cat) => {
-                let current = {};
+                let current = { };
 
                 if (type == report_types.photographic) {
                   current = {
@@ -128,124 +128,121 @@ class ReportsController {
 
   async getReports({ query }) {
     return new Promise((resolve, reject) => {
-      let filter = {};
 
       query.type = report_types[query.type] ?? "photographic";
 
-      if (query.byclient) {
-        filter.clientId = {
-          equals: query.byclient,
-        };
-      }
+      let filter = {
+        type: {
+          equals: query.type,
+        },
+        revised: {
+          equals: query.revised
+        },
+        clientId: {
+          equals: query.byclient
+        }
+      };
 
-      this.reports.findMany({
-        where: {
-          type: {
-            equals: query.type,
+
+      this.reports
+        .findMany({
+          where: filter,
+          orderBy: {
+            createdAt: "desc",
           },
-          ...filter,
-        },
-        orderBy: {
-          createdAt: "desc",
-        },
-        skip: query.start,
-        take: query.end,
-        select: {
-          id: true,
-          type: true,
-          revised: true,
-          isComplete: true,
-          createdAt: true,
-          branchId: !query.branch,
-          chainId: !query.chain,
-          clientId: !query.client,
-          creatorId: !query.creator,
-          branch: query.branch
-            ? {
-              select: {
-                address: true,
-                displayName: true,
-                name: true,
-                id: true,
-              },
-            }
-            : false,
-          chain: query.chain
-            ? {
-              select: {
-                format: true,
-                id: true,
-                name: true,
-              },
-            }
-            : false,
-          client: query.client
-            ? {
-              select: {
-                displayName: true,
-                name: true,
-                id: true,
-                cuit: true,
-              },
-            }
-            : false,
-          categories: query.categories
-            ? {
-              select: {
-                id: true,
-                badCategory: query.type == "photographic",
-                withoutStock: query.type == "photographic",
-                category: {
-                  select: {
-                    name: true,
-                    id: true,
-                  },
+          skip: query.start,
+          take: query.end,
+          select: {
+            id: true,
+            type: true,
+            revised: true,
+            isComplete: true,
+            createdAt: true,
+            branchId: !query.branch,
+            chainId: !query.chain,
+            clientId: !query.client,
+            creatorId: !query.creator,
+            branch: query.branch
+              ? {
+                select: {
+                  address: true,
+                  displayName: true,
+                  name: true,
+                  id: true,
                 },
-                photos: query.type == "photographic"
-                  ? {
-                    where: {
-                      delete: false,
+              }
+              : false,
+            chain: query.chain
+              ? {
+                select: {
+                  format: true,
+                  id: true,
+                  name: true,
+                },
+              }
+              : false,
+            client: query.client
+              ? {
+                select: {
+                  displayName: true,
+                  name: true,
+                  id: true,
+                  cuit: true,
+                },
+              }
+              : false,
+            categories: query.categories
+              ? {
+                select: {
+                  id: true,
+                  badCategory: query.type == "photographic",
+                  withoutStock: query.type == "photographic",
+                  category: {
+                    select: {
+                      name: true,
+                      id: true,
                     },
-                  }
-                  : false,
-                breakevens:
-                  query.type == "breakeven"
+                  },
+                  photos: query.type == "photographic"
                     ? {
-                      select: {
-                        product: true,
-                        status: true,
+                      where: {
+                        delete: false,
                       },
                     }
                     : false,
-              },
-            }
-            : false,
-          creator: query.creator
-            ? {
+                  breakevens:
+                    query.type == "breakeven"
+                      ? {
+                        select: {
+                          product: true,
+                          status: true,
+                        },
+                      }
+                      : false,
+                },
+              }
+              : false,
+            creator: query.creator
+              ? {
+                select: {
+                  id: true,
+                  email: true,
+                  name: true,
+                  role: true,
+                },
+              }
+              : false,
+            location: {
               select: {
-                id: true,
-                email: true,
-                name: true,
-                role: true,
+                latitude: true,
+                longitude: true,
               },
-            }
-            : false,
-          location: {
-            select: {
-              latitude: true,
-              longitude: true,
             },
           },
-        },
-      })
+        })
         .then(async (result) => {
           const maxCount = await this.reports.count({
-            where: {
-              type: {
-                equals: query.type,
-              },
-              ...filter,
-            },
+            where: filter,
           });
 
           return resolve({
@@ -312,24 +309,22 @@ class ReportsController {
             categories: query.categories
               ? {
                 select: {
-                  badCategory: query.type == "photographic",
-                  withoutStock: query.type == "photographic",
+                  badCategory: true,
+                  withoutStock: true,
                   category: {
                     select: {
                       name: true,
                       id: true,
+
                     },
                   },
-                  photos: query.type == "photographic",
-                  breakevens:
-                    query.type == "breakeven"
-                      ? {
-                        select: {
-                          product: true,
-                          status: true,
-                        },
-                      }
-                      : false,
+                  photos: true,
+                  breakevens: {
+                    select: {
+                      product: true,
+                      status: true,
+                    },
+                  },
                 },
               }
               : false,
@@ -369,7 +364,7 @@ class ReportsController {
           where: {
             id: report,
           },
-          data: {},
+          data: { },
           select: {
             id: true,
             type: true,

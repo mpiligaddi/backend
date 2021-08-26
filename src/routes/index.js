@@ -42,6 +42,12 @@ const routesMiddlewares = (rateLimiter) => {
         return null;
       },
     }),
+    (err, req, res, next) => {
+      if(err){
+        return res.status(401).send({code: 401, message: err.message})
+      }
+      return next();
+    },
     convertQuerys
   );
 

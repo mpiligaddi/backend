@@ -20,8 +20,9 @@ router.patch("/images", async (req, res) => {
   let reports = req.body;
   let errors = [];
 
-  await Promise.all(reports.map((report) => controller.deleteImage({ id: report[0], reason: report[1] }).catch((e) => errors.push(report[0]))))
-  res.send({ message: errors.length == reports.length ? "No se eliminó ninguna imagen" : "Imagenes eliminadas con éxito", errors: errors })
+  await Promise.all(reports.images.map((report) => controller.deleteImage({ id: report, reason: { delete: true, reason: reports.reason } }).catch((e) => errors.push(report))))
+
+  res.send({ message: errors.length == reports.images.length ? "No se eliminó ninguna imagen" : "Imagenes eliminadas con éxito", errors: errors })
 })
 
 router.patch("/images/:id/favorite", [query("favorite", "Falta marcar si es favorito o no").isBoolean(), validateBody], (req, res) => {
@@ -91,7 +92,6 @@ router
               const errors = [];
 
               Promise.all(req.files.image.map((file) => {
-                console.log(file);
                 return createFile(file, directory)
                   .then((value) => {
                     success.push(`${path_url}/${id}/${r.report.id}/${value}`);
@@ -109,6 +109,7 @@ router
                   })
                 });
             }
+            return res.status(r.code).send(r);
           })
           .catch((c) => {
             console.log(c);
