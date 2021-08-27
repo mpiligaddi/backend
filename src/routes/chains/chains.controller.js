@@ -243,9 +243,24 @@ class ChainsController {
         };
       }
 
-      if (query.reports) {
+      if (query.reports == true) {
         filter.NOT.reports = {
           none: { }
+        }
+
+        filter.reports = {
+          some: {
+            type: report_types[query.reporttype],
+            categories: (query.reporttype && query.reporttype == report_types.photographic ) ? {
+              some: {
+                photos: {
+                  some: {
+                    delete: query.reportsdeleted || false
+                  }
+                }
+              }
+            } : undefined
+          }
         }
       }
 
@@ -265,21 +280,6 @@ class ChainsController {
             },
           },
         };
-      }
-
-      filter.reports = {
-        some: {
-          type: report_types[query.reporttype],
-          categories: (query.reporttype && query.reporttype == report_types.photographic ) ? {
-            some: {
-              photos: {
-                some: {
-                  delete: query.reportsdeleted || false
-                }
-              }
-            }
-          } : undefined
-        }
       }
 
       this.chains.findMany({
