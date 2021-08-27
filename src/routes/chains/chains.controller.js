@@ -267,21 +267,20 @@ class ChainsController {
         };
       }
 
-      if (query.reports != undefined)
-        filter.reports = {
-          some: {
-            type: report_types[query.reportstype] ?? report_types.photographic,
-            categories: (query.reportstype && query.reportstype == report_types.photographic) ? {
-              some: {
-                photos: {
-                  some: {
-                    delete: query.reportsdeleted || false
-                  }
+      filter.reports = {
+        some: {
+          type: report_types[query.reporttype],
+          categories: (query.reporttype && query.reporttype == report_types.photographic ) ? {
+            some: {
+              photos: {
+                some: {
+                  delete: query.reportsdeleted || false
                 }
               }
-            } : undefined
-          }
+            }
+          } : undefined
         }
+      }
 
       this.chains.findMany({
         orderBy: {

@@ -140,15 +140,15 @@ class ReportsController {
         clientId: {
           equals: query.byclient
         },
-        categories: {
+        categories: (query.reporttype && query.reporttype == report_types.photographic) ? {
           some: {
             photos: {
               some: {
-                delete: query.deleted || false
+                delete: query.reportsdeleted || false
               }
             }
           }
-        }
+        } : undefined
       };
 
 
@@ -214,7 +214,7 @@ class ReportsController {
                   photos: query.type == "photographic"
                     ? {
                       where: {
-                        delete: false,
+                        delete: query.reportsdeleted,
                       },
                     }
                     : false,
