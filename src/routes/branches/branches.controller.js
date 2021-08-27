@@ -204,7 +204,7 @@ class BranchesController {
         filter.reports = {
           some: {
             type: report_types[query.reportstype] ?? report_types.photographic,
-            categories: {
+            categories: (query.reportstype && query.reportstype == report_types.photographic) ? {
               some: {
                 photos: {
                   some: {
@@ -212,7 +212,7 @@ class BranchesController {
                   }
                 }
               }
-            }
+            } : undefined
           }
         }
       }
@@ -247,7 +247,7 @@ class BranchesController {
           reports: query.reports ? {
             where: {
               type: report_types[query.reportstype],
-              categories: {
+              categories: (query.reportstype && query.reportstype == report_types.photographic) ? {
                 some: {
                   photos: {
                     some: {
@@ -255,7 +255,7 @@ class BranchesController {
                     }
                   }
                 }
-              }
+              } : undefined
             }
           } : false,
           zone: query.zone ?? false
