@@ -200,12 +200,22 @@ class BranchesController {
       filter.reportTypes = {
         has: report_types[query.reportstype]
       }
-      if (query.reports)
+      if (query.reports != undefined) {
         filter.reports = {
           some: {
-            type: report_types[query.reportstype] ?? report_types.photographic
+            type: report_types[query.reportstype] ?? report_types.photographic,
+            categories: {
+              some: {
+                photos: {
+                  some: {
+                    delete: query.reportsdeleted || false
+                  }
+                }
+              }
+            }
           }
         }
+      }
     }
 
     return new Promise((resolve, reject) => {
@@ -236,8 +246,16 @@ class BranchesController {
           } : false,
           reports: query.reports ? {
             where: {
-              revised: query.reports == "revised",
-              type: report_types[query.reportstype]
+              type: report_types[query.reportstype],
+              categories: {
+                some: {
+                  photos: {
+                    some: {
+                      delete: query.reportsdeleted || false
+                    }
+                  }
+                }
+              }
             }
           } : false,
           zone: query.zone ?? false

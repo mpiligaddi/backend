@@ -25,16 +25,16 @@ class ClientsController {
                 id: admin,
               },
             },
-            user:{
-              connectOrCreate:{
-                where:{
+            user: {
+              connectOrCreate: {
+                where: {
                   email: email,
                 },
-                create:{
+                create: {
                   email: email,
                   name: name,
                   role: user_role.client,
-                  account:{
+                  account: {
                     create: {
                       email: email,
                       password: bcrypt.hashSync(`chek-${name}`, bcrypt.genSaltSync()),
@@ -78,57 +78,57 @@ class ClientsController {
           include: {
             admin: query.admin
               ? {
-                  select: {
-                    id: true,
-                    name: true,
-                    email: true,
-                  },
-                }
+                select: {
+                  id: true,
+                  name: true,
+                  email: true,
+                },
+              }
               : false,
             categories: query.categories
               ? {
-                  select: {
-                    id: true,
-                    category: {
-                      include: {
-                        products: true,
-                      },
+                select: {
+                  id: true,
+                  category: {
+                    include: {
+                      products: true,
                     },
                   },
-                }
+                },
+              }
               : false,
             comercial: query.comercial ?? false,
             coverages: query.coverages
               ? {
-                  select: {
-                    branch: {
-                      select: {
-                        id: true,
-                        displayName: true,
-                        chain: true,
-                        address: true,
-                      },
+                select: {
+                  branch: {
+                    select: {
+                      id: true,
+                      displayName: true,
+                      chain: true,
+                      address: true,
                     },
-                    clientId: false,
-                    frecuency: true,
-                    intensity: true,
-                    id: true,
                   },
-                }
+                  clientId: false,
+                  frecuency: true,
+                  intensity: true,
+                  id: true,
+                },
+              }
               : false,
             periods: query.periods
               ? {
-                  select: {
-                    period: {
-                      select: {
-                        name: true,
-                        alias: true,
-                        type: true,
-                      },
+                select: {
+                  period: {
+                    select: {
+                      name: true,
+                      alias: true,
+                      type: true,
                     },
-                    id: true,
                   },
-                }
+                  id: true,
+                },
+              }
               : false,
             reports: query.reports ?? false,
           },
@@ -154,79 +154,65 @@ class ClientsController {
           include: {
             admin: query.admin
               ? {
-                  select: {
-                    id: true,
-                    name: true,
-                    email: true,
-                  },
-                }
+                select: {
+                  id: true,
+                  name: true,
+                  email: true,
+                },
+              }
               : false,
             categories: query.categories
               ? {
-                  select: {
-                    id: true,
-                    category: {
-                      select: {
-                        id: true,
-                        name: true,
-                      },
+                select: {
+                  id: true,
+                  category: {
+                    select: {
+                      id: true,
+                      name: true,
                     },
                   },
-                }
+                },
+              }
               : false,
             comercial: query.comercial ?? false,
             coverages: query.coverages
               ? {
-                  select: {
-                    branch: {
-                      select: {
-                        id: true,
-                        displayName: true,
-                        chain: true,
-                        address: true,
-                      },
+                select: {
+                  branch: {
+                    select: {
+                      id: true,
+                      displayName: true,
+                      chain: true,
+                      address: true,
                     },
-                    clientId: false,
-                    frecuency: true,
-                    intensity: true,
-                    id: true,
                   },
-                }
+                  clientId: false,
+                  frecuency: true,
+                  intensity: true,
+                  id: true,
+                },
+              }
               : false,
             periods: query.periods
               ? {
-                  select: {
-                    period: {
-                      select: {
-                        name: true,
-                        alias: true,
-                        type: true,
-                      },
+                select: {
+                  period: {
+                    select: {
+                      name: true,
+                      alias: true,
+                      type: true,
                     },
-                    id: true,
                   },
-                }
+                  id: true,
+                },
+              }
               : false,
             reports: query.reports
               ? {
-                  include: {
-                    categories: {
-                      include: {
-                        category: {
-                          select: {
-                            name: true,
-                            id: true,
-                          },
-                        },
-                        photos: {
-                          include: {
-                            images: true,
-                          },
-                        },
-                      },
-                    },
-                  },
-                }
+                select:{
+                  id: true
+                },
+              }
               : false,
           },
         })
@@ -262,9 +248,9 @@ class ClientsController {
   async getClients({ query }) {
     return new Promise((resolve, reject) => {
       let filters = {
-        NOT: {},
+        NOT: { },
         AND: {
-          NOT: {},
+          NOT: { },
         },
       };
 
@@ -277,7 +263,7 @@ class ClientsController {
 
       if (query.coverages == "only") {
         filters.NOT.coverages = {
-          none: {},
+          none: { },
         };
       }
 
@@ -290,7 +276,7 @@ class ClientsController {
                 category: {
                   NOT: {
                     products: {
-                      none: {},
+                      none: { },
                     },
                   },
                 },
@@ -304,7 +290,7 @@ class ClientsController {
                 category: {
                   NOT: {
                     products: {
-                      none: {},
+                      none: { },
                     },
                   },
                 },
@@ -325,80 +311,67 @@ class ClientsController {
             products: !!query.products ?? false,
             admin: query.admin
               ? {
-                  select: {
-                    id: true,
-                    name: true,
-                    email: true,
-                  },
-                }
+                select: {
+                  id: true,
+                  name: true,
+                  email: true,
+                },
+              }
               : false,
             categories: query.categories
               ? {
-                  select: {
-                    id: true,
-                    category: {
-                      select: {
-                        name: true,
-                        id: true,
-                      },
+                select: {
+                  id: true,
+                  category: {
+                    select: {
+                      name: true,
+                      id: true,
                     },
                   },
-                }
+                },
+              }
               : false,
             comercial: query.comercial ?? false,
             coverages: query.coverages
               ? {
-                  select: {
-                    branch: {
-                      select: {
-                        id: true,
-                        displayName: true,
-                        chain: true,
-                        address: true,
-                      },
+                select: {
+                  branch: {
+                    select: {
+                      id: true,
+                      displayName: true,
+                      chain: true,
+                      address: true,
                     },
-                    clientId: false,
-                    frecuency: true,
-                    intensity: true,
-                    id: true,
                   },
-                }
+                  clientId: false,
+                  frecuency: true,
+                  intensity: true,
+                  id: true,
+                },
+              }
               : false,
             periods: query.periods
               ? {
-                  select: {
-                    period: {
-                      select: {
-                        id: true,
-                        name: true,
-                        alias: true,
-                        type: true,
-                      },
+                select: {
+                  period: {
+                    select: {
+                      id: true,
+                      name: true,
+                      alias: true,
+                      type: true,
                     },
-                    id: true,
                   },
-                }
+                  id: true,
+                },
+              }
               : false,
             reports: query.reports
               ? {
-                  include: {
-                    categories: {
-                      include: {
-                        category: {
-                          select: {
-                            name: true,
-                            id: true,
-                          },
-                        },
-                        photos: {
-                          include: {
-                            images: true,
-                          },
-                        },
-                      },
-                    },
-                  },
-                }
+                select: {
+                  id: true,
+                  type: true
+                },
+              }
               : false,
           },
         })

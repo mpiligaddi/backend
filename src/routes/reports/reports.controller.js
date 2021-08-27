@@ -129,7 +129,6 @@ class ReportsController {
   async getReports({ query }) {
     return new Promise((resolve, reject) => {
 
-      query.type = report_types[query.type] ?? "photographic";
 
       let filter = {
         type: {
@@ -140,6 +139,15 @@ class ReportsController {
         },
         clientId: {
           equals: query.byclient
+        },
+        categories: {
+          some: {
+            photos: {
+              some: {
+                delete: query.deleted || false
+              }
+            }
+          }
         }
       };
 

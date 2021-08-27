@@ -133,9 +133,16 @@ class RivalsController {
         take: query.end,
         include: {
           categories: query.categories ? {
-            where: query.bycategory ? {
-              categoryId: {
-                equals: query.bycategory
+            where: (query.bycategory || query.byclient) ? {
+              category: {
+                id: {
+                  equals: query.bycategory
+                },
+                clients: {
+                  some: {
+                    clientId: query.byclient
+                  }
+                }
               }
             } : { },
             select: {

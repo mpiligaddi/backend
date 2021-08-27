@@ -1,4 +1,4 @@
-const { PrismaClient, user_role, stock_type } = require('@prisma/client')
+const { PrismaClient, user_role, stock_type, report_types } = require('@prisma/client')
 const BACKOFFICE = require("./js/BACKOFFICE.csv.json")
 const BRANCHES = require("./js/BRANCHES.csv.json")
 const CATEGORIES = require("./js/CATEGORIES.csv.json")
@@ -13,7 +13,7 @@ const SUPERVISORS = require("./js/SUPERVISORS.csv.json")
 const REPORTSCLIENTS = require("./js/REPORTSCLIENTS.csv.json")
 const ZONES = require("./js/ZONES.csv.json");
 const categoriesxclient = require("./js/categoriesxclient.csv.json")
-const report_types = require("./js/report_types.json")
+const reportTypesCSV = require("./js/report_types.json")
 const products = require('./js/SURTIDO PARA PRUEBA SAN IGNACIO NORMALIZADO.csv.json')
 const FORMATOS = require("./js/TABLA FORMATO (1).csv.json")
 const additionals = require("./js/additionals.csv.json")
@@ -62,42 +62,6 @@ async function main() {
      }
    }) */
 
-  let productsdb = await prisma.product.findMany({});
-
-  for (const productdb of productsdb) {
-    await prisma.product.update({
-      where: {
-        id: productdb.id
-      },
-      data: {
-        chains: {
-          create: [
-            {
-              chain: {
-                connect: {
-                  id: '6f7c31cd-34b9-4a33-a495-fa0c7b095255'
-                }
-              }
-            },
-            {
-              chain: {
-                connect: {
-                  id: '7c73469b-f046-4c4a-8f14-169427abf11e'
-                }
-              }
-            },
-            {
-              chain: {
-                connect: {
-                  id: 'd69a7eaa-9f3b-482b-b58c-d4b2b7e881c5'
-                }
-              }
-            }
-          ]
-        }
-      }
-    })
-  }
 
 }
 
@@ -133,24 +97,6 @@ async function createAdditionals() {
 
 async function createRivals() {
   for (const rivalCSV of rivals) {
-    console.log(rivalCSV);
-
-    let categoryM = await prisma.rivalCategories.findMany({
-      where: {
-        category: {
-          name: {
-            in: CATEGORIES.filter((cat2) => rivalCSV.CATEGORIAS.includes(cat2['ID CAT'])).map((e) => e.NOMBRE.capitalize()),
-          }
-        }
-      },
-      include: {
-        category: true,
-        rival: true
-      }
-    });
-
-    console.log(categoryM);
-
     let rivalModel = await prisma.rival.create({
       data: {
         name: rivalCSV.NOMBRE,
@@ -190,20 +136,15 @@ async function createRivals() {
 }
 
 async function productsUpload() {
-  for (const product of products.filter((r) => {
-    return r.CONDICION == 0
-  })) {
+  for (const product of products.filter((r) => r.CONDICION == 0)) {
 
     try {
-
 
       const result = await prisma.product.create({
         data: {
           name: product.NOMBRE.capitalize(),
           secondarys: {
-            create: products.filter((r) => {
-              return r.CONDICION == 1 & r.BASE == product.BASE;
-            }).map((e) => {
+            create: products.filter((r) => r.CONDICION == 1 && r.BASE == product.BASE).map((e) => {
               return {
                 category: {
                   connect: {
@@ -323,7 +264,7 @@ async function periodReports() {
 
 async function reportsTypes() {
   const result = await prisma.reportType.createMany({
-    data: report_types.map((rt) => {
+    data: reportTypesCSV.map((rt) => {
       return {
         name: rt.nombre.capitalize(),
         alias: rt.id

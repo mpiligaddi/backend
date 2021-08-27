@@ -218,8 +218,8 @@ class ChainsController {
   async getChains({ query }) {
     return new Promise((resolve, reject) => {
       let filter = {
-        NOT: {},
-        AND: {},
+        NOT: { },
+        AND: { },
       };
 
       if (query.search) {
@@ -245,12 +245,7 @@ class ChainsController {
 
       if (query.reports) {
         filter.NOT.reports = {
-          none: {}
-        }
-        filter.reports = {
-          some: {
-            type: report_types[query.reporttype] ?? report_types.photographic,
-          }
+          none: { }
         }
       }
 
@@ -266,11 +261,27 @@ class ChainsController {
         filter.AND = {
           NOT: {
             products: {
-              none: {},
+              none: { },
             },
           },
         };
       }
+
+      if (query.reports != undefined)
+        filter.reports = {
+          some: {
+            type: report_types[query.reportstype] ?? report_types.photographic,
+            categories: {
+              some: {
+                photos: {
+                  some: {
+                    delete: query.reportsdeleted || false
+                  }
+                }
+              }
+            }
+          }
+        }
 
       this.chains.findMany({
         orderBy: {
@@ -326,6 +337,18 @@ class ChainsController {
             : false,
           reports: query.reports
             ? {
+              where: {
+                type: report_types[query.reportstype],
+                categories: {
+                  some: {
+                    photos: {
+                      some: {
+                        delete: query.reportsdeleted || false
+                      }
+                    }
+                  }
+                }
+              },
               select: {
                 id: true,
                 revised: true,
