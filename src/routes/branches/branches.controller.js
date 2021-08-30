@@ -192,7 +192,17 @@ class BranchesController {
 
     if (query.byzone) {
       filter.zone = {
-        name: query.byzone
+        name: {
+          equals: query.byzone,
+          mode: 'insensitive'
+        }
+      }
+    } else if (query.byregion) {
+      filter.zone = {
+        region: {
+          equals: query.byregion,
+          mode: 'insensitive'
+        }
       }
     }
 
