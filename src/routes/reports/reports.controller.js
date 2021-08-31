@@ -161,10 +161,13 @@ class ReportsController {
 
       if (query.after) {
         filter.createdAt = {
+          ...filter.createdAt,
           gte: new Date(query.after ?? Date.now())
         }
-      } else if (query.before) {
+      }
+       if (query.before) {
         filter.createdAt = {
+          ...filter.createdAt,
           lt: new Date(query.before ?? Date.now())
         }
       }
