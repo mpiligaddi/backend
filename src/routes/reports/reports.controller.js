@@ -140,6 +140,14 @@ class ReportsController {
         clientId: {
           equals: query.byclient
         },
+        branch: {
+          zone: {
+            region:  query.byregion ? {
+              equals: query.byregion,
+              mode: 'insensitive'
+            } : undefined
+          }
+        },
         categories: (query.reporttype && query.reporttype == report_types.photographic) ? {
           some: {
             photos: {
@@ -151,6 +159,18 @@ class ReportsController {
         } : undefined
       };
 
+      if (query.begin) {
+        filter.createdAt = {
+          ...filter.createdAt,
+          gte: new Date(query.begin ?? Date.now())
+        }
+      }
+      if (query.end) {
+        filter.createdAt = {
+          ...filter.createdAt,
+          lte: new Date(query.end ?? Date.now())
+        }
+      }
 
       this.reports
         .findMany({
@@ -159,7 +179,7 @@ class ReportsController {
             createdAt: "desc",
           },
           skip: query.start,
-          take: query.end,
+          take: query.take,
           select: {
             id: true,
             type: true,
@@ -173,9 +193,7 @@ class ReportsController {
             branch: query.branch
               ? {
                 select: {
-                  address: true,
-                  displayName: true,
-                  name: true,
+                  zone: true,
                   id: true,
                 },
               }
@@ -193,9 +211,7 @@ class ReportsController {
               ? {
                 select: {
                   displayName: true,
-                  name: true,
                   id: true,
-                  cuit: true,
                 },
               }
               : false,

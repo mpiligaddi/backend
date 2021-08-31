@@ -61,45 +61,19 @@ async function main() {
        }
      }
    }) */
+   const zonesDB = await prisma.zone.findMany();
 
-  const allProducts = await prisma.product.findMany({
-    where: {
-      clients: {
-        some: {
-          clientId: {
-            equals: '88aa7359-69a6-4bef-8916-cbf9736bc612'
-          }
-        }
-      }
-    },
-    select: {
-      id: true,
-    }
-  })
-  for (const onep of allProducts) {
-    const r = await prisma.product.update({
-      where: {
-        id: onep.id
-      },
-      data: {
-        chains: {
-          create: ["MAXICONSUMO",
-            "NINI",
-            "TORNADO",
-            "YAGUAR"
-          ].map((e) => {
-            return {
-              chain: {
-                connect: {
-                  name: e.capitalize()
-                }
-              }
-            }
-          })
-        }
-      }
-    })
-  }
+   for (const zoneit of zonesDB) {
+     const zonecsv = ZONES.find((e) => e.NOMBRE.toLowerCase() == zoneit.name.toLowerCase())
+     await prisma.zone.update({
+       where: {
+         id: zoneit.id
+       },
+       data: {
+         region: zonecsv.REGION.capitalize()
+       }
+     })
+   }
 }
 
 
