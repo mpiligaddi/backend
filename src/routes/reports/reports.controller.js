@@ -142,7 +142,7 @@ class ReportsController {
         },
         branch: {
           zone: {
-            region:  query.byregion ? {
+            region: query.byregion ? {
               equals: query.byregion,
               mode: 'insensitive'
             } : undefined
@@ -159,16 +159,13 @@ class ReportsController {
         } : undefined
       };
 
-      if (query.begin) {
+      if (query.after) {
         filter.createdAt = {
-          ...filter.createdAt,
-          gte: new Date(query.begin ?? Date.now())
+          gte: new Date(query.after ?? Date.now())
         }
-      }
-      if (query.end) {
+      } else if (query.before) {
         filter.createdAt = {
-          ...filter.createdAt,
-          lte: new Date(query.end ?? Date.now())
+          lt: new Date(query.before ?? Date.now())
         }
       }
 
@@ -179,7 +176,7 @@ class ReportsController {
             createdAt: "desc",
           },
           skip: query.start,
-          take: query.take,
+          take: query.end,
           select: {
             id: true,
             type: true,
