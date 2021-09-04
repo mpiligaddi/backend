@@ -306,6 +306,13 @@ class ChainsController {
               where: {
                 reportTypes: query.branchestype ? {
                   has: query.branchestype
+                } : undefined,
+                coverages: query.byclient ? {
+                  some: {
+                    clientId: {
+                      equals: query.byclient
+                    }
+                  }
                 } : undefined
               },
               select: {
