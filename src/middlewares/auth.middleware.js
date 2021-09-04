@@ -28,6 +28,7 @@ const authMiddleware = async (req, res, next) => {
 };
 
 const csrfMiddleware = (err, req, res, next) => {
+  console.log(err.code);
   if (err.code !== "EBADCSRFTOKEN") return next(err);
 
   return res.status(403).send({ code: 403, message: "Esta acción no está permitida" });

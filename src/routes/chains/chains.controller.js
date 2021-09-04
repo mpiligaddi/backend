@@ -218,8 +218,8 @@ class ChainsController {
   async getChains({ query }) {
     return new Promise((resolve, reject) => {
       let filter = {
-        NOT: { },
-        AND: { },
+        NOT: {},
+        AND: {},
       };
 
       if (query.search) {
@@ -243,15 +243,25 @@ class ChainsController {
         };
       }
 
+      if (query.branchestype) {
+        filter.branches = {
+          some: {
+            reportTypes: {
+              has: query.branchestype
+            }
+          }
+        }
+      }
+
       if (query.reports == true) {
         filter.NOT.reports = {
-          none: { }
+          none: {}
         }
 
         filter.reports = {
           some: {
             type: report_types[query.reporttype],
-            categories: (query.reporttype && query.reporttype == report_types.photographic ) ? {
+            categories: (query.reporttype && query.reporttype == report_types.photographic) ? {
               some: {
                 photos: {
                   some: {
@@ -276,7 +286,7 @@ class ChainsController {
         filter.AND = {
           NOT: {
             products: {
-              none: { },
+              none: {},
             },
           },
         };
@@ -293,22 +303,29 @@ class ChainsController {
           format: query.format,
           branches: query.branches
             ? {
-              skip: +query.bstart || 0,
-              take: +query.bend || 10,
+              where: {
+                reportTypes: query.branchestype ? {
+                  has: query.branchestype
+                } : undefined
+              },
               select: {
                 id: true,
-                displayName: true,
-                address: true,
-                coverages: {
-                  select: {
-                    clientId: true,
-                  },
-                },
               },
             }
             : false,
           products: query.products
             ? {
+              where: query.byclient ? {
+                product: {
+                  clients: {
+                    some: {
+                      clientId: {
+                        equals: query.byclient
+                      }
+                    }
+                  }
+                }
+              } : {},
               select: {
                 product: {
                   select: {
