@@ -310,6 +310,7 @@ class ChainsController {
               },
               select: {
                 id: true,
+                reportTypes: true
               },
             }
             : false,
